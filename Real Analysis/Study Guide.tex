@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs, dsfont, enumitem}
+%\usepackage[top=3.5cm,bottom=3.5cm,left=3.7cm,right=4.7cm,columnsep=30pt]{geometry} % Document margins and spacings
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage{microtype} % Improves spacing
+
+\usepackage{multicol} % Required for splitting text into multiple columns
+
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\nats}{\mathbb{N}}
+
+
+
+\newcommand{\entry}[1]{\textbf{#1}: } % Defines the command to print each word on the page, \markboth{}{} prints the first word on the page in the top left header and the last word in the top right
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	SECTION A
+%----------------------------------------------------------------------------------------
+
+Math 310: Real Analysis Study Guide
+
+\begin{multicols}{0}
+
+
+
+\entry{Upper Bound}{Suppose $E \subset  \reals$ and $w \in E$. $w$ is an upper bound of $E$ if $x \leq w$ for all $x \in E$.}
+
+\entry{Lower Bound}{Suppose $E \subset \reals$ and $w \in E$. $w$ is a lower bound of $E$ if $x \geq w$ for all $x \in E$.}
+
+\entry{Bounded Above}{A subset is said to be bounded above it has at least one upper bound.}
+
+\entry{Bounded Below}{A subset is said to be bounded below if it has at least one lower bound.}
+
+\entry{Least Upper Bound (LUB)}{A real number $w$ is said to be the least upper bound of a subset $E \subset \reals$ if \begin{enumerate} 
+\item $w$ is an upper bound of $E$ 
+\item for all $y < w$, there exists $x \in E$ with $x > y$ \end{enumerate} }
+
+\entry{Greatest Lower Bound (GLB)}{A real number $w$ is said to be the greatest lower bound of a subset $E \subset \reals$ if \begin{enumerate} 
+\item $w$ is a lower bound of $E$
+\item for all $y > w$, there exists $x \in E$ with $x < y$ \end{enumerate} }
+
+\entry{Sequence}{A sequence in $\reals$ is a function defined on $\nats$ with values in $\reals$ (denoted as: $\{x_n\} = \{x_1, x_2, \dots\}$)}
+
+\entry{Subsequence}{A subsequence of $(x_n)$ is a sequence $(y_k)$ where for some sequence $\{n_k\}$ in $\nats$ with $n_1 < n_2 < \dots $, there is $\lim y_k = x_{n_k}$}
+
+\entry{Limit of a Sequence}{$\lim (x_n) = x$ if for any $\varepsilon > 0$, there exists $\nats \in \reals$ such that $|x_n - x| < \varepsilon$ for all $n \geq \nats$}
+
+\entry{Convergent}{$(x_n)$ is convergent if $\lim x_n = x$}
+
+\entry{Cauchy Sequence}{$(x_n)$ is said to be a Cauchy sequence if for any $\varepsilon > 0$, there exists $\nats$ such that $|x_n - x_k| < \varepsilon$ for all $n,k \geq \nats$. }
+
+\entry{Limit of a Function}{If for any $\varepsilon > 0$, there exists $\delta > 0$ such that $|f(x) - L| < \varepsilon$ for all $x$ with $|x - a| < \delta$ then $\lim_{x\to a} f(x) = L$.}
+
+\entry{Continuity (sequential)}{A function $f: E \to \reals$ is continuous for all $x \in E$ if $(x_n)$ is a sequence in $E$ with $\lim x_n = x$ then $\lim f(x_n) = f(x)$.}
+
+\entry{Continuity ($\varepsilon-\delta$)}{A function $f: E \to \reals$ is continuous if for every $x \in E$ and for all $\varepsilon > 0$, there exists $\delta > 0$ such that $|f(u) - f(x)| < \varepsilon$ for all $u \in E$ with $|u - x| < \delta$.}
+
+\entry{Intermediate Value Theorem} {Let $I$ be any interval in $\reals$. Suppose $f: I \to \reals$, $f$ continuous, $a,b \in I$ and $a<b$. If $y$ is in between $f(a)$ and $f(b)$, then there is at least one $c \in I$ with $f(c) = y$.}
+
+\entry{Function Bounded Above}{$f: E \to \reals$ is bounded above on $E$ if there exists $M$ such that $f(x) \leq M$ for all $x \in E$.}
+
+\entry{Function Bounded Below}{$f: E \to \reals$ is bounded below on $E$ if there exists $m$ such that $f(x) \geq m$ for all $x \in E$.}
+
+\entry{Extreme Value Theorem}{Suppose $f$ is continuous on $[a,b]$. Then $f$ has a min and max on $[a,b]$.}
+
+\entry{Derivative of $f$}{$\lim_{h\to 0} \frac{f(x+h)-f(x)}{h}$}
+
+\entry{Local Maximum}{$f$ has a local maximum at $x=a$ if there is some $\delta > 0$ such that  $f(x) \leq f(a)$ for all $x$ with $|x-a| < \delta$. }
+
+\entry{Local Minimum}{$f$ has a local minimum at $x=a$ if there is some $\delta > 0$ such that $f(x) \geq f(a)$ for all $x$ with $|x-a| < \delta$.}\\
+
+\entry{Rolle's Theorem}{If $f'(x)$ exists on $[a,b]$, $f$ continuous on $[a,b]$ and $f(a) = f(b)$, then $f'(c) = 0$ for some $c$ in $[a,b]$.}
+
+\entry{Mean Value Theorem}{Suppose $f$ is ``nice'' on $[a,b]$. Then there exists a $c$ with $\frac{f(b) - f(a)}{b-a} = f'(c)$}
+
+\entry{Continuity}{A function $f: E \to \reals$ is continuous if for all $x \in E$ and all $\varepsilon > 0$, there exists $\delta(x,\varepsilon)$ with $|f(u) - f(x)| < \varepsilon$ for all $u \in E$ with $|x - u| < \delta$.}
+
+\entry{Uniform Continuity}{A function $f: E \to \reals$ is uniformly continuous if for all $\varepsilon > 0$ there exists (a single) $\delta(\varepsilon)$ such that $|f(u) - f(x)| < \varepsilon$ for all $x,u \in E$ with $|x-u| < \delta$. ($\delta$ does not depend on $x$.)}
+
+\entry{Partition}{A partition of the interval $[a,b]$ with $a < b$ is a finite subset $P \subset [a,b]$ such that $a \in P$ and $b \in P$ and is written as: $P = \{x_0, x_1, \dots, x_n\}$ where $a = x_0 < x_1 < \dots < x_n = b$}
+
+\entry{Lower Sum}{$L(f,P) = \sum_{k=1}^n m_k \Delta x_k$ where $m_k = \text{glb}\{f(x): x \in I_k\}$}
+
+\entry{Upper Sum}{$U(f,P) = \sum_{k=1}^n M_k \Delta x_k$ where $M_k = \text{lub}\{f(x): x \in I_k\}$}
+
+\entry{Lower Integral}{$\underline{\int} =  \underline{\int_a^b} f(x) \, dx = \text{glb}\{U(f,p): p \in P \}$ (bounded above by $M(b-a)$)}
+
+\entry{Upper Integral}{$\overline{\int} = \overline{\int_a^b} f(x) \, dx = \text{lub}\{L(f,p): p \in P\}$ (bounded below by $-M(b-a)$)}
+
+\entry{Riemann Integrable}{A continuous function $f$ is Riemann integrable if $U(f,P) - L(f,P) < \varepsilon$.}
+
+\entry{Integrable}{If $\underline\int f = \overline\int f$, then $f$ is integrable on $[a,b]$}
+
+\entry{$f_n \to f$}{For every $x \in E$ and $\varepsilon > 0$, there exists $N(\varepsilon, x)$ such that $|f_n(x) - f(x)| < \varepsilon$, all $n \geq N$, then $f_n$ converges to $f$.}
+
+\entry{$f_n \stackrel{\to}{\to} f$}{If for every $\varepsilon > 0$, there exists (a single) $N(\varepsilon)$ such that for every $x \in E$, $|f_n(x) - f(x)| < \varepsilon$ for all $n \geq N$ then $f_n$ converges uniformly to $f$.}
+
+\entry{Sum of Infinite Series}{$\sum_{k=1}^\infty a_k = S$ if $\lim S_n = S$ where $S_n$ are partial sums and $S_n = \lim_{k=1}^n a_k$.}
+
+\end{multicols}
+
+\end{document} 

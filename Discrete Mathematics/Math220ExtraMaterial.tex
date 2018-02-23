@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb} 
+\newcommand{\Mod}[1] {\ (\text{mod}\ #1)}
+
+\begin{document}
+
+\begin{center} The Chinese Remainder Theorem \end{center}  
+Let $m_1, m_2, \dots, m_n$ be pairwise relatively prime positive integers greater than 1 and $a_1, a_2, \dots, a_n$ arbitrary integers. Then the system of linear congruences 
+$$\begin{aligned} x &\equiv a_1 \Mod{m_1} \\ x &\equiv a_2 \Mod{m_2} \\  & \vdots \\ x &\equiv a_n \Mod{m_n} \end{aligned} $$ 
+has a unique solution $m = m_1m_2\dots m_n$. (That is, there is a solution $x$ with $0 \leq x \leq m$, and all other solutions are congruent $\Mod{m}$ to this solution.) \\~\\
+Proof: Let $M_x = \frac{m}{m_k}$ for $k = 1, 2, \dots, n$. Thus, $M_k$ is the product of all moduli except $m_k$. Since $m_i$ and $m_k$ are relatively prime if $i \neq k$, it follows that gcd $(m_k, M_k) = 1$. Therefore, there exist integers $r_k$ and $s_k$ such that $m_kr_k + M_Ks_k = 1$. By Bezout's Theorem, $$m_kr_k + M_ks_k \equiv 1 \Mod{m_k}$$ But $m_kr_k \equiv \Mod{m_k}$. Therefore $$M_ks_k \equiv 1 \Mod{m_k}$$ We call $s_k$ an inverse of $M_k \Mod{m_k}$ since their product is 1. So, we know that for $j = 1, 2, \dots, n$, there exists integers $s_1, s_2, \dots, s_n$ such that $M_js_j \equiv 1 \Mod{m_j}$. Now we form the theorem: $$x = a_1M_1s_1 + a_2M_2s_2 + \dots + a_nM_ns_n$$ and we will show that $x$ is a solution to all $n$ linear congruences. Since $M_j \equiv 0 \Mod{m_k}$ for $j \neq k$, all terms except the $k^\text{th}$ in the sum are $\equiv 0 \Mod{m_k}$. Because $M_ks_k \equiv 1 \Mod{m_k}$ we see that $$x \equiv a_kM_ks_k \equiv a_k \Mod{m_k} \text{ for $k$ = 1, 2, $\dots, n$}$$ Thus, $x$ is a solution to all $n$ linear congruences. \newpage
+Example 1: The Chinese mathematician Sun-Tsu, in the 1st century AD asked: when a number is divided by 3, the remainder is 2; when dividing by 5, the remainder is 3; and when dividing by 7, the remainder is 2. What is the number? \newline So, we have the following system of linear congruences: $$\begin{aligned} x &\equiv 2 \Mod{3} \\ x &\equiv 3 \Mod{5} \\ x &\equiv 2 \Mod{7} \end{aligned} $$ Let $m = 3 \times 5 \times 7 = 105$, $$M_1 = \frac{m}{3} = \frac{105}{3} = 35$$ $$M_2 = \frac{m}{5} = \frac{105}{5} = 21 $$ $$M_3 = \frac{m}{7} = 15$$ By inspection, 2 is an inverse of $M_1 = 35 \Mod{3}$ since $2 \times 35 = 70 \equiv 1 \Mod{3}$; 1 is an inverse of $M_2 = 21 \Mod{5}$ since $1 \equiv 21 \Mod{5} \rightarrow 1 \times 21 \equiv 1 \Mod{5}$; $M_3 = 15 \rightarrow 15\times s_3 \equiv 1 \Mod{7} \rightarrow s_3 = 1$ also since $15\times 1 = 15 \equiv 1 \Mod{7}$. $$x = a_1M_1s_1 + a_2M_2s_2 + a_3M_3s_3$$ $$x = (2\times35\times2)+(3\times21\times1)+(2\times15\times1) = 233 \equiv 23 \Mod{105} $$ 
+$$\begin{aligned} 23 \equiv 2 \Mod{3} &\text{ because } 23 - 2 = 21 \equiv 0 \Mod{3} \\ 23 \equiv 3 \Mod{5} &\text{ because } 23 - 3 = 20 \equiv 0 \Mod{5} \\ 23 \equiv 2 \Mod{7} &\text{ because } 23 - 2 = 21 \equiv 0 \Mod{7} \end{aligned} $$ \newpage 
+Example 2: Solve the system: $$\begin{aligned} x &\equiv 1 \Mod{2} \\ x &\equiv 2 \Mod{3} \\ x &\equiv 3 \Mod{5} \\ x &\equiv 4 \Mod{11} \end{aligned} $$ 
+$$\begin{aligned} m &= 2 \times 3 \times 5 \times 11 = 330 \\ M_1 &= \frac{330}{2} = 165 \\ M_2 &= \frac{330}{3} = 110 \\ M_3 &= \frac{330}{5} = 66 \\ M_4 &= \frac{330}{11} = 33 \end{aligned} $$ 
+$$\begin{aligned} 165s_1 &\equiv 1 \Mod{2} \rightarrow s_1 = 1 \text{ since } 165 - 1 \equiv 0 \Mod{2} \\ 
+110s_2 &\equiv 1 \Mod{3} \rightarrow s_2 = 2 \text{ since } 220 - 1= 119 \text{ and } 3 \times 73 = 219 \\
+66s_3 &\equiv 1 \Mod{5} \rightarrow s_3 = 1 \text{ since } 66 - 1 = 65 \text{ and } 5 \times 13 = 65 \\ 
+30s_4 &\equiv 1 \Mod{11} \rightarrow s_4 = -4 \text{ since } -120 - 1 = -121 \equiv 0 \Mod{11} \end{aligned} $$ 
+Therefore: $$x = (1\times165\times1) + (2\times110\times2) + (3\times66\times1) + (4\times30\times-4) $$ $$x = 323$$ $$x \equiv -7 \Mod{330} \equiv 323$$ 
+$$\begin{aligned} 323 &\equiv 1 \Mod{2} \\ 323 &\equiv 2 \Mod{3} \\ 323 &\equiv 3 \Mod{5} \\ 323 &\equiv 4 \Mod{11} \end{aligned} $$ \newpage 
+\begin{center} Fermat's Little Theorem \end{center}
+Let $p$ be a prime such that $p \mid a$, $a \in \mathbb{Z}$. Then $$a \equiv 1 \Mod{p}$$ Furthermore, there exists $a \in \mathbb{Z}$ such that $$a^p \equiv a \Mod{p} $$ Proof: Consider $\{a, 2a, 3a, \dots, (p -1)a\}$. Since $p$ is a prime, only 1 and $p$ divide $p$ and so $\{1, 2, 3, \dots, p -1\}$ are all relatively prime to $p$. Can $ai \equiv aj \Mod{p}$? That would require $$ai - aj \equiv 0 \Mod{p} \rightarrow a(i - j) \equiv 0 \Mod{p} $$ Now, $p \nmid a$ by hypothesis and $1 \leq i - j \leq p - 2$ so that $p \nmid i - j$. Therefore, $\{a, 2a, 3a, \dots, (p - 1)a\}$ consists of $p - 1$ integers all relatively prime to each other and therefore each one belongs to a unique congruence class $\Mod{p}$, namely $\{1, 2, 3, \dots, p - 1\}$. Therefore $$a(2a)(3a)\dots((p - 1)a) \equiv (p - 1)! \Mod{p} $$ $$a^{p - 1}(p - 1)! \equiv (p - 1)! \Mod{p} $$
+$$a^{p - 1} \equiv 1 \Mod{p} $$ $$a\cdot a^{p - 1} \equiv a \cdot 1 = a \Mod{p} \text{ if } p \nmid a $$ $$a^p \equiv a \Mod{p} \text{ if } p \nmid a $$ 
+What if $p \mid a$? Then $a^p \equiv 0 \equiv a \Mod{p}$. Hence $$a^p \equiv a \Mod{p} $$ whether or not $p\mid a$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 

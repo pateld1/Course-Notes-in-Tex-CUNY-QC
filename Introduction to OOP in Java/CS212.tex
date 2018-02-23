@@ -1,0 +1,1086 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Computer Science 212: Object-Oriented Programming in Java}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\title{Computer Science 212: Object-Oriented Programming in Java}
+\author{Darshan Patel}
+\date{Fall 2016}
+\maketitle
+
+\tableofcontents
+
+\section{Introduction to Java}
+\begin{itemize} 
+\item Java code can be written once and run anywhere
+\item Java source code goes to a compiler for a machine and made into source code which can be run on any machine 
+\item API: application program interface- class libraries (MATH, GUI, Database...) 
+\item JRI: Java Runtime Environment: JVM plus API (can run Java programs)
+\item JDK: Java Development Kit: JRE plus compiler, javadoc, ...
+\item Example: Java source code is written and stored in a .java file, compiler then calls "javac name.java" making a class file "name.class" which can then be run "run name" 
+\item The Java virtual machine ensures a program will run the same way on any computer 
+\item When running on native hardware, you are dependent on the machine's architecture 
+\item The JVM levels the playing field
+
+\end{itemize}
+
+\section{Classes and Objects} 
+\begin{itemize} 
+\item Primitives: single-valued data items, not objects \begin{itemize} 
+\item byte: 8 bit signed two's complement integer
+\item short: 16 bit signed two's complement integer 
+\item int: 32 bit signed two's complement integer 
+\item long: 64 bit signed two's complement integer 
+\item float: 32 bit single precision IEEE 754 
+\item double: 64 bit single precision IEEE 754
+\item boolean: true/false 
+\item char: 16 bit Unicode character \end{itemize} 
+\item The number of bits and the range of values: $$n = 32$$ $$-(2^{n- 1})\dots(2^{n - 1}) + 1$$
+$$-2^{31}\dots2^{31} - 1 $$ $$-2,147,483,648\dots2,147,483,647$$ 
+\item ASCII: 8 bit char code $$2^8 = 256 \text{ char} $$
+\item Unicode: 16 char code $$2^{16} = 2^6 \times 2^{10} = 64,000 \text{ char}$$
+\item Class: a blueprint or template that describes the properties and behaviors of an object 
+\item Object: an instance of a class which has specific properties 
+\item Instantiation: making an instance of a class
+\item Static variables belong to a class - only one variable for every instance of the class
+\item Instance variables belong to an object - the object is an instance of the class 
+\item Static variables can be changed 
+\item Use the final modifier to make constants 
+\item Methods: defines the behavior of an object 
+
+\end{itemize}
+
+\section{Arrays and Sorting}
+\begin{itemize} 
+\item \begin{lstlisting}
+private static int inputFromFile(String filename, short[] numbers){
+      TextFileInput in = new TextFileInput(filename);
+      int lengthFilled = 0;
+      String line = in.readLine();
+      while ( lengthFilled < numbers.length && line != null ) {
+         numbers[lengthFilled++] = Short.parseShort(line);
+         line = in.readLine();
+      } // while 
+      if ( line != null ) {
+         System.out.println("File contains too many numbers.");
+         System.out.println("This program can process only " +
+                            numbers.length + " numbers.");
+         System.exit(1);
+      } // if
+      in.close();
+      return lengthFilled; 
+   }  // method inputFromFile 
+      
+   
+   private static void selectionSort (short[] array, int length) { 
+      for ( int i = 0; i < length - 1; i++ ) { 
+         int indexLowest = i; 
+         for ( int j = i + 1; j < length; j++ ) 
+            if ( array[j] < array[indexLowest] ) 
+               indexLowest = j;
+         if ( array[indexLowest] != array[i] ) { 
+            short temp = array[indexLowest];
+            array[indexLowest] = array[i]; 
+            array[i] = temp; 
+         }  // if
+      } // for i 
+   } // method selectionSort 
+\end{lstlisting}
+\end{itemize}
+
+\section{Methods and Parameter Passing} 
+\begin{itemize} 
+\item Primitive type parameters are passed by value 
+\item Pass by value means a copy of the value of the parameter is given to the method
+\item Each variable in the main program and the method has its own memory location
+\item Object type parameters are passed by reference 
+\item Pass by reference means a reference to the parameter is given to the method 
+\item Each variable in the main program and the method has its own memory location for the reference 
+\item Since we have a reference to an object in a method, any changes made to that object are permanent 
+\item Changes happen to the object whose reference is used in a method call
+\item \begin{lstlisting} 
+private static void selectionSort
+                         (short[] array, int length) { 
+for ( int i = 0; i < length - 1; i++ ) { 
+  int indexLowest = i; 
+  for ( int j = i + 1; j < length; j++ ) 
+    if ( array[j] < array[indexLowest] ) 
+       indexLowest = j;
+       if ( array[indexLowest] < array[i] ) { 
+         swap( array,indexLowest,i); 
+       }
+   } // for i 
+} // method selectionSort 
+
+\end{lstlisting}
+\item \begin{lstlisting}
+public static void swap 
+                (int[] a, int x, int y) {
+  int temp;
+  temp = a[x];
+  a[x]=a[y];
+  a[y]=temp;
+}
+
+\end{lstlisting}
+\end{itemize}
+
+\section{Program Modularity and Error Checking} 
+\begin{itemize} 
+\item Program modularity: break a program down into smaller parts (methods), test each method separately, understand the relationship between the methods: parameters and their expected values
+\item Date validation: data entered by a use (at a prompt), data entered by a user (into a file), data values received from other methods
+\item A method should verify what it receives and returns 
+\item System.exit(0) causes the program to end
+\item "Run-time" error messages can provide useful information to the programmer or to the user 
+\item Errors could be due to bad code or bad data 
+\item Bad code and testing: test the program with all kinds of possible data
+\item From method to method, all data variables in the program should be in a "correct" state
+\item Ex: a method that sorts should produce a sorted object 
+\item Assertions: used during program development, testing for errors in the logic of the program
+\item They are usually "turned off" when a program is run by the user 
+\item Such errors should not occur in the final version of the program 
+\item Once an assertion is "thrown," the program terminates 
+\item These errors should not happen in "real life"
+\item The string in the assertion statement is printed along with a stack trace 
+\item Exception: an error that can be "thrown" by a method
+\item Ex: Integer.parseInt("abc") will throw an exception called "IllegalArgumentException"
+\item Our program can also throw these common exceptions and terminate 
+\item To throw an exception: \begin{lstlisting}
+throw new IllegalArgumentException
+                          ("SSN must have only digits.");
+\end{lstlisting}
+
+\end{itemize}
+
+\section{GUIs and Inheritance} 
+\begin{itemize} 
+\item It is common for the "main" application and the GUI to be separate classes
+\item By using inheritance, all things a JFrame can do is brought to the class \begin{lstlisting} 
+public class SSNGUI extends JFrame{?
+	
+}
+\end{lstlisting}
+\item Non-Application Classes (no "main" method) \begin{itemize} 
+\item Classes without "main" methods are true objects 
+\item They cannot exist without being instantiated 
+\item They may inherit from other classes so little extra code must be written
+\item When an object is instantiated, a special method called a "constructor" is automatically executed 
+\item The name of the constructor is the same as the name of the class
+\item The constructor has no "return" attributes
+\item The constructor is the initialization method for the object 
+\item The constructor may take parameters from the instantiating method for initial values
+\end{itemize} 
+\item \begin{lstlisting} 
+import javax.swing.*;
+import java.awt.*;
+public class SSNJFrame3{
+   static final int LIST_SIZE = 10;
+   static String ssn;
+   static String[] ssnList;
+   static int ssnSize;
+   static TextFileInput inFile;
+   static String inFileName = "SSN.txt";
+   static JFrame myFrame;
+   
+   public static void main(String[] args) {
+      initialize();
+      readSSNsFromFile(inFileName);
+      printSSNList(ssnList,ssnSize);
+      printSSNtoJFrame(myFrame,ssnList,ssnSize);
+   }   
+   public static void initialize() {
+	   ssn="";
+	   ssnList= new String[LIST_SIZE];
+	   ssnSize=0;
+       inFile = new TextFileInput(inFileName);
+       myFrame=new JFrame();
+       myFrame.setSize(400,200);
+       myFrame.setLocation(100, 100);
+       myFrame.setTitle("Social Security Numbers");
+       myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+   }
+   \end{lstlisting}
+
+\end{itemize}
+
+\section{Defining a Simple Class}
+\begin{itemize} 
+\item An object is defined by its attributes and behavior 
+\item Attributes: data values 
+\item Behavior: defined by the methods
+\item The reason the data value is private is to ensure that the object contains correct data values 
+\item Public data values can be changed by the user 
+\item Methods that assign values to the data values should check for validity and throw an exception if they are not valid 
+\item A method is private if it is not to be called from outside the class
+\item A method is static if it is not the behavior of an object
+\item Since all classes inherit from class Object, it automatically has methods: \begin{lstlisting} 
+equals(Object o);
+toString();
+\end{lstlisting}
+\item These methods may not behave the way we want to 
+\item The "this" operator is a reference to the class in which it is used
+
+\end{itemize}
+
+\section{Dynamic vs. Static Structures: Linked Lists} 
+\begin{itemize} 
+\item Static storage structures: once declared, they are fixed in size
+\item the size may be a "variable" or a constant but once declared, the size is fixed
+\item Dynamic structures use only as much memory as they need 
+\item Dynamic structures rely on themselves to determine the order of the data items they contain 
+\item Dynamic structures are not stored in contiguous memory 
+\item A node has 2 components: the actual data of the node and a reference linking it to the next node in the list 
+\item It is helpful to have an empty dummy node at the beginning of the list 
+\item \begin{lstlisting}
+public class ListNode {
+   String data;
+   ListNode next;
+   
+   public ListNode(String data, ListNode next)  {
+      this.data = data;
+      this.next = next;
+   }  // constructor
+   
+   public ListNode()  {
+      this.data = null;
+      this.next = null;
+   }  // constructor
+   
+   public ListNode(String data)  {
+      this.data = data;
+      this.next = null;
+   }  // constructor
+
+}
+\end{lstlisting}
+\item \begin{lstlisting}
+public class LinkedListIterator {
+
+   private ListNode node;
+   public LinkedListIterator(ListNode first)  {
+        node = first;
+   }
+
+   public boolean hasNext()  {
+      return ( node != null );
+   }
+   
+   public String next()  {
+      if ( node == null )
+         throw new NullPointerException("Linked list empty.");
+      String currentData = node.data;
+      node = node.next;
+      return currentData;
+   }
+
+}
+
+\end{lstlisting}
+\item \begin{lstlisting}
+public void append (String s) {
+  ListNode n = new ListNode(s);
+  last.next = n;
+  last = n;
+  length++;
+}
+\end{lstlisting}
+\item \begin{lstlisting}
+public void printList () {
+  ListNode p = first.next;
+  while (p != null) {
+    System.out.println(p.data);
+    p = p.next;
+  }
+  }
+\end{lstlisting}
+\item \begin{lstlisting}
+public ListNode find (String s) {
+  ListNode p = first.next;
+  while (p != null && !(p.data).equals(s)) {
+    p = p.next;
+  } // while
+  return p;
+}
+\end{lstlisting}
+
+\end{itemize}
+
+\section{Inheritance and Polymorphism} 
+\begin{itemize} 
+\item Extending a class is based on the "is a" relationship 
+\item The protected modifier grants access only from descendant classes 
+\item Public grants access from any class 
+\item Private grants access only to instances of the same class 
+\item When a class is instantiated, the first thing it must do is "construct" its super class 
+\item Calling one of the constructors of the super class is done using the method super($<$optional parameters$>$) 
+\item The name of the constructor is the same as the name of the class and has no return type 
+\item An abstract class cannot be instantiated
+\item  A class is abstract if \begin{itemize} 
+\item it is declared as abstract 
+\item it contains an abstract method 
+\item it inherits an abstract method and does not overload it \end{itemize} 
+\item The instanceof operator tests if an object (instance) is a subtype of a given type 
+
+\end{itemize}
+
+\section{GUIs and Event-Driven Programming} 
+\begin{itemize} 
+\item JFrames: complete Window objects, they don't do anything until told to
+\item An event, such as a menu choice, signals the JFrame to respond 
+\item Three Tier Architecture: graphical user interface, program logic - decisions based on the user's choices, data (files) - data available for the user's choice 
+\item All the main program needs to do is instantiate the GUI
+\item An event is something that happens while the program is running 
+\item An Event Handler is a method that is automatically called when an event, such as choosing a menu item, occurs 
+\item An Event Handler can handle more than one event but each event needs a handler (or nothing will happen) 
+\item Event Handlers are written in a class that implements an interface called ActionListener 
+\item An Interface is a collection of method headings only (not bodies) 
+\item Interfaces are implemented by a Java class 
+\item If an interface is implemented, all methods specified in the interface must be provided by that class 
+\item An interface, if implemented, guarantees that all methods will be defined 
+\item The interface ActionListener contains a method called actionPerformed(ActionEvent) 
+\item The actionPerformed method is called when an event happens 
+\item Each event needs to be registered with some ActionListener 
+\item When an ActionEvent object is created, the actionPerformed method of the handler that is registered with the event is called and the ActionEvent is passed to it as a parameter 
+\item \begin{lstlisting} 
+import javax.swing.*;
+import java.awt.*;
+public class SSNGUI extends JFrame {
+      
+   public SSNGUI(String title, int height, int width) {
+	    setTitle(title);
+	    setSize(height,width);
+       setLocation  (400,200);
+	    createFileMenu();
+	    setDefaultCloseOperation(EXIT_ON_CLOSE);
+       setVisible(true);
+   } //SSNGUI
+
+   private void createFileMenu( ) {
+      JMenuItem   item;
+      JMenuBar    menuBar  = new JMenuBar();
+      JMenu       fileMenu = new JMenu("File");
+      FileMenuHandler fmh  = new FileMenuHandler(this);
+
+      item = new JMenuItem("Open");    //Open...
+      item.addActionListener( fmh );
+      fileMenu.add( item );
+
+      fileMenu.addSeparator();           //add a horizontal separator line
+    
+      item = new JMenuItem("Quit");       //Quit
+      item.addActionListener( fmh );
+      fileMenu.add( item );
+
+      setJMenuBar(menuBar);
+      menuBar.add(fileMenu);
+    
+   } //createMenu
+
+} //SSNGUI\end{lstlisting} 
+\item \begin{lstlisting} 
+import java.awt.event.*;
+import java.io.*;
+public class FileMenuHandler implements ActionListener {
+   JFrame jframe;
+   public FileMenuHandler (JFrame jf) {
+      jframe = jf;
+   }
+   public void actionPerformed(ActionEvent event) {
+      String  menuName;
+      menuName = event.getActionCommand();
+      if (menuName.equals("Open"))
+         openFile( ); 
+      else if (menuName.equals("Quit"))
+         System.exit(0);
+   } //actionPerformed
+   }
+\end{lstlisting} 
+
+
+
+\end{itemize}
+
+\section{Exception Handling} 
+\begin{itemize} 
+\item To throw an exception: \begin{lstlisting} 
+public SSN (String s) {
+      if (isValidSSN(s) )
+         SSNumber = s;
+      else 
+         throw new IllegalSSNException("Invalid SSN: "+s);
+   }
+\end{lstlisting} 
+\item Extending an existing exception: \begin{lstlisting}
+public class IllegalSSNException
+        extends IllegalArgumentException {
+   public IllegalSSNException(String message) {
+      super (message);
+   }
+}
+\end{lstlisting} 
+\item When an exception is thrown, the RunTime System looks for a method that can handle the exception
+\item If no such method is found, the Runtime System handles the exception and terminates the program 
+\item The Runtime System looks at the most recently called method and backs up all the way to the main program 
+\item If any one of the previous methods knew how to handle the exception, it would be an exception catcher 
+\item Multiple exceptions can be taught by a try-catch block
+\item The JVM will go through the catch blocks top to bottom until a matching error is found 
+\item This is why the order of the exceptions listed is important, because of the class hierarchy and inheritance
+\item When an exception is not caught, the program terminates and does not continue 
+\item The finally block is executed whether or not an exception occurs 
+\item It is executed even if there is a return statement prior to the final code 
+\item Excluding exceptions in the class RuntimeException, the compiler must find a catcher or a propagator for every exception
+\item RuntimeException is an unchecked exception while all other exceptions are checked exceptions 
+
+\end{itemize}
+
+\section{Regular Expressions} 
+\begin{itemize} 
+\item A Regular Expression (regex) is a pattern that can be matched against a string 
+\item \begin{lstlisting} 
+import java.util.regex.*;
+
+public static isValidSSN(String ssn) {
+	Pattern p;
+	Matcher m;
+	String SSN_PATTERN =              ;
+	p = Pattern.compile(SSN_PATTERN);
+	m = p.matcher(ssn);
+	return matcher.matches();
+
+}
+\end{lstlisting} 
+\item Constants: match exactly the string inside the regex 
+\item Character Classes (match any character inside [] \begin{itemize} 
+\item [abc] - a, b, or c (simple class) 
+\item [\^abc] - any character except a, b, or c (negation) 
+\item [a-zA-Z] - a through z, or A through Z, inclusive (range) 
+\item [a-d[m-p]] - a through d or m through p: [a -dm-p] (union) 
+\item [a-z\&\&[def]] - d, e or f (intersection) 
+\item [a-z\&\&[\^bc]] - a through z, except for b and c: [ad-z]
+\item [a-z\&\&[\^m-p]] - a through z, and not m through p: [a-lq-z] \end{itemize} 
+\item Predefined Character Classes \begin{itemize} 
+\item . - any character (may or may not match line end) 
+\item \textbackslash d - a digit: [0-9]
+\item \textbackslash D - a non-digit: [\^0-9]
+\item \textbackslash s - a whitespace character: [\textbackslash t\textbackslash n\textbackslash x0B\textbackslash f\textbackslash r]
+\item \textbackslash S - a non-whitespace character: [\^\textbackslash s]
+\item \textbackslash w - a word character: [a-zA-Z\_0-9]
+\item \textbackslash W - a non-word character: [\^\textbackslash w] \end{itemize} 
+\item Quantifiers \begin{itemize} 
+\item X? - X, once or not at all 
+\item X* - X, zero or more times 
+\item X+ - one or more times 
+\item X{n} - X, exactly n times 
+\item X{n,} - X, at least n times 
+\item X{n,m} - X, at least n but not more than m times \end{itemize} 
+\item \^ - beginning of regex, \$ - end of regex 
+
+\end{itemize}
+
+\section{Maps}
+\begin{itemize} 
+\item In a hashmap, a "hash function" maps key to index 
+\item Issues: search in time O(c), collisions, growth 
+\item \begin{lstlisting} 
+import java.util.HashMap;
+import java.util.Iterator;
+ 
+public class HashMapExample{
+       public static void main(String args[]){
+          HashMap hashMap = new HashMap();
+          hashMap.put("One", new Integer(1)); 
+          hashMap.put("Two", new Integer(2));
+          hashMap.put("Three", new Integer(3));
+
+        Integer myInt = hashMap.get("Two");
+      
+        if(hashMap.containsValue(new Integer(1)))
+            System.out.println("HashMap contains 1 as value");
+         else{
+            System.out.println("HashMap does not contain 1 as value");
+       
+        if( hashMap.containsKey("One") )
+            System.out.println("HashMap contains One as key");
+        else
+            System.out.println("HashMap does not contain One as value");
+}
+}
+}
+\end{lstlisting} 
+\item To get the keys and values out of the HashMap
+\item \begin{lstlisting} 
+       Iterator itr;
+       System.out.println("Retrieving all keys from the HashMap"); 
+       
+       itr = hashMap.keySet().iterator();
+       while(itr. hasNext()){        
+          System.out.println(itr.next());
+        }
+       
+           
+        System.out.println("Retrieving all values from the HashMap");
+
+        itr = hashMap.entrySet().iterator();
+        while(itr. hasNext()){        
+           System.out.println(itr.next());
+       }
+       \end{lstlisting}
+\item The order items went in is not the same as how they come out 
+\item A TreeMap arranges the data keys so they come out in order when using the iterator 
+\item \begin{lstlisting} 
+TreeMap <String, String> french  = 
+			new TreeMap<String, String> ( );
+\end{lstlisting} 
+\item entrySet() returns a collection of key/value pairs 
+\item interface Map.Entry is a key/value pair 
+\item \begin{lstlisting} 
+Set set = french.entrySet(); 
+Iterator i = set.iterator(); 
+Map.Entry <String,String> me;
+
+while(i.hasNext()) { 
+   me = (Map.Entry)i.next(); 
+   System.out.print(me.getKey() + ": "); 
+   System.out.println(me.getValue()); 
+} 
+\end{lstlisting} 
+\item Order can be assumed if the class implements Comparable 
+\item \begin{lstlisting} 
+TreeMap <String, String> french  = 
+			new TreeMap<String, String> ( );
+\end{lstlisting} 
+\item For user-defined objects, the TreeMap needs to know how to order the keys 
+\item \begin{lstlisting} 
+TreeMap <SSN, Integer> treeMap  = 
+			new TreeMap (new SSNComparator());\end{lstlisting} 
+\item Comparator is a class that implements Comparator which has a method int compare (Object, Object) 
+\item \begin{lstlisting} 
+import java.util.Comparator;
+
+public class SSNComparator implements Comparator <SSN>  {
+   public int compare(SSN num1, SSN num2) {
+      return num1.compareTo(num2);
+   }\end{lstlisting}
+\item The TreeMap is efficient because it keeps item in order and has O(n) for adding new values 
+\item The TreeMap is based on the Red-Black tree 
+\end{itemize}
+
+\section{File Input and Output}
+\begin{itemize} 
+\item File I/O is done through the operating system: file system to operating system to program
+\item Files can be stored on a variety of devices, read/written by many operating systems
+\item Constructor for TextFileInput \begin{lstlisting} 
+public TextFileInput(String filename)
+   {
+      this.filename = filename;
+      try  {
+         br = new BufferedReader(
+                  new InputStreamReader(
+                      new FileInputStream(filename)));
+      } catch ( IOException ioe )  {
+         throw new RuntimeException(ioe);
+      }  // catch
+   }  // constructor
+}
+\end{lstlisting}
+\item public FileInputStream(String name) throws FileNotFoundException \newline
+
+Creates a FileInputStream by opening a connection to an actual file, 
+the file named by the path name name in the file system. A new FileDescriptor 
+object is created to represent this file connection. \newline
+
+Parameters:
+name - the system-dependent file name. \newline 
+Throws: 
+FileNotFoundException - if the file does not exist, is a directory rather than 
+a regular file, or for some other reason cannot be opened for reading. 
+\item public int read() throws IOException \newline
+Reads a byte of data from this input stream. This method blocks if no input is yet available.
+\item An InputStreamReader is a bridge from byte streams to character streams: It reads bytes and decodes them into characters using a specified charset. The charset that it uses may be specified by name or may be given explicitly, or the platform's default charset may be accepted. \begin{lstlisting}
+public TextFileInput(String filename)
+   {
+      this.filename = filename;
+      try  {
+         br = new BufferedReader(
+                  new InputStreamReader(
+                      new FileInputStream(filename)));
+      } catch ( IOException ioe )  {
+         throw new RuntimeException(ioe);
+      }  // catch
+   }  // constructor
+\end{lstlisting} 
+\item The FileInputStream reads ASCII bytes from the file and delivers a stream of 32-bit int values 
+\item The InputStreamReader converts the ints to a stream of Unicode characters (the default character set)
+\item public String readLine() throws IOException \newline
+Read a line of text. A line is considered to be terminated by any one of a line feed ('\textbackslash n'), a carriage return ('\r'), or a carriage return followed immediately by a linefeed. \newline
+Returns: 
+A String containing the contents of the line, not including any line-termination characters, or null if the end of the stream has been reached \newline
+Throws: 
+IOException - If an I/O error occurs
+\item The BufferedReader separates the stream of Unicode characters into "lines" of the file (a line is terminated with lineFeed \textbackslash n, carriageReturn or \textbackslash n\textbackslash r) 
+\item The class File is an abstract representation of file and directory pathnames 
+\item \begin{lstlisting} 
+import java.io.File;
+import javax.swing.*;
+
+public class SingleFile {
+   public static void main (String args[]){
+   JFileChooser fileChooser = new JFileChooser();
+   fileChooser.showOpenDialog(null);
+   File myFile = fileChooser.getSelectedFile();
+   System.out.println("getName(): "+myFile.getName());
+   System.out.println("getParent(): "+myFile.getParent());
+   System.out.println("getPath(): "+myFile.getPath());
+   System.out.println("lastModified(): "+myFile.lastModified());
+   System.out.println("length(): "+myFile.length());
+   }
+}
+\end{lstlisting} 
+\item \begin{lstlisting} 
+import java.io.File;
+import javax.swing.*;
+public class ListFiles {
+
+	public static void main(String[] args) {
+        JFileChooser fd = new JFileChooser();
+//        mode - the type of files to be displayed:
+//            * JFileChooser.FILES_ONLY
+//            * JFileChooser.DIRECTORIES_ONLY
+//            * JFileChooser.FILES_AND_DIRECTORIES 
+        fd.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fd.showOpenDialog(null);
+		File f = fd.getSelectedFile();
+		listFiles(f,"");
+	}
+	public static void listFiles(File f, String indent) {
+		File files[] = f.listFiles();
+		
+		for (int i = 0; i<files.length; i++) {
+			File f2 = files[i];
+			System.out.print(f2.getName());
+			if (f2.isDirectory())
+				listFiles(f2, indent+"   ");
+			System.out.print("...");
+			System.out.print(f2.length());
+			System.out.println();
+		}
+	}
+}
+\end{lstlisting} 
+\end{itemize}
+
+\section{Generics}
+\begin{itemize} 
+\item Generic: of, applicable to, or referring to all the members of a genus, class, group, or kind; general
+\item The advantage of using generics is to make generalized variables so it can be widely used without edited 
+\item \begin{lstlisting} 
+public class ListNode <E> {
+   E data;
+   ListNode next;
+   public ListNode(E myData) {
+      data=myData;
+      next=null;
+   }
+   public ListNode() {
+      data=null;
+      next=null;
+   }
+}
+\end{lstlisting} 
+\item \begin{lstlisting} 
+public class LinkedList<E> {
+   private ListNode first;
+   private ListNode last;
+   private int length;
+   
+   public LinkedList() {
+      ListNode ln = new ListNode();
+      first = ln;
+      last = ln;
+      length = 0;
+   }
+   public void append ( E myData){
+      ListNode n = new ListNode(myData);
+      last.next = n;
+      last = n;
+      length++;
+   }
+   ....
+}
+\end{lstlisting} 
+\item To make a LinkedList, write "LinkedList$<$String$>$ stringList = new LinkedList$<$String$>$(); "
+ 
+
+\end{itemize}
+
+\section{Recursion and the Run Time Stack} 
+\begin{itemize} 
+\item A recursive method is a method that calls itself 
+\item A recursive algorithm is one that solves a problem by using the same algorithm to solve a smaller part of the problem 
+\item Ex: to list all the presidents of the US, identify the first president and then list the rest of the presidents 
+\item \begin{lstlisting} 
+
+public class BinomialCoefficient {
+
+   public static void main(String[] args) {
+      int[] n = {4,4,4,4,4};
+      int[] r = {0,1,2,3,4};
+      int x,y;
+      for (int i=0; i<n.length; i++) {
+         x=n[i];
+         y=r[i];
+         System.out.println(x+" choose "+y+" is "+bc(x,y));
+      }
+   }
+   private static int bc (int n, int r) {
+       if (n==0 || r==0 ||n==r) {
+            return 1;
+      }
+      else
+         return bc(n-1,r)+bc(n-1,r-1);
+   }
+}\end{lstlisting} 
+\item \begin{lstlisting} 
+
+public class EuclidianGCD {
+
+   public static void main(String[] args) {
+      int[] testNumerators = {4,6,1,0,15,20};
+      int[] testDenominators = {8,18,2,5,225,225};
+      int n,d;
+      for (int i=0; i<testNumerators.length; i++) {
+         n=testNumerators[i];
+         d=testDenominators[i];
+         System.out.println("The greatest common divisor of "+n+" and "+d+
+               " is "+gcd(n,d));
+      }
+   }
+   private static int gcd (int n, int d) {
+         if (d == 0) return n;
+         else return gcd(d, n % d);
+   }
+}\end{lstlisting} 
+\item \begin{lstlisting} 
+
+public class Factorial {
+
+   public static void main(String[] args) {
+      int[] testValues = {4,6,1,0};
+      int n;
+      for (int i=0; i<testValues.length; i++) {
+         n=testValues[i];
+         System.out.println("Factorial("+n+") = "+factorial(n));
+      }
+   }
+   private static int factorial (int n) {
+      if (n==0)
+         return 1;
+      else
+         return n*factorial(n-1);
+   }
+}\end{lstlisting} 
+\item \begin{lstlisting} 
+public class Fibonacci {
+
+   public static void main(String[] args) {
+      int[] testValues = {4,6,1,0,9,18};
+      int n;
+      for (int i=0; i<testValues.length; i++) {
+         n=testValues[i];
+         System.out.println("The "+n+suffix(n)+" Fibonacci number is "+fibonacci(n));
+      }
+   }
+   private static int fibonacci (int n) {
+      if (n==0)
+         return 0;
+      if
+         (n==1)
+         return 1;
+      return fibonacci(n-1)+fibonacci(n-2);
+   }
+}
+\end{lstlisting}
+\item \begin{lstlisting} 
+import javax.swing.*;
+public class Pascal {
+
+      public static void main (String[] args){
+         int numRows = Integer.parseInt(JOptionPane.showInputDialog(null,"How many rows?"))-1;
+         for (int i=0;i<= numRows;i++){
+            for (int j=0; j<=i; j++)
+               System.out.print(bc(i,j)+" ");
+            System.out.println();
+         }
+      }
+      private static int bc (int n, int r) {
+         if (n==0 || r==0 ||n==r) {
+              return 1;
+        }
+        else
+           return bc(n-1,r)+bc(n-1,r-1);
+     }
+      
+}\end{lstlisting} 
+\item \begin{lstlisting} 
+
+public class TowersOfHanoi {
+
+   public static void main(String[] args) {
+      moveRings(3,"A","B","C");
+
+   }
+   private static void moveRings(int numberOfRings, String fromTower,
+                                 String toTower, String tempTower) {
+      if (numberOfRings == 0) return;
+      moveRings (numberOfRings-1, fromTower, tempTower, toTower);
+      System.out.println("Move a ring from tower "+fromTower+" to tower "+
+                           toTower);
+      moveRings (numberOfRings-1, tempTower, toTower, fromTower);
+   }
+}\end{lstlisting} 
+
+\end{itemize}
+
+\section{Model-View-Controller (MVC)}
+\begin{itemize} 
+\item Model: a representation of the data with no concern for how it will appear to the user - extends Observable 
+\item View: displays the data using GUI components by observing the Model - implements Observer 
+\item Controller: a Listener that responds to events and updates the Model 
+\item Regular Program \begin{lstlisting} 
+public class TemperatureModel  {
+    private double temperatureF = 32.0;
+    public double getF() {
+      return temperatureF;
+  }
+  public double getC(){
+      return (temperatureF - 32.0) * 5.0 / 9.0;
+  }
+  public void setF(double tempF)
+  {  
+      temperatureF = tempF;
+  }
+  public void setC(double tempC)
+  {  temperatureF = tempC*9.0/5.0 + 32.0;
+  }
+}
+\end{lstlisting} 
+\item Model Class \begin{lstlisting} 
+import java.util.Observable;
+public class TemperatureModel extends Observable {
+    private double temperatureF = 32.0;
+    public double getF() {
+      return temperatureF;
+   }
+  public double getC(){
+      return (temperatureF - 32.0) * 5.0 / 9.0;
+   }
+  public void setF(double tempF)
+   {  
+      temperatureF = tempF;
+      setChanged();
+      notifyObservers();
+   }
+  public void setC(double tempC)
+   {  temperatureF = tempC*9.0/5.0 + 32.0;
+      setChanged();
+      notifyObservers();
+   }
+}
+\end{lstlisting}
+\item Controller (Listener) \begin{lstlisting} 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+  class UpListener implements ActionListener  {
+     TemperatureModel model;
+   
+      public UpListener(TemperatureModel m) {
+      model = m;
+   }
+
+      public void actionPerformed(ActionEvent e) {  
+         model.setF(model.getF() + 1.0);
+      }
+   }\end{lstlisting} 
+\item GUI class \begin{lstlisting} 
+import java.awt.*;
+import java.awt.event.*;
+abstract class TemperatureGUI implements java.util.Observer {
+   private String label;
+   private TemperatureModel model;
+   private Frame temperatureFrame;
+   private TextField display = new TextField();
+   private Button upButton = new Button("Raise");
+   private Button downButton = new Button("Lower");
+   
+   TemperatureGUI(String theLabel, TemperatureModel tModel, int h, int v) {  
+      label = theLabel;
+      model = tModel;
+      Frame temperatureFrame;
+      temperatureFrame = new Frame(label);
+      temperatureFrame.add("North", new Label(label));
+      temperatureFrame.add("Center", display);
+      Panel buttons = new Panel();
+      buttons.add(upButton);
+      buttons.add(downButton);      
+      temperatureFrame.add("South", buttons);      
+      temperatureFrame.addWindowListener(new CloseListener()); 
+      model.addObserver(this); // Connect the View to the Model
+      temperatureFrame.setSize(200,100);
+      temperatureFrame.setLocation(h, v);
+      temperatureFrame.setVisible(true); 
+   
+   public void setDisplay(String s){ 
+      display.setText(s);}
+   public double getDisplay()  {  
+      return Double.valueOf(display.getText()).doubleValue();
+   }
+      continued?
+}
+}
+\end{lstlisting}
+\item If it is to operate in Fahrenheit \begin{lstlisting} 
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Observable;
+
+public class FarenheitGUI extends TemperatureGUI {
+   
+   public FarenheitGUI(TemperatureModel model, int h, int v) {  
+      super("Farenheit Temperature", model, h, v);
+      setDisplay(""+model.getF());
+      addUpListener(new UpListener(model));
+      addDownListener(new DownListener(model));
+      addDisplayListener(new DisplayListener(model,this));
+   }
+   
+   public void update(Observable t, Object o) 
+	// automatically called when the model is changed
+   {  
+      setDisplay("" + model().getF());
+   }
+
+}\end{lstlisting} 
+
+\end{itemize}
+
+\section{Threads} 
+\begin{itemize} 
+\item Thread: an instance of program execution - generalized as a Process 
+\item A single Java application could be considered a Thread but a Java application may contain multiple threads 
+\item The value of threads can be seen by looking at process states that are linked in a continuous loop
+\item Process States: \begin{itemize} 
+\item Ready: threads that are ready to run
+\item Running: threads that are running on a CPU
+\item Waiting: threads that are waiting for something 
+\end{itemize} 
+\item The operating system (or the JVM) is responsible for moving processes (threads) from state to state 
+\item To instantiate a new thread: "Thread t = new Thread();"
+\item t.start() will make the thread go from ready to running 
+\item t.sleep(ms), t.suspend(),t.wait() will make the thread go from running to waiting
+\item t.stop() will kill the thread
+\item t.resume() will make the thread go from waiting to ready 
+\item Making a timer work \begin{lstlisting} 
+import java.awt.*;
+import javax.swing.*;
+public class TimerJFrame extends JFrame implements Runnable {
+   private int secondsRemaining;
+   private JTextArea text = new JTextArea();
+   public TimerJFrame (int seconds) {
+      secondsRemaining = seconds;
+      setTitle("Time Remaining...");
+      setSize(150,150);
+      setLocation  (400,200);
+      Container cp = getContentPane();
+      text.setFont(new Font("Arial",2,72));
+      cp.add(text);
+      text.append(Integer.toString(secondsRemaining));
+      setVisible(true);
+      setDefaultCloseOperation(EXIT_ON_CLOSE);
+      Thread timer = new Thread(this);
+      timer.start();
+   }
+   public void run() {
+  System.out.println("The game has started...");      
+  while (secondsRemaining > 0) {
+    try {
+         Thread.sleep(1000);
+         secondsRemaining--;
+         text.setText(Integer.toString(secondsRemaining));
+         setVisible(true);
+      }
+        catch (InterruptedException ie) {
+           System.out.println("Timer is interrupted");
+        }
+   }
+   JOptionPane.showMessageDialog(null,"Time is up!");
+   }
+   }
+   \end{lstlisting} 
+\item Another example \begin{lstlisting} 
+public class LoggingThread extends Thread {
+  private LinkedList linesToLog = new LinkedList();
+  private volatile boolean terminateRequested;
+
+  public void run() {
+    try {
+      while (!terminateRequested) {
+        String line;
+        synchronized (linesToLog) {
+          while (linesToLog.isEmpty())
+            linesToLog.wait();
+          line = (String) linesToLog.removeFirst();
+        }
+        doLogLine(line);
+      }
+    } catch (InterruptedException ex) {
+      Thread.currentThread().interrupt();
+    }
+  }
+  private void doLogLine(String line) {
+    // ... write to wherever
+  }
+  public void log(String line) {
+    synchronized (linesToLog) {
+      linesToLog.add(line);
+      linesToLog.notify();
+    }
+  }
+}
+\end{lstlisting}
+\end{itemize}
+\end{document}

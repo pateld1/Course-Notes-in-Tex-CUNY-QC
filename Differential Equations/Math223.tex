@@ -1,0 +1,477 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Math 223: Differential Equations}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\newcommand{\dy}{\frac{dy}{dt}}
+\newcommand{\ddy}{\frac{d^2y}{dt^2}} 
+\newcommand{\sumzinf}{\sum_{n = 0}^{\infty}}
+
+\title{Math 223: Differential Equations}
+\author{Darshan Patel}
+\date{Spring 2017}
+\maketitle
+
+\tableofcontents
+
+\section{First Order Differential Equations} 
+\subsection{First Order Linear Differential Equations} 
+\begin{definition} Differential Equation: an equation that has a function and one or more of its derivative $$ \ddy + y^2\dy + 3y = \cos(t) $$ \end{definition}
+Note: The order of a differential equation is the order of the highest derivative of the function $y$ that appears in the equation. 
+\begin{definition} First Order Linear Differential Equation: an equation in the form of 
+$$\dy = f(t, y)$$ \end{definition}
+\begin{definition} First Order Linear Homogeneous Equation: an equation in the form of 
+$$\dy + a(t)y = 0$$ \end{definition}
+\begin{definition} First Order Linear Nonhomogeneous Equation: an equation in the form of $$\dy + a(t)y = b(t) $$ \end{definition} 
+Steps to solving First Order Linear Homogeneous Equations: $$\begin{aligned} 
+\dy + a(t)y &= 0 \\ \frac{1}{y}\dy &= -a(t) \\ \frac{d}{dt} \ln|y(t)| &= -a(t) \\ \ln y(t) &= -\int a(t)dt + C_1 \\ |y(t)| &= \exp(-\int a(t)dt + C_1) = C\exp(-\int a(t) dt) \\ |y(t)\exp(\int a(t)dt)| &= C \\ y(t) &= C\exp(-\int a(t)dt) \end{aligned} $$ 
+\begin{example} Solve: $\dy + 2ty = 0$. $$a(t) = 2t$$ $$y(t) = C\exp(-\int 2tdt) = C\exp(-t^2) $$ \end{example}
+\begin{definition} General Solution: $$y(t) = C\exp(-\int a(t) dt) $$ \end{definition} 
+\begin{definition} Initial Condition: $y(t_0) = y_0$ or some other value for a certain differential equation \end{definition} 
+To solve an initial condition problem: $$\begin{aligned} \int_{t_0}^t \frac{d}{ds}\ln|y(s)|ds &= -\int_{t_0}^t a(s)ds \\ \ln|y(t)| - \ln|y(t_0)| = \ln|\frac{y(t)}{y(t_0)} &= -\int_{t_0}^t a(s)ds \\ |\frac{y(t)}{y(t_0)}| &= \exp(-\int_{t_0}^t a(s)ds) \\ y(t) &= y_0\exp(-\int_{t_0}^t a(s)ds) \end{aligned} $$ 
+\begin{example} Solve: $\dy + (\sin(t))y = 0$, given $y(0) = \frac{3}{2} $. 
+$$a(t) = \sin(t) $$ $$y(t) = \frac{3}{2}\exp(-\int_0^t \sin(s)ds) = \frac{3}{2}e^{\cos(t) - 1}$$ \end{example}
+\begin{example} Given initial condition $y(0) = 2$ for the equation $\dy + ty = 0$, solve for $y$. $$\begin{aligned} y &= Ce^{-\int tdt} \\ &= Ce^{-\frac{t^2}{2}} \\ &= 2e^{-\frac{t^2}{2}} \end{aligned} $$ \end{example} 
+\begin{example} Solve the equation: $\dy + a(t)y = 0$ given $y(0) = y_0$. 
+$$ \begin{aligned} \dy &= -a(t)y \\ \frac{1}{y}\dy &= -a(t) \\ \frac{d}{dx}(\ln(y(t))) &= -a(t) \\ \int_{t_0}^t \frac{d}{dt}(\ln(y(t))) dt &= -\int a(t) dt \\ \ln(y)\Big|_{y_0}^y &= -\int_{t_0}^t a(t) dt \\ \ln(y(t)) - \ln(y_0) &= -\int a(t) dt \\ 
+\ln(\frac{y}{y_0}) &= -\int_{t_0}^t a(t)dt \\ \frac{y}{y_0} &= e^{-\int_{t_0}^t a(t) dt} \\ y &= y_0e^{-\int_{t_0}^t a(t) dt} \end{aligned} $$ \end{example}
+\begin{example} Solve $\dy + \sin(t)y = 0$ where $y(0) = 3$. 
+$$y(t) = 3e^{-\int_0^t \sin(t) dt} = 3e^{\cos(0) - \cos(t)} = 3e^{1 - \cos(t)} $$ \end{example} 
+\begin{example} Solve $\dy + e^{t^2}y = 0$ where $y(0) = 4$. 
+$$y(t) = 4e^{-\int_0^t e^{t^2} dt} $$ \end{example} 
+
+
+\begin{definition} Integrating Factor: $\mu(t)$, a factor used to solve a nonhomogeneous equation \end{definition} 
+Note: For a first order linear nonhomogeneous equation: $$\mu(t) = \exp(\int a(t)dt) $$ 
+Thus: $$\begin{aligned} \dy + a(t) &= b(t) \\ \mu(t)\dy + a(t)\mu(t)y &= \mu(t)b(t) \\ \frac{d}{dt} \mu(t)y &= \mu(t)\dy + \frac{d\mu}{dt}y \\ \mu &= \exp(\int a(t)dt) \\ \frac{d}{dt} \mu(t)y &= \mu(t)b(t) \\ \mu(t)y &= \int \mu(t)b(t)dt + C \\ y &= \frac{1}{\mu(t)}(\int \mu(t)b(t)dt + C) \\ &= \exp(-\int a(t)dt)(\int \mu(t)b(t)dt + C) \end{aligned} $$ 
+For satisfying an initial condition $y(t_0) = y_0$: $$ \begin{aligned} 
+\int_{t_0}^t \frac{d}{dt} \mu(t)ydt &= \int_{t_0}^t \mu(t)b(t)dt \\ \mu(t)y - \mu(t_0)y_0 &= \int_{t_0}^t \mu(s)b(s)ds \\ y &= \frac{1}{\mu(t)}(\mu(t_0)y_0 + \int_{t_0}^t \mu(s)b(s)ds) \end{aligned} $$ 
+
+\begin{example} Solve: $\dy - 2ty = t$. $$ \begin{aligned} \mu(t) &= \exp(\int -2tdt) = e^{-t^2} \\ e^{-t^2}(\dy - 2ty) &= e^{-t^2}(t) \\ \frac{d}{dt} e^{-t^2}y &= te^{-t^2} \\ e^{-t^2}y &= \int te^{-t^2}dt = -\frac{1}{2}\int -2te^{-t^2}dt \\ &= -\frac{1}{2}e^{-t^2} + C \\ y(t) &= -\frac{1}{2} + Ce^{-t^2} \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy + 2ty = t$, given $y(1) = 2$. $$\begin{aligned} 
+\mu(t) &= \exp(\int a(t)dt) = \exp(\int 2tdt) = e^{t^2} \\ \int_1^t \frac{d}{ds}e^{s^2}y(s)ds &= \int_1^t se^{s^2}ds \\ e^{s^2}y(s)\Big|_1^t &= \frac{e^{s^2}}{2}\Big|_{1}^t \\ e^{t^2}y - 2e &= \frac{e^{t^2}}{2} - \frac{e}{2} \\ y &= \frac{1}{2} + \frac{3e}{2}e^{-t^2} = \frac{1}{2} + \frac{3}{2}e^{1 - t^2} \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy + y = \frac{1}{1 + t^2}$ given $y(2) = 3$. $$ \begin{aligned} \mu(t) &= \exp(\int a(t)dt) = \exp(\int 1dt) = e^t \\ e^t(\dy + y) &= \frac{e^t}{1 + t^2} \\ \frac{d}{dt}e^ty &= \frac{e^t}{1 + t^2} \\ \int_2^t \frac{d}{ds}e^sy(s)ds &= \int_2^t \frac{e^s}{1 + s^2}ds \\ e^ty - 3e^2 &= \int_2^t \frac{e^s}{1 + s^2}ds \\ y &= e^{-t}\Big[3e^2 + \int_2^t \frac{e^s}{1 + s^2}ds\Big] \end{aligned} $$ \end{example}
+
+
+\subsection{Separation of Variables} 
+\begin{definition} Separable Equation: an equation that can be separated $$\dy = \frac{g(t)}{f(y)} $$ \end{definition} 
+If $\dy = \frac{g(t)}{f(y)}$, then $$\begin{aligned} f(y)\dy &= g(t) \\ f(y(t))\dy &= g(t) \\ \frac{d}{dt}F(y(t)) &= f(y(t))\frac{d}{dt} \\ \frac{d}{dt}F(y(t)) &= g(t) \\ F(y(t)) &= \int g(t)dt + C \end{aligned} $$ 
+\begin{example} Solve: $\dy = \frac{t^2}{y^2}$. $$\begin{aligned} y^2\dy &= t^2 \\ \frac{d}{dt}\frac{y^3(t)}{3} &= t^2 \\ y^3(t) &= t^3 + C \\ y(t) &= (t^3 + C)^{\frac{1}{3}} \end{aligned} $$ \end{example} 
+\begin{example} Solve: $e^y\dy - t - t^3 = 0$. $$\begin{aligned} \frac{d}{dt}e^{y(t)} &= t + t^3 \\ e^{y(t)} &= \frac{t^2}{2} + \frac{t^4}{4} + C \\ y(t) &= \ln(\frac{t^2}{2} + \frac{t^4}{4} + C) \end{aligned} $$ \end{example}
+
+If initial condition $y(0) = y_0$ is given for $\dy = \frac{g(t)}{f(y)}$, then $$ \begin{aligned} F(y(t)) - F(y_0) &= \int_{t_0}^t g(s)ds \\ F(y) - F(y_0) &= \int_{y_0}^y f(r)dr \\ \int_{y_0}^y f(r)dr &= \int_{t_0}^t g(s)ds \end{aligned} $$
+\begin{example} Solve: $e^y\dy - (t + t^3) = 0$ where $y(1) = 1$. $$ \begin{aligned} 
+y &= \ln(\frac{t^2}{2} + \frac{t^4}{4} + C) \\ 1 &= \ln(\frac{3}{4} + C) \\ C &= e - \frac{3}{4} \\ 
+y(t) &= \ln(e - \frac{3}{4} + \frac{t^2}{2} + \frac{t^4}{4}) \end{aligned} $$ Using the new method: $$\begin{aligned} e^y\dy &= t + t^3 \\ \int_1^y e^rdr &= \int_1^t (s + s^3)ds \\ e^y - e &= \frac{t^2}{2} + \frac{t^4}{4} - \frac{1}{2} - \frac{1}{4} \\ y(t) &= \ln(e - \frac{3}{4} + \frac{t^2}{2} + \frac{t^4}{4}) \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = \frac{1 + t^2}{y^2}$. 
+$$\begin{aligned} y^2dy &= (1 + t^2)dt \\ \frac{y^3}{3} &= t + \frac{t^3}{3} + C \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = 1 + y^2$ where $y(0) = 0$. 
+$$\begin{aligned} \frac{1}{1 + y^2}dy &= dt \\ \int_0^y \frac{1}{1 + y^2}dy &= \int_0^t dt \\ \arctan(y)\big|_0^y &= t \\ \arctan(y) - \arctan(0) &= t \\ \arctan(y) &= t \\ y &= \tan(t) \end{aligned} $$ \end{example}
+\begin{example} Solve: $\dy = 1 + y^2$ where $y(0) = 1$. $$\begin{aligned} \int_1^y \frac{dr}{1 + r^2} &= \int_0^t ds \\ \arctan(r)\Big|_1^y &= s\Big|_0^t \\ \arctan(y) - \arctan(1) &= t \\ y &= \tan(t + \frac{\pi}{4}) \end{aligned} $$ \end{example} 
+\begin{example} Solve: $y\dy + (1 + y^2)\sin(t) = 0$ where $y(0) = 1$. $$\begin{aligned} \frac{y}{1 + y^2}\dy &= -\sin(t) \\ \int_1^y \frac{rdr}{1 + r^2} &= \int_0^t -\sin(s)ds \\ \frac{1}{2}\ln(1 + y^2) - \frac{1}{2}\ln(2) &= \cos(t) - 1 \\ y(t) &= (2e^{-4\sin^2(\frac{t}{2})} - 1)^{\frac{1}{2}} \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = (1 + y)t$, where $y(0) = 1$. 
+$$\frac{1}{1 + y}\dy = t $$ This is not allowable since $y(0) = -1$, But it can be seen that $y(t) = -1$ is one solution of this initial condition problem. \end{example}
+Note: Consider the initial condition problem $\dy = f(y)g(t)$ where $y(t_0) = y_0$. Then, $y(t) = y_0$ is one solution of this initial condition problem. 
+\begin{example} Solve: $(1 + e^y)\dy = \cos(t)$, where $y(\frac{\pi}{2}) = 3$. $$\begin{aligned} \int_3^y (1 + e^r)dr &= \int_{\frac{\pi}{2}}^t \cos(s)ds \\ (r + e^r)\Big|_3^y &= \sin(s)\Big|_{\frac{\pi}{2}}^t \\ y + e^y - 3 - e^3 &= \sin(t) - \sin(\frac{\pi}{2}) \\ y + e^y &= \sin(t) + e^3 + 2 \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = -\frac{t}{y}$. $$\begin{aligned} \dy &= -\frac{t}{y} \\ ydy &= -tdt \\ \int ydy &= -tdt \\ \frac{y^2}{2} &= -\frac{t^2}{2} \\ y^2 + t^2 &= c^2 \end{aligned} $$ \end{example} 
+Note: The circles $t^2 + y^2 = c^2$ are called solution curves of the differential equation $\dy = -\frac{t}{y}$. 
+\begin{example} Solve: $\dy - 2ty = 1$, $y(0) = 1$. $$\begin{aligned} 
+\mu(t) &= \exp(\int -2t \, dt) = \exp(-t^2) \\ \int_1^y \frac{d}{dt} \exp(-t^2)y \, dy &= \int_0^t \exp(-t^2) \, dt \\ 
+\exp(-t^2)y(t)\Big|_0^y &= \int_0^t \exp(-t^2) \, dt \\ \exp(-t^2)y - 1 &= \int_0^t \exp(-t^2)\, dt \\ e^{-t^2}y &= 1 + \int_0^t e^{-t^2} \, dt \\ y &= e^{t^2} + e^{t^2}\int_0^t e^{-t^2} \, dt \end{aligned} $$ \end{example}
+\begin{example} Solve: $\dy = 1 - t + y^2 - ty^2$. $$ \begin{aligned} 
+\dy &= 1 - t + y^2 - ty^2 = 1 - t + y^2(1 - t) = (1 - t)(1 + y^2) \\ \int \frac{dy}{1 + y^2}dy &= \int (1 + t^2) \, dt \\ 
+\arctan(y) &= t + \frac{t^3}{3} + C \\ y &= \tan(t + \frac{t^3}{3} + C) \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = (1 + t)(1 + y)$. $$ \begin{aligned}
+\dy &= (1 + t)(1 + y) \\ \int \frac{dy}{1 + y} &= \int (1 + t) \, dt \\ \ln(y + 1) &= t + \frac{t^2}{t} + C \\ y + 1 &= \exp(t + \frac{t^2}{2} + C) \\ y &= \exp(t + \frac{t^2}{2} + C) - 1 \\ &= Ce^{t + \frac{t^2}{2}} - 1 \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = (1 + y)t$, $y(0) = -1$. $$ \begin{aligned} 
+\dy &= (1 + y)t \\ \int_0^y \frac{1}{1 + y} \, dy &= \int_{-1}^t t \, dt \\ \ln(1 + y)\Big|_0^y &= \frac{t^2}{t}\Big|_0^t \\ \ln(1 + y) - \ln(0) &= \frac{t^2}{2} \\ \ln(\frac{1 + y}{0}) &= \frac{t^2}{2} \\ \frac{1 + y}{0} &= e^{\frac{t^2}{2}} \\ 
+1 + y &= 0 \\ y &= -1 \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\dy = \frac{2t}{y + yt^2}$, $y(2) = 3$. $$ \begin{aligned} 
+\dy &= \frac{2t}{y + yt^2} = \frac{2t}{y(1 + t^2)} \\ \int_3^y y \, dy &= \int_2^t \frac{2t}{t^2} \, dt \\ \frac{y^2}{2}\Big|_3^4 &= \ln(t^2)\Big|_2^t \\ \frac{y^2}{2} - \frac{9}{2} &= \ln(t^2) - \ln(4) \\ y^2 &= 2\ln(\frac{t^2}{4}) + 9 \end{aligned} $$ \end{example} 
+
+\subsection{Population Models} 
+\begin{example} Solve: $\frac{dp}{dt} = ap$, $p(t_0) = p_0$, where $p$ is the population. 
+$$ P(t) = p_0\exp(\int_{t_0}^t at \, dt) = p_0e^{a(t - t_0)}$$ This is too simple to explain population control. \end{example} 
+\begin{definition} Population Model: $$\frac{dp}{dt} = ap, p(t_0) = p_0$$ $$ p(t) = p_0\exp(a(t - t_0))$$  \end{definition} 
+\begin{definition} Better Population Model: $$\frac{dp}{dt} = ap - bp^2$$ \end{definition}
+\begin{example} Solve $\frac{dp}{dt} = ap - bp^2$ where $p(t_0) = p_0$. $$\begin{aligned} 
+\frac{dp}{dt} &= ap - bp^2 \\ \frac{1}{ap - bp^2}\, dp &= dt \\ \int_{p_0}^p \frac{1}{ap - bp^2} \, dp &= \int_{t_0}^t \, dt \\ \frac{1}{ap - bp^2} &= \frac{1}{p(a - bp)} \\ &= \frac{A}{p} + \frac{B}{a - bp} \\ &= \frac{A(a - bp) + B(p)}{p(a - bp)} \\ A(a - bp) + Bp &= 1 \\ A &= \frac{1}{a} \\ B &= \frac{b}{a} \\ \int_{p_0}^p \frac{1}{ap - bp^2} \, dp &= \int_{t_0}^t \, dt \\ \int_{p_0}^p \frac{1}{a}\frac{1}{p} + \frac{b}{a}\frac{1}{a - bp} \, dp &= \int_{t_0}^t \, dt \\ \int_{p_0}^p \frac{1}{p} + \frac{b}{a - bp} \, dp &= a\int_{t_0}^t \, dt \\ \ln(p)\Big|_{p_0}^p + \ln(a - bp)\Big|_p^{p_0} &= a(t - t_0) \\ \ln(p) - \ln(p_0) + \ln(a - bp_0) - \ln(a - bp) &= a(t - t_0) \\ \ln\Big[\frac{p(a - bp_0)}{p_0(a - bp)}\Big] &= a(t - t_0) \\ \frac{p(a - bp_0)}{p_0(a - bp)} &= \exp(a(t - t_0)) \\ p(a - bp_0) &= p_0(a - bp)\exp(a(t - t_0)) \\ &= p_0a\exp(a(t - t_0)) - p_0bp\exp(a(t - t_0)) \\ p(a - bp_0) + bp_0p\exp(a(t - t_0)) &= ap_0\exp(a(t - t_0)) \\ p[(a - bp_0) + bp_0\exp(a(t - t_0))] &= ap_0\exp(a(t - t_0)) \\ p(t) &= \frac{ap_0\exp(a(t - t_0))}{a - bp_0 + bp_0\exp(a(t - t_0))} \cdot \frac{\exp(-a(t - t_0))}{\exp(-a(t - t_0))} \\ &= \frac{ap_0}{bp_0 + (a - bp_0)\exp(-a(t - t_0))} \end{aligned} $$ This is the logistic model of population. \end{example} 
+Note: $$\lim_{t \to \infty} p(t) = \frac{ap_0}{bp_0} = \frac{a}{b} $$ \\~\\
+\begin{example} Find the derivative of $\frac{dp}{dt} = ap - bp^2$. $$\begin{aligned} \frac{dp}{dt} &= ap - bp^2 \\ \frac{d^2p}{dt^2} &= p(-b\frac{dp}{dt}) + (a - bp)\frac{dp}{dt} \\ &= \frac{dp}{dt}(a - bp - bp) \\ &= (a - 2bp)\frac{dp}{dt} \end{aligned} $$ \end{example} 
+
+\subsection{Exact Equations and why we cannot solve very many differential equations} 
+Given the function $\phi(t, y(t))$, note that: $$ \frac{d}{dt} \phi(t, y(t)) = \frac{\partial \phi}{\partial t} + \frac{\partial \phi}{\partial y}\frac{dy}{dt} $$ 
+\begin{theorem} Let $M(t, y)$ and $N(t, y)$ be continuous and have continuous partial derivatives with respect to $t$ and $y$ in the rectangle $R$ consisting of those points $(t, y)$ with $a < t < b$ and $c < y < d$. There exists a function $\phi(t, y)$ such that $M(t, y) = \frac{\partial \phi}{\partial t}$ and $N(t, y) = \frac{\partial \phi}{\partial y}$ if and only if $$\frac{\partial M}{\partial y} = \frac{\partial N}{\partial t} $$ in $R$\end{theorem} 
+\begin{proof} Observe that $M(t, y) = \frac{\partial \phi}{\partial t}$ for some function $\phi(t, y)$ if and only if $$ \phi(t, y) = \int M(t, y) \, dt + h(y)$$ where $h(y)$ is an arbitrary function of $y$. Then $$\frac{\partial \phi}{\partial y} = \int \frac{\partial M(t, y)}{\partial y} \, dt + h'(y)$$ Therefore, $\frac{\partial \phi}{\partial y}$ will be equal to $N(t, y)$ if and only if $$N(t, y) = \int \frac{\partial M(t, y)}{\partial y} \, dt + h'(y)$$ or $$h'(y) = N(t, y) - \int \frac{\partial M(t, y)}{\partial y} \, dt $$ Now $h'(y)$ is a function of $y$ alone, while the RHS is a function of both $t$ and $y$. But a function of $y$ alone cannot be equal to a function of both $t$ and $y$. Thus the above equation can be true only if the RHS is a function of $y$ alone, and that is if and only if $$ \frac{\partial}{\partial t} \Big[ N(t, y) - \int \frac{\partial M(t, y)}{\partial y} \, dt \Big] = \frac{\partial N}{\partial t} - \frac{\partial M}{\partial y} = 0 $$ Hence, if $\frac{\partial N}{\partial t} \neq \frac{\partial M}{\partial y}$, then there is no function $\phi(t, y)$ such that $M = \frac{\partial \phi}{\partial t}$ and $N = \frac{\partial \phi}{\partial y}$. On the other hand, if $\frac{\partial N}{\partial t} = \frac{\partial M}{\partial y}$, then $$h(y) = \int\Big[N(t, y) - \int \frac{\partial M(t, y)}{\partial y}\, dt\Big]\, dy $$ Consequently, $M = \frac{\partial \phi}{\partial t}$ and $N = \frac{\partial \phi}{\partial y}$ with $$\phi(t, y) = \int M(t, y) \, dt + \int \Big[ N(t, y) - \int \frac{\partial M(t, y)}{\partial y}\, dt \Big] \, dy $$ \end{proof} 
+\begin{definition} The differential equation $$M(t, y) + N(t, y)\dy = 0$$ is said to be \textit{exact} if $$ \frac{\partial M}{\partial y} = \frac{\partial N}{\partial t} $$ \end{definition}
+Methods to Obtain $\phi(t, y)$: \begin{enumerate} 
+\item The equation $M(t, y) = \frac{\partial \phi}{\partial t}$ determines $\phi(t, y)$ up to an arbitrary function of $y$ alone, that is $$\phi(t, y) = \int M(t, y) \, dt + h(y)$$ The function $h(y)$ is then determined from the equation $$h'(y) = N(t, y) = \int \frac{\partial M(t, y)}{\partial y} \, dt $$ 
+\item If $N(t, y) = \frac{\partial \phi}{\partial y}$, then, of necessity, $$\phi(t, y) = \int N(t, y) \, dy + k(t) $$ where $k(t)$ is an arbitrary function of $t$ alone. Since $$M(t, y) = \frac{\partial \phi}{\partial t} = \int \frac{\partial N(t, y)}{\partial t} \, dy + k'(t) $$ then $k(t)$ is determined from the equation $$k'(t) = M(t, y) - \int \frac{\partial N(t, y)}{\partial t} \, dy $$ 
+\item The equations $\frac{\partial \phi}{\partial t} = M(t, y)$ and $\frac{\partial \phi}{\partial y} = N(t, y)$ imply that $$\phi(t, y) = \int M(t, y) \, dt + h(y)$$ and $$\phi(t, y) = \int N(t, y) \, dy + k(t) $$ Usually, $h(y)$ and $k(t)$ can be determined by inspection. \end{enumerate} 
+\begin{example} Solve: $3y + e^t + (3t + \cos y) \dy = 0$. \\ Here, $M(t, y) = 3y + e^t$ and $N(t, y) = 3t + \cos(y)$. This equation is exact since $\frac{\partial M}{\partial y} = 3 = \frac{\partial N}{\partial t} $. Hence there exists a function $\phi(t, y)$ such that $3y + e^t = \frac{\partial \phi}{\partial t}$ and $3t + \cos(y) = \frac{\partial \phi}{\partial y}$. \begin{enumerate} 
+\item \textit{First Method} $$\begin{aligned} \phi(t, y) &= e^t + 3ty + h(y) \\ \frac{\partial \phi}{\partial y} &= 3t + h'(y) \\ h'(y) + 3t &= 3t + \cos(y) \end{aligned} $$ Thus $h(y) = \sin(y)$ and $\phi(t, y) = e^t + 3ty + \sin(y)$. The general solution of the differential equation must be left in the form $e^t + 3ty + \sin(y) = c$ since $y$ cannot be found explicitly as a function of $t$. 
+\item \textit{Second Method} $$\begin{aligned} \phi(t, y) &= 3ty + \sin(y) + k(t) \\ \frac{\partial \phi}{\partial t} &= 3y + k'(t) \\ 3y + k'(t) &= 3y + e^t \end{aligned} $$ Thus $k(t) = e^t$ and $\phi(t, y) = 3ty + \sin(y) + e^t$. 
+\item \textit{Third Method} $$\begin{aligned} \phi(t, y) &= e^t + 3ty + h(y) \\ &= 3ty + \sin(y) + k(t) \end{aligned} $$ Comparing these two expressions for the same function $\phi(t, y)$, it is obvious that $h(y) = \sin(y)$ and $k(t) = e^t$. Hence $$\phi(t, y) = e^t + 3ty + \sin(y) $$ \end{enumerate} \end{example} 
+\begin{example} Solve: $3t^2t + 8ty^2 + (t^3 + 8t^2y + 12y^2)\dy = 0$, $y(2) = 1$. \\ Here $M(t, y) = 3t^2y + 8ty^2$ and $N(t, y) = t^3 + 8t^2y + 12y^2$. This equation is exact since $$\frac{\partial M}{\partial y} = 3t^2 + 16ty \text{ and } \frac{\partial N}{\partial t} = 3t^2 + 16ty $$ 
+Hence there exists a function $\phi(t, y)$ such that $$\begin{aligned} 3t^2y + 8ty^2 &= \frac{\partial \phi}{\partial t} \\ t^3 + 8t^2y + 12y^2 &= \frac{\partial \phi}{\partial y} \end{aligned} $$ \begin{enumerate} 
+\item \textit{First Method} $$\begin{aligned} \phi(t, y) &= t^3y + 4t^2y^2 + h(y) \\ \frac{\partial \phi}{\partial y} &= t^3 + 8t^2y + h'(y) \\ t^3 + 8t^2y + h'(y) &= t^3 + 8t^2y + 12y^2 \end{aligned} $$ Hence $h(y) = 4y^3$ and the general solution of the differential equation is $\phi(t, y) = t^3y + 4t^2y^2 + 4y^3 = c$. Setting $t = 2$ and $y = 1$ in this equation, $c = 28$. Thus, the solution of this initial value problem is $$t^3y + 4t^2y^2 + 4y^3 = 28$$ 
+\item \textit{Second Method} $$\begin{aligned} \phi(t, y) &= t^3y + 4t^2y^2 + 4y^3 + k(t) \\ \frac{\partial \phi}{\partial t} &= 3t^2y + 8ty^2 + k'(t) \\ 3t^2y + 8ty^2 + k'(t) &= 3t^2y + 8ty^2 \end{aligned} $$ Thus $k(t) = 0$ and $$\phi(t, y) = t^3y + 4t^2y^2 + 4y^3$$ 
+\item \textit{Third Method} $$\begin{aligned} \phi(t, y) &= t^3y + 4t^2y^2 + h(y) \\ &= t^3y + 4t^2y^2 + 4y^3 + k(t) \end{aligned} $$ Comparing these two expressions for the same function $\phi(t, y)$, it is clear that $h(y) = 4y^3$ and $k(t) = 0$. Hence $$\phi(t, y) = t^3y + 4t^2y^2 + 4y^3$$ \end{enumerate} \end{example} 
+\begin{example} Solve: $4t^3e^{t + y} + t^4e^{t + y} + 2t + (t^4e^{t + y} + 2y)\dy = 0$, $y(0) = 1$. \\ This equation is exact since $$\frac{\partial}{\partial y}(4t^3e^{t + y} + t^4e^{t + y} + 2t) = (t^4 + 4t^3)e^{t + y} = \frac{\partial}{\partial t}(t^4e^{t + y} + 2y) $$ Hence there exists a function $\phi(t, y)$ such that $$\begin{aligned} 4t^3e^{t + y} + t^4e^{t + y} + 2t &= \frac{\partial \phi}{\partial t} \\ t^4e^{t + y} + 2y &= \frac{\partial \phi}{\partial y} \end{aligned} $$ 
+The second method will be used here because it is easier to integrate $t^4e^{t + y} + 2y$ with respect to $y$ than it is to integrate $4t^3e^{t + y} + t^4e^{t + y} + 2t$ with respect to $t$. Thus $$\begin{aligned} \phi(t, y) &= t^4e^{t + y} + y^2 + k(t) \\ \frac{\partial \phi}{\partial t} &= (t^4 + 4t^3)e^{t + y} \\ (t^4 + 4t^3)e^{t + y} + k'(t) &= 4t^3e^{t + y} + t^4e^{t + y} + 2t \end{aligned} $$ Thus $k(t) = t^2$ and the general solution of the differential equation is $\phi(t, y) = t^4e^{t + y} + y^2 + t^2 + c$. Setting $t = 0$ and $y = 1$ in this equation yields $c = 1$. Thus the solution of this initial value problem is $$t^4e^{t + y} + t^2 + y^2 = 1$$ \end{example} 
+\begin{example} Solve: $2t\sin y + y^3e^t + (t^2\sin y + 2y^2e^t)\dy = 0 $.
+$$\begin{aligned} \frac{\partial M}{\partial y} &= 2t\cos y + 3y^2e^t \\ \frac{\partial N}{\partial t} &= 2t\cos y + 3y^2e^t \\ \frac{\partial \phi(t, y)}{\partial t} &= 2t\sin y + y^3e^t \\ \frac{\partial \phi(t, y)}{\partial y} &= t^2\cos y + 3y^2e^t \\ \phi(t, y) &= t^2\sin y + y^3e^t + h(y) \\ &+ t^2\sin y + y^3e^t + k(t) \\ \phi(t, y) &= t^2\sin y + y^3e^t + c \end{aligned} $$  \end{example}
+\begin{example} Solve: $1 + (1 + ty)e^{ty} + (1 + t^2e^{ty})\dy = 0$. $$\begin{aligned} \frac{\partial M}{\partial y} &= (1 + ty)te^{ty} + te^{ty} \\ \frac{\partial N}{\partial t} &= t^2ye^{ty} + 2te^{ty} \\ \frac{\partial \phi{t, y}}{\partial t} &= 1 + (1 + ty)e^{ty} \\ \frac{\partial \phi(t, y)}{\partial y} &= 1 + t^2e^{ty} \\ \phi(t, y) &= \int (1 + t^2e^{ty}) \, dy = y + te^{ty} + k(t) \\ \frac{\partial \phi(t, y)}{\partial t} &= tye^{ty} + e^{ty} + k'(t) = 1 + (1 + ty)e^{ty} \\ k'(t) &\to k(t) = t \\ \phi(t, y) &+ y + te^{ty} + t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $y\sec^2 t + \sec t\tan t + (2y + \tan t)\dy = 0$. $$\begin{aligned} \frac{\partial M}{\partial y} &= \sec^2 \\ \frac{\partial N}{\partial t} &= \sec^2 t \\ \frac{\partial \phi(t, y)}{\partial t} &+ y\sec^2 y + \sec t \tan t \\ \frac{\partial \phi(t, y)}{\partial y} &= 2y + \tan t \\ \phi(t, y) &= y\tan t + \sec t + h(y) \\ &= y^2 + y\tan t + k(t) \\ \phi(t, y) &= y\tan t + \sec t + y^2 + c \\ ax^2 + bx + c &= (1)y^2 + (\tan t)y + (\sec t) \\ y &= \frac{-\tan t \pm \sqrt{\tan^2 t - 4(\sec t)}}{2} \\ y(0) &= 1 \\ \phi(t, y) &= 1\tan(0) + \sec(0) + 1^1 = 2 \\ \phi(t, y) &= y\tan t + \sec t + y^2 + 2 \end{aligned} $$ \end{example} 
+
+\section{Second Order Linear Differential Equations} 
+\subsection{Algebraic Properties of Solutions} 
+\begin{definition} Second Order Linear Homogeneous Differential Equation: $$\ddy + p(t)\dy + q(t)y = 0 $$ \end{definition} 
+\begin{definition} Second Order Linear Nonhomogeneous Differential Equation: $$\ddy + p(t)\dy + q(t)y = g(t) $$ \end{definition} 
+\begin{theorem} Existence-Uniqueness Theorem: Let the functions $p(t)$ and $q(t)$ be continuous in the open interval $\alpha < t < \beta$. Then, there exists one, and only one function $y(t)$ satisfying the differential equation $$ \ddy + p(t)\dy + q(t)y = 0 $$ on the entire interval $\alpha < t < \beta$, and the prescribed initial conditions $y(t_0) = y_0$, $y'(t_0) = y'_0$. In particular, any solutions $y = y(t)$ of this differential equation which satisfies $y(t_0) = 0$ and $y'(t_0) = 0$ at some time $t = t_0$ must be identically zero. \end{theorem} 
+\begin{example} Solve: $\ddy + y = 0$. $$\begin{aligned} y_1 &= \cos t \\ y_2 &= \sin t \\ y &= c_1\cos t + c_2\sin t  \end{aligned} $$ \end{example} 
+Let $L[y](t) = \ddy(t) + p(t)y'(t) + q(t)y(t)$ be an operator which operates on the function $y$. 
+\begin{example} Let $p(t) = 0$ and $q(t) = t$. Then if $y(t) = \cos t$, $$L[y](t) = (\cos t)'' + t\cos t = (t - 1)\cos t $$ If $y(t) = t^3$, then $$L[y](t) = (t^3)'' + t(t^3) = t^4 + 6t $$ The operator $L$ assigns the function $(t - 1)\cos t$ to the function $\cos t$ and the function $6t + t^4$ to the function $t^3$. \end{example} 
+Note: \begin{itemize} 
+\item $L[cy](t) = cL[y](t)$ for any constant $c$ 
+\item $L[y_1 + y_2](t) = L[y_1](t) + L[y_2](t)$ \end{itemize} 
+\begin{definition} An operator $L$ which assigns functions to functions and which satisfies both qualities above is called a linear operator. All other operators are nonlinear. \end{definition} 
+In the differential equation $$\ddy + y = 0$$, two solutions were $y_1(t) = \cos t$ and $y_2(t) = \sin t$. Thus $$y(t) = c_1\cos t + c_2 \sin t $$ for every choice of constants $c_1$ and $c_2$. Let $y(0)= y_0$ and $y'(0) = y'_0$ and consider $$\phi(t) = y_0\cos t + y'_0 \sin t $$ This function is a solution to the differential equation since it is a linear combination of solutions. Therefore $$y(t) = y_0 \cos t + y'_0 \sin t $$ must be the general solution of the differential equation. \\~\\
+The general solution of a second order linear homogeneous differential equation is $$ y(t) = c_1y_1(t) + c_2y_2(t) $$ 
+\begin{theorem} Let $y_1(t)$ and $y_2(t)$ be two solutions to $\ddy + p(t)\dy + q(t)y = 0$ on the interval $\alpha < t < \beta$, with $y_1(t)y'_2(t) - y'_1(t)y_2(t) \neq 0$. Then $$y(t) = c_1y_1(t) + c_2y_2(t)$$ is the general solution. \end{theorem} 
+\begin{proof} Let $y(t) = c_1y_1(t) + c_2y_2(t)$ and let $y_0$ and $y'_0$ be the values of $y$ and $y_0$ at a time $t = t_0$. Then the following must be true: $$\begin{aligned} c_1y_1(t_0) + c_2y_2(t_0) &= y_0 \\ c_1y'_1(t_0) = c_2y'_2(t_0) &= y'_0 \end{aligned} $$ Multiplying the first equation by $y'_2(t_0)$ and the first equation by $y'_1(t_0)$ gives the following: $$\begin{aligned} c_1\Big[y_1(t_0)y'_2(t_0) - y'_1(t_0)y_2(t_0)\Big] &= y_0y'_2(t_0) - y'_0y_2(t_0) \\ c_2\Big[y'_1(t_0)y_2(t_0) - y_1(t_0)y'_2(t_0)\Big] &= y_0y'_1(t_0) - y'_0y_1(t_0) \end{aligned} $$ 
+Thus $$\begin{aligned} c_1 &= \frac{y_0y'_2(t_0) - y'_0y_2(t_0)}{y_1(t_0)y'_2(t_0) - y'_1(t_0)y_2(t_0)} \\ 
+c_2 &= \frac{y'_0y_1(t_0) - y_0y'_1(t_0)}{y_1(t_0)y'_2(t_0) - y'_1(t_0)y_2(t_0)} \end{aligned} $$ Thus the denominator $y_1(t_0)y'_2(t_0) - y'_1(t_0)y_2(t_0) \neq 0$. \end{proof} 
+\begin{definition} The quantity $y_1(t)y'_2(t) - y'_1(t)y_2(t)$ is called the Wronskian of $y_1$ and $y_2$ and is denoted by $W(t) = W[y_1, y_2](t)$. \end{definition} 
+\begin{theorem} Let $p(t)$ and $q(t)$ be continuous in the interval $\alpha < t < \beta$ and let $y_1(t)$ and $y_2(t)$ be two solutions. Then $W[y_1, y_2](t)$ is either identically zero or is never zero on the interval $\alpha < t < \beta$. \end{theorem} 
+\begin{proof} Let $W(t) = y_1(t)y'_2(t) - y'_1(t)y_2(t)$. Then $$\begin{aligned} W'(t) &= y_1(t)\ddy_2(t) + y'_1y'_2(t) - y'_2(t)y'_1(t) - \ddy_1(t)y_2(t) \\ &= y_1(t)\Big[-p(t)y'_2 - q(t)y_2\Big] - y_2\Big[-p(t)y'_1 - q(t)y_1\Big] \\ &= -p(t)y_1y'_2 + p(t)y'_1y_2 \\ \frac{dW}{dt} + p(t)y_1y'_2 - p(t)y'_1y_2 &= 0 \\ \frac{dW}{dt} + p(t)\Big[y_1y'_2 - y'_1y_2\Big] &= 0 \\ \frac{dW}{dt} + p(t)W(t) &= 0 \\ W(t) &= ce^{-\int p(t) \, dt} \end{aligned} $$\end{proof} 
+\begin{theorem} Let $y_1(t)$ and $y_2(t)$ be two solutions on the interval $\alpha < t < \beta$ and suppose that $W[y_1, y_2](t_0) = 0$ for some $t_0$ in this interval. Then, one of these solutions is constant multiple of the other. \end{theorem} 
+\begin{proof} Suppose $y_1y'_2 - y'_1y_2 - 0$. Then $$\begin{aligned} \frac{y'_2}{y_2} &= \frac{y'_1}{y_1} \\ \frac{d}{dt} \ln y_1 &= \frac{d}{dt} \ln y_2 \\ \ln y_2 - \ln y_1 &= c \\ \ln\Big(\frac{y_2}{y_1}\Big) &= 0 \end{aligned} $$ \end{proof} 
+\begin{definition} The functions $y_1(t)$ and $y_2(t)$ are said to be linearly dependent on an interval $I$ if one of these functions is a constant multiple of the other on $I$. The functions $y_1(t)$ and $y_2(t)$ are said to be linearly independent on an interval $I$ if they are not linearly dependent on $I$. \end{definition}
+\begin{theorem} Two solutions $y_1(t)$ and $y_2(t)$ are linearly independent on the interval $\alpha < t < \beta$ if and only if their Wronskian is unequal to zero on this interval. Thus, two solutions $y_1(t)$ and $y_2(t)$ form a fundamental set of solutions on the interval $\alpha < t < \beta$ if and only if they are linearly independent on this interval. \end{theorem} 
+
+\subsection{Linear Equations with Constant Coefficients} 
+Let $$L[y] = a\ddy + b\dy + c = 0$$ For example, $$L[e^{rt}] = a(e^{er})'' + b(e^{er})' + c(e^{rt}) = (ar^2 + br + c)e^{rt} $$ Then $y(t) = e^{rt}$ is a solution if and only if $$ar^2 + br + c = 0$$ 
+\begin{definition} Characteristic Equation: an algebraic equation of degree $n$ upon which depends the solution of a differential equation \end{definition} 
+Here, the characteristic equation is $$ar^2 + br + c = 0$$ Its solutions are given by $$r = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ 
+\begin{example} Solve: $\ddy + 5\dy + 4y = 0$. $$\begin{aligned} r^2 + 5r + 4 &= 0 \\ (r + 4)(r + 1) &= 0 \\ r &= -4 \\ r &= -1 \\ y_1 &= e^{-4t} \\ y_2 &= e^{-t} \\ y(t) &= c_1e^{-4t} + c_2e^{-t} \end{aligned} $$
+If $y_0(0) = 1$ and $y'_0(0) = 0$, then the solution would follow: $$\begin{aligned} y'(t) &= -4c_1e^{-4t} - c_2e^{-t} \\ c_1 + c_2 &= 0 \\ \begin{bmatrix} 1 & 1 & 1 \\ -4 & -1 & 0 \end{bmatrix} &\to \begin{bmatrix} 1 & 0 & \frac{1}{3} \\ 0 & 1 & \frac{4}{3} \end{bmatrix}  \\ c_1 &= \frac{1}{3} \\ c_2 &= \frac{4}{3} \\ y(t) &= \frac{1}{3}e^{-4t} + \frac{4}{3}e^{-t} \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + y = 0$. $$\begin{aligned} r^2 - 1 &= 0 \\ r &= -1. 1\\ y = c_1e^t + c_2e^{-t} \end{aligned} $$ \end{example}
+\begin{example} Solve: $6\ddy - 7\dy+ y = 0$. $$\begin{aligned} 6r^2 - 7r + 1 &= 0 \\ (6r - 1)(r - 1) &= 0 \\ r &= \frac{1}{6}, 1 \\ y(t) &= c_1e^{\frac{1}{6}t} + c_2e^t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy - 3\dy- 4y = 0$. $$\begin{aligned} r^2 - 3r - 4 &= 0 \\ (r - 4)(r + 1) &= 0 \\ r &= -1, 4 \\ y(t) &= c_1e^{4t} + c_2e^{-t} \end{aligned} $$ Let $y(0) = 1$ and $y'(0) = 1$. $$y'(t) = 4c_1e^{4t} - c_2e^{-t} $$ To solve for these initial values, plug in the values and solve for the coefficients. $$\begin{aligned} c_1 + c_2 &= 1 \\ 4c_1 - c_2 &= 1 \end{aligned} $$ $$\begin{pmatrix} 1 & 1 & 1 \\ 4 & -2 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 & \frac{1}{2} \\ 0 & 1 & \frac{1}{2} \end{pmatrix} $$ Thus the solution is
+$$ y(t) = \frac{1}{2}e^{4t} + \frac{1}{2}e^{-t} $$ \end{example} 
+\begin{example} Solve: $7\ddy + 5\dy+ y = 0$ where $y(0) = 0$ and $y'(0) = 1$. $$\begin{aligned} 7r^2 + 5r + 1 &= 0 \\ r &= \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = \frac{-5 \pm \sqrt{5^2 - 4(7)(-1)}}{14} \\ &= \frac{-5 \pm 4 \sqrt{3}}{14} \\ y(t) &= c_1\exp(\frac{-5 - 4\sqrt{3}}{14}t) + c_2\exp(\frac{-5 + 4\sqrt{3}}{14}t) \\ y'(t) &= \frac{-5 - 4\sqrt{3}}{14}c_1\exp(\frac{-5 - 4\sqrt{3}}{14}t) + \frac{-5 + 4\sqrt{3}}{14}c_2\exp(\frac{-5 - 4\sqrt{3}}{14}t) \end{aligned} $$  $$\begin{aligned} c_1 + c_2 &= 0 \\  c_1 &= -c_2 \\ \frac{-5 - 4\sqrt{3}}{14}c_1 + \frac{-5 + 4\sqrt{3}}{14}c_2 &= 1 \\ -\frac{-5 - 4\sqrt{3}}{14}c_2 + \frac{-5 + 4\sqrt{3}}{14}c_2 &= 1 \\ \frac{8\sqrt{3}}{14}c_2 &= 1 \\ c_2 &= \frac{7}{4\sqrt{3}} \\ c_1 &= -c_2 = -\frac{7}{4\sqrt{3}} \\ y(t) &= -\frac{7}{4\sqrt{3}}\exp(\frac{-5 - 4\sqrt{3}}{14}t) + \frac{7}{4\sqrt{3}}\exp(\frac{-5 + 4\sqrt{3}}{14}t)  \end{aligned} $$ \end{example} 
+Note: If $b^2 - 4ac$ is negative, then the characteristic equation $ar^2 + br + c = 0$ has complex roots: $$r_1 = \frac{-b + i\sqrt{4ac - b^2}}{2a} \text{ and } r_2 = \frac{-b - i\sqrt{4ac - b^2}}{2a} $$ where $e^{r_1t}$ and $e^{r_2t}$ are solutions of the differential equation $$a\ddy + b\dy + cy = 0$$ 
+Let $y(t) = u(t) + iv(t)$ be a complex-valued solution to this differential equation. This means that $$ a[u''(t) + iv''(t)] + b[u'(t) + iv'(t)] + c[u(t) + iv(t)] = 0$$ 
+\begin{theorem} Let $y(t) = u(t) + iv(t)$ be a complex-valued solution to $a\ddy + b\dy + cy = 0$, with $a$, $b$ and $c$ being real. Then $y_1(t) = u(t)$ and $y_2(t) = v(t)$ are two real-valued solutions of the differential equation. In other words, both the real and imaginary parts of a complex valued solution are actual solutions to the differential equation. (The imaginary part of the complex number $\alpha + i\beta$ is $\beta$. Similarly, the imaginary part of the function $u(t) + iv(t)$ is $v(t)$.) \end{theorem} 
+Let $r = \alpha + i\beta$, then $$e^{rt} = e^{\alpha t}e^{i \beta t} = e^{\alpha t}(\cos \beta t + i\sin \beta t) $$ Therefore $$y(t) = \exp{\frac{[-b + i\sqrt{4ac - b^2}]t}{2a}} = e^{-\frac{bt}{2a}}[\cos \frac{\sqrt{4ac - b^2}}{2a}t] + i[\sin \frac{\sqrt{4ac - b^2}}{2a}t]$$ The two solutions for the differential equation are $$\begin{aligned} y_1(t) &= e^{-\frac{bt}{2a}}\cos \beta t \\ y_2(t) &= e^{-\frac{bt}{2a}}\sin \beta t \end{aligned} $$ where $\beta = \frac{\sqrt{4ac - b^2}}{2a}$. In addition, the solution for if it's a initial value problem is $$y(t) = e^{-\frac{bt}{2a}}[c_1\cos \beta t + c_2\sin \beta t]$$ 
+\begin{example} Solve: $4\ddy + 4\dy + 5y = 0$. $$\begin{aligned} 4r^2 + 4r + 5 &= 0 \\ r_1 &= -\frac{1}{2} + i \\ r_2 &= -\frac{1}{2} - i \\ y(t) &= e^{r_1t} = e^{(-\frac{1}{2} + i)t} = e^{-\frac{t}{2}}\cos t + ie^{-\frac{t}{2}}\sin t \end{aligned} $$ 
+The two linearly independent real-valued solutions are $$\begin{aligned} \text{Re}\{e^{r_1t}\} &= e^{-\frac{1}{2}}\cos t \\ \text{Im}\{e^{r_1t}\} &= e^{-\frac{t}{2}} \sin t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + 2\dy + 4y = 0$ where $y(0) = 1$ and $y'(0) = 1$. $$\begin{aligned} r^2 + 2r + 4 &= 0 \\ r_1 &= -1 + \sqrt{3}i \\ r_2 &= -1 - \sqrt{3}i \\ y(t) &= e^{r_1t} = e^{(-1 + \sqrt{3}i)} = e^{-t}\cos \sqrt{3}t + ie^{-t} \sin \sqrt{3}t \\ &= e^{-t}[c_1\cos \sqrt{3}t + c_2\sin \sqrt{3}t] \\ y(0) &= c_1 + 0c_2 = 1 \\ y'(0) &= -c_1 + \sqrt{3}c_2 = 1 \\ c_1 &= 1,c_2 = \frac{2}{\sqrt{3}} \\ y(t) &= e^{-t}[\cos \sqrt{3}t + \frac{2}{\sqrt{3}}\sin \sqrt{3}t] \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + \dy+ y = 0$. $$\begin{aligned} r^2 + r + 1 &= 0 \\ r &= \frac{-1 \pm \sqrt{1 - 4}}{2} = -\frac{1}{2} \pm \frac{\sqrt{3}}{2}i \\ y(t) &= c_1e^{-\frac{t}{2}}\cos \frac{\sqrt{3}}{2}t + c_2e^{-\frac{t}{2}}\sin\frac{\sqrt{3}}{2}t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + 2\dy+ 3y = 0$. $$\begin{aligned} r^2 + 2r + 3 &= 0 \\ r &= \frac{-2 \pm \sqrt{4 - 12}}{2} = -1 \pm \sqrt{2}i \\ y(t) &= c_1e^{-t}\cos \sqrt{2}t + c_2e^{-t}\sin \sqrt{2}t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + 4\dy+ 2y = 0$ where $y(0) = 1$ and $y'(0) = 2$. $$\begin{aligned} r^2 + 4r + 2 &= 0 \\ r&= \frac{-1 \pm \sqrt{1 - 8}}{2} = -\frac{1}{2} \pm \frac{\sqrt{7}}{2}i \\ y &= c_1e^{-\frac{t}{2}}\cos \frac{\sqrt{3}}{2}t + c_2e^{-\frac{t}{2}}\sin \frac{\sqrt{3}}{2}t \\ y(0) &= c_1 + 0c_2 = 1 \\ y'(0) &= -\frac{1}{2}c_1 + \frac{\sqrt{3}}{2}c_2 \\ c_1 &= 1 \\ c_2 &= -\frac{3}{\sqrt{2}} \\ y(t) &= e^{-\frac{t}{2}}\cos \frac{\sqrt{3}}{2}t - \frac{3}{\sqrt{2}}e^{-\frac{t}{2}}\sin \frac{\sqrt{3}}{2}t \end{aligned} $$ \end{example} 
+\begin{example} Solve: $\ddy + 2\dy+ 5y = 0$ where $y(0) = 0$ and $y'(0) = 2$. $$\begin{aligned} r^2 + 2r + 5 &= 0 \\ r &= \frac{-2 \pm \sqrt{4 - 20}}{2} = -1 \pm 2i \\ y(t) &= c_1e^{-t}\cos 2t + c_2e^{-t}\sin 2t \\ y(0) &= c_1 + 0 = 0 \\ y'(0) &= 0c_1 + 2c_2 = 2 \\ c_1 &= 0 \\ c_2 &= 1 \\ y(t) &= y_2(t) = e^{-t}\sin 2t \end{aligned} $$ \end{example} 
+
+\subsection{Equal Roots; Reduction of Order} 
+\begin{definition} Method of Reduction of Order \\ 
+If $b^2 = 4ac$, then the characteristic equation $ar^2 + br + c = 0$ has one real roots $r_1 = r_2 = -\frac{b}{2a}$ and so there is only one solution, $y_1(t) = e^{-\frac{bt}{ac}}$ for the differential equation $a\ddy + b\dy + cy = 0$. To find the other solution, let $y(t) = y_1(t)v(t)$. Then $$\dy = v\frac{dy_1}{dt} + y_1\frac{dv}{dt} $$ and $$\ddy = v\frac{d^2y_1}{dt^2} + 2\frac{dv}{dt}\frac{dy_1}{dt} + y_1\frac{d^2v}{dt^2}$$ Consequently, $$\begin{aligned} L[y] &= v\frac{d^2y_1}{dt^2} + 2\frac{dv}{dt}\frac{dy_1}{dt} + y_1\frac{d^2v}{dt^2} + p(t)\Big[v\frac{dy_1}{dt} + y_1\frac{dv}{dt}\Big] + q(t)vy_1 \\ &= y_1\frac{d^2v}{dt^2} + \Big[2\frac{dy_1}{dt} + p(t)y_1\Big]\frac{dv}{dt} + \Big[\frac{d^2y_1}{dt^2} p(t)\frac{dy_1}{dt} + q(t)y_1\Big]v \\ 
+&= y_1\frac{d^2v}{dt^2} + \Big[2\frac{dy_1}{dt} + p(t)y_1\Big]\frac{dv}{dt} \end{aligned} $$ 
+since $y_1(t)$ is a solution of $L[y] = 0$. Hence, $y(t) = y_1(t)v(t)$ is a solution of the differential equation $a\ddy + b\dy + cy = 0$ if $v$ satisfies $$y_1\frac{d^2v}{dt^2} + \Big[2\frac{dy_1}{dt} + p(t)y_1\Big]\frac{dv}{dt} = 0$$ Note that this is really a first order linear equation for $\frac{dv}{dt}$. Its solution is $$\begin{aligned} \frac{dv}{dt} &= c\exp\Bigg(-\int \Big[ 2\frac{y'_1(t)}{y_1(t)} + p(t)\Big] \, dt\Bigg) \\ &= c\exp\Bigg(-\int p(t) \, dt\Bigg)\exp\Bigg[2\int \frac{y'_1(t)}{y_1(t)} \, dt\Bigg] \\ &= \frac{c\exp(-\int p(t) \, dt)}{y^2_1(t)} \end{aligned} $$ 
+Letting $c = 1$ and $v(t) = \int u(t) \, dt$ where $$u(t) = \frac{\exp(-\int p(t) \, dt)}{y^2_1(t)} $$ Therefore $$y_2(t) = v(t)y_1(t) = y_1(t)\int u(t) \, dt $$ \end{definition} 
+\begin{example} Solve: $\ddy + 4\dy + 4y = 0$ where $y(0) = 1$ and $y'(0) = 3$. \\ The characteristic equation $r^2 + 4r + 4 = (r + 2)^2 = 0$ has two equal roots $r_1 = r_2 = 2$. Thus $$\begin{aligned} u &= \frac{e^{-\int 4 \, dt}}{e^{-4t}} = \frac{e^{-4t}}{e^{-4t}} = 1 \\ v &= \int u(t) \, dt = \int 1 \, dt = t \\ y(t) &= c_1e^{-2t} + c_2te^{-2t} \end{aligned} $$ 
+Furthermore $$\begin{aligned} y(0) &= c_1 + 0 = 1 \\ y'(0) &= -2c_1 + c_2 = 3 \end{aligned} $$
+Therefore $c_1 = 1$ and $c_2 = 5$ and hence $$y(t) = e^{-2t} + 5te^{-2t} = (1 + 5t)e^{-2t} $$ \end{example} 
+\begin{example} Solve: $(1 - t^2)\ddy + 2t\dy - 2y = 0$ where $y(0) = 3$ and $y'(0) = -4$ in the interval $-1 < t < 1$. \\ $y_1(t) = t$ is one solution of this differential equation. Use method of reduction of order to find the second solution $y_2(t)$. Therefore divide both sides by $1 - t^2$ to obtain the following $$\ddy + \frac{2t}{1 - t^2}\dy - \frac{2}{1 - t^2}y = 0$$ Hence $$\begin{aligned} u(t) &= \frac{\exp\Big(-\int \frac{2t}{1 - t^2} \, dt\Big)}{y^2_1(t)} = \frac{e^{\ln(1 - t^2)}}{t^2} = \frac{1 - t^2}{t^2} \\ y_2(t) &= t\int \frac{1 - t^2}{t^2} \, dt = -t\Big(\frac{1}{t} + t\Big) = -(1 + t^2) \\ y(t) &= c_1t - c_2(1 + t^2) \end{aligned} $$ 
+To find the constants $$\begin{aligned} y(0) &= 0c_1 - c^2 = 3 \\ y'(0) &= c_1 + 0c_2 \end{aligned} $$ 
+Hence $c_1 = -4$ and $c_2 = 3$ and $$y(t) = -4t + 3(1 + t^2)$$ \end{example} 
+\begin{example} Solve: $9\ddy + 6\dy+ y = 0$ with $y(0) = 1$ and $y'(0) = 0$. $$\begin{aligned} 9r^2 + 6r + 1 &= 0 \\ r &= (3t + 1)^2 \\ t &= -\frac{1}{3} \\ y_1 &= c_1e^{-\frac{t}{3}} \\ y_2 &= c_2te^{-\frac{t}{3}} \\ y &= c_1e^{-\frac{t}{3}} + c_2te^{-\frac{t}{3}} \\ y(0) &= c_1 + 0c_2 = 1 \\ y'(0) &= -\frac{1}{3}c_1 + \frac{1}{3}c_2 = 0 \\ c_1 &= 1 \\ c_2 &= \frac{1}{3} \\ y(t) &= e^{-\frac{t}{3}} + \frac{1}{3}te^{-\frac{t}{3}} \end{aligned} $$ \end{example}
+
+\begin{example} Solve: $\ddy - \frac{2(t + 1)}{t^2 + 2t - 1}\dy+ \frac{2}{t^2 + 2t - 1}y = 0$ where $y_1 = t + 1$. 
+$$ \begin{aligned} u &= \frac{\exp(\int \frac{2(t + 1)}{t^2 + 2t - 1} \, dt)}{(1 + t)^2} \\ &= \frac{\exp(\ln (t^2 + 2t - 1))}{(t + 1)^2} \\ &= \frac{t^2 + 2t - 1}{(t + 1)^2} \\ &= \frac{t^2 + 2t + 1 - 2}{(t + 1)^2} \\ &= \frac{(t + 1)^2 - 2}{(t + 1)^2} \\ &= 1 - \frac{2}{(t + 1)^2} \\ v &= \int u \, dt = t + \frac{2}{t + 1} \\ y &= t(t + 1) + 2 = t^2 + t + 2 \end{aligned} $$ \end{example}
+
+\begin{example} Solve: $(1 + t^2)\ddy - 2t\dy+ 2y = 0$ where $y_1 = t$. $$\begin{aligned} 
+u &= \frac{\exp(\int \frac{2t}{1 + t^2} \, dt)}{t^2} \\ &= \frac{e^{\ln (1 + t^2)}}{t^2} \\ &= \frac{1 + t^2}{t^2} \\ v &= \int u \, dt = t + \frac{1}{t} \\ y(t) &= t^2 + t + 1 \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy + y = t$ where $y(0) = 1$ and $y'(0) = 0$. $$\begin{aligned} 
+y &= c_1\cos t + c_2\sin t + t \\ y(0) &= c_1 + 0c_2 + 0 = 1 \\ y'(0) &= 0c_1 + c_2 + 1 = 0 \\ c_1 &= 1 \\ c_2 &= -1 \\ y(t) &= \cos t - \sin t + t \end{aligned} $$ \end{example}
+
+\subsection{The Nonhomogeneous Equation} 
+Let $L[y] = \ddy + p(t)\dy + q(t)y = g(t)$ where $p(t)$, $q(t)$ and $g(t)$ are continous on an open interval $\alpha < t < \beta$. 
+\begin{theorem} Let $y_1(t)$ and $y_2(t)$ be two linearly independent solutions of the homogeneous equation $$L[y] = \ddy + p(t)\dy + q(t)y = 0$$ and let $\psi(t)$ be any particular solution of the nonhomogeneous equation above. Then, every solution $y(t)$ of the nonhomogeneous equation must be of the form $$y(t) = c_1y_1(t) + c_2y_2(t) + \psi(t)$$ for some choice of constants $c_1. c_2$. \end{theorem} 
+\begin{theorem} The difference of any two solutions of the nonhomogeneous equation is a solution of the homogeneous equation. \end{theorem} 
+\begin{proof} Let $\psi_1(t)$ and $\psi_2(t)$ be two solutions of the nonhomogeneous equation. By the linearity of $L$: 
+$$ L[\psi_1 - \psi_2](t) = L[\psi_1](t) - L[\psi_2](t) = g(t) - g(t) = 0 $$ Therefore $\psi_1(t) - \psi_2(t)$ is a solution of the homogeneous equation.  \end{proof} 
+\begin{proof} Let $y(t)$ be any solution of the nonhomogeneous equation. By the above theorem, the function $\phi(t) = y(t) - \psi(t)$ is a solution of the homogeneous equation. But every solution $\phi(t)$ of the homogeneous equation is of the form $\phi(t) = c_1y_1(t) + c_2y_2(t)$ for some choice of constants $c_1, c_2$. Therefore $$y(t) = \phi(t) + \psi(t) = c_1y_1(t) + c_2y_2(t) + \psi(t) $$ \end{proof} 
+\begin{example} Solve: $\ddy + y = t$. \\ 
+The functions $y_1(t) = \cos t$ and $y_2(t) = \sin t$ are two linearly independent solutions of the homogeneous equation $\ddy + y = 0$. Moreover, $\psi(t) = t$ is an obvious solution of this nonhomogeneous equation. Therefore, $$y(t) = c_1\cos t + c_2\sin t + t $$ \end{example} 
+\begin{example} Find the general solution of the equation if the three solutions of a certain second-order nonhomogeneous linear equation are $$ \begin{aligned} \psi_1(t) &= t \\ \psi_2(t) &= t + e^t \\ \psi_3(t) &= 1 + t + e^t \end{aligned} $$ 
+The functions $$\psi_2(t) - \psi_1(t) = e^t \text{ and } \psi_3(t) - \psi_2(t) = 1$$ are solutions of the corresponding homogeneous equation. Moreover, these functions are linearly independent. Therefore, every solution $y(t)$ of this equation must be of the form $$ y(t) = c_1e^t + e_2 + t $$ \end{example} 
+
+\subsection{The Method of Variation of Parameters} \
+\begin{definition} Method of Variation of Parameters: a technique for finding a particular solution $\psi(t)$ of the nonhomogeneous equation $$L[y] = \ddy + p(t)\dy + q(t)y = g(t)$$ once the solutions of the homogeneous equation $$L[y] = \ddy + p(t)\dy + q(t)y = 0$$ are known, using the knowledge of the solutions of the homogeneous equation to find a solution of the nonhomogeneous equation \end{definition} 
+Let $y_1(t)$ and $y_2(t)$ be two linearly independent solutions of the homogeneous equation; then $$\psi(t) = u_1(t)y_1(t) + u_2(t)y_2(t)$$ for some functions $u_1(t)$ and $u_2(t)$. Note that $$\frac{d}{dt} \psi(t) = \frac{d}{dt} [u_1y_1 + u_2y_2] = [u_1y'_1 + u_2y'_2] + [u'_1y_1 + u_2'y_2] $$ If it so happens that $$y_1(t)u'_1(t) + y_2(t)u'_2(t) = 0$$ then $\frac{d^2 \psi}{dt^2}$ and $L[\psi]$ will have no second order derivatives of $u_1$ and $u_2$. Therefore $$\begin{aligned} L[\psi] &= [u_1y'_1 + u_2y'_2]' + p(t)[u_1y'_1 + u_2y'_2] + q(t)[u_1y_1 + u_2y_2] \\ &= u'_1y'_1 + u'_2y'_2 + u_1[\ddy_1 + p(t)y'_1 + q(t)y_1] + u_2[\ddy_2 + p(t)y'_2 + q(t)y_2] \\ &= u'_1y'_1 + u'_2y'_2 \end{aligned}$$ since both $y_1(t)$ and $y_2(t)$ are solutions of the homogeneous equation $L[y] = 0$. Consequently, $\psi(t) = u_1y_1 + u_2y_2$ is a solution of the nonhomogeneous equation if $$\begin{aligned} y_1(t)u'_1(t) + y_2(t)u'_2(t) &= 0 \\ y'_1u'_1(t) + y'_2(t)u'_2(t) &= g(t) \end{aligned} $$ By further manipulations, $$\begin{aligned} [y_1(t)y'_2(t) - y'_1(t)y_2(t)]u'_1(t) &= -g(t)y_2(t) \\ [y_1(t)y'_2(t) - y'_1(t)y_2(t)]u'_2(t) &= g(t)y_1(t) \end{aligned} $$ 
+Therefore $$ u'_1(t) = -\frac{g(t)y_2(t)}{W[y_1, y_2](t)} \text{ and } u'_2(t) = \frac{g(t)y_1(t)}{W[y_1, y_2](t)} $$ $u_1(t)$ and $u_2(t)$ are obtained by integrating the RHSs. 
+\begin{example} Solve: $\ddy + y = \tan t$ on the interval $-\frac{\pi}{2} < t < \frac{\pi}{2}$. Then find the solution $y(t)$ which satisfies $y(0) = 1$ and $y'(0) = 1$. \\ 
+The functions $y_1(t) = \cos t$ and $y_2(t) = \sin t$ are two linearly independent solutions of the homogeneous equation $\ddy + y = 0$ with $$W[y_1, y_2](t) = y_1y'_2 - y'_1y_2 = (\cos t)\cos t - (-\sin t)\sin t = 1$$ Thus $$u'_1 = -\tan t\sin t \text{ and } u'_2(t) = \tan t\cos t$$ 
+Therefore $$\begin{aligned} u_1(t) &= -\int \tan t \sin t \, dt \\ &= -\int \frac{\sin^2 t}{\cos t} \, dt \\ &= \int \frac{\cos^2 t - 1}{\cos t} \, dt \\ &= \sin t - \ln | \sec t + \tan t| \\ &= \sin t - \ln(\sec t + \tan t) \end{aligned} $$ in the interval $-\frac{\pi}{2} < t < \frac{\pi}{2} $. Similarly, $$u_2(t) = \int \tan t \cos t \, dt = \int \sin t \, dt = -\cos t $$ 
+Consequently $$\psi(t) = \cos t[\sin t - \ln(\sec t + \tan t)] + \sin t(-\cos t) = \cos t \ln(\sec t + \tan t) $$ is a particular solution on the interval $-\frac{\pi}{2} < t < \frac{\pi}{2}$. To solve using the initial conditions, $$y(t) = c_1\cos t + c_2\sin t - \cos t\ln(\sec t + \tan t) $$ for some choice of constants $c_1$ and $c_2$. $$\begin{aligned} y(0) &= c_1 + 0c_2 + 0 = 1 \\ y'(0) &= 0c_1 + c_2 - 1 \end{aligned} $$ Therefore $c_1 = 1$ and $c_2 = 2$ and $$y(t) = \cos t + 2\sin t - \cos t\ln(\sec t + \tan t)$$ \end{example} 
+
+\begin{example} Solve: $\ddy - 4\dy+ 4y = te^{2t}$$$\begin{aligned} 
+r^2 - 4r + 4 &= 0 \\ (r - 2)^2 &= 0 \to r = 2 \\ 
+y_1 &= e^{2t} \\ y_2 &= te^{2t} \\ 
+W &= e^{2t}(e^{2t}(2t + 1)) - 2e^{2t}(te^{2t}) = e^{4t} \\ 
+u'_1 &= -\frac{te^{2t}te^{2t}}{e^{4t}} = t^2 \\
+u_1 = \int 4t \, dt = 2t^2 \\ 
+u'_2 &= \frac{te^{2t}e^{2t}}{e^{4t}} = t \\
+u_2 = \int t \, dt = \frac{t^2}{2} \\
+\psi(t) &= 2t^2e^{2t} + \frac{t^2}{2}te^{2t} 
+\end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy - 3\dy+ 2y = te^{3t} + 1$
+$$\begin{aligned} 
+r^2 - 3r + 2 &= 0 \\ (r - 1)(r + 2) &= 0 \to r = -2, 1 \\ 
+y_1 &= e^t \\ y_2 &= e^{-2t} \\ 
+W &= e^t(-2e^{-2t}) - e^t(e^{-2t}) = -3e^{-t} \\ 
+u'_1 &= -\frac{(te^{3t} + 1)e^{-2t}}{-3e^{-t}} = \frac{1}{3}e^{-t}(e^{3t}t + 1) \\
+u_1 &= \int \frac{1}{3}e^{-t}(e^{3t}t + 1) \, dt = \frac{1}{12}e^{-t}(e^{3t}(2t - 1) - 4) \\ 
+u'_2 &= \frac{(te^{3t} + 1)e^t}{-3e^{-t}} = -\frac{1}{3}e^{2t}(e^{3t}t + 1) \\
+u_2 &= \int -\frac{1}{3}e^{2t}(e^{3t}t + 1) \, dt = -\frac{1}{150}e^{2t}(2e^{3t}(5t - 1) + 25) \\ 
+\psi(t) &= \frac{1}{12}e^{-t}(e^{3t}(2t - 1) - 4)e^t - \frac{1}{150}e^{2t}(2e^{3t}(5t - 1) + 25)e^{-2t} \end{aligned} $$\end{example} 
+
+\begin{example} Solve: $3\ddy + 4\dy+ y = (\sin t)e^{-t}$
+$$\begin{aligned} 
+3r^2 + 4r + 1 &= 0 \\ (3r + 1)(r + 1) &= 0 \to r = -\frac{1}{3}, -1 \\
+y_1 &= e^{-\frac{t}{3}} \\ y_2 &= e^{-t} \\ 
+W &= e^{-\frac{t}{3}}(-e^{-t}) - e^{-t}(-\frac{1}{3}e^{-\frac{t}{3}}) = -\frac{2}{3}e^{-\frac{4t}{3}} \\ 
+u'_1 &= -\frac{(\sin t)e^{-t}e^{-t}}{-\frac{2}{3}e^{-\frac{4t}{3}}} = \frac{3}{2}e^{-\frac{2t}{3}}\sin t \\
+u_1 &= \int \frac{3}{2}e^{-\frac{2t}{3}}\sin t \, dt = -\frac{9}{26}e^{-\frac{2t}{3}}(2\sin t + 3\cos t) \\ 
+u'_2 &= \frac{(\sin t)e^{-t}(e^{-\frac{t}{3}})}{-\frac{2}{3}e^{-\frac{4t}{3}}} = -\frac{3}{2}\sin t \\ 
+u_2 &= \int -\frac{3}{2}\sin t \, dt = \frac{3}{2}\cos t \\ 
+\psi(t) &= -\frac{9}{26}e^{-\frac{2t}{3}}(2\sin t + 3\cos t)e^{-\frac{t}{3}} + \frac{3}{2}e^{-t}\cos t \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy - \frac{2t}{1 + t^2}\dy+ \frac{2}{1 + t^2}y = 1 + t^2$ 
+$$\begin{aligned} 
+y_1 &= t \\ 
+u &= \frac{\exp(-\int -\frac{2t}{1 + t^2} \, dt)}{t^2} = \frac{e^{\ln (1 + t^2)}}{t^2} = \frac{1 + t^2}{t^2} = \frac{1}{t^2} + 1 \\ 
+v &= \int \frac{1}{t^2} + 1 \, dt = -\frac{1}{t} + t \\ 
+y_2 &= t(-\frac{1}{t} + t) = t^2 - 1 \\ 
+W &= t(2t) - (t^2 - 1)1 = t^2 + 1 \\ 
+u'_1 &= -\frac{(1 + t^2)(t^2 - 1)}{t^2 + 1} = -(t^2 - 1) = 1 - t^2 \\ 
+u_1 &= \int 1 - t^2 \, dt = t - \frac{t^3}{3} \\ 
+u'_2 &= \frac{(1 + t^2)t}{t^2 + 1} = t \\ 
+u_2 &= \int t \, dt = \frac{t^2}{2} \\ 
+\psi(t) &= t(t - \frac{t^3}{3}) + \frac{t^2}{2}(t^2 - 1) \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy + 4\dy + 4y = t^{\frac{5}{2}}e^{-2t}$, $y(0) = y'(0) = 0$ $$\begin{aligned} 
+r^2 + 4r + 4 &= 0 \\ (r + 2)^2 &= 0 \to r = -2 \\ 
+y_1 &= e^{-2t} \\ y_2 &= te^{-2t} \\ W &= e^{-2t}(-2te^{-2t} + e^{-2t}) + te^{-2t}(2e^{-2t}) = e^{-4t} \\ 
+u'_1 &= -\frac{t^{\frac{5}{2}}e^{-2t} \cdot te^{-2t}}{e^{-4t}} = -t^{\frac{7}{2}} \\ 
+u_1 &= \int -t^{\frac{7}{2}} \, dt = -\frac{2}{9}e^{\frac{9}{2}t} \\
+u'_2 &= \frac{t^{\frac{5}{2}}e^{-2t}e^{-2t}}{e^{-4t}} = t^{\frac{5}{2}} \\ 
+u_2 &= \int t^{\frac{5}{2}} \, dt = \frac{2}{7}e^{\frac{7}{2}} \\ 
+\psi(t) &= -\frac{2}{9}t^{\frac{9}{2}}e^{-2t} + \frac{2}{7}t^{\frac{7}{2}}e^{-2t} = 2t^{\frac{9}{2}}e^{-2t}(\frac{1}{7} - \frac{1}{9}) = \frac{4}{63}t^{\frac{9}{2}}e^{-2t} \\ 
+y &= c_1e^{-2t} + c_2te^{-2t} + \frac{4}{63}t^{\frac{9}{2}}e^{-2t} \\ 
+c_1 = c^2 &= 0 \\ 
+y &= \frac{4}{63}t^{\frac{9}{2}}e^{-2t} \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy + p(t)\dy + q(t)y = 0$ given that $y_1 = (1 + t)^2$ $$\begin{aligned} 
+\ddy + p(t)\dy + q(t)y &= (1 + t)^2 \\ u' &= \frac{1}{(t + 1)^4} \\ v &= \int \frac{1}{(t + 1)^4} \, dt = \frac{1}{3(1 + t)^3} \\ y_2 &= -\frac{1}{3(1 + t)^3} \cdot (1 + t)^2 = -\frac{1}{3(1 +t)} \\ 
+W &= (1 + t)(\frac{1}{3(1 + t)^2}) + (\frac{1}{3(1 + t)})(2(1 + t)) = 1 \\
+u'_1 &= ((1 + t)(-\frac{1}{3(1 + t)})) = -\frac{1}{3} \\ 
+u_1 &= \int -\frac{1}{3} \, dt = -\frac{1}{3}t \\ 
+u'_2 &= ((1 + t)(1 + t)^2) = (1 = t)^3 \\ 
+u_2 &= \int (1 + t)^3 \, dt = \frac{1}{4}(1 + t)^4 \\ 
+\psi(t) &= -\frac{1}{3}t(1 + t)^2 + \frac{1}{4}(1 + t)^4\frac{1}{(1 + t)} \end{aligned} $$ \end{example} 
+
+
+
+
+
+
+
+\begin{example} Solve: $\ddy + \dy + y = t^2 $ 
+$$\begin{aligned} r^2 + r + 1 &= 0 \\ r &= \frac{-1 \pm \sqrt{1 - 4}}{2} = -\frac{1}{2} \pm \frac{\sqrt{3}}{2}i \\ 
+\psi(t) &= a_0 + a_1t + a_2t^2 \\ \psi'(t) &= a_1 + 2a_2t \\ \psi''(t) &= 2a_2 \\ 
+(a_0 + a_1t + a_2t^2) + (a_1 + 2a_2t)t + a_2t^2 &= t^2 + 0 + 0 \\ 
+a_2 &= 1 \\ a_1 + 2a_2 &= 0 \\ a_1 &= -2a_2 = -2 \\ a_0 + a_1t + a_2t^2 &= 0 \\ a_0 &= -(a_1t + a_2t^2) = -(1 + -2) = 1 \\ \psi(t) &= t^2 - 2t \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy + 3\dy = t^2 - t$ $$\begin{aligned}
+\psi(t) &= a_0 + a_1t + a_2t^2 + a_3t^3 \\ \psi'(t) &= a_1 + 2a_2t + 3a_3t^2 \\
+\psi''(t) &= 2a_2 + 6a_3t \\ 
+(2a_2 + 3a_1) + (6a_3 + 6a_2)t + 9a_3t^2 &= t^2 - t \\
+9a_3 &= 1 \to a_3 = \frac{1}{9} \\
+6a_23 + 6a_2 &= -1 \\ a_3 + a_2 &= -\frac{1}{6} \\ 
+a_3 &= -\frac{1}{6} - \frac{1}{9} = -\frac{5}{18} \\ 
+2a_2 + 3a_1 &= 0 \\
+3a_1 &= -2a_2 = \frac{10}{18} = \frac{5}{9} \to a_1 = \frac{5}{27} \\ 
+\psi(t) &= \frac{5}{27}t - \frac{1}{6}t - \frac{5}{27}t^3
+\end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy + 3y = t^3 - 1$ $$\begin{aligned} 
+\psi &= a_0 + a_1t + a_2t^2 + a_3t^3 \\ \psi' &= a_1 + 2a_2t + 3a_3t^2 \\ \psi'' &= 2a_2 + 6a_3t \\ 2a_2 + 6a_3t + 3a_1t + 3a_2t^2 + 3a_3t^3 &= t^3 - 1 \\ 3a_3t^3 &= t^3 \to a_3 = \frac{1}{3} \\ 3a_2t^2 &= 0 \to a_2 = 0 \\ 6a_3t + 3a_1t &= 0 \\ 2a_2 + 3a_0 &= -1 \\ 3a_1t &= -6a_3t = -6(\frac{1}{3}t) = -2t \to a_1 = -\frac{2}{3} \\ 3a_0 &= -1 - 2a_2 = -1 - 2(0) = -1 \\ \psi(t) &= -1 - \frac{2}{3}t + \frac{1}{3}t^3 \end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy - y = t^2e^t$ $$\begin{aligned} y &= e^tv \\ A = 1, ~ B = 0 &, ~C = -1, ~\alpha = 1 \\ v'' + 2v'  &= t^2 \\ v &= a_1t + a_2t^2 + a_3t^3 \\ v' &= a_1 + 2a_2t + 3a_3t^2 \\ v'' &= 2a_2 + 6a_3t \\ (2a_2 + 2a_1) + (6a_3 + 4a_2)t + 6a_3t^2 &= t^2 \\ 6a_3 &= 1 \to a_3 = \frac{1}{6} \\ 1 + 4a_2 &= 0 \to a_2 = -\frac{1}{4} \\ -\frac{1}{2} + 2a_1 &= 0 \to a_1 = \frac{1}{4} \\ \psi(t) &= \frac{1}{4}t - \frac{1}{4}t^2 + \frac{1}{6}t^3 \\ y &= c_1e^t + c_2e^{-t} + \Big[\frac{t^3}{6} - \frac{t^2}{4} + \frac{1}{4}\Big]e^t \end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy + 5\dy + 4y = t^2e^{7t}$ $$\begin{aligned} A = 1, ~ B = 5 &, ~C = 4, ~\alpha = 72 \\ v'' + 19v' + 88v &= t^2 \\ v &= a_0 + a_1t + a_2t^2 \\ v' &= a_1 + 2a_2t \\ v'' &= 2a_2 \\ (2a_2 + 19a_1 + 88a_0) + (38a_2 + 88a_1)t + 88a_2t^2 &= t^2 \\ 88a_2t^2 &= t^2 \to a_2 = \frac{1}{88} \\ 38a_2 + 88a_1 &= 0 \to a_1 = -\frac{38}{(88)^2} \\ 2(\frac{1}{88}) + 19(\frac{-38}{(88)^2}) + 88a_0 &= 0 \to a_0 = \frac{-2(88) + 19(38)}{88^3} \\ \psi(t) &= -\frac{2(88) + 19(38)}{88^3} - \frac{38}{88^2}t + \frac{1}{88}t^2 \end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy + 2\dy + y = e^{-t}$ $$\begin{aligned} r^2 + 2r + 1 &= 0 \to (r + 1)^2 = 0 \to r = -1,~ -1 \\ 
+v'' &= 1 \\ v' &= t \\ v &= \frac{t^2}{2} \\ y &= c_1e^{-t} + c_2te^{-t} + \frac{t^2}{2}e^{-t} \end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy + 4y = \sin 2t $ $$\begin{aligned} y'' + 4y &= e^{2it} \\ y &= e^{2it}v \\ A = 1, ~ B = 0 &, ~C = 4, ~\alpha = 2i \\ v'' + 4iv' &= 1 \\ v' &= \frac{1}{4i} = -\frac{i}{4} \\ v &= -\frac{i}{4}t \\ \psi(t) &= -\frac{i}{4}t\Big[\cos 2t + i\sin 2t\Big] = \frac{1}{4}t\sin 2t - \frac{i}{4}t\cos 2t \end{aligned} $$ \end{example}
+
+\begin{example} Solve $\ddy + 4y = t\sin 2t$ $$\begin{aligned} y'' + 4y &= te^{2it} \\ A = 1, ~ B = 0 &, ~C = 4, ~\alpha = 2i \\ y &= e^{2it}v \\ v'' + 4iv' &= t \\ v &= a_1t + a_2t^2 \\ v' &= a_1 + 2a_2t \\ v'' &= 2a_2 \\ 2a_2 + 4i(a_1 + 2a_2t) &= t \\ 8ia_2 &= 1 \to a_2 = \frac{1}{8i} = -\frac{1}{8} \\ 2a_2 + 4ia_1 &= 0 \to -\frac{1}{8} + 2ia_1 = 0 \to 2a_1 = \frac{1}{8} \to a_1 = \frac{1}{16} \\ v &= \frac{1}{16}t - \frac{1}{8}t^2 \\ \psi(t) &= (\frac{1}{16}t - \frac{1}{8}t^2)e^{2it} \\ &= (\frac{1}{16}t - \frac{1}{8}t^2)(\cos 2t + i\sin 2t) \\ &= \frac{1}{8}\cos 2t + \frac{1}{16}t\sin 2t \end{aligned} $$ \end{example} 
+
+\begin{example} Solve $\ddy + \dy + 6y = \sin t$ $$\begin{aligned} y'' + y' - 6y &= e^{it} \\ A = 1, ~ B = 1 &, ~C = -6, ~\alpha = i \\ y &= e^{it}v \\ v'' + (1 + 2i)v' + (-1 + i - 6)v &= 1 \\ v'' + (1 + 2i)v' + (i - 7)v &= 1 \\ v &= \frac{1}{i - 7} = -\frac{7}{50} - \frac{i}{50} \\ \psi(t) &= (-\frac{7}{50} - \frac{i}{50})(\cos t + i\sin t) \\ \text{Im}\{\psi\} &= \frac{1}{50}\cos t - \frac{7}{50}\sin t \end{aligned} $$ \end{example} 
+
+
+
+
+
+
+\subsection{Method of Judicious Guessing} 
+Let $L[y] = a\ddy + b\dy + cy = a_0 + a_1t + \dots + a_nt^n$. Seek a function $\psi(t)$ such that the three functions $a\psi''$, $b\psi'$ and $c\psi$ add up to a given polynomial of degree $n$. Therefore $$\psi(t) = A_0 + A_1t + \dots + A_nt^n$$ and compute $$\begin{aligned} L[\psi](t) &= a\psi''(t) + b\psi'(t) + c\psi(t) \\ &= a[2A_2 + \dots + n(n - 1)A_nt^{n - 2}] + b[A_1 + \dots + nA_nt^{n - 1}] + c[A_0 + A_1t + \dots + A_nt^n] \\ &= cA_nt^n + (cA_{n - 1} + nbA_n)t^{n - 1} + \dots + (cA_0 + bA_1 + 2aA_2) \end{aligned} $$ 
+Equating coefficients of like powers of $t$ in the equation $$L[\psi](t) = a_0 + a_1t + \dots + a_nt^n$$ gives 
+$$cA_n = a_n,~ cA_{n - 1} + nbA_n = a_{n - 1}, ~ \dots , ~ cA_0 + bA_1 + 2aA_2 = a_0 $$ 
+The first equation determines $A_n = \frac{a_n}{C}$ for $c \neq 0$, and the remaining equations then determine $A_{n - 1}, \dots, A_0$ successively. But when $c = 0$, the first equation has no solution $A_n$. This is expected though, for if $c = 0$, then $L[\psi] = a\psi'' + b\psi'$ is a polynomial of degree $n - 1$, which the RHS is a polynomial of degree $n$. To guarantee that $a\psi'' + b\psi'$ is a polynomial of degree $n$, take $\psi$ as a polynomial of degree $n + 1$ Thus $$\psi(t) = t[A_0 + A_1t + \dots + A_nt^n] $$ The coefficients $A_0, A_1, \dots, A_n$ are determined uniquely from the equation $$a\psi'' + b\psi' = a_0 + a_1t + \dots + a_nt^n$$ if $b \neq 0$. If $b = c = 0$, $$\psi(t) = \frac{1}{a}\Big[ \frac{a_0t^2}{1 \cdot 2} + \frac{a_1t^3}{2 \cdot 3} + \dots + \frac{a_nt^{n + 2}}{(n + 1)(n + 2)}\Big] $$ 
+In summary, the differential equation $a\ddy + b\dy + cy = a_0 + a_1t + \dots + a_nt^n$ has a solution $\psi(t)$ of the form $$\psi(t) = \begin{cases} A_0 + A_1t + \dots + A_nt^n ~& c \neq 0 \\ t(A_0 + A_1t + \dots + A_nt^n) ~& c = 0, b\neq 0 \\ t^2(A_0 + A_1t + \dots + A_nt^n) ~& c = b = 0 \end{cases} $$ 
+
+\begin{example} Solve: $L[y] = \ddy + \dy + y = t^2$. \\ Set $\psi(t) = A_0 + A_1t + A_2t^2$ and compute 
+$$\begin{aligned} L[\psi](t) &= \psi''(t) + \psi'(t) + \psi(t) \\ &= 2A_2 + (A_1+ 2A_2t) + A_0 + A_1t + A_2t^2 \\ &= (A_0 + A_1 + 2A_2) + (A_1 + 2A_2)t + A_2t^2 \end{aligned} $$ 
+Equating coefficient of like powers of $t$ in the equation $L[\psi](t) = t^2$ gives $$\begin{aligned} A_2 &= 1 \\ A_1 + 2A_2 &= 0 \\ A_0 + A_1 + 2A_2 &= 0 \end{aligned} $$ 
+Therefore $A_0 = 0$,  $A_1 = -2$ and $A_2 = 1$. Thus $$\psi(t) = -2t + t^2 $$ is a particular solution. \end{example}
+Consider the differential equation $$L[y] = a\ddy + b\dy + cy = (a_0 + a_1t + \dots + a_nt^n)e^{\alpha t} $$ 
+To remove the factor $e^{\alpha t}$ from the RHS, let $y(t) = e^{\alpha t}v(t)$. Then $$\begin{aligned} y' &= e^{\alpha t}(v' + \alpha v) \\ y'' &= e^{\alpha t}(v'' + 2\alpha v' = \alpha^2v) \end{aligned} $$ so that $$L[y] = e^{\alpha t}\Big[av'' + (2a\alpha + b)v' + (a\alpha^2 + b\alpha + c)v\Big] $$ Therefore, $y(t) = e^{\alpha t}v(t)$ is a solution if $$a\frac{d^2 v}{dt^2} + (2a\alpha + b)\frac{dv}{dt} + (a\alpha^2 + b\alpha + c)v = a_0 + a_1t + \dots + a_nt^n $$ 
+To find $v(t)$, examine three cases: \\~\\ 
+(i) $a\alpha^2 + b\alpha + c \neq 0$: $\alpha$ is not a root of the characteristic equation $ar^2 + br + c = 0$ and so $e^{\alpha t}$ is not a solution of homogeneous equation $L[y] = 0$. \\
+
+(ii) $a\alpha^2 + b\alpha + c = 0$ but $2a\alpha + b \neq 0$: $\alpha$ is a single root of the characteristic equation, implying that $e^{\alpha t}$ is a solution of the homogeneous equation, but $te^{\alpha t}$ is not. \\
+(iii) both $a\alpha^2 + b\alpha + c$ and $2a\alpha + b$ equal 0: $\alpha$ is a double root of the characteristic equation therefore both $e^{\alpha t}$ and $te^{\alpha t}$ are solutions of the homogeneous equation. \\~\\
+Hence, the differential equation has a particular solution $\psi(t)$ of the form (i) $\psi(t) = (A_0 + \dots + A_nt^n)e^{\alpha t}$, if $e^{\alpha t}$ is not a solution of the homogeneous equation; (ii) $\psi(t) = t(A_0 + \dots + A_nt^n)e^{\alpha t}$, if $e^{\alpha t}$ is a solution of the homogeneous equation but $te^{\alpha t}$ is not; and (iii) $\psi(t) = t^2(A_0 + \dots + A_nt^n)e^{\alpha t}$ if both $e^{\alpha t}$ and $te^{\alpha t}$ are both solutions of the homogenous equation. \\~\\
+There are two ways to compute a particular solution $\psi(t)$. Either make the substitution $y = e^{\alpha t}v$ and find $v(t)$ from $$a\frac{d^2v}{dt^2} + (2a\alpha + b)\frac{dv}{dt} + (a\alpha^2 + b\alpha + c)v = a_0 + a_1t + \dots + a_nt^n$$ or guess a solution $\psi(t)$ of the form $e^{\alpha t}$ times a suitable polynomial in $t$. If $\alpha$ is a double root of the characteristic equation, or if $n \geq 2$, then it is advisable to set $y = e^{\alpha t}v$ and then find $v(t)$ from the above differential equation. Otherwise guess $\psi(t)$ directly. 
+
+\begin{example} Solve: $\ddy - 4\dy + 4y = (1 + t + \dots + t^{27})e^{2t}$. \\
+$$\begin{aligned} r^2 - 4r + 4 &= 0 \\ (r - 2)^2 &= 0 \\ r &= 2, 2 \\ y_1(t) &= e^{2t} \\ y_2(t) &= te^{2t} \end{aligned} $$ To find a particular solution $\psi(t)$, set $y = e^{2t}v$. Then $$\frac{d^2v}{dt^2} = 1 + t + t^2 + \dots + t^{27}$$ Integrating this equation twice and setting the constants of integration equal to zero gives $$v(t) = \frac{t^2}{1 \cdot 2} + \frac{t^3}{2 \cdot 3} + \dots + \frac{t^{29}}{28 \cdot 29} $$ Therefore the general solution is $$\begin{aligned} y(t) &= c_1e^{2t} + c_2te^{2t} + e^{2t} \Big[ \frac{t^2}{1 \cdot 2} + \frac{t^3}{2 \cdot 3} + \dots + \frac{t^{29}}{28 \cdot 29}\Big] \\ &= e^{2t}\Big[c_1 + c_2t + \frac{t^2}{1 \cdot 2} + \frac{t^3}{2 \cdot 3} + \dots + \frac{t^{29}}{28 \cdot 29}\Big] \end{aligned} $$ \end{example} 
+
+\begin{theorem} Let $y(t) = u(t) + iv(t)$ be a complex-valued solution of the equation $$L[y] = a\ddy + b\dy + cy = g(t) = g_1(t) + ig_2(t)$$ where $a$, $b$ and $c$ are real. This means that $$a\Big[u''(t) + iv''(t)\Big] + b\Big[u'(t) + v'(t)\Big] + c\Big[u(t) + iv(t)\Big] = g_1(t) + ig_2(t)$$ Then $L[u](t) = g_1(t)$ and $L[v](t) = g_2(t)$. \end{theorem}
+
+\begin{example} Solve $L[y] = \ddy - 3\dy + 2y = (1 + t)e^{3t}$. \\ 
+$e^{3t}$ is not a solution of the homogeneous equation $y'' - 3y' + 2y = 0$> Thus set $\psi(t) = (A_0 + A_1t)e^{3t}$. Computing $$\begin{aligned} L[\psi](t) &= \psi'' - 3\psi' + 2\psi \\ &= e^{3t}\Big[(9A_0 + 6A_1 + 9A_1t) - 3(3A_0 + A_1 + 3A_1t) + 2(A_0 + A_1t)\Big] \\ &= e^{3t}\Big[(2A_0 + 3A_1) + 2A_1t\Big] \end{aligned} $$ and cancelling off the factor $e^{3t}$ from both sides of the equation $L[\psi](t) = (1 + t)e^{3t}$ gives $$2A_1t + (2A_0 + 3A_1) = 1 + t $$ This implies that $2A_1 = 1$ and $2A_0 + 3A_1 = 1$. Hence $A_1 = \frac{1}{2}$ and $A_0 = -\frac{1}{4}$. Therefore $\psi(t) = (-\frac{1}{4} + \frac{t}{2})e^{3t}$. \end{example}
+
+Consider the differential equation $$L[y] = a\ddy + b\dy + cy = (a_0 + a_1t + a_2t^2 + \dots + a_nt^n) \times \begin{cases} \cos \omega t \\ \sin \omega t \end{cases} $$ 
+
+\begin{theorem} Let $y(t) = u(t) + iv(t)$ be a complex-valued solution of the equation $$L[y] = a\ddy + b\dy + cy = g(t) = g_1(t) + ig_2(t) $$ where $a$, $b$ and $c$ are real. This means that $$a\Big[ u''(t) + iv''(t)\Big] + b\Big[u'(t) + iv'(t)\Big] + c\Big[u(t) + iv(t)] = g_1(t) + ig_2(t)$$ Then $L[u](t) = g_1(t)$ and $L[v](t) = g_2(t)$. \end{theorem} 
+
+\begin{proof} Equating real and imaginary parts gives $$\begin{aligned} au''(t) + bu'(t) + cu(t) &= g_1(t) \\ av''(t) + bv'(t) + cv(t) &= g_2(t) \end{aligned} $$ Let $\psi(t) = u(t) + iv(t)$ be a particular solution of the equation $$a\ddy + b\dy + cy = (a_0 + a_1t + a_2t^2 + \dots + a_nt^n)e^{i\omega t} $$ The real part of the RHS is $(a_0 + a_1t + a_2t^2 + \dots a_nt^n)\cos \omega t$ while the imaginary part is $(a_0 + a_1t + a_2t^2 + \dots + a_nt^n)\sin \omega t$. Therefore $u(t) = \text{Re}\{\phi(t)\}$ is a solution of $ay'' + by' + cy = (a_0 + a_1t + a_2t^2 + a_nt^n)\cos \omega t$ while $v(t) = \text{Im}\{\phi(t)\}$ is a solution of $ay'' + by' + cy = (a_0 + a_1t + a_2t^2 + \dots + a_nt^n) \sin \omega t$. \end{proof} 
+
+\begin{example} Solve $L[y] = \ddy + 4y = \sin 2t$. \\ Find $\psi(t)$ as the imaginary part of a complex-valued solution $\phi(t)$ of the equation $L[y] = \ddy + 4y = e^{2it}$. Observe that the characteristic equation $r^2 + 4 = 0$ has complex roots $r = \pm 2i$. Thus $$\begin{aligned} \phi(t) &= A_0te^{2it} \\ \phi'(t) &= A_0(1 + 2it)e^{2it} \\ \phi''(t) &= A_0(4i - 4t)e^{2it} \end{aligned} $$ 
+Thus $L[\phi](t) = \phi''(t) + 4\phi(t) = 4iA_0e^{2it}$. Hence $A_0 = \frac{1}{4i} = -\frac{i}{4}$ and $$\phi(t) = -\frac{it}{4}e^{2it} = -\frac{it}{4}(\cos 2t + i\sin 2t) = \frac{t}{4}\sin 2t - i\frac{t}{4}\cos 2t$$ 
+Therefore $\psi(t) = \text{Im}\{\phi(t)\} = -\frac{t}{4}\cos 2t$ is a particular solution. \end{example} 
+
+\begin{example} Solve $\ddy + 4y = \cos 2t$. \\ From the previous example, $\phi(t) = \frac{t}{4}\sin 2t - i\frac{t}{4}\cos 2t$ is a complexed valued solution. Therefore $$\psi(t) = \text{Re}\{\phi(t)\} = \frac{t}{4}\sin 2t$$ is a particular solution here. \end{example} 
+
+\begin{example} Solve $\ddy + 2\dy + y = te^t\cos t$. \\ Note that $te^t\cos t$ is the real part of $te^{(1 + i)t}$. Therefore find $\psi(t)$ as the real part of the complex valued-solution $\phi(t)$ of the equation $$L[y] = \ddy + 2\dy + y = te^{(1 + i)t}$$ 
+Observe that $1 + i$ is not a root of the characteristic equation $r^2 + 2r + 1 = 0$. Therefore, particular solution $\phi(t)$ will be of the form $\phi(t) = (A_0 + A_1t)e^{(1 + i)t}$.  $$\begin{aligned} \phi(t) &= (A_0 + A_1t)e^{(1 + i)t} \\ \phi'(t) &= \Big((1 + i)A_0 + A_1 + (1 + i)A_1t\Big)e^{(1 + i)t} \\ \phi''(t) &= 2\Big(iA_1t + iA_0 + (1 + i)A_1\Big)e^{(1 + i)t} \end{aligned} $$ Computing $L[\phi] = \phi''  + 2\phi' + \phi$ and using the identity $$(1 + i)^2 + 2(1 + i) + 1 = \Big[(1 + i) + 1\Big]^2 = (2 + i)^2$$, see that $$\Big[(2 + i)^2 A_1t + (2 + i)^2A_0 + 2(2 + i)A_1\Big] = t$$ Equating coefficients of like powers of $t$ in this equation gives $$\begin{aligned} (2 + i)^2A_1 &= 1 \\ (2 + I)A_0 + 2A_1 &= 0 \end{aligned} $$ 
+This implies that $A_0 = \frac{1}{(2 + i)^2}$ and $A_0 = -\frac{2}{(2 + i)^3}$, so that $$\psi(t) = \Bigg[\frac{-2}{(2 + i)^3} + \frac{t}{(2 + i)^2}\Bigg]e^{(1 + i)t} $$ After a little algebra, $$\psi(t) = \frac{e^t}{125}\Big[(15t - 4)\cos t + (20t - 22)\sin t\Big] + i\Big[(22 - 20t)\cos t + (15t - 4)\sin t\Big] $$ Hence $$\phi(t) = \text{Re}\{\psi(t)\} = \frac{e^t}{125} [(15t - 4)\cos t + (20t - 22)\sin t] $$  \end{example}
+
+\subsection{Series Solutions} 
+Let $L[y] = P(t)\ddy + Q(t)\dy + R(t)y = 0$ where $P(t)$ is unequal to zero. Consider the case where $P(t), ~ Q(t), ~R(t)$ are polynomials in $t$. If $y(t)$, is a solution of the differential equation and is a polynomial in $t$, then the three functions $P(t)y''(t)$, $Q(t)y'(t)$ and $R(t)y(t)$ are also polynomials in $t$. Therefore a polynomial solution $y(t)$ of the differential equation can be determined by setting the sums of the coefficients of like powers of $t$ in the expression $L[y](t)$ equal to zero. 
+
+\begin{example} Find two linearly independent solutions of the equation $$L[y] = \ddy - 2t\dy - 2y = 0$$ \\ Try to find two polynomial solutions. It is not obvious what degree of any polynomial solution should be therefore set $$y(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + \dots = \sum_{n = 0}^{\infty} a_nt^n $$ From this, $$\begin{aligned} \dy &= a_1 + 2a_2t + 3a_3t^2 + \dots + \sum_{n = 0}^{\infty} na_nt^{n - 1} \\ \ddy &= 2a_2 + 6a_3t + \dots = \sum_{n = 0}^{\infty} n(n - 1)a_nt^{n - 2} \end{aligned} $$ 
+Therefore $y(t)$ is a solution if $$\begin{aligned} L[y](t) &= \sumzinf n(n - 1)a_nt^{n - 2} - 2t\sumzinf na_nt^{n - 1} - 2\sumzinf a_nt^n \\ &= \sumzinf n(n - 1)a_nt^{n - 2} - 2\sumzinf na_nt^n - 2\sumzinf a_nt^n = 0 \end{aligned} $$ 
+Rewrite the first summation so that the exponent of the general term is $n$ instead of $n - 2$. This is done by increasing every $n$ underneath the summation sign by 2, and decreasing the lower limit by 2; thus $$\sumzinf n(n - 1)a_nt^{n- 2} = \sum_{n = -2}^{\infty} (n + 2)(n + 1)a_{n + 2}t^n $$ 
+Verify this by letting $m = n - 2$. When $n$ is zero, $m = -2$ and when $n$ is infinity, $m$ is also infinity. Therefore $$\sumzinf n(n - 1)a_nt^{n - 2} = \sum_{m = -2}^{\infty} (m + 2)(m + 1)a_{m + 2}t^m $$ Observe that the contribution to this sum from $m = -2$ and $m = -1$ is zero. since the factor $(m + 2)(m + 1)$ vanishes in both these instances. Hence $$\sumzinf n(n - 1)a_nt^{n - 2} = \sumzinf (n + 2)(n + 1)a_{n + 2}t^n$$ Now $$L[y](t) = \sumzinf (n + 2)(n + 1)a_{n + 2}t^n - 2\sumzinf na_nt^m - 2\sumzinf a_nt^n = 0$$ Setting the sum of the coefficients of like powers of $t$ in this equation equal to zero gives $$\begin{aligned}  (n + 2)(n + 1)a_{n + 2} - 2na_n - 2a_n &= 0 \\ (n + 2)(n + 1)a_{n + 2} - 2(n + 1)a_n &= 0 \\ (n + 2)(n + 1)a_{n + 2} &= 2(n + 1)a_n \\ a_{n + 2} &= \frac{2(n + 1)a_n}{(n + 2)(n + 1)} = \frac{2}{n + 2}a_n \end{aligned} $$ 
+This is a recurrence formula for the coefficients $a_0, a_1, a_2, a_3, \dots$. The coefficient $a_n$ determines the coefficient $a_{n + 2}$. Thus $$\begin{aligned} a_2 &= \frac{2}{2}a_0  = a_0 \\ a_4 &= \frac{2}{2 + 2}a_2 = \frac{2}{4}a_2 = \frac{1}{2}a_2 \end{aligned} $$ In a similar fashion, $$\begin{aligned} a_3 &= \frac{2}{2 + 1}a_1 = \frac{2}{3}a_1 \\ a_5 &= \frac{2}{3 + 2}a_3 = \frac{2}{5} a_3 = \frac{2}{5} \frac{2}{3}a_1 = \frac{4}{3 \cdot 5}a_1 \end{aligned} $$ 
+Conequently, all the coefficients are determined uniquely once $a_0$ and $a_1$ are given. Therefore if $y(t) = a_0 + a_1t + a_2t^2 + a_3t^3 + \dots$, then $a_0 = y(0)$ and $a_1 = y'(0)$. To find two solutions, choose two different sets of values of $a_0$ and $a_1$. The simplest possible choices are $$\begin{aligned} (i) ~ a_0 &= 1, ~ a_1 = 0 \\ (ii) ~ a_0 = 0, ~ a_1 = 1 \end{aligned} $$ In the first case, where $a_0 = 1$ and $a_1 = 0$, all the odd coefficients $a_1, a_3, a_5, \dots$ are zero since $a_3 = \frac{2}{3}a_1 = 0$, $a_5 = \frac{2}{5}a_3 = 0$, and so forth. On the other hand, the even coefficients are determined from the relations $$\begin{aligned} a_2 &= a_0 = 1 \\ a_4 &= \frac{2}{4}a_2 = \frac{1}{2} \\ a_6 &= \frac{2}{6}a_4 = \frac{1}{2 \cdot 3} \\ a_8 &= \frac{2}{8}a_6 = \frac{1}{2 \cdot 3 \cdot 4} \end{aligned} $$ and so forth. Thus $$a_{2n} = \frac{1}{2 \cdot 3 \cdot 4 \dots \cdot n} = \frac{1}{n!} $$ Hence $$y_1(t) = 1 + t^2 + \frac{t^4}{2!} + \frac{t^6}{3!} + \dots = e^{t^2} $$ is the first solution. \\~\\ In the second case, where $a_0 = 0$ and $a_1 = 1$. note that all the even coefficients are zero. On the other hand, the odd coefficients are determined from the following relations $$\begin{aligned} a_3 &= \frac{2}{3}a_1 = \frac{2}{3} \\ a_5 &= \frac{2}{5}a_3 = \frac{2}{5} \cdot \frac{2}{3} \\ a_7 &= \frac{2}{7}a_5 = \frac{2}{7} \cdot \frac{2}{5} \cdot \frac{2}{3} \\ a_9 &= \frac{2}{9}a_5 = \frac{2}{9} \cdot \frac{2}{7} \cdot \frac{2}{5} \cdot \frac{2}{3} \end{aligned} $$ and so forth. Thus $$a_{2n + 1} = \frac{2^n}{3 \cdot 5 \cdot \dots \cdot (2n + 1)} $$ There the second solution is $$y_2(t) = t + \frac{2}{3}t^3 + \frac{2^2}{3 \cdot 5}t^5 + \dots = \sumzinf \frac{2^nt^{2n + 1}}{3 \cdot 5 \cdot \dots \cdot (2n + 1)} $$ \end{example}
+
+Properties of Power Series \begin{enumerate} 
+\item An infinite series $$y(t) = a_0 + a_1(t - t_0) + a_2(t - t_0)^2 + \dots = \sumzinf a_n(t - t_0)^n $$ is called a power series about $t = t_0$. 
+\item All power series have an interval of convergence. This means that there exists a nonnegative number $\rho$ such that the infinite series converges for $|t - t_0| < \rho$ and diverges for $|t - t_0| > \rho$. The number $\rho$ is called the radius of convergence of the power series. 
+\item The power series can be differentiated and integrated term by term, and the resultant series have the same interval of convergence.
+\item The simplest method for determining the interval of convergence of the power series is the Cauchy ratio test. Suppose that $$\lim_{n \to \infty} \frac{a_{n + 1}}{a_n} = \lambda$$ Then the power series converges for $|t - t_0| < \frac{1}{\lambda}$ and diverges for $|t - t_0| > \frac{1}{\lambda}$. 
+\item The product of two power series $\sumzinf a_n (t - t_0)^n$ and $\sumzinf b_n(t - t_0)^n$ is again a power series of the form $\sumzinf c_n(t - t_0)^n$ with $c_n = a_0b_n + a_1b_{n - 1} + \dots + a_nb_0$. The quotient $$\frac{a_0 + a_1t + a_2t^2 + \dots}{b_0 + b_1t + b_2t^2 + \dots} $$ of two power series is again a power series, provided that $b_0 \neq 0$. 
+\item Many of the functions $f(t)$ that arise in applications can be expanded in power series; that is, we can find coefficients $a_0, a_1, a_2, \dots$ so that $$f(t) = a_0 + a_1(t - t_0) + a_2(t - t_0)^2 + \dots = \sumzinf a_n(t - t_0)^n$$ 
+Such functions are said to be analytic at $t = t_0$, and the series is called the Taylor series of $f$ about $t = t_0$. It can be easily shown that if $f$ admits such an expansion, then, of necessity, $a_n = \frac{f^{(n)}(t_0)}{n!}$ where $f^{(n)}(t) = \frac{d^nf(t)}{dt^n}$. 
+\item The interval of convergence of the Taylor series of a function $f(t)$, about $t_0$, can be determined directly through the Cauchy ratio test and other similar methods, or indirectly, through the following theorem of complex analysis. \end{enumerate} 
+
+\begin{theorem} Let the variable $t$ assume complex values and let $z_0$ be the point closest to $t_0$ at which $f$ or one of its derivatives fails to exist. Compute the distance $\rho$, in the complex plane, between $t_0$ and $z_0$. then the Taylor series of $f$ converges for $|t - t_0| < \rho$ and diverges for $|t - t_0| > \rho$. \end{theorem} 
+
+\begin{theorem} Let the functions $\frac{Q(t)}{P(t)}$ and $\frac{R(t)}{P(t)}$ have convergent Taylor series expansions about $t = t_0$, for $| t - t_0| < \rho$. Then every solution $y(t)$ of the differential equation $$P(t)\ddy + Q(t)\dy + R(t)y = 0$$ is analytic at $t = t_0$ and the radius of convergence of its Taylor series expansion about $t = t_0$ is at least $\rho$. The coefficients $a_2, a_3, \dots, $ in the Taylor series expansion $$y(t) = a_0 + a_1(t - t_0) + a_2(t - t_0)^2 + \dots $$ are determined by plugging the series into the differential equation and setting the sum of the coefficients of like powers of $t$ in this expression equal to zero. \end{theorem} 
+Note: The interval of convergence of the Taylor series expansion of any solution $y(t)$ is determined, usually, by the interval of convergence of the power series $\frac{Q(t)}{P(t)}$ and $\frac{R(t)}{P(t)}$, rather than by the interval of convergence of the power series $P(t)$, $Q(t)$, and $R(t)$. This is because the differential equation must be put in the standard form $$\ddy + p(t)\dy + q(t)y = 0$$ whenever we examine questions of existence and uniqueness. 
+
+\begin{example} Find two linearly independent solutions of $$L[y] = \ddy + \frac{3t}{1 + t^2}\dy + \frac{1}{1 + t^2}y = 0 $$ In addition, find the solution $y(t)$ which satisfies the initial conditions $y(0) = 2$, $y'(0) = 3$. \\
+The right way to do this problem is to multiply both sides by $1 + t^2$ to obtain the equivalent equation $$L[y] = (1 + t^2)\ddy + 3t\dy + y = 0 $$ Setting up $$\begin{aligned} y(t) &= \sumzinf a_nt^n \\ y'(t) &= \sumzinf na_nt^{n - 1} \\ y''(t) &= \sumzinf n(n - 1)a_nt^{n - 2} \end{aligned} $$ Plug these series into the differential equation. $$\begin{aligned} L[y](t) &= (1 + t^2)\sumzinf n(n - 1)a_nt^{n - 2} + 3t \sumzinf na_nt^{n - 1} + \sumzinf a_nt^n \\ &= \sumzinf n(n + 1)a_nt^{n - 2} + \sumzinf [n(n - 1) + 3n + 1]a_nt^n \\ &= \sumzinf (n + 2)(n + 1)a_{n + 2}t^n + \sumzinf (n + 1)^2a_nt^n \end{aligned} $$ Setting the sum of the coefficients of like powers of $t$ equal to zero gives $$(n + 2)(n + 1)a_{n + 2} + (n + 1)^2a_n = 0 $$ or $$a_{n + 2} = -\frac{(n + 1)^2a_n}{(n + 2)(n + 1)} = -\frac{n + 1}{n + 2}a_n $$ This is a recurrence formula for the coefficients $a_2, a_3, \dots$ in terms of $a_0$ and $a_1$. To find two linearly independent solutions, choose the two simplest cases (1) $a_0 = 1,~ a_1 = 0$ and (2) $a_0 = 0;~ a_1 = 1$. \\~\\ In the first case where $a_0 = 1$ and $a_1 = 0$, all the odd coefficients are zero since $a_3 = -\frac{2}{3}a_1 = 0$, $a_5 = -\frac{4}{5}a_3 = 0$, and so on. The even coefficients are determined from the relations $$\begin{aligned} a_2 &= -\frac{1}{2}a_0 = -\frac{1}{2} \\ a_4 &= -\frac{3}{4}a_2 = \frac{1 \cdot 3}{2 \cdot 4} \\ a_6 &= -\frac{5}{6}a_4 = -\frac{1 \cdot 3 \cdot 5}{2 \cdot 4 \cdot 6} \\ a_8 &= \frac{7}{8}a_6 = \frac{1 \cdot 3 \cdot 5 \cdot 7}{2 \cdot 4 \cdot 6 \cdot 8} \end{aligned} $$ and so forth. Proceeding inductively, we find that $$a_{2n} = (-1)^n \frac{1 \cdot 3 \cdot \dots \cdot (2n -1)}{2 \cdot 4 \cdot \dots \cdot 2n} = (-1)^n \frac{1 \cdot 3 \cdot \dots \cdot (2n - 1)}{2^nn!} $$ Thus $$y_1(t) = 1 - \frac{t^2}{2} + \frac{1 \cdot 3}{2 \cdot 4}t^4 + \dots = \sumzinf (-1)^n\frac{1 \cdot 3 \cdot \dots \cdot (2n - 1)}{2^nn!}t^{2n} $$ The ratio of the $(n + 1)$ term to the $n$th term of $y_1(t)$ is $$-\frac{1 \cdot 3 \cdot \dots \cdot (2n - 1)(2n + 1)t^{2n + 2}}{2^{n + 1}(n + 1)!} \times \frac{2^nn!}{1 \cdot 3 \cdot \dots \cdot (2n - 1)t^{2n}} = \frac{-(2n + 1)t^2}{2(n + 1)} $$ and the absolute value of this quantity approaches $t^2$ as $n$ approaches infinity. Hence by the Cauchy ratio test, the infinite series $y_1(t)$ converges for $|t| < 1$ and diverges for $|t| > 1$. \\~\\ In the second case where $a_0 = 0$ and $a_1 = 1$, all the even coefficients are zero and the odd coefficients are determined from the relations $$\begin{aligned} a_3 &= -\frac{2}{3}a_1 = -\frac{2}{3} \\ a_5 &= -\frac{4}{5}a_3 = \frac{2 \cdot 4}{3 \cdot 5} \\ a_7 &= -\frac{6}{7}a_5 = -\frac{2 \cdot 4 \cdot 6}{3 \cdot 5 \cdot 7} \\ a_9 &= -\frac{8}{9}a_7 = \frac{2 \cdot 4 \cdot 6 \cdot 8}{3 \cdot 5 \cdot 7 \cdot 9} \end{aligned} $$ and so on. Proceeding inductively, we find that $$a_{2n + 1} = (-1)^n \frac{2 \cdot 4 \cdot \dots \cdot 2n}{3 \cdot 5 \cdot \dots \cdot (2n + 1)} = \frac{(-1)^n2^nn!}{3 \cdot 5 \cdot \dots \cdot (2n + 1)} $$ Thus $$y_2(t) = t - \frac{2}{3}t^3 + \frac{2 \cdot 4}{3 \cdot 5}t^5 + \dots = \sumzinf \frac{(-1)^n2^nn!}{3 \cdot 5 \cdot \dots \cdot (2n + 1)}t^{2n + 1} $$ is a second solution. It is easily verified that this solution, too, converges for $|t| < 1$ and diverges for $|t| > 1$. This is not every surprising since the Taylor series expansions about $t = 0$ of the functions $\frac{3t}{1 + t^2}$ and $\frac{1}{1 + t^2} $ only converge for $|t| < 1$. \\~\\ The solutions $y_1(t)$ satisfies the initial conditions $y(0) = 1$ and $y'(0) = 0$ while $y_2(t)$ satisfies the initial conditions $y(0) = 0$ and $y'(0) = 1$. Hence $$ y(t) = 2y_1(t) + 3y_2(t) $$ \end{example} 
+
+\begin{example} Solve $ L[y](t) = \ddy + t\dy + y = 0$. $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &= \sumzinf n(n - 1)a_nt^{n-  2} \\ L[y](t) &= \sumzinf n(n - 1)a_nt^{n - 2} + \sumzinf na_nt^n + \sumzinf a_nt^n = 0 \\ \sum_{n = -2}^{\infty} (n + 2)(n + 1)a_{n + 2}t^n + \sumzinf (n + 1)a_nt^n &= 0 \\ \sumzinf (n + 2)(n + 1)a_{n + 2}t^n + \sumzinf (n + 1)a_nt^n &= 0 \\ (n + 2)(n + 1)a_{n + 2} &= -(n + 1)a_n \\ a_{n + 2} &= -\frac{1}{n + 2}a_n \end{aligned}$$  Case 1: $a_0 = 1$, $a_1 = 0$ - All odd coefficients are zeros. $$\begin{aligned} a_2 &= -\frac{1}{2} \\ a_4 &= \frac{1}{4 \cdot 2} \\ a_6 &= -\frac{1}{6 \cdot 4 \cdot 2} \\ y_1(t) &= 1 - \frac{1}{2}t^2 + \frac{1}{2 \cdot 4}t^4 - \frac{1}{2 \cdot 4 \cdot 6}t^6 + \dots \end{aligned} $$ 
+This series converges everywhere by the theorem. ($Q(t)$ and $R(t)$ converges everywhere.) \\ 
+Case 2: $a_0 = 0$, $a_1 = 1$ - All even coefficients are zeros. $$\begin{aligned} a_3 &= -\frac{1}{3} \\ a_5 &= \frac{1}{5 \cdot 3} \\ a_7 &= -\frac{1}{7 \cdot 5 \cdot 3} \\ y_2(t) &= t - \frac{1}{3}t^3 + \frac{1}{5 \cdot 3}t^5 - \frac{1}{7 \cdot 5 \cdot 3}t^7 \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $(2 + t^2)\ddy - t\dy - 3y = 0$. \\ Note that the radius of convergence is $\sqrt{2}$.  $$\begin{aligned} 
+y&= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^n \\ y'' &= \sumzinf n(n - 1)a_nt^{n - 2} \\ 2\sumzinf n(n - 1)a_nt^{n - 2} + \sumzinf n(n - 1)a_nt^n - \sumzinf na_nt^n - 3\sumzinf a_nt^n &= 0 \\ 2\sum_{n = -2}^{\infty} (n + 2)(n + 1)a_{n + 2}t^n &= \sumzinf [n + 3 - n^2 + n] a_nt^n \\ 2\sumzinf (n + 2)(n + 1)a_{n + 2}t^n &= -[n^2 - 2n - 3]a_nt^n \\ &= -(n - 3)(n + 1)a_nt^n \\ 2(n + 2)(n + 1)a_{n + 2} &= (3 - n)(n + 1)a_n \\ a_{n + 2} &= \frac{3 - n}{2(n + 2)}a_n \end{aligned} $$ Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} 
+a_2 &= \frac{3}{2 \cdot 2} \\ a_4 &= \frac{1}{2\cdot 4} \cdot \frac{3}{2 \cdot 2} \\ a_6 &= -\frac{1}{2 \cdot 6} \cdot \frac{1}{2 \cdot 4} \cdot \frac{3}{2 \cdot 2} \\ a_8 &= -\frac{3}{2 \cdot 8} \cdot -\frac{1}{2 \cdot 6} \cdot \frac{1}{2 \cdot 4} \cdot \frac{3}{2 \cdot 2} \\ a_{10} &= -\frac{5}{2 \cdot 10} \cdot - \frac{3}{2 \cdot 8} \cdot -\frac{1}{2 \cdot 6} \cdot \frac{1}{2 \cdot 4} \cdot \frac{3}{2 \cdot 2} \\ y_1(t) &= 1 + \frac{3}{2\cdot 2}t^2 + \frac{1 \cdot 3}{2^2 \cdot 2 \cdot 4}t^4 - \frac{1 \cdot 3}{2^3 \cdot 2 \cdot 4 \cdot 6}t^6 + \frac{3 \cdot 1 \cdot 3}{2^4 \cdot 2 \cdot 4 \cdot 6 \cdot 8}t^8 - \frac{5 \cdot 3 \cdot 1 \cdot 3}{2^5 \cdot 2 \cdot 4 \cdot 6 \cdot 8 \cdot 10}t^{10} + \dots \end{aligned} $$ This series converges for $-\sqrt{2} < t < \sqrt{2}$. \\ Case 2: $a_0 = 0$, $a_1 = 1$. $$\begin{aligned} a_3 &= \frac{2}{2 \cdot 3} \\ a_5 = 0 \\ a_7 &= 0 \\ y_2(t) &= t + \frac{1}{3}t^3 \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $L[y] = \ddy + t^2\dy + 2ty = 0$. $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &= n(n -1)a_nt^{n - 2} \\ L[y](t) &= \sumzinf n(n - 1)a_nt^{n - 2} + t^2 \sumzinf na_nt^{n - 1} + 2t\sumzinf a_nt^n \\ &= \sumzinf n(n - 1)a_nt^{n - 2} + \sumzinf na_nt^{n + 1} + 2\sumzinf a_nt^{n + 1} \\ &= \sumzinf n(n - 1)a_nt^{n - 2} + \sumzinf (n + 2)a_nt^{n + 1} \end{aligned} $$ Rewrite the first summation so that the exponent of the general term is $n + 1$ instead of $n - 2$. This is accomplished by increasing every $n$ underneath the summation sign by 3 and decreasing the lower limit by 3. $$\begin{aligned} \sumzinf n(n - 1)a_nt^{n - 2} &= \sum_{n = -3}^{\infty} (n + 3)(n + 2)a_{n + 3}t^{n + 1} \\ &= \sum_{n = -1}^{\infty} (n + 3)(n + 2)a_{n + 3}t^{n + 1} \end{aligned} $$ Thus $$\begin{aligned} L[y](t) &= \sum_{n = -1}^{\infty} (n + 3)(n + 2)a_{n + 3}t^{n + 1} + \sumzinf (n + 2)a_nt^{n + 1} \\ &= 2a_2 + \sumzinf (n + 3)(n + 2)a_{n + 3}t^{n + 1} + \sumzinf (n + 2)a_nt^{n + 1} \end{aligned} $$ Setting the sum of the coefficients of like powers of $t$ equal to zero gives $$ \begin{aligned} 2a_2 &= 0 \\ (n + 3)(n + 2)a_{n + 3} + (n + 2)a_n &= 0 \\ a_2 &= 0 \\ a_{n + 3} &= \frac{1}{n + 3}a_n \end{aligned} $$ 
+Case 1: $a_0 = 1$, $a_0 = 1$. $$\begin{aligned} a_3 &= -\frac{1}{3} \\ a_6 &= \frac{1}{3 \cdot 6} \\ a_9 &= -\frac{1}{3 \cdot 6 \cdot 9} \\ a_{3n} &= \frac{(-1)^n}{3 \cdot 6 \cdot \dots \cdot 3n} = \frac{(-1)^n}{3^nn!} \\ y_1(t) &= 1 - \frac{1}{3}t^3 + \frac{1}{3 \cdot 6}t^6 - \frac{1}{3 \cdot 6 \cdot 9}t^9 + \dots = \sumzinf \frac{(-1)^n}{3^nn!}t^{3n} \end{aligned} $$ 
+Case 2: $a_0 = 0$, $a_1 = 1$. $$\begin{aligned} a_4 &= -\frac{1}{4} \\ a_7 &= -\frac{1}{4 \cdot 7}  \\ a_{10} &= -\frac{1}{4 \cdot 7 \cdot 10} \\ y_2(t) &= t - \frac{1}{4}t^4 + \frac{1}{4 \cdot 7}t^7 - \frac{1}{4 \cdot 7 \cdot 10}t^{10} + \dots \end{aligned} $$ \end{example} 
+
+\begin{example} Solve: $\ddy - t\dy  = 0$ $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf n_nt^{n - 1} \\ y'' &= \sumzinf n(n - 1)a_nt^{n - 2} \\ \sumzinf n(n - 1)a_nt^{n - 2} - \sumzinf a_nt^{n - 1} &= 0 \\ \sum_{n = -3}^{\infty} (n + 3)(n + 2)a_{n + 3} t^{n + 1} &= \sumzinf a_nt^{n - 1} \\ (n + 3)(n + 2) a_{n + 3} &= a_n \\ a_{n + 3} &= \frac{1}{(n + 3)(n + 2)} a_n \end{aligned} $$ 
+Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} a_3 &= \frac{1}{3 \cdot 2} \\ a_6 &= \frac{1}{6 \cdot 5 \cdot 3 \cdot 2} \\ a_9 &= \frac{1}{9 \cdot 8 \cdot 6 \cdot 5 \cdot 4 \cdot 3} \\ y_1 &= 1 + \frac{1}{3 \cdot 2}t^t + \frac{1}{6 \cdot 5 \cdot 4 \cdot 3} t^6 + \frac{1}{9 \cdot 8 \cdot 6 \cdot 5 \cdot 3 \cdot 2} + \dots \end{aligned} $$ 
+Case 2: $a_0 = 0$, $a_1 = 1$ $$\begin{aligned} a_4 &= \frac{1}{4 \cdot 3} \\ a_7 &= \frac{1}{7 \cdot 6 \cdot 4 \cdot 3} \\ a_{10} &= \frac{1}{10 \cdot 9 \cdot 7 \cdot 6 \cdot 4 \cdot 3} \\ y_2 &= t + \frac{1}{4 \cdot 3}t^4 + \frac{1}{7 \cdot 6 \cdot 4 \cdot 3}t^7 + \frac{1}{10 \cdot 9 \cdot 7 \cdot 6 \cdot 4 \cdot 3} t^{10} + \dots \end{aligned} $$ 
+This solution converges everywhere by the theorem. \end{example} 
+
+\begin{example} Solve: $\ddy - 2t\dy + \lambda y = 0$ $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &=\sumzinf n(n - 1)a_nt^{n - 2} \\ \sumzinf n(n - 1)a_nt^{n - 2} - 2\sumzinf na_nt^n + \lambda \sumzinf a_nt^n &= 0 \\ \sum_{n = -2}^{\infty} (n + 2)(n + 1)a_{n + 2}t^n - 2 \sumzinf na_nt^n + \lambda \sumzinf a_nt^n &= 0 \\ \sumzinf (n + 2)(n + 1)a_{n + 2}t^n - 2\sumzinf na_nt^n + \lambda \sumzinf s_nt^n &= 0 \\ \sumzinf (n + 2)(n + 1)a_{n + 2}t^n - \sumzinf (2n - \lambda) a_nt^n &= 0 \\ (n + 2)(n + 1)a_{n + 2} &= (2n - \lambda)a_n \\ a_{n + 2} &= \frac{2n - \lambda}{(n + 2)(n + 1)}a_n \end{aligned} $$ 
+Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} a_2 &= \frac{-\lambda}{2 \cdot 1} \\ a_4 &= \frac{(4 - \lambda)(-\lambda)}{4 \cdot 3 \cdot 2 \cdot 1} \\ a_6 &= \frac{(8 - \lambda)(4 - \lambda)(-\lambda)}{6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1} \\ a_8 &= \frac{(12- \lambda)(8 - \lambda)(4 - \lambda)(-\lambda)}{8 \cdot 7 \cdot 6 \cdot 5 \cdot4 \cdot 3 \cdot 2 \cdot 1} \\ y_1 &= 1 + \frac{(-\lambda)}{2!}t^2 + \frac{(4 - \lambda)(-\lambda)}{4!}t^4 + \frac{(8 - \lambda)(4 - \lambda)(-\lambda)}{6!}t^6 + \frac{(12 - \lambda)(8 - \lambda)(4 - \lambda)(-\lambda)}{8!}t^8 + \dots \end{aligned} $$ Case 2: $a_0 = 0$, $a_1 = 1$ $$\begin{aligned} a_3 &= \frac{2 - \lambda}{3 \cdot 2} \\ a_5 &= \frac{(6 - \lambda)(2 - \lambda)}{5 \cdot 4 \cdot 3 \cdot 2} \\ a_7 &= \frac{(10 - \lambda)(6  -\lambda)(2 - \lambda)}{7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2} \\ y_2 &= t + \frac{2 - \lambda}{3!}t^3 + \frac{(6 - \lambda)(2 - \lambda)}{5!}t^5 + \frac{(10 - \lambda)(6 - \lambda)(2 - \lambda)}{7!}t^7 + \dots \end{aligned} $$ This solution converges  everywhere. \end{example} 
+
+\begin{example} Solve: $(1 - t^2)\ddy - 2t\dy + \alpha(\alpha + 1)y = 0 $ $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &= \sumzinf n(n - 1)a_nt^{n - 2} \\ &\sumzinf n(n - 1)a_nt^{n - 2} - \sumzinf n(n - 1)a_n - 2\sumzinf na_nt^n + \alpha(\alpha + 1)\sumzinf a_nt^n = 0 \\ &\sumzinf (n + 2)(n + 1)a_{n + 2}t^n = \sumzinf \Big[ n(n - 1) + 2n - \alpha(\alpha + 1)\Big] a_nt^n \\ &= \sumzinf \Big[ n^2 + n - \alpha(\alpha + 1)\Big] a_nt^n \\ &= \sumzinf (n + \alpha + 1)(n - \alpha) a_nt^n \\ a_{n + 2} &= \frac{(n + \alpha + 1)(n - \alpha)}{(n + 2)(n  +1)}a_n \end{aligned} $$ Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} a_2 &= \frac{(\alpha + 1)(-\alpha)}{2 \cdot 1} \\ a_4 &= \frac{(3 + \alpha)(2 - \alpha)(\alpha + 1)(-\alpha)}{4 \cdot 3 \cdot 2 \cdot 1} \\ a_6 &= \frac{(5 + \alpha)(3 + \alpha)(1 + \alpha)(-\alpha)(2 - \alpha)(4 - \alpha)}{6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1} \\ y_1 &= 1 + \frac{(\alpha + 1)(-\alpha)}{2!}t^2 + \frac{(\alpha + 3)(\alpha + 1)(-\alpha)(2 - \alpha)}{4!}t^4 \\ &+ \frac{(\alpha + 5)(\alpha + 3)(\alpha + 1)(-\alpha)(2 - \alpha)(4  - \alpha)}{6!}t^6 + \dots \end{aligned} $$ Case 2: $a_0 = 0$, $a_1 = 1$ $$\begin{aligned} a_3 &= \frac{(2 + \alpha)(1 - \alpha)}{3 \cdot 2} \\ a_5 &= \frac{(4 + \alpha)(2 + \alpha)(1 - \alpha)(3 - \alpha)}{5 \cdot 4 \cdot 3 \cdot 2} \\ a_7 &= \frac{(6 + \alpha)(4 + \alpha)(2 + \alpha)(1 - \alpha)(3 - \alpha)(5 - \alpha)}{7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2} \\ y_2 &= t + \frac{(2 + \alpha)(1 - \alpha)}{3!}t^3 + \frac{(4 + \alpha)(2 + \alpha)(1 - \alpha)(3 - \alpha)}{5!}t^5 \\ &+ \frac{(6 + \alpha)(4 + \alpha)(2 + \alpha)(1 - \alpha)(3 - \alpha)(5 - \alpha)}{7!}t^7 + \dots \end{aligned} $$ This solution converges for $-1 < t < 1$. \end{example} 
+
+\begin{example} Solve: $\ddy - t^3y = 0$ $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &= \sumzinf n(n - 1)a_nt^{n - 2} \\ \sumzinf n(n - 1)a_nt^{n - 2} - \sumzinf a_nt^{t + 3} &= 0 \\ \sum_{n = -5}^{\infty} (n + 5)(n + 4)a_{n + 5}t^{n - 3} - \sumzinf a_nt^{n + 3} &= 0 \\ \sum_{n = -3}^{\infty} (n + 5)(n + 4)a_{n + 5}t^{n + 3} &= \sumzinf a_nt^{n + 3} \\ a_2 = a_3 = a_4 &= 0 \text{ since there are no } t^2, t^3, t^4 \text{ terms on the RHS} \\ (n + 5)(n + 4)a_{n + 5} &= a_n \\ a_{n + 5} &= \frac{1}{(n + 5)(n + 4)}a_n \end{aligned} $$ 
+Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} a_5 &= \frac{1}{5 \cdot 4} \\ a_{10} &= \frac{1}{10 \cdot 9 \cdot 5 \cdot 4} \\ a_{15} &= \frac{1}{15 \cdot 14 \cdot 10 \cdot 9 \cdot 5 \cdot 4} \\ y_1 &= 1 + \frac{1}{5 \cdot 4}t^5 + \frac{1}{10 \cdot 9 \cdot 5 \cdot 4}t^{10} + \frac{1}{15 \cdot 14 \cdot 10 \cdot 9 \cdot 5 \cdot 4}t^{15} + \dots \end{aligned} $$ 
+Case 2: $a_0 = 0$, $a_1 = 1$ $$\begin{aligned} a_6 &= \frac{1}{6 \cdot 5} \\ a_{11} &= \frac{1}{11 \cdot 10 \cdot 6 \cdot 5} \\ a_{16} &= \frac{1}{16 \cdot 15 \cdot 11 \cdot 10 \cdot 6 \cdot 5} \\ y_2 &= t + \frac{1}{6 \cdot 5}t^6 + \frac{1}{11 \cdot 10 \cdot 6 \cdot 5}t^{11} + \frac{1}{16 \cdot 15 \cdot 11 \cdot 10 \cdot 6 \cdot 5} + \dots \end{aligned} $$ This solution converges everywhere. \end{example} 
+
+\begin{example} Solve $(1 - t^2)\ddy - t\dy + \alpha^2y = 0$ $$\begin{aligned} y &= \sumzinf a_nt^n \\ y' &= \sumzinf na_nt^{n - 1} \\ y'' &= \sumzinf n(n - 1)a_nt^{n - 2} \\ &\sumzinf n(n - 1)a_nt^{n - 2} - \sumzinf n(n - 1)a_nt^n - \sumzinf na_nt^n + \alpha^2 \sumzinf a_nt^n = 0 \\ &\sum_{n = -2}^{\infty} (n + 2)(n + 1)a_{n + 2}t^n - \sumzinf n(n - 1)a_nt^n - \sumzinf na_nt^n + \alpha^2 \sumzinf a_nt^n = 0 \\ &\sumzinf (n + 2)(n + 1)a_{n + 2}t^n - \sumzinf n(n - 1)a_nt^n - \sumzinf na_nt^n + \alpha^2 \sumzinf a_nt^n = 0 \\ &\sumzinf (n + 2)(n + 1)a_{n + 2}t^n = \sumzinf n(n - 1)a_nt^n + \sumzinf na_nt^n - \alpha^2 \sumzinf a_nt^n  \\ &= \sumzinf \Big[ n(n - 1) + n - \alpha^2\Big] a_nt^n \\ &= \sumzinf (n^2 - \alpha^2)a_nt^n \\ (n + 2)(n + 1)a_{n + 2} &= (n^2 - \alpha^2)a_n \\ a_{n + 2} &= \frac{n^2 - \alpha^2}{(n + 2)(n + 1)}a^n \end{aligned} $$ 
+Case 1: $a_0 = 1$, $a_1 = 0$ $$\begin{aligned} a_2 &= \frac{(-\alpha^2)}{2 \cdot 1} \\ a_4 &= \frac{(2^2 - \alpha^2)(-\alpha^2)}{4 \cdot 3 \cdot 2 \cdot 1} \\ a_6 &= \frac{(4^2 - \alpha^2)(2^2 - \alpha^2)(-\alpha^2)}{6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1} \\ a_8 &= \frac{(6^2 - \alpha^2)(4^2 - \alpha^2)(2^2 - \alpha^2)(-\alpha^2)}{8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1} \\ y_1 &= 1 + \frac{(-\alpha^2)}{2!}t^2 + \frac{(2^2 - \alpha^2)(-\alpha^2)}{4!}t^4 \\ &+ \frac{(4^2 - \alpha^2)(2^2 - \alpha^2)(-\alpha^2)}{6!}t^6 + \frac{(6^2 - \alpha^2)(4^2 - \alpha^2)(2^2 - \alpha^2)(-\alpha^2)}{8!}t^8 + \dots \end{aligned} $$ 
+Case 2: $a_0 = 0$, $a_1 = 1$ $$\begin{aligned} a_3 &= \frac{(1^2 - \alpha^2)}{3 \cdot 2} \\ a_5 &= \frac{(3^2 - \alpha^2)(1^2 - \alpha^2)}{5 \cdot 4 \cdot 3 \cdot 2} \\ a_7 &= \frac{(5^2 - \alpha^2)(3^2 - \alpha^2)(1^2 - \alpha^2)}{7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2} \\ a_9 &= \frac{(7^2 - \alpha^2)(5^2 - \alpha^2)(3^2 - \alpha^2)(1^2 - \alpha^2)}{9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2} \\ y_2 &= t + \frac{(1^2 - \alpha^2)}{3!}t^3 + \frac{(3^2 - \alpha^2)(1^2 - \alpha^2)}{5!}t^5 \\ &+ \frac{(5^2 - \alpha^2)(3^2 - \alpha^2)(1^2 - \alpha^2)}{7!}t^7 + \frac{(7^2 - \alpha^2)(5^2 - \alpha^2)(3^2 - \alpha^2)(1^2 - \alpha^2)}{9!}t^9 + \dots \end{aligned} $$ 
+This solution converges from $-1 < t < 1$. \end{example} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

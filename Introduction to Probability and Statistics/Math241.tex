@@ -1,0 +1,745 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Math 241: Introduction to Probability}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\renewcommand{\arraystretch}{1.8}
+
+
+\title{Math 241: Introduction to Probability}
+\author{Darshan Patel}
+\date{Fall 2016}
+\maketitle
+
+\tableofcontents
+
+\newpage
+\section{Probability}
+\begin{definition} 
+Experiment: anything that sets up a probabilistic situation \end{definition}
+\begin{definition} 
+Outcome: any indivisible result of the experiment \end{definition}
+\begin{definition}
+Sample Space: the collection of all possible outcomes, represented by S \end{definition}
+\begin{example}
+Toss a coin. Outcomes: H, T; Sample space: S = $ \{ H, T\} $ \newline
+Toss 2 coins. Outcomes: (H, H), (H, T), (T, H), (T, T); S = $ \{(H, H), (H, T), (T, H), (T, T)\} $ \newline
+Toss 2 dice. Outcomes: (1, 1), (1, 2), (1, 3),$ \dots $, (6, 6); S = $\{ (1, 1), (1, 2), (1, 3), \dots, (6, 6)\} $ \end{example}
+Types of Sample Spaces
+\begin{enumerate} 
+\item Finite: one where the number of outcomes is finite 
+\item Infinite Discrete: one where there is infinite outcomes but countable
+\begin{example} Toss a coin until a head appears, S = $\{ H, TH, TTH, TTH, \dots \} $ \end{example}
+\item Infinite Nondiscrete: one where there is infinite outcomes 
+\begin{example} Select a real number between 0 and 1 \end{example}
+\end{enumerate}
+\begin{definition} 
+Event: a collection of outcomes, represented by a letter \end{definition}
+\begin{example} 
+Toss 2 coins. Let A be the event where the first coin is H. Then $ A = \{ (H, H), (H, T)\} $. \newline
+Toss 2 dice. Let B be the event where the sum equals 5. Then $ B = \{ (1, 4), (2, 3), (3, 2), (4, 1)\} $. \end{example}
+Set Operations: Let A and B be two sets of outcomes: 
+\begin{enumerate} 
+\item $ A \bigcup B $ is the set consisting of those outcomes that are in A or B or both
+\item $ A \bigcap B $ is the set consisting of those outcomes that are A and B 
+\item $ A' $ is the set consisting of those outcomes in S which are not in A, called the complement of A 
+\end{enumerate} 
+Note: Intersection can be written as follows: $ A \bigcap B $ or AB 
+\begin{definition} 
+Impossible event ($\emptyset$): the set consisting of zero outcomes \end{definition}
+\begin{example} 
+Toss 2 dice. Let A be the event where the sum equal 1. Then $ A = \{\} = \emptyset $. \end{example}
+Note: $ \emptyset' = S, S' = \emptyset $ \newline
+If every outcome in A is also an outcome in B, we say that A is a subset of B, $A \subset B$. This means that if A occurs, then B occurs. \newline
+\begin{example} 
+Toss 2 dice. Let A be the event that both dice are even and let B be the event where the sum is even. Then it is clear that $ A \subset B $ but $ B \not\subset A $. \end{example}
+If $A \subset B$ and $ B \subset A $, then $A = B$. 
+\begin{definition} 
+A and B are disjoint or mutually exclusive if $ A \bigcap B = \emptyset $. \end{definition} 
+\begin{example} 
+Select a card from an ordinary 52 card deck. Let A be the event a king is picked up, B be the event a queen is picked up and C be the event a heart is picked up. Then A and B are mutually exclusive and A and C are not mutually exclusive. \end{example} 
+Properties: 
+\begin{enumerate} 
+\item Commutative Laws: $ A \bigcup B = B \bigcup A $, $ AB = BA $ 
+\item Associative Laws: $ (A \bigcup B) \bigcup C = A \bigcup (B \bigcup C) $, $ (AB)C = A(BC) $
+\item Distributive Laws: $ A \bigcup (B \bigcap C) = (A \bigcup B) \bigcap (A \bigcup C) $, $A \bigcap (B \bigcup C) = (A \bigcap B) \bigcup (A \bigcap C) $ 
+\item DeMorgan's Laws: $ (A \bigcup B)' = A' \bigcap B' $, $(A \bigcap B)' = A' \bigcup B' $ 
+\item $ A \bigcup S = S $, $ A \bigcap S = A $
+\item $ A \bigcup \emptyset = A $, $ A \bigcap \emptyset = \emptyset $
+\item $ A \bigcup A' = S $, $ A \bigcap A' = \emptyset $
+\end{enumerate} \newpage
+\begin{definition} 
+Let S be the sample space of an experiment. The probability function is a function $P = S \rightarrow [0, 1] $ which satisfies the following axioms: 
+\begin{enumerate}
+\item If A is any event in S, $ 0 \leq P(A) \leq 1 $
+\item $ P(S) = 1 $
+\item One of the following two: 
+\begin{enumerate} 
+\item If A and B are mutually exclusive, $ P(A \bigcup B) = P(A) + P(B) $. This extends to any finite number of sets which are pair-wise mutually exclusive. 
+\item If $A_1, A_2, A_3, \dots $ is an infinite sequence of events which are pairwise mutually exclusive, $P(A_1 \bigcup A_2 \bigcup A_3 \dots) = P(A_1) + P(A_2) + P(A_3) + \dots $. 
+\end{enumerate} \end{enumerate} \end{definition} 
+\begin{theorem} $ P(\emptyset) = 0 $ \end{theorem} \begin{proof} \begin{align*} 
+S \bigcap \emptyset &= \emptyset \\
+P(S \bigcup \emptyset) &= P(S) + P(\emptyset) \\
+P(S) &= P(S) + P(\emptyset) \\
+1 &= 1 + P(\emptyset) \\
+P(\emptyset) &= 0 \end{align*} \end{proof} 
+\begin{theorem} $ P(A') = 1 - P(A) $ \end{theorem} \begin{proof}  \begin{align*} 
+A \bigcap A' &= 0 \\
+P(A \bigcup A') &= P(A) + P(A') \\
+P(S) &= P(A) + P(A') \\ 
+1 &= P(A) + P(A') \\ 
+P(A') &= 1 - P(A) \end{align*} \end{proof} 
+\begin{theorem} $ P(AB') = P(A) - P(AB) $ \end{theorem} \begin{proof} \begin{align*} 
+AB' \bigcap AB &= \emptyset \\
+AB' \bigcup AB &= A \\ 
+P(AB' \bigcup AB) &= P(A) \\
+P(AB') + P(AB) &= P(A) \\
+P(AB') &= P(A) - P(AB) \end{align*} \end{proof} 
+\begin{theorem} $ P(A \bigcup B) = P(A) + P(B) - P(AB) $ \end{theorem} \begin{proof} \begin{align*} 
+A \bigcup B &= AB' \bigcup AB \bigcup A'B \\
+P(A \bigcup B) &= P(AB') + P(AB) + P(A'B) \\
+P(A \bigcup B) &= P(A) - P(AB) + P(AB) + P(B) - P(AB) \\
+P(A \bigcup B) &= P(A) + P(B) - P(AB) \end{align*} \end{proof} 
+\begin{example} A coin is tossed. Compute the probability it is heads. \end{example} 
+\begin{definition} 
+Fairness assumption; every outcome in the sample space has an equal probability of occurrence. This will be noted by saying "fair." It will also be assumed from now on unless noted otherwise. \end{definition} 
+\begin{example} A coin is tossed. Compute the probability it is heads. 
+\begin{align*} H \bigcap T &= \emptyset \\ P(H \bigcup T)  &= P(S) \\ P(H) + P(T) &= 1 \\ P(H) + P(H) &= 1 \\ 2P(H) &= 1 \\ P(H) &= \frac{1}{2} \end{align*} \end{example} 
+\begin{example} A dice is tossed. Compute P(1). $ P(1) = \frac{1}{6} $ \end{example}
+\begin{example} A dice is tossed. Compute P(odd). 
+\begin{align*} P(\text{odd}) &= P(\text{1 or 3 or 5}) \\ P(\text{odd}) &= P(1) + P(3) + P(5) \\ &= \frac{1}{6} + \frac{1}{6} + \frac{1}{6} \\ &= \frac{1}{2} \end{align*} \end{example} 
+\begin{theorem} If S contains N outcomes, each outcome having an equal probability of occurrence, and A is an event within S containing $N_A$ outcomes, then $ P(A) = \frac{N_A}{N}.$ \end{theorem} 
+\begin{example} Select a card from an ordinary deck. Compute the probability it is a king or a heart. 
+\begin{align*} P(K \bigcup H) &= P(K) + P(H) - P(KH) \\ &= \frac{4}{52} + \frac{13}{52} - \frac{1}{52} \\ &= \frac{16}{52} \end{align*} \end{example} 
+\begin{example} Toss 2 dice. Compute the probability their sum equals 5. $ P(\text{sum = } 5) = \frac{4}{36} $ \end{example} 
+\begin{example} Toss 3 coins. Compute the probability that exactly 2 are heads. $ P(A) = \frac{3}{8} $ \end{example}
+\begin{example} An urn contains 5 red balls numbered 1, 2, 3, 4, and 5, and 4 blue balls numbered 1, 2, 3, and 4. One ball is randomly selected. Compute the probability it is red or even. 
+$ P(R \bigcup E) = P(R) + P(E) - P(R \bigcap E) = \frac{5}{9} + \frac{4}{9} - \frac{2}{9} = \frac{7}{9} $ \end{example} 
+\begin{example} 5 cards are selected from an ordinary deck. Compute the probability it is a royal flush. $ P(RF) = \frac{4}{2598960} $ \end{example}
+
+\section{Combinatorial Methods}
+\begin{definition} Fundamental Counting Principle: if an experiment has k parts and the $i^\text{th}$ part has $N_i$ possible outcomes, then the experiment has a total of $ N = N_1N_2N_3 \dots N_i $ outcomes. \end{definition}
+\begin{example} A menu has 6 appetizers, 4 main courses and 5 desserts. How many different 3 course meals can be ordered? \begin{align*} k &= 3 \\ N_1 &= 6 \\ N_2 &= 4 \\ N_3 &= 5 \\ N &= N_1N_2N_3 = 120 \end{align*} \end{example}
+\begin{example} 4 dices are tossed. Compute the probability \begin{enumerate} 
+\item all dice have odd values: $ P = \frac{3^4}{6^4} = \frac{1}{16} $
+\item all dice have the same value: $ P = \frac{6 \times 1 \times 1 \times 1}{6^4} = \frac{1}{6^3} $
+\item sum of the dices = 4: $ P = \frac{1}{6^4} $
+\item sum of the dices = 5: $ P = \frac{4}{6^4} $ \end{enumerate} \end{example} 
+\begin{definition} Permutations: an ordered selection of items without replacement \end{definition} 
+\begin{example} An urn has 5 balls labeled 1, 2, 3, 4, 5. Select 3 balls without replacement. Some permutations are: $123, 231, 312, \dots, 345$ How many? $5 \cdot 4 \cdot 3 = 60$ permutations. \end{example}
+\begin{example} A 3 digit number is formed by selecting 3 tags from 9 tags labeled 1, 2, 3, 4, 5, 6, 7, 8, 9 without replacement. \begin{enumerate} 
+\item How many numbers can be formed: $9 \cdot 8 \cdot 7 = 504 $
+\item What is the probability that the number 123 is formed?: $\frac{1}{504} $
+\item What is the probability that the number turns out to be less than 500?: $\frac{4 \cdot 8 \cdot 7}{504} = \frac{224}{504} = \frac{4}{9} $
+\item What is the probability that the number turns out to be odd?: $ \frac{8 \cdot 7 \cdot 5}{504} = \frac{5}{9} $
+\item What is the probability that the number turns out to be odd and less than 500?: P(1 or 3, X, odd) + P(2 or 4, X, odd) = $ \frac{2 \cdot 7 \cdot 4}{9 \cdot 8 \cdot 7} + \frac{2 \cdot 7 \cdot 5}{9 \cdot 8 \cdot 7} = \frac{126}{504} = \frac{1}{4} $ 
+\item What is the probability that the number is odd OR less than 500?: $P(A \bigcup B) = P(A) + P(B) - P(AB) = \frac{5}{9} + \frac{4}{9} - \frac{1}{4} = \frac{3}{4} $ \end{enumerate} \end{example}
+If $k$ items are selected from $n$ distinct items without replacement, the number of possible permutations is written as: $P(n, k)$ or $P_k^n$, where P stands for permutation, and it is evaluated as follows: $$ P_k^n = n(n - 1)(n - 2)\dots (n - k + 1)$$ This equation has $k$ terms. \newline
+\begin{example} P(9, 3) = $ 9 \cdot 8 \cdot 7 $, P(8, 5) = $8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 $ \end{example}
+Note: If $k = n$, P(n,n) = $n(n - 1)(n - 2)\dot 1 = n!$. This means that $n!$ represents the number of possible rearrangements of n items without replacement. \\~\\
+\begin{definition} Combinations: an unordered selection of items without replacement \end{definition} 
+\begin{example} Select 3 letters from A, B, C, D, E without replacement. Some possible combinations are: ABC, ACB (both same), ABD, BCD, CBD (both same) ... \newline
+How many combinations are possible? $\frac{P_3^5}{3!} = \frac{60}{6} = 10 $. All the possible combinations are: ABC, ABD, ABE, ACD, ACE, ADE, BCD, BCE, BDE, CDE. \end{example} 
+Combinations can be written and computed as follows: C(n, k) = $C^n_k =\binom{n}{k} = \frac{P(n, k)}{n!} = \frac{n!}{k!(n - k)!} $. \newline
+The computational formula is: C(n, k) = $\frac{P(n, k)}{n!}$ while the theoretical formula is: $\frac{n!}{k!(n - k)!} $. \newline
+\begin{example} $$ (^9_3) = \frac{9!}{3!6!} = \frac{P^9_3}{3!} $$ \end{example} 
+\begin{example} How many different 5 card hands are possible using an ordinary card deck? $ \binom{52}{5} = \frac{52 \cdot 51 \cdot 50 \cdot 49 \cdot 48}{5!} = \frac{P(52, 5)}{5!} = 2,598,960 $ \newline
+\begin{enumerate} 
+\item P(royal flush) = $\frac{4}{2,598,960} $
+\item P(4 aces) = $ \frac{48}{2,598,960} $
+\item P(4 of a kind) = $ \frac{13 \cdot 48}{2,598,960} $
+\item P(3 aces, 2 kinds) = $\frac{\binom{4}{3}\binom{4}{2}}{2,598,960} = \frac{4 \cdot 6}{2,598,960} = \frac{24}{2,598,960} $
+\item P(full house) = $\frac{13\frac{4}{3}12\frac{4}{2}}{2,598,960} = \frac{3744}{2,598,960} $
+\item P(flush) = $\frac{4\frac{13}{5}}{2,598,960} $ \end{enumerate} \end{example} 
+\begin{theorem} $$\binom{n}{n - k} = \binom{n}{k} $$ \end{theorem} 
+\begin{proof} $$ \binom{n}{k} =  \frac{n!}{k!(n - k)!} =  \binom{n}{n - k} = \frac{n!}{(n - k)!(n - (n - k))!}  = \frac{n!}{(n - k)!\cdot k!} = \binom{n}{k} $$ \end{proof}  
+\begin{example} $$ \binom{100}{98} = \binom{100}{2} = \frac{100 \times 9}{2 \times 1} = 495 $$ \end{example}
+\begin{theorem} $$ \binom{n}{0} = 1 $$ $$ \binom{n}{n} = 1 $$ \end{theorem}
+\begin{proof} $$ \binom{n}{0} = \frac{n!}{0!(n - 0)!} = \frac{n!}{1 \times n!} = 1 $$ \end{proof} 
+\begin{theorem} $$ \binom{n}{1} = n $$ $$ \binom{n}{n - 1} = n $$ \end{theorem} 
+\begin{proof} $$ \binom{n}{1} = \frac{n!}{1(n - 1)!} = \frac{n!}{(n - 1)!} = \frac{n}{1} = n $$ \end{proof}
+\begin{theorem} Pascal's Theorem: $$ \binom{n}{k} + \binom{n}{k + 1} = \binom{n + 1}{k + 1} $$ \end{theorem} 
+\begin{proof} $$ \begin{aligned} \binom{n}{k} + \binom{n}{k + 1} &= \frac{n!}{k!(n - k)!} + \frac{n!}{(k + 1)!(n - (k + 1)!)} \\ &= \frac{n!}{k!(n - k)(n - k -1)!} + \frac{n!}{(k + 1)k!(n - k - 1)!} \\ &= \frac{n!}{k!(n - k - 1)!}[\frac{1}{n - k} + \frac{1}{k + 1}] \\ &= \frac{n!}{k!(n - k -1)!}\frac{k + 1 + n - k}{(n - k)(k + 1)} \\ &= \frac{n!}{k!(n - k - 1)!}\frac{(n + 1)!}{(k + 1)!((n + 1) - (k + 1))!} \\ &= \binom{n + 1}{k + 1} \end{aligned} $$ \end{proof} 
+\begin{theorem} Binomial Theorem: $$ (x + y)^n = \sum_{k = 0}^n \binom{n}{k}x^{n - k}y^k $$ \end{theorem}
+\begin{example} $ (x + y)^3 = $ $$ (x + y)^3 = \binom{3}{0}x^3y^0 + \binom{3}{1}x^2y^1 + \binom{3}{2}x^1y^2 + \binom{3}{3}x^0y^3 = x^3 + 3x^2y + 3xy^2 + y^3 $$ \end{example} 
+\begin{example} $ (2x + y)^4 = $ $$ \begin{aligned} (2x + y)^4 &= \binom{4}{0}(2x)^4y^0 + \binom{4}{1}(2x)^3y^1 + \binom{4}{2}(2x)^2y^2 + \binom{4}{3}(2x)^1y^3 + \binom{4}{4}(2x)^0y^4 \\  &= 16x^4 + 32x^3y + 24x^2y^2 + 8xy^3 + y^4 \end{aligned} $$ \end{example}
+
+\section{Conditional Probability and Independence}
+\begin{example} An urn contains 5 red balls numbered 1 to 4, 6 blue balls numbered 1 to 6. Select 1 ball at random. Compute $P(2)$. $P(2) = \frac{2}{10} = \frac{1}{5} $ \\~\\
+If you cheated and peeked for a red ball, compute $P(2)$. $P(2) = \frac{1}{4}$ \end{example}
+The notation for conditional probability is $P[X|Y]$ where $X$ is an event of something occurring and $Y$ is the event of something occurring GIVEN. 
+\begin{definition} If $P(B) \neq 0$, then $P[A|B] = \frac{P(AB)}{P(B)}$. \end{definition} 
+\begin{example} An urn contains 5 red balls numbered 1 to 4, 6 blue balls numbered 1 to 6. Select 1 ball at random. Compute the probability where A: the ball is a 2 and B: the ball is red. $$ P[A|B] = \frac{P(AB)}{P(B)} = \frac{\frac{1}{10}}{\frac{4}{10}} = \frac{1}{4} $$ \end{example} 
+Note: Key words for conditional probability: GIVEN, IF 
+\begin{example} Toss 2 coins. A: both coins are head, B: at least 1 coin is head \\~\\ 
+$$ P[A|B] = \frac{P(AB)}{P(B)} = \frac{\frac{1}{4}}{\frac{3}{4}} = \frac{1}{3} $$ 
+$$ P[B|A] = \frac{P(BA)}{P(A)} = \frac{\frac{1}{4}}{\frac{1}{4}} = 1 $$ \end{example}
+\begin{example} Toss 2 dice. A: exactly 1 die is a 1, B: sum = 7 \\~\\
+$$ P[A|B] = \frac{P(AB)}{P(B)} = \frac{\frac{2}{36}}{\frac{6}{36}} = \frac{1}{3} $$ $$ P(A) = \frac{10}{36} $$  \end{example} 
+\begin{example} Select 5 cards from an ordinary deck. A: 4 aces, B: exactly 1 picture card (KQJ) \\~\\ 
+$$ P[A|B] = \frac{P(AB)}{P(B)} = \frac{\frac{4 \times 3}{\binom{52}{5}}}{\frac{\binom{12}{1}\binom{40}{4}}{\binom{52}{5}}} = \frac{1}{\binom{40}{4}} = \frac{1}{91390} $$ $$ P(A) = \frac{1}{52145} $$ \end{example} 
+If we know that $P[A|B] = \frac{P(AB)}{P(B)}$, then it is clear by rearrangement that $$ P(AB) = P(A|B)P(B) $$ We also know that $P[B|A] = \frac{P(BA)}{P(A)}$ which then rearranges to $$ P(BA) = P(B|A)P(A)$$ But since we know that $P(AB) = P(BA)$, then it is clear that: $$ P(AB) = P(BA) = P(A|B)P(B) = P(B|A)P(A) $$ 
+\begin{example} A urn has 7 red balls and 3 blue balls. Select 2 balls without replacement. Compute the probability that both balls are red. $$ P(R_1R_2) = P(R_2|R_1)P(R_1) = \frac{6}{9} \times {7}{10} = \frac{42}{90} $$ \end{example}
+\begin{example} 2 defective calculators are mixed up with 3 good ones. They are going to be tested until the 2 defects are found. Compute the probability that the defects are found in the first 2 tests. $$P(D_1D_2) = P(D_2|D_1)P(D_1) = \frac{1}{4} \times {2}{5} = \frac{1}{10} $$ \end{example} 
+\begin{definition} Let S be a sample space. A partition of S is a collection of mutually exclusive subsets whose union is all of S. \end{definition}
+\begin{example} Select a card. Let A: heads, B: clubs, C: diamonds, D: spades. Suppose $A_0$ be another event in S. Then: $$ A_0 = A_0A \bigcup A_0B \bigcup A_0C \bigcup A_0D $$ and $$ \begin{aligned} P(A_0) &= P(A_0A) + P(A_0B) + P(A_0C) + P(A_0D) \\ &= P(A_0|A)P(A) + P(A_0|B)P(B) + P(A_0|C)P(C) + P(A_0|D)P(D) \end{aligned} $$ \end{example}
+\begin{theorem} Theorem of Total Probability: In general, if $B_1, B_2, B_3, \dots B_n $ form a partition on S, and A is any event in S, then $$ P(A) = \sum\limits_{k = 1}^n P(A|B_k)P(B_k) $$ \end{theorem}
+\begin{example} Urn 1 has 7 red balls and 3 blue balls. Urn 2 has 4 red balls and 6 blue balls. Urn 3 has 2 red balls and 8 blue balls. Toss a die. If 1, 2, 3, pick a ball from urn 1. If 4, 5, pick a ball from urn 2. If 6, pick a ball from urn 3. Compute the probability that the ball is red. $$ \begin{aligned} P(R) &= P(R|U_1)P(U_1) + P(R|U_2)P(U_2) + P(R|U_3)P(U_3) \\ &= \frac{7}{10}\frac{3}{6} + \frac{4}{10}\frac{2}{6} + \frac{2}{10}\frac{1}{6} \\ &= \frac{21 + 8 + 2}{60} - \frac{31}{60} \end{aligned} $$ \newline Compute the probability that the ball comes from urn 1 given that it is red. $$ P(U_1|R) = \frac{P(RU_1)}{P(R)} = \frac{P(R|U_1)P(U_1)}{P(R)} = \frac{\frac{21}{60}}{\frac{31}{60}} = \frac{21}{31} $$ \end{example} 
+\begin{theorem} Baye's Theorem: If $B_1, B_2, B_3, \dots, B_n$ form a partition on S and A is any event in S, then  $$ P(B_k|A) = \frac{P(A|B_k)P(B_k)}{\sum\limits_{i = 1}^n P(A|B_i)P(B_i)} $$ \end{theorem} 
+\begin{proof} $$ P(B_k|A) = \frac{P(B_kA)}{P(A)} = \frac{P(AB_k)}{P(A)} = \frac{P(A|B_k)P(B_k)}{\sum\limits_{i = 1}^n P(A|B_i)P(B_i)} $$ \end{proof}
+\begin{definition} Let A and B be events in S. Suppose $P(A|B) = P(A)$ and $P(B|A) = P(B)$. Then we say that A and B are independent. \end{definition} 
+Since $P(A|B) = \frac{P(AB)}{P(B)}$ and A and B are independent, then $P(A) = \frac{P(AB)}{P(B)}$ and so $P(AB) = P(A)P(B)$. Similarly, since $P(B|A) = \frac{P(BA)}{P(A)}$ and A and B are independent, then $P(B) = \frac{P(BA)}{P(A)}$ and so $P(BA) = P(A)P(B)$. \\~\\ 
+This means that A and B are independent if $$ P(AB) = P(A)P(B) $$ 
+Recall: If A and B are mutually exclusive, then $$ P(A \bigcup B) = P(A) + P(B) $$ 
+Note: To be mutually exclusive is when 2 events cannot occur simultaneously. To be independent is when 2 events cannot affect one another \\~\\
+\begin{example} A coin is tossed and a die is thrown. Let A: heads on coin and B: 6 on the die. Prove that A and B are independent. $$ P(A) = \frac{1}{2} $$ $$ P(B) = \frac{1}{6} $$ $$ P(AB) = \frac{1}{2 \times 6} = \frac{1}{12} $$ Also, $$ P(AB) = P(A)P(B) = \frac{1}{2}\frac{1}{6} = \frac{1}{12} $$ This shows that A and B are independent. \end{example} 
+\begin{example} A coin is tossed 10 times. Compute the probability they are all heads. $$ P(HHH\dots H) = (\frac{1}{2})^10 $$ \end{example} 
+\begin{example} 5 coins are tossed. Compute the probability of obtaining 3 heads and 2 tails. $$ P(HHHTT) = (\frac{1}{2})^5 $$ $$ P(HTHTH) = (\frac{1}{2})^5 $$ There are $\binom{5}{3}$ ways to position 3 heads. $P = \binom{5}{3}(\frac{1}{2})^5$. There are $\binom{5}{2}$ ways to position 2 tails. But $\binom{5}{3} = \binom{5}{2}$. Thus both will have equal probabilities. \end{example} 
+\begin{example} A pair of dice are tossed 8 times. Compute the probability their sum will be equal to 5 exactly 3 times. \newline On a single toss, $P(\text{sum = }5) = \frac{4}{6^2} = \frac{1}{9}$. So, $P(\text{sum} \neq 5) = 1 - \frac{4}{6^2} = \frac{8}{9}. $ \newline So let A: sum = 5 and A': sum $\neq$ 5. Then $$ P(AAAA'A'A'A'A') = (\frac{1}{9})^3(\frac{8}{9})^5 $$ and the probability this will occur 3 times is: $$ P = \binom{8}{3}(\frac{1}{9})^3(\frac{8}{9})^5 $$ \end{example} \newpage
+
+\section{Discrete Random Variables and Probability Functions}
+\begin{definition} A random variable is a numerical function defined on a sample space \end{definition}
+\begin{definition} Let $f(x) = P[X = x]$. $f$ is called either the probability function of $X$ or probability distribution. \end{definition} 
+\begin{example} Toss a coin. $$X(H) = 1 $$ $$ X(T) = 0 $$ $$ f(1) = P[X = 1] = \frac{1}{2} $$ $$ f(0) = P[X = 0] = \frac{1}{2} $$ $$ \begin{tabular}{crl}
+$x$ & $f(x)$ \\ \hline
+1 & 0 \\ \hline
+$\frac{1}{2}$ & $\frac{1}{2}$ 
+\end{tabular}$$ \end{example} 
+\begin{example} Roll 2 dice. Let $X$ = the sum of the dice. $$X(2, 3) = 5$$ $$X(1, 5) = 6$$ $$X(i, j) = i + j$$ $$ 
+\begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline
+2 & $\frac{1}{36}$  \\ \hline
+3 & $\frac{2}{36}$ \\ \hline
+4 & $\frac{3}{36}$ \\ \hline
+5 & $\frac{4}{36}$ \\ \hline
+6 & $\frac{5}{36}$ \\ \hline
+7 & $\frac{6}{36}$ \\ \hline
+8 & $\frac{5}{36}$ \\ \hline
+9 & $\frac{4}{36}$ \\ \hline
+10 & $\frac{3}{36}$ \\ \hline
+11 & $\frac{2}{36}$ \\ \hline
+12 & $\frac{1}{36}$ 
+\end{tabular} $$ \end{example}
+\begin{example} Toss 3 coins. Let $X$ = the number of heads obtained. $$X(HHT) = 2$$ $$X(THT) = 1 \text{ etc...} $$ $$ \begin{tabular}{ll}
+x & f(x) \\ \hline
+0 & $\frac{1}{8}$ \\ \hline 
+1 & $\frac{3}{8}$ \\ \hline
+2 & $\frac{3}{8}$ \\ \hline
+3 & $\frac{1}{8}$
+\end{tabular} $$ \end{example} 
+Note: $$\sum f(x) = 1 $$
+\begin{center} Special Probability Distributions \end{center} 
+\begin{definition} Discrete Uniform Distribution: $$ f(x) = \begin{cases} \frac{1}{n} & \text{if } x = 1, 2, 3, \cdot, n \\ 0 & \text{otherwise} \end{cases} $$ \end{definition}
+\begin{example} Toss a single dice. $$ \begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline
+1 & $\frac{1}{6}$ \\ \hline
+2 & $\frac{1}{6}$ \\ \hline
+3 & $\frac{1}{6}$ \\ \hline
+4 & $\frac{1}{6}$ \\ \hline
+5 & $\frac{1}{6}$ \\ \hline
+6 & $\frac{1}{6}$
+\end{tabular} $$ \\~\\ \end{example} 
+\begin{definition} Bernoulli Distribution: $$ f(x) = \begin{cases} p & \text{if } x = 1 \\ q & \text{if } x = 0 \\ p + q = 1 \end{cases} $$ \end{definition} 
+\begin{example} Toss a single coin. If heads, it is a success (or X = 1). If tails, it is a failure (or X = 0). $$ f(1) = p = \frac{1}{2} $$ $$f(0) = q = \frac{1}{2} $$ \end{example}
+\begin{definition} Binomial Distribution: Consider any Bernoulli experiment (2 outcomes/ success or failure). Let $P$(success) = $p$ and $P$(failure) = $q$ and $p + q = 1$. Repeat the experiment $n$ times under identical conditions (replication condition) in such a way that no repetition has any effect upon any other (independence condition). If $X$ represents the number of successes in $n$ trials, we say that $X$ has a binomial distribution with parameters $n$ and $p$. \end{definition} 
+\begin{example} An urn contains 3 red balls and 2 blue balls. Select 3 balls with replacement. Let x = number of red balls obtained. This means success is red, and failure is blue.$$ \begin{tabular}{lll}
+outcome & $x$ & $f(x)$ \\ \hline
+BBB & 0 & $(\frac{2}{5})^3$ \\ \hline
+RBB & 1 & $(\frac{3}{5})(\frac{2}{5})^2$ \\ \hline
+BRB & 1 & $(\frac{3}{5})(\frac{2}{5})^2$ \\ \hline 
+BBR & 1 & $(\frac{3}{5})(\frac{2}{5})^2$ \\ \hline
+BRR & 2 & $(\frac{3}{5})^2(\frac{2}{5})$ \\ \hline
+RBR & 2 & $(\frac{3}{5})^2 (\frac{2}{5})$ \\ \hline
+RRB & 2 & $(\frac{3}{5})^2 (\frac{2}{5})$ \\ \hline
+RRR & 3 & $(\frac{3}{5})^3$ 
+\end{tabular} $$ Another way to write this in table form is: $$ \begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline
+0 & $\frac{8}{125}$ \\ \hline
+1 & $\frac{36}{125}$ \\ \hline
+2 & $\frac{54}{125}$ \\ \hline
+3 & $\frac{27}{125}$
+\end{tabular} $$ \end{example} 
+If we have $n$ trials and $x$ = number of successes, then $P[X = x] = \binom{n}{x} p^xq^{n - x}$ where p is the probability of success and q is the probability of failure. \begin{example} In the previous example, $$f(0) = \binom{3}{0}(\frac{3}{5})^0(\frac{2}{5})^3 = \frac{8}{125}$$ $$f(1) = \binom{3}{1}(\frac{3}{5})^1(\frac{2}{5})^2 = \frac{36}{125}$$ $$f(2) = \binom{3}{2}(\frac{3}{5})^2(\frac{2}{5})^1 = \frac{54}{125}$$ $$f(3) = \binom{3}{3}(\frac{3}{5})^3(\frac{2}{5})^0 = \frac{27}{125}$$ \\~\\ \end{example} 
+\begin{definition} Hypergeometric Distribution: Suppose $n$ items are selected without replacement from $N_1$ items from one type and $N_2$ items of another type. The probability of selecting $x$ items of the first type and $n - x$ items of the second type is $$ P = \frac{\binom{N_1}{x}\binom{N_2}{n - x}}{\binom{N_1 + N_2}{n}} $$ \end{definition} 
+\begin{example} An urn contains 4 red balls and 6 blue balls. 5 balls are selected without replacement. Find the probability function for x = number of red balls collected. $$ \begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline
+0 & $\frac{\binom{4}{0}\binom{6}{5}}{\binom{10}{5}}$ \\ \hline
+1 & $\frac{\binom{4}{1}\binom{6}{4}}{\binom{10}{5}}$ \\ \hline
+2 & $\frac{\binom{4}{2}\binom{6}{3}}{\binom{10}{5}}$ \\ \hline
+3 & $\frac{\binom{4}{3}\binom{6}{2}}{\binom{10}{5}}$ \\ \hline
+4 & $\frac{\binom{4}{4}\binom{6}{1}}{\binom{10}{5}}$
+\end{tabular} $$ \end{example} 
+\begin{theorem} If $X$ has a binomial distribution, with parameters $n$ and $p$, $$ f(x) = \binom{n}{x} p^xq^{n - x} $$ for $ x = 0, 1, 2, 3, \dots, n $ \end{theorem} 
+Observe that \begin{enumerate} \item $f(x) \geq 0$ \item $\sum\limits_{x = 0}^n f(x) = \sum\limits_{x = 0}^n \binom{n}{x}p^xq^{n - x} = \sum\limits_{x = 0}^n \binom{n}{x}q^{n - x}p^x = (q + p)^n = (q + p)^1 = 1^1 = 1 $ \end{enumerate} 
+If $N >> n$, the hypergeometric distribution $h(x, n, N_1, N_2)$ becomes nearly equal to the binomial distribution $b(x, n, p)$. That is to say, if there are many more selections made without replacement, then it resembles the probability of having selected with replacement and $$ h(x, n, N_1, N_2) \approx b(x, n, p) $$ where $ p = \frac{N_1}{N_1 + N_2}. \\~\\ $ 
+\begin{definition} Geometric Distribution: Repeat an experiment over and over again until success occurs. The probability of this happening on the $x^\text{th}$ trial is: $$ P[X = x] = pq^{x - 1} $$ where p is the probability of success and q is the probability of failure. \end{definition} \begin{example} Roll a dice until the number 6 occurs. Let x = number of rolls for when this occurs. $P[X = 6] = f(6) = \frac{1}{6}(\frac{5}{6})^{6 - 1} $ \\~\\ \end{example} 
+\begin{definition} Poisson Distribution: $f(x) = \frac{\lambda^x e^{-x}}{x!} $ where $x = 0, 1, 2, \dots $. \end{definition} 
+\begin{theorem} Poisson's Limit Law: If $\lambda = np$, $\lim_{n \to \infty} b(n, p) = p(x, \lambda) $. \end{theorem} 
+\begin{proof} $$ \begin{aligned} b(x, n, p) &= \binom{n}{x}p^xq^{1 - x} \\ &= \frac{P^n_x}{x!} p^x(1 - p)^{n - x} \\ &= \frac{n(n-1)\dots(n - x + 1)}{x!}(\frac{\lambda}{n})^x(1 - \frac{\lambda}{n})^{n - x} \\ &= \frac{n(n-1)\dots(n - x + 1)}{x!}\frac{\lambda^x}{n^x}(1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x} \\ &= \frac{n(n-1)\dots(n - x + 1)}{n^x}\frac{\lambda^x}{x!}(1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x} \\ &= (\frac{n}{n})(\frac{n - 1}{n})\dots(\frac{n - x + 1}{n})\frac{\lambda^x}{x!}(1 - \frac{\lambda}{n})^n(1 - \frac{\lambda}{n})^{-x} \\ &= (1)(1 - \frac{1}{n})(1 - \frac{2}{n})\dots(1 - \frac{x - 1}{n})\frac{\lambda^x}{x!}(1 - \frac{\lambda}{n})^n(1 - \frac{\lambda}{n})^{-x} \end{aligned} $$ Let $n \rightarrow \infty$. Then $ 1- \frac{1}{n} \rightarrow 1$, $1 - \frac{2}{n} \rightarrow 1$ and so forth up to $1 - \frac{x - 1}{n} \rightarrow 1$. Also, $(1 - \frac{\lambda}{n})^{-x} \rightarrow 1$ and $(1 - \frac{\lambda}{n})^n = e^{-x}$. Thus, $$ \lim_{n \to \infty} b(x, n, p) = \frac{\lambda^xe^{-\lambda}}{x!} $$ \end{proof} 
+\begin{example} Let $n = 50,000$, $p = 0.0001$, and $x = 10$. Then: \newline
+Binomial: $b(10, 50000, 0.0001) = \binom{50000}{10}(0.0001)^10(0.9999)^49990 = 0.018130 $ \newline 
+Poisson:$\lambda = np = (50000)(0.0001) = 5$  $p(10, 5) = \frac{5^10e^{-5}}{10!} = 0.0018133 $\end{example} 
+In general, if $n$ is large and $p$ is small, the Poisson distribution gives an excellent approximation to the binomial distribution. \\~\\ 
+\begin{definition} Cumulative Probability Distribution: Given a random variable $X$, we define $F(X) = P[X \leq x]$ \end{definition} 
+\begin{example} An urn has 10 balls: one 1, 2 twos, 4 threes, 3 fours. Select one ball and let $X$ = value on the ball. Then: $$ f(2) = P[X = 2] = \frac{2}{10} $$ but $$ F(2) = P[X \leq 2] = \frac{3}{10} $$ $$ \begin{tabular}{lll}
+$x$ & $f(x)$ & $F(x)$ \\ \hline
+1 & 0.1 & 0.1 \\ \hline
+2 & 0.2 & 0.3 \\ \hline
+3 & 0.4 & 0.7 \\ \hline 
+4 & 0.3 & 1.0  \end{tabular} $$ Note: $f(2.5) = 0$ BUT $F(2.5) = \frac{3}{10}$. \end{example} 
+$F(X)$ is a step function that is nondecreasing \begin{itemize} \item $\lim_{x \to \infty} F(X) = 1$ \item $\lim_{x \to \infty} f(x) = 0 $ \end{itemize}
+\begin{example} A pair of dice is rolled 1000 times. Compute the probability their sum is 5 between 100 and 125 times inclusive (including 100 and 125). \newline 
+Binomial: $n = 1000, p = \frac{4}{36} = \frac{1}{9} $ $$ \text{binomcdf}(1000, \frac{1}{9}, 125) - \text{binomcdf}(1000, \frac{1}{9}, 99) = 0.943 - 0.1203 = 0.804 $$\end{example} 
+\begin{example} If $X$ has a Poisson distribution with $\lambda = 7$, compute $P[X \geq 10]$. \newline
+$$P[X \geq 10] = 1 - \text{poissoncdf}(7, 9) = 1 - 0.7166 = 0.2034 $$ \end{example} 
+\begin{definition} A probability density function is a function which satisfies: \begin{enumerate} \item $f(x) \geq 0$ for all $x$ \item $ \int_{-\infty}^\infty f(x)dx = 1$ \end{enumerate} \end{definition} 
+if a random variable $X$ has the probability density function $f(x)$: $$ P[a \leq x \leq b] = \int_a^b f(x)dx $$ 
+\begin{example} Let $X$ be a random variable whose probability density function is $$ f(x) = \begin{cases} \frac{3}{4}(2x - x^2) & \text{ if } 0 \leq x \leq 2 \\ 0 & \text{ elsewhere} \end{cases} $$ Show that $f(x)$ is a valid probability density function and compute $P[0 \leq X \leq 1]$ and $P[X \geq \frac{1}{2}]$. \begin{enumerate}
+\item If $x < 0$ or $x > 2$, $f(x) = 0$. If $0 \leq x \leq 2$, $f(x) = \frac{3}{4}x(2 - x)$. So, $f(x) \geq 0$ for all $x$. \newline
+\item $ \begin{aligned} \int_{-\infty}^\infty f(x)dx &= \int_{-\infty}^0 f(x)dx + \int_0^2 f(x)dx + \int_2^\infty f(x)dx \\ &= \int_{-\infty}^0 0dx + \int_0^2 \frac{3}{4}(2x - x^2)dx + \int_2^\infty 0dx \\ &= \int_0^2 \frac{3}{4}(2x - x^2)dx \\ &= \frac{3}{2}[x^2 - \frac{x^3}{3}]\Big|_0^2 \\ &= \frac{3}{4}(4 - \frac{8}{3}) = 1\end{aligned} $ \end{enumerate}
+$$P[0 \leq X \leq 1] = \int_0^1 \frac{3}{4}(2x - x^2)dx = \frac{3}{2}[x^2 - \frac{x^3}{3}]\Big|_0^1 = \frac{3}{4}(1 - \frac{1}{3}) = \frac{1}{2} $$ 
+$$ P[X \geq \frac{1}{2}] = \int_\frac{1}{2}^2 \frac{3}{4}(2x - x^3)dx = \frac{3}{4}[x^2 - \frac{x^3}{3}]\Big|_\frac{1}{2}^2 = \frac{3}{4}[(14 - \frac{8}{3}) - (\frac{1}{4} - \frac{1}{24})] = \frac{27}{32} $$ \end{example}
+\begin{example} Let $f(x)  = \begin{cases} e^{-x} & \text{ if} x \geq 0 \\ 0 & \text{ elsewhere } \end{cases} $ Is this a probability density function? Compute $P[0 \leq x \leq 1]$. \begin{enumerate} \item $e^{-x}$ for $x > 0$ so $f(x) > 0$, 0 for $x < 0$. Thus $f(x) \geq 0$ for all $x$ 
+\item $\begin{aligned} \int_{-\infty}^\infty f(x)dx &= \int_0^\infty e^{-x}dx \\ &= \lim_{t \to \infty} \int_0^t e^{-x}dx \\ &= \lim_{t \to \infty} -e^{-x}\Big|_0^t \\ &= \lim_{t \to \infty} (-e^{-t} + 1) = 1 \end{aligned} $ \end{enumerate} 
+$$ P[0 \leq x \leq 1] = \int_0^1 e^{-x}dx = -e^{-x}\Big|_0^1 = -e^{-1} + 1 = 1 - \frac{1}{e} $$ \end{example}
+Suppose $X$ is a continuous random variable with the probability density function $f(x)$. \begin{itemize} 
+\item $P[X = a] = \int_a^a f(x)dx = 0 $ \item $ P[a \leq X \leq b] = P[a < X \leq b] $ \item $ P[a \leq X \leq b] = P[a \leq X < b] $ \item $ P[a \leq X \leq b] = P[a < X < b] $ \end{itemize} 
+\begin{definition} Cumulative Probability Function: $F(x) = P[X \leq x] = \int_{-\infty}^x f(t)dt$ \end{definition} 
+\begin{example} Find $F(x)$ if $f(x) = \begin{cases} 2x & \text{ if } 0 \leq x \leq 1 \\ 0 & \text{ elsewhere } \end{cases}$ and $P[0.5 \leq X \leq 0.6]$. \begin{itemize} 
+\item If $x < 0, F(x) = 0$ \item If $x > 1, F(x) = 1$ \item If $0 \leq x \leq 1, F(x) = \int_{-\infty}^x f(t)dt = \int_0^x 2tdt = t^2\Big|_0^x = x^2 $ \end{itemize} 
+$$ F(x) = \begin{cases} 0 & \text{ if } x < 0 \\ x^2 & \text{ if } 0 \leq x \leq 1 \\ 1 & \text { if } x > 1 \end{cases} $$ 
+$$ P[0.5 \leq X \leq 0.6] = F(0.6) - F(0.5) = 0.36 - 0.25 = 0.11 $$ \end{example} 
+\begin{example} Find $F(x)$ if $f(x) = \begin{cases} \frac{3}{4}(2x - x^2) & \text{ if } 0 \leq x \leq 2 \\ 0 & \text{ elsewhere } \end{cases} $ and $P[0 \leq X \leq 1]$. \begin{itemize} \item If $x < 0, F(x) = 0$ \item If $x > 2, F(x) = 1$ \item If $0 \leq x \leq 2, F(x) = \int_0^t \frac{3}{4}(2t - t^2)dt = \frac{3}{4}[t^2 - \frac{t^3}{3}]\big|_0^x = \frac{3}{4}(x^2 - \frac{x^3}{3}) $ \end{itemize} $$ F(x) = \begin{cases} 0 & \text{ if } x < 0 \\ \frac{3}{4}(x^2 - \frac{x^3}{3}) & \text { if } 0 \leq x \leq 2 \\ 1 & \text { if } x > 2 \end{cases} $$ 
+$$ P[0 \leq X \leq 1] = F(1) - F(0) = \frac{3}{4}(1 - \frac{1}{3}) - 0 = \frac{1}{2} $$ \end{example} 
+Properties of $F(x)$: \begin{itemize} \item continuous everywhere \item nondecreasing \item $\lim_{x \to -\infty} F(x) = 0$ \item $\lim_{x \to \infty} F(x) = 1$ \item $F'(x) = f(x)$ everywhere $F(x)$ is defined \end{itemize} \newpage
+
+\section{Continuous Random Variables and Probability Density Functions}
+\begin{center} Important Continuous Distributions \end{center} 
+\begin{definition} Uniform Continuous Distribution: $$ f(x) = \begin{cases} \frac{1}{\beta - \alpha} &\text{ if } \alpha \leq x \leq \beta \\ 0 &\text{ elsewhere } \end{cases} $$ \end{definition} \begin{example} Let $X$ be a random variable and let $f(x) = \begin{cases} \frac{1}{4} &\text{ if } 1 \leq x \leq 5 \\ 0 &\text { elsewhere} \end{cases}$. Compute $P[2 \leq x \leq 4]$ and $P[0 \leq x \leq 4]$. $$ P[2 \leq x \leq 4] = \int_2^4 \frac{1}{4}dx = \frac{1}{2} $$ $$ P[0 \leq x \leq 4] = \int_0^1 0dx + \int_1^4 \frac{1}{4}dx = \frac{3}{4} $$ Find $F(x)$. $$F(x) =  \int_\infty^x f(t)dt = \int_1^x \frac{1}{4}dt = \frac{1}{4}t\Big|_1^x = \frac{1}{4}(x - 1)$$ $$ F(x) = \begin{cases} 0 & x < 1 \\ \frac{1}{4}(x - 1) & 1 \leq x \leq 5 \\ 1 & x > 5 \end{cases} $$ $$P[2 \leq x \leq 4] = F(4) - F(2) = \frac{3}{4} - \frac{1}{4} = \frac{1}{2} $$ $$ P[0 \leq x \leq 4] = F(4) - F(0) = \frac{3}{4} - 0 = \frac{3}{4} $$ \end{example}
+\begin{definition} Exponential Distribution: parameter $\theta > 0$ $$ f(x) = \begin{cases} \frac{1}{\theta}e^{-\frac{x}{\theta}} &\text{ if } x > 0 \\ 0 &\text{ elsewhere } \end{cases} $$ \end{definition} Is this a probability density function? \begin{itemize} \item $f(x) \geq 0$ for all $x$ \item $\int_{-\infty}^\infty f(x)dx = \int_0^\infty \frac{1}{\theta}e^{-\frac{x}{\theta}}dx = \lim_{t \to \infty} \int_0^t \frac{1}{\theta}e^{-\frac{x}{\theta}} dx = \lim_{t \to \infty} (-e^{-\frac{x}{\theta}})\Big|_0^t = \lim_{t \to \infty} (-e^{-\frac{t}{\theta}} + e^0) = 0 + 1 = 1 $ \end{itemize} Yes, the exponential distribution is a probability density function. 
+\begin{example} Suppose $X$ has an exponential distribution with parameter $\theta = 2$. Compute $P[2 \leq x \leq 4]$. $$ P[2 \leq x \leq 4] = \int_2^4 \frac{1}{2}e^{-\frac{x}{2}}dx = -e^{-\frac{x}{2}}\Big|_2^4 = -e^{-2} + e^{-1} = \frac{1}{e} - \frac{1}{e^2} = 0.2325 $$ Compute $F(x)$. $$F(x) = \int_0^x \frac{1}{2}e^{-\frac{t}{2}}dt = -e^{-\frac{t}{2}}\Big|_0^x = -e^{-\frac{x}{2}} + 1 = 1 - e^{-\frac{x}{2}} $$ $$ F(x) = \begin{cases} 0 & \text{ if } x < 0 \\ 1 - e^{-\frac{x}{2}} &\text{ if } x \geq 0 \end{cases} $$ $$ P[2 \leq x \leq 4] = F(4) - F(2) = (1 - e^{-2}) - (1 - e^{-1}) = e^{-1} - e^{-2} = \frac{1}{e} - \frac{1}{e^2} $$ \end{example}
+\begin{definition} Normal Distribution: parameters $\mu, \sigma$ where $-\infty < \mu <\infty$ and $\sigma > 0$ $$ f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x - \mu}{\sigma})^2} \text{ for all } x $$ \end{definition}
+\begin{definition} Standard Normal Distribution: $\mu = 0, \sigma = 1$ $$ f(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2} $$ \end{definition} 
+Properties of the Standard Normal Distribution: \begin{itemize} 
+\item Symmetry with respect to the y axis \item $f(x) > 0$ for all $x$ \item $\int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}dx = 1$ \end{itemize} 
+\begin{example} Suppose $X$ has a standard normal distribution. Compute $P[0 \leq x \leq 1]$. $$P[0 \leq x \leq 1] = 0.341 \text{ use normalcdf } $$ 
+Find $x$ such that $P[x \leq X] = 0.7$. $$ x = 0.5244 \text{ use invNorm } $$ \end{example} 
+Manipulations: \begin{itemize} \item If $\mu = +x$, the graph shifts $x$ units to the right \item If $\mu = -x$, the graph shifts $x$ units to the left 
+\item If $\sigma = +x$, the graph expands $x$ times horizontally \item If $\sigma = -x$, the graph shrinks $x$ times horizontally \end{itemize} 
+\begin{theorem} Standardization Theorem: If $X$ has a normal distribution with parameters $\mu$ and $\sigma$, then $$ z = \frac{x - \mu}{\sigma}$$ has a standard distribution. \end{theorem} 
+\begin{example} Suppose $X$ has a normal distribution with $\mu = 2$ and $\sigma = 4$. Compute $P[0 \leq x \leq 5]$. \newline Let $ z = \frac{x - 2}{4}$. If $x = 0$, $z = -\frac{1}{2}$. If $x = 5$, $z = \frac{3}{4}$. Then: $$ P[0 \leq x \leq 5] = P[-\frac{1}{2} \leq z \leq \frac{3}{4}] $$ \end{example} \newpage
+
+\section{Mathematical Expectation}
+\begin{definition} Expected Value: If $X$ is a discrete random variable whose probability density function is $f(x)$, the expected value of $X$ is: $$ \mathrm{E[X]} = \sum\limits_x xf(x) $$ \end{definition} 
+\begin{example} An urn has four balls numbered 1, two balls numbered 2, one ball numbered 3, and three balls numbered 4. Select one ball and let $X = $value. \newline
+\begin{tabular}{lll}
+$x$ & $f(x)$ & $xf(x)$ \\ \hline
+1 & 0.4 & 0.4 \\ \hline
+2 & 0.2 & 0.4 \\ \hline
+3 & 0.1 & 0.4 \\ \hline
+4 & 0.3 & 1.2 
+\end{tabular} 
+$ \begin{aligned} \text{Average }&= \frac{(4)1 + (2)2 + (1)3 + (3)4}{10} \\ &= \frac{(4)1}{10} + \frac{(2)2}{10} + \frac{(1)3}{10} + \frac{(3)4}{10} \\ &= 1(\frac{4}{10}) + 2(\frac{2}{10}) + 3(\frac{1}{10}) + 4(\frac{3}{10}) \\ &= \sum\limits_{x = 1}^4 xf(x) = 2.3 \end{aligned} $ \end{example} 
+\begin{example} An urn contains 4 red balls and 1 blue ball. Two balls are randomly selected with replacement. Let $X = $the number of red balls obtained. Compute $\mathrm{E[X]}$. \newline This is a binomial distribution with $n = 2$ and $p = 0.8$. \newline Thus $f(x) = \binom{2}{x}(0.8)^x(0.2)^{2 - x}$. \newline \begin{tabular}{lll} 
+$x$ & $f(x)$ & $xf(x)$ \\ \hline
+0 & 0.4 & 0 \\ \hline
+1 & 0.32 & 0.32 \\ \hline
+2 & 0.64 & 1.28 \end{tabular} 
+$$\mathrm{E[X]} = 0 + 0.32 + 1.28 = 1.60 $$ \end{example} 
+\begin{example} Two dices are rolled. Let $X = $ sum. Compute $\mathrm{E[X]}$. \newline \begin{tabular}{lcl} 
+$x$ & $f(x)$ & $xf(x)$ \\ \hline
+2 & $\frac{1}{36}$  & $\frac{2}{36}$ \\ \hline
+3 & $\frac{2}{36}$ & $\frac{6}{36}$ \\ \hline
+4 & $\frac{3}{36}$ & $\frac{12}{36}$ \\ \hline
+5 & $\frac{4}{36}$ & $\frac{20}{36}$ \\ \hline
+6 & $\frac{5}{36}$ & $\frac{30}{36}$ \\ \hline
+7 & $\frac{6}{36}$ & $\frac{42}{36}$ \\ \hline
+8 & $\frac{5}{36}$ & $\frac{40}{36}$ \\ \hline
+9 & $\frac{4}{36}$ & $\frac{36}{36}$ \\ \hline
+10 & $\frac{3}{36}$ & $\frac{30}{36}$ \\ \hline
+11 & $\frac{2}{36}$ & $\frac{22}{36}$ \\ \hline
+12 & $\frac{1}{36}$ & $\frac{12}{36}$ \end{tabular} $$\mathrm{E[X]} = \frac{252}{36} = 7 $$ \end{example} 
+\begin{example} Two dices are rolled. Let $X = $ the absolute value of their difference. Compute $\mathrm{E[X]}$.\newline
+ \begin{tabular}{lll}
+$x$ & $f(x)$ & $xf(x)$ \\ \hline
+0 & $\frac{6}{36}$  & $\frac{0}{36}$ \\ \hline
+1 & $\frac{10}{36}$ & $\frac{10}{36}$ \\ \hline
+2 & $\frac{8}{36}$ & $\frac{16}{36}$ \\ \hline
+3 & $\frac{6}{36}$ & $\frac{18}{36}$ \\ \hline
+4 & $\frac{4}{36}$ & $\frac{16}{36}$ \\ \hline
+5 & $\frac{2}{36}$ & $\frac{10}{36}$ \end{tabular} $$\mathrm{E[X]} = \frac{70}{36} = 1.944$$ \end{example}
+\begin{definition} If $X$ is a continuous random variable with probability density function $f(x)$, $$\mathrm{E[X]} = \int_{-\infty}^\infty xf(x)dx $$ \end{definition} 
+\begin{example} Let $X$ be a continuous random variable with probability density function $f(x) = \begin{cases} 2x &\text{ if } 0 \leq x \leq 1 \\ 0 &\text{ elsewhere } \end{cases}$. Compute $\mathrm{E[X]}$. $$\mathrm{E[X]} = \int_{-\infty}^\infty xf(x)dx = \int_0^1 2x^2dx = \frac{2}{3}x^3\Big|_0^1 = \frac{2}{3} $$ \end{example} 
+\begin{example} Let $X$ be a continuous random variable with probability density function $f(x) = \begin{cases} \frac{3}{4}(2x - x^2) &\text{ if } 0 \leq x \leq 2 \\ 0 &\text{ elsewhere } \end{cases}$. Compute $\mathrm{E[X]}$. $$\mathrm{E[X]} = \int_{-\infty}^\infty xf(x)dx = \int_0^2 \frac{3}{4}(2x - x^2)dx = \frac{3}{4}[\frac{2}{3}x^3 - \frac{x^4}{4}]\Big|_0^2 = \frac{3}{4}[\frac{16}{3} - \frac{16}{4}] = 4 - 3 = 1 $$ \end{example} 
+\begin{example} Suppose $X$ has an exponential distribution with parameter $\theta = 3$. Compute $\mathrm{E[X]}$. $$\begin{aligned} \mathrm{E[X]} &= \int_{-\infty}^\infty xf(x)dx \\ &= \int_0^\infty \frac{1}{3}xe^{-\frac{x}{3}}dx \\ &= \lim_{t \to infty} \int_0^t \frac{1}{3}xe^{-\frac{x}{3}}dx \\ &= \lim_{t \to \infty} [-xe^{-\frac{x}{3}} - 3e^{-\frac{x}{3}}]\Big|_0^t \\ &= \lim_{t \to \infty} [-te^{-\frac{t}{3}} - 3e^{-\frac{t}{3}} - 0 + 3] \\ &= 0 - 0 - 0 + 3 = 3 \end{aligned} $$ \end{example}
+\begin{theorem} Strong Law of Large Numbers: Let $E$ be any experiment whose sample space if $S$. Let $X$ be any random variable defined on $S$ with $\mathrm{E[X]} = \mu$. If the experiment is repeated under identical conditions and $x_i$ denotes the value of $x$ on the $i^\text{th}$ repetition: $$ P[\lim_{n \to \infty} \frac{x_1 + x_2 + \dots + x_n}{n} = \mu] = 1 $$ In other words, as $x \to \infty$, $\frac{x_1 + x_2 + \dots + x_n}{n} \rightarrow \mu $ with probability of 1. If $n$ is large, $\frac{x_1 + x_2 + \dots + x_n}{n} \approx \mu $ with large probabilities \end{theorem} 
+\begin{example} Toss a coin. $X_1 = 5, X_2 = 2. X_3 = 1$ $$ \frac{x_1 + x_2 + x_3}{n} = \frac{5 + 2 + 1}{3} = 2.667 $$ $$\mathrm{E[X]} = 3.5 $$ \end{example} 
+\begin{definition} The game is fair if $\mathrm{E[X]} = 0$. \end{definition}
+\begin{example} Pay 7 dollars to play a game. Roll 2 dice. You get an amount of money in dollars equal to the sum of the dice. Let $X$ = your winnings. 
+$$ \begin{tabular}{ccc}
+$x$ & $f(x)$ & $xf(x)$ \\ \hline
+-5 & $\frac{1}{36}$ & $-\frac{5}{36}$ \\ \hline
+-4 & $\frac{2}{36}$ & $-\frac{8}{36}$ \\ \hline
+-3 & $\frac{3}{36}$ & $-\frac{9}{36}$ \\ \hline
+-2 & $\frac{4}{36}$ & $-\frac{8}{36}$ \\ \hline
+-1 & $\frac{5}{36}$ & $-\frac{5}{36}$ \\ \hline
+0 & $\frac{6}{36}$ & 0 \\ \hline
+1 & $\frac{5}{36}$ & $\frac{5}{36}$ \\ \hline
+2 & $\frac{4}{36}$ & $\frac{8}{36}$ \\ \hline
+3 & $\frac{3}{36}$ & $\frac{9}{36}$ \\ \hline
+4 & $\frac{2}{36}$ & $\frac{8}{36}$ \\ \hline
+5 & $\frac{1}{36}$ & $\frac{5}{36}$
+\end{tabular} $$ $\mathrm{E[X]} = 0$ Game is fair. \end{example} 
+\begin{example} Roulette: 18 red slots, 18 blue slots, 2 green slots. Bet dollars on a color (red or blue). If your color shows up, you get back 2 dollars. Otherwise you get 0 dollars. Let $X$ = winnings. $$ \begin{tabular}{ccc} $x$ & $f(x)$ & $xf(x)$ \\ \hline -1 & $\frac{20}{38}$ & $-\frac{20}{38}$ \\ \hline 1 & $\frac{18}{38}$ & $\frac{18}{38}$ \end{tabular} $$ $\mathrm{E[X]} = -\frac{2}{38} \approx -0.0526 $ This game is unfair. \end{example} 
+Let $X$ be a discrete random variable with probability density function $f(x)$. Then $$E[g(x)] = \sum_x g(x)f(x) $$ If $g(x) = x$, $E(g(x)) = \mathrm{E[X]}$. 
+\begin{example} Toss 2 dice, one red and one green. Let $X$ be the difference in the order red green. Compute $E(X^2)$. $$\begin{tabular}{cccc} 
+$x$ & $x^2$ & $f(x)$ & $x^2f(x)$ \\ \hline 
+-5 & 25 & $\frac{1}{36}$ & $\frac{25}{36}$ \\ \hline
+-4 & 16 & $\frac{2}{36}$ & $\frac{32}{36}$ \\ \hline
+-3 & 9 & $\frac{3}{36}$ & $\frac{27}{36}$ \\ \hline
+-2 & 4 & $\frac{4}{36}$ & $\frac{16}{36}$ \\ \hline
+-1 & 1 & $\frac{5}{36}$ & $\frac{5}{36}$ \\ \hline
+0 & 0 & $\frac{6}{36}$ & 0 \\ \hline
+1 & 1 & $\frac{5}{36}$ & $\frac{5}{36}$ \\ \hline
+2 & 4 & $\frac{4}{36}$ & $\frac{16}{36}$ \\ \hline
+3 & 9 & $\frac{3}{36}$ & $\frac{27}{36}$ \\ \hline
+4 & 16 & $\frac{2}{36}$ & $\frac{32}{36}$ \\ \hline
+5 & 25 & $\frac{1}{36}$ & $\frac{25}{36}$ \end{tabular} $$ $\mathrm{E[X]} = 0$, $\mathrm{E[X^2]} = \frac{210}{36} \approx 5.833$ \end{example} 
+Note: Clearly $$ \mathrm{E[X^2]} \neq (\mathrm{E[X]})^2 $$ \newline
+If $X$ is a continuous random variable with probability density function $f(x)$ $$\mathrm{E[g(x)]} = \int_{-\infty}^\infty g(x)f(x)dx $$ 
+\begin{example} Let $X$ have the probability density function: $$f(x) = \begin{cases} 2x &\text{ if } 0 \leq x \leq 1 \\ 0 &\text{ elsewhere } \end{cases}$$ Find $\mathrm{E[X^2]}$. $$\mathrm{E[X^2]} = \int_{-\infty}^\infty x^2f(x)dx = \int_0^1 x^22xdx = \int_0^1 2x^3dx = 2\frac{x^4}{4}\Big|_0^1 = \frac{1}{2} $$ \end{example} 
+\begin{example} The radius of a circular disk produced by a certain machine is uniformly distributed between 1 inch and 1.02 inches. Compute its expected area. Let $X$ = radius. $$f(x) = \begin{cases} \frac{1}{\beta - \alpha} = \frac{1}{1.02 - 1} = 50 &\text{ if } 1 \leq x \leq 1.02 \\ 0 &\text{ elsewhere } \end{cases} $$ $$\begin{aligned} \mathrm{E[A]} = \mathrm{E[\pi X^2]} &= \int_{-\infty}^\infty \pi x^2f(x)dx \\ &= \int_1^1.02 \pi x^250dx \\ &= 50\pi\frac{x^3}{3}\Big|_1^1.02 = \frac{50\pi}{3}(1.02^3 - 1.0^3) \approx 1.02\pi \approx 32.05 \text{ in.}^2 \end{aligned} $$ \end{example} 
+\begin{theorem} $$ \mathrm{E[c]} = c $$ \end{theorem} 
+\begin{proof} Discrete Case: $\mathrm{E[c]} = \sum_x cf(x) = c\sum_x f(x) = c \times 1 = c $ \newline 
+Continuous Case: $\mathrm{E[c]} = \int_{-\infty}^\infty cf(x)dx = c\int_{-\infty}^\infty f(x)dx = c \times 1 = c $ \end{proof} 
+\begin{theorem} $$\mathrm{E[aX]} = a\mathrm{E[X]} $$ $$\mathrm{E[g(x)]} = \sum_x g(x)f(x) $$\end{theorem} 
+\begin{proof} Discrete Case: $\mathrm{E[aX]} = \sum_x axf(x) = a\sum_x xf(x) = a\mathrm{E[X]} $ \end{proof} 
+\begin{theorem} $$\mathrm{E[aX^2 + bX + c]} = a\mathrm{E[X^2]} + b\mathrm{E[X]} + c $$ \end{theorem} 
+\begin{proof} Discrete Case: $\mathrm{E[aX^2 + bX + c]} = \sum_x (ax^2 + bx + c)f(x) = \sum_x (ax^2f(x) + bxf(x) + cf(x)) = \sum_x ax^2f(x) + \sum_x bxf(x) + \sum_x cf(x) = a\sum_x x^2f(x) + b\sum_x xf(x) + c\sum_x f(x) = a\mathrm{E[X^2]} + b\mathrm{E[X]} + c $ \end{proof}
+This theorem extends to polynomials of higher degrees. 
+\begin{definition} Variance of a Random Variable: Let $X$ be a random variable where expected value $\mathrm{E[X]} = \mu$. $$\mathrm{Var(X)} = \mathrm{E[(x - \mu)^2]} $$ \end{definition}
+\begin{example} An urn contains five balls numbered: 1, 3, 5, 7, 9. Select one ball. Let $X =$ its value. Find the variance of $X$. $\mathrm{E[X]} = 5 = \mu$ 
+$$\begin{tabular}{ccccc}
+$x$ & $x - \mu$ & $(x - \mu)^2$ & $f(x)$ & $(x - \mu)^2f(x)$ \\ \hline 
+1 & -4 & 16 & 0.2 & 3.2 \\ \hline
+3 & -2 & 4 & 0.2 & 0.8 \\ \hline
+5 & 0 & 0 & 0.2 & 0 \\ \hline
+7 & 2 & 4 & 0.2 & 0.8 \\ \hline
+9 & 4 & 16 & 0.2 & 3.2 \end{tabular} $$ $$\mathrm{Var[X]} = \mathrm{E[(x - \mu)^2]} = 8 $$ \end{example} 
+\begin{example} An urn contains five balls numbered: 3, 4, 5, 6, 7. Select one ball. Let $X =$ its value. Find the variance of $X$. $\mathrm{E[X]} = 5 = \mu$ 
+$$ \begin{tabular}{ccccc}
+$x$ & $x - \mu$ & $(x - \mu)^2$ & $f(x)$ & $(x - \mu)^2f(x)$ \\ \hline 
+3 & -2 & 4 & 0.2 & 0.8 \\ \hline
+4 & -1 & 1 & 0.2 & 0.2 \\ \hline
+5 & 0 & 0 & 0.2 & 0 \\ \hline
+6 & 1 & 1 & 0.2 & 0.2 \\ \hline
+7 & 2 & 4 & 0.2 & 0.8 \end{tabular} $$ $$\mathrm{Var[X]} = \mathrm{E[(x - \mu)^2]} = 2 $$ \end{example} 
+\begin{example} An urn contains five balls numbered: 5, 5, 5, 5, 5. Select one ball. Let $X =$ its value. Find the variance of $X$. $\mathrm{E[X]} = 5 = \mu$ 
+$$ \begin{tabular}{ccccc}
+$x$ & $x - \mu$ & $(x - \mu)^2$ & $f(x)$ & $(x - \mu)^2f(x)$ \\ \hline 
+5 & 0 & 0 & 1 & 0 \end{tabular} $$ $$\mathrm{Var[X]} = \mathrm{E[(x - \mu)^2]} = 0 $$ \end{example} 
+One way to describe variance is average squared deviation. \newline It is always true that $\mathrm{V[X]} \geq 0$. 
+\begin{definition} Standard Deviation of $X$: $$\sigma = \sqrt{\mathrm{V[X]}} $$ or $$\sigma^2 = \mathrm{Var[X]} $$ \end{definition} 
+\begin{example} Let $X$ be a random variable whose probability density function is: $f(x) = \begin{cases} 2x &\text{ if } 0 \leq x \leq 1 \\ 0 &\text{ elsewhere } \end{cases}$. Find the variance of $X$. $$\mathrm{E[X]} = \int_0^1 xf(x)dx = \int_0^1 2x^2dx = \frac{2}{3}x^3\Big|_0^1 = \frac{2}{3} = \mu $$ 
+$$\begin{aligned} \mathrm{E[(x - \mu)^2]} &= \int_0^1 (x - \frac{2}{3})^2f(x)dx \\ &= \int_0^1 (x - \frac{2}{3})^2(2x)dx \\ &= \int_0^1 (x^2 - \frac{4}{3}x + \frac{4}{9})dx \\ &= \int_0^1 (2x^3 - \frac{8}{3}x^2 + \frac{8}{9}x)dx \\ &= [\frac{1}{2}x^4 - \frac{8}{9}x^3 + \frac{4}{9}x^2]\Big|_0^1 \\ &= \frac{1}{2} - \frac{8}{9} + \frac{4}{9} = \frac{1}{18} = \mathrm{Var[x]} \end{aligned} $$ \end{example} 
+\begin{theorem} $$\mathrm{Var[X]} = \mathrm{E[X^2]} - \mathrm{E^2[X]} $$ \end{theorem} 
+\begin{proof} $$\begin{aligned} \mathrm{Var[X]} &= \mathrm{E[(x - \mu)^2]} \\ &= \mathrm{E[X^2 - 2\mu X + \mu^2]} \\ &= \mathrm{E[X]} - \mathrm{E[2\mu X]} + \mathrm{E[\mu^2]} \\ &= \mathrm{E[X^2]} - 2\mu\mathrm{E[X]} + \mu^2 \\ &= \mathrm{E[X^2]} - 2\mu^2 + \mu^2 = \mathrm{E[X^2]} - \mathrm{E^2[X]} \end{aligned} $$ \end{proof} 
+\begin{example} Find the variance of random variable $X$ whose probability density function is: $f(x) = \begin{cases} 2x &\text{ if } 0 \leq x \leq 1 \\ 0 &\text{ elsewhere } \end{cases}$. $$\mathrm{E[X^2]} = \int_0^1 x2xdx = \int_0^1 2x^3dx = \frac{1}{2}x^4\Big|_0^1 = \frac{1}{4} $$
+$$ \mathrm{Var[X]} = \frac{1}{2} - (\frac{2}{3})^2 = \frac{1}{2} - \frac{4}{9} = \frac{9}{18} - \frac{8}{18} = \frac{1}{18} $$ \end{example} 
+\begin{example} An urn contains five balls numbered: 1, 3, 5, 7, 9. Select one ball. Let $X =$ its value. Find the variance of $X$. $\mathrm{E[X]} = 5$ 
+$$\begin{tabular}{cccc}
+$x$ & $f(x)$ & $xf(x)$ & $x^2f(x)$\\ \hline 
+1 & 0.2 & 0.2 & 0.2 \\ \hline
+3 & 0.2 & 0.6 & 1.8 \\ \hline
+5 & 0.2 & 1.0 & 5.0 \\ \hline
+7 & 0.2 & 1.4 & 9.8 \\ \hline
+9 & 0.2 & 1.8 & 16.2 \end{tabular} $$ $$\mathrm{Var[X]} = \mathrm{E[X^2]} - \mathrm{E^2[X]} = 33 - 5^2 = 8 $$ \end{example} 
+\begin{theorem} $$\mathrm{Var[aX]} = a^2\mathrm{Var[X]} $$ \end{theorem} 
+\begin{proof} Let $ Y = aX$. Then $\mathrm{Var[Y]} = \mathrm{Var[aX]} = a\mathrm{E[X]} $. Thus, let $\mu_Y = a\mu_X$. 
+$$\begin{aligned} \mathrm{Var[Y]} &= \mathrm{E[(Y - \mu_Y)^]} \\ &= \mathrm{E[(aX - a\mu_X)^2]} \\ &= \mathrm{E[a^2(x - \mu_Y)^2]} \\ &= a^2\mathrm{E[(x - \mu)^2]} \\ &= a^2\mathrm{Var[X]} \end{aligned} $$ \end{proof} 
+\begin{theorem} $$\mathrm{Var[X + b]} = \mathrm{Var[X]} $$ \end{theorem} 
+\begin{proof} Let $ Y = X + b$. \end{proof} 
+\begin{theorem} $$\mathrm{Var[c]} = 0 $$ \end{theorem} 
+\begin{proof} Let $ Y = c$. \end{proof} 
+\begin{example} Let $X$ have a binomial distribution with parameters $n = 3$ and $p = 0.4$. Compute the expected value and variance of $X$. 
+$$\begin{tabular}{cccc}
+$x$ & $f(x)$ & $xf(x)$ & $x^2f(x)$\\ \hline 
+0 & $\binom{3}{0}(0.4)^0(0.6)^3 = 0.216 $ & 0.0 & 0.0 \\ \hline
+1 & $\binom{3}{1}(0.4)^1(0.6)^2 = 0.432 $ & 0.432 & 0.432 \\ \hline
+2 & $\binom{3}{2}(0.4)^2(0.6)^1 = 0.288 $ & 0.576 & 1.152 \\ \hline
+3 & $\binom{3}{3}(0.4)^3(0.6)^0 = 0.064 $ & 0.192 & 0.576 \end{tabular}$$ $$\mathrm{E[X]} = 1.200 $$ $$ \mathrm{E[X^2]} = 2.16 $$ $$ \mathrm{Var[X]} = \mathrm{E[X^2]} - \mathrm{E^2[X]} = 2.16 - 1.200^2 = 2.16 - 1.44 = 0.72 $$ \end{example} 
+\begin{theorem} If $X$ has a binomial distribution with parameters $n$ and $p$, $$\mathrm{E[X]} = np$$ and $$\mathrm{Var[x]} = npq $$ \end{theorem} 
+\begin{proof} $$ f(x) = \binom{n}{x}p^xq^{n - x}$$ $$ \begin{aligned} \mathrm{E[X]} &= \sum_{x = 0}^n xf(x) \\ &= \sum_{x = 0}^n x\binom{n}{x}p^xq^{1 - x} \\ &= \sum_{x = 1}^n x \frac{n!}{x!(n - x)!} p^xq^{1 - x} \\ &= \sum_{x = 1}^n \frac{n!}{(x - 1)!(n - x)!} p^xq^{1 - x} \\ &= \sum_{x = 1}^n \frac{n(n - 1)!}{(x - 1)!(n - x)!} pp^{x - 1}q^{n - x} \\ &= np\sum_{x = 1}^n \frac{(n - 1)!}{(x - 1)!(n - x)!}p^{x - 1}q^{n - x} \\ &\text{Let y = x - 1 and m = n - 1} \\ &= np\underbrace{\sum_{y = 0}^m \frac{m!}{y!(m - y)!}p^yq^{m - y}}_{(p + q)^m = 1} \\ &= np\cdot 1 \\ &= np \end{aligned} $$ \end{proof} 
+\begin{proof} $$  f(x) = \binom{n}{x}p^xq^{n - x}$$ $$ \begin{aligned} \mathrm{Var[X]} &= \mathrm{E[X^2]} - \mathrm{E^2[X]} \\ &= \mathrm{E[X(X - 1) + X]} - \mathrm{E^2[X]} \\ &= \mathrm{E[X(X - 1)]} + \mathrm{E[X]} - \mathrm{E^2[X]} \\ \mathrm{E[X(X - 1)]} &= \sum_{x = 0}^n x(x-1)f(x) \\ &= \sum_{x = 0}^n x(x - 1)\binom{n}{x}p^xq^{n - x} \\ &= \sum_{x = 2}^n x(x - 1)\binom{n}{x}p^xq^{n - x} \\ &= \sum_{x = 2}^n x(x - 1)\frac{n!}{x!(n - x)!}p^xq^{n - x} \\ &= \sum_{x = 2}^n \frac{n!}{(x - 2)!(n - x)!} p^xq^{n - x} \\ &= \sum_{x = 2}^n \frac{n(n - 1)(n - 2)!}{(x - 2)!(n - x)!}p^2p^{x - 2}q^{n - x} \\ &= n(n - 1)p^2\sum_{x = 2}^n \frac{(n - 2)!}{(x - 2)!(n - x)!}p^{x - 2}q^{n - x} \\ &\text{Let m = n - 2 and y = x - 2} \\ &= n(n - 1)p\underbrace{\sum_{y = 0}^m \frac{m!}{y!(m - y)!}p^yq^{m - y}}_{(p + q)^m = 1} \\ &= n(n - 1)p^2 \\ \mathrm{Var[X]} &= \mathrm{E[X(X - 1)]} + \mathrm{E[X]} - \mathrm{E^2[X]} \\ &= n(n - 1)p^2 + np - n^2p^2 \\ &= n^2p^2 - np^2 + np - n^2p^2 \\ &= np - np^2 \\ &= np(1 - p) \\ &= npq \end{aligned} $$ \end{proof} 
+\begin{example} An urn has 7 red balls and 8 blue balls. Select 5 balls without replacement. Let $X$ = the number of red balls obtained. Compute $\mathrm{E[X]}$ and $\mathrm{Var[X]}$. (This is a binomial distribution.) $$\mathrm{E[X]} = np = 5\cdot \frac{7}{15} = \frac{7}{3} $$ $$\mathrm{Var[X]} = npq = 5\cdot \frac{7}{15} \cdot \frac{8}{15} = \frac{56}{45} $$ \end{example} 
+\begin{theorem} If $X$ is uniformly distributed between $\alpha$ and $\beta$, then $$ \mathrm{E[X]} = \frac{\alpha + \beta}{2} $$ and $$\mathrm{Var[X]} = \frac{(\beta - \alpha)^2}{12} $$ \end{theorem} 
+\begin{proof} $$f(x) = \begin{cases} \frac{1}{\beta - \alpha} &\text{ if } \alpha \leq x \leq \beta \\ 0 &\text{ elsewhere } \end{cases} $$ 
+$$\begin{aligned} \mathrm{E[X]} &= \int_{-\infty}^\infty xf(x)dx \\ &= \int_\alpha^\beta x\frac{1}{\beta - \alpha}dx \\ &= \frac{1}{\beta - \alpha}\int_\alpha^\beta xdx \\ &= \frac{1}{\beta - \alpha}\frac{1}{2}x\Big|_\alpha^\beta \\ &= \frac{1}{2(\beta - \alpha)}(\beta^2 - \alpha^2) \\ &= \frac{1}{2(\beta - \alpha)}(\beta + \alpha)(\beta - \alpha) \\ &= \frac{1}{2}(\beta + \alpha) \end{aligned} $$ \end{proof} 
+\begin{proof} $$f(x) = \begin{cases} \frac{1}{\beta - \alpha} &\text{ if } \alpha \leq x \leq \beta \\ 0 &\text{ elsewhere } \end{cases} $$ 
+$$\begin{aligned} \mathrm{Var[X]} &= \mathrm{E[X^2]} - \mathrm{E^2[X]} \\ \mathrm{E[X^2]} &= \int_{-\infty}^\infty x^2f(x)dx \\ &= \int_\alpha^\beta x^2\frac{1}{\beta - \alpha}dx \\ &= \frac{1}{\beta - \alpha}\frac{x^3}{3}\Big|_\alpha^\beta \\ &= \frac{1}{3(\beta - \alpha)}(\beta^3 - \alpha^3) \\ &= \frac{1}{3(\beta - \alpha)}(\beta - \alpha)(\beta^2 + \alpha\beta + \alpha^2) \\ &= \frac{1}{3}(\beta^2 + \alpha\beta + \alpha^2) \\ \mathrm{Var[X]} &= \mathrm{E[X^2]} - \mathrm{E^2[X]} \\ &= \frac{1}{3}(\beta^2 + \alpha\beta + \alpha^2) - \frac{\beta^2 - 2\alpha\beta + \beta^2}{4} \\ &= \frac{1}{12}(4\beta^2 + 4\alpha\beta + 4\alpha^3 -3\beta^2 - 6\alpha\beta - 3\alpha^2) \\ &= \frac{1}{12}(\beta^2 - 2\alpha\beta + \alpha^2) \\ &= \frac{(\beta - \alpha)^2}{12} \end{aligned} $$ \end{proof} 
+\begin{example} Compute the expected number of aces in a 5 cards poker hand. (This is a hypergeometric distribution.) 
+$$\mathrm{E[X]} = \frac{nN_1}{N_1 + N_2} = \frac{5 \cdot 4}{4 + 48} = 0.38463 $$ \end{example} 
+\begin{example} Let $X$ have a normal distribution with $\mu = 3$. Find $\sigma$ if $P[x > 1] = 0.89435$. 
+$$P[X < 1] = 1 - P[X > 1] = 1 - 0.89435 = 0.010565$$ 
+Let $z = \frac{x - \mu}{\sigma}$ where $z$ has a standard normal distribution. Then: $$z = \frac{x - 3}{\sigma} = \text{invNorm}(0.10565, 0, 1) = -1.245$$ 
+This means $$ -1.245 = \frac{1 - 3}{\sigma} \rightarrow \sigma = \frac{-1}{-1.245} = 1.6$$ \end{example} 
+
+\section{Multivariate Distribution}
+\begin{definition} Bivariate Distribution: a probability distribution of two random variables either $X, Y$ or $X_1, X_2$ \end{definition} 
+\begin{definition} Joint Probability Function (discrete case): $$f(x, y) = P[X = x, Y = y] $$ \end{definition} 
+\begin{example} Two dices are tossed. Let $X$ = the sum of 2 dices and $Y$ = the absolute value of its difference. Construct the joint probability function. 
+$$\begin{tabular}{cccccccccccc}
+        $f(x,y)$ & 2              & 3              & 4              & 5              & 6              & 7              & 8              & 9              & 10             & 11             & 12             \\ \hline
+        0        & $\frac{1}{36}$ & 0              & $\frac{1}{36}$ & 0              & $\frac{1}{36}$ & 0              & $\frac{1}{36}$ & 0              & $\frac{1}{36}$ & 0              & $\frac{1}{36}$ \\ \hline 
+        1        & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              \\ \hline
+        2        & 0              & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & 0              \\ \hline
+        3        & 0              & 0              & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & 0              & 0              \\ \hline
+        4        & 0              & 0              & 0              & 0              & $\frac{2}{36}$ & 0              & $\frac{2}{36}$ & 0              & 0              & 0              & 0              \\ \hline
+        5        & 0              & 0              & 0              & 0              & 0              & $\frac{2}{36}$ & 0              & 0              & 0              & 0              & 0              \\ \hline
+    \end{tabular} $$ \end{example}
+\begin{example} Toss four coins. Let $X$ = the number of heads and $Y$ = the number of heads - the number of tails. Construct the joint probability function. 
+$$ \begin{tabular}{cccccc}
+        $f(x,y)$ & 0              & 1              & 2              & 3              & 4              \\ \hline
+        -4       & $\frac{1}{16}$ & 0              & 0              & 0              & 0              \\ \hline 
+        -3       & 0              & 0              & 0              & 0              & 0              \\ \hline
+        -2       & 0              & $\frac{4}{16}$ & 0              & 0              & 0              \\ \hline
+        -1       & 0              & 0              & 0              & 0              & 0              \\ \hline
+        0        & 0              & 0              & $\frac{6}{16}$ & 0              & 0              \\ \hline
+        1        & 0              & 0              & 0              & 0              & 0              \\ \hline
+        2        & 0              & 0              & 0              & $\frac{4}{16}$ & 0              \\ \hline
+        3        & 0              & 0              & 0              & 0              & 0              \\ \hline
+        4        & 0              & 0              & 0              & 0              & $\frac{1}{16}$ \\ \hline
+    \end{tabular} $$ \end{example} 
+\begin{definition} Cumulative Joint Probability Function: $$ F(x, y) = P[X \leq x, Y \leq y] $$ \end{definition} 
+\begin{definition} Marginal Probability Function: $$f_X(x) = P[X = x] = \sum_Y f(x, y) $$ $$f_Y(y) = P[Y = y] = \sum_X f(x, y) $$ \end{definition}
+\begin{example} Suppose a certain experiment has the following joint probability distribution. Construct its marginal probability function. 
+$$ \begin{tabular}{cccccc}
+        $f(x,y)$ & 1    & 2    & 3    & 4    & $f_Y(y)$ \\ \hline
+        1        & 0.1  & 0.05 & 0.07 & 0.02 & 0.24     \\ \hline
+        2        & 0.08 & 0.12 & 0.03 & 0.02 & 0.25     \\ \hline
+        3        & 0.15 & 0.2  & 0.05 & 0.11 & 0.51     \\ \hline
+        $f_X(x)$ & 0.33 & 0.37 & 0.15 & 0.15 & 1.00     \\ \hline  \end{tabular} $$
+$$F(3,2) = P[X \leq 3, Y \leq 2] = 0.45 $$ $$F(3.4, 2.1) = P[X \leq 3.4, Y \leq 2.1] = 0.45$$ $$f_X(2) = 0.05 + 0.12 + 0.2 = 0.37 $$ $$f_Y(2) = 0.08 + 0.12 + 0.03 + 0.02 = 0.25 $$ \end{example} 
+Note: $X$ and $Y$ are independent if $$f(x, y) = f_X(x)f_Y(y) \text{ for all } X, Y$$ $$P[X = x \text{ and } Y = y] = P[X = x]P[Y = y]$$ $$P(AB) = P(A)P(B)$$
+\begin{example} Roll a die and toss 2 coins. Let $X$ = the value on the die and $Y$ = the number of heads obtained. Construct the joint probability function. 
+$$ \begin{tabular}{llllllll}
+$f(x,y)$ & 1              & 2              & 3              & 4              & 5              & 6              & $f_Y(y)$      \\ \hline
+0        & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{4}$ \\ \hline
+1        & $\frac{2}{24}$ & $\frac{2}{24}$ & $\frac{2}{24}$ & $\frac{2}{24}$ & $\frac{2}{24}$ & $\frac{2}{24}$ & $\frac{1}{2}$ \\ \hline
+2        & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{24}$ & $\frac{1}{4}$ \\ \hline
+$f_X(x)$ & $\frac{1}{6}$  & $\frac{1}{6}$  & $\frac{1}{6}$  & $\frac{1}{6}$  & $\frac{1}{6}$  & $\frac{1}{6}$  & 1 \\ \hline           
+\end{tabular} $$ 
+$$f(x,y) = f_X(x)f_Y(y) \text{ for all } x, y \rightarrow X, Y \text{ are independent.} $$ \end{example}
+Properties of Single Summations: \begin{enumerate} 
+\item \begin{theorem} $$\sum_{x = 1}^n cf(x) = c\sum_{x = 1}^n f(x) $$ \end{theorem} 
+\item \begin{theorem} $$\sum_{x = 1}^n (f(x) + g(x)) = \sum_{x = 1}^n f(x) + \sum_{x = 1}^n g(x) $$ \end{theorem} \end{enumerate} 
+\begin{definition} Double Summations: $$\sum_{x = 1}^n\sum_{y = 1}^m f(x, y) = \sum_{x = 1}^n(\sum_{y = 1}^m f(x, y)) $$ \end{definition} 
+Properties of Double Summations: \begin{enumerate} 
+\item \begin{theorem} $$\sum_x\sum_y cf(x, y) = c\sum_x\sum_y f(x, y) $$ \end{theorem} 
+\item \begin{theorem} $$\sum_x\sum_y [f(x, y) + g(x, y)] = \sum_x\sum_y f(x, y) + \sum_x\sum_y g(x, y) $$ \end{theorem} \end{enumerate} 
+\begin{example} Compute $\sum_{x = 1}^3\sum_{y = 1}^4 xy^2$. $$\sum_{x = 1}^3\sum_{y = 1}^4 xy^2 = \sum_{x = 1}^3 (x + 4x + 9x + 16x) = \sum_{x = 1}^3 30x = 30\sum_{x = 1}^3 x = 30 \cdot 6 = 180 $$ \end{example} 
+\begin{example} Compute $\sum_{y = 1}^4\sum_{x = 1}^3 xy^2$. $$ \sum_{y = 1}^4\sum_{x = 1}^3 xy^2 = \sum_{y = 1}^4 (y^2 + 2y^2 + 3y^2) = \sum_{y = 1}^4 6y^2 = 6(1 + 4 + 9 + 16) = 6 \cdot 30 = 180 $$ \end{example}
+\begin{theorem} If $h(x, y) = f(x)g(y)$, then $$\sum_x\sum_y h(x, y) = (\sum_x f(x))(\sum_y g(y)) $$ \end{theorem} 
+\begin{example} Compute $\sum_{x = 1}^4\sum_{y = 1}^5 (x + y^2)$. $$\begin{aligned} \sum_{x = 1}^4\sum_{y = 1}^5 (x + y^2) &= \sum_{x = 1}^4\sum_{y = 1}^5 x + \sum_{x = 1}^4\sum_{y = 1}^5 y^2 \\ &= \sum_{x = 1}^4 x \sum_{y = 1}^5 1 + \sum_{y = 1}^5 y^2 \sum_{x = 1}^4 1 \\ &= 5\sum_{x = 1}^4 x + 4\sum_{y = 1}^5 y^2 \\ &= (5 \cdot 10) + (4 \cdot 55) = 50 + 220 = 270 \end{aligned} $$ \end{example} 
+\begin{definition} Double Integrals: $$\int_a^b\int_c^d f(x, y) dydx = \int_a^b[\int_c^d f(x, y) dy] dx $$ \end{definition} 
+\begin{example} Compute $\int_0^1\int_0^2 xydydx$. $$\int_0^1\int_0^2 xydydx = \int_0^1 \frac{xy^2}{2}\Big|_{y = 0}^{y = 2}dx = \int_0^1 2xdx = x^2\Big|_0^1 = 1 $$ \end{example} 
+\begin{example} Compute $\int_0^1\int_0^1 xy^3dydx$ $$\int_0^1\int_0^1 xy^3dydx = \int_0^1 x\frac{y^4}{4}\Big|_{y = 0}^{y = 1}dx = \int_0^1 \frac{1}{4}xdx = \frac{x^2}{8}\Big|_0^1 = \frac{1}{24} $$ \end{example}
+\begin{example} Compute $\int_0^1\int_0^x xy^3dydx$ $$\int_0^1\int_0^x xy^3dydx = \int_0^1 x\frac{y^4}{4}\Big|_{y = 0}^{y = x}dx = \int_0^1 \frac{1}{4}x^5dx = \frac{1}{24}x^6\Big|_0^1 = \frac{1}{24}$$ \end{example} 
+$f(x, y)$ is called a joint probability density function if: \begin{itemize} 
+\item $f(x, y) \geq 0$ for all $x, y$ \item $\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y)dydx = 1$ \end{itemize} 
+If $f(x, y)$ is the joint probability density function of $X$ and $Y$, $$f_X(x) = \int_{-\infty}^\infty f(x, y)dy $$ and $$f_Y(y) = \int_{-\infty}^\infty f(x, y)dx$$ 
+If $X$ and $Y$ have joint probability density function $f(x, y)$, we say that $X$ and $Y$ are independent if $$f(x, y) = f_X(x)f_Y(y) $$ 
+\begin{example} Suppose $X$ and $Y$ have joint probability density function as follows: $f(x, y) = \begin{cases} \frac{3}{16}xy^2 &\text{if } 0 \leq x \leq 2, 0 \leq y \leq 2 \\ 0 &\text{elsewhere} \end{cases} $ \begin{enumerate} \item Verify that $f(x, y)$ is a joint probability density function. \begin{itemize} \item $f(x, y) \geq 0$ for all $x, y$ \item $$\begin{aligned} \int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y)dydx &= \int_0^2 \int_0^2 \frac{3}{16}xy^2 dydx \\ &= \int_0^2 \frac{x}{16}y^3\Big|_{y = 0}^{y = 2}dx \\ &= \int_0^2 \frac{1}{2}xdx \\ &= \frac{x^2}{4}\Big|_0^2 \\ &= 1 \end{aligned} $$ \end{itemize} \item Compute $P[0 \leq X \leq 1, 0 \leq Y \leq 1]$. $$\begin{aligned} P[0 \leq X \leq 1, 0 \leq Y \leq 1] &= \int_0^1 \int_0^1 \frac{3}{16}xy^2 dydx \\ &= \int_0^1 \frac{1}{16}xy^3\Big|_{y = 0}^{y = 1}dx \\ &= \int_0^1 \frac{1}{16}xdx \\ &= \frac{1}{32}x^2\Big|_0^1 \\ &= \frac{1}{32} \end{aligned} $$ 
+\item Compute $P[Y \leq X]$. $$\begin{aligned} P[Y \leq X] &= \int_0^2 \int_0^x \frac{3}{16}xy^2dydx \\ &= \int_0^2 \frac{1}{16}xy^3\Big|_{y = 0}^{y = x}dx \\ &= \int_0^2 \frac{1}{16}x^4dx \\ &= \frac{1}{80}x^5\Big|_0^2 \\ &= \frac{32}{80} \end{aligned} $$ 
+\item Compute $f_X(x)$ and $f_Y(y)$. $$\begin{aligned} f_X(x) &= \int_0^2 xy^2dy \\ &= \frac{1}{16}xy^3\Big|_{y = 0}^{y = 2} \\ &= \frac{1}{2}x \end{aligned} $$ 
+$$\begin{aligned} f_Y(y) &= \int_0^2 \frac{3}{16}xy^2dx \\ &= \frac{3}{32}x^2y^2\Big|_{x = 0}^{x = 2} \\ &= \frac{3}{8}y^2 \end{aligned} $$ 
+\item Show that $X$ and $Y$ are independent. $$ \frac{3}{16}xy^2 = (\frac{1}{2}x)(\frac{3}{8}y^2) = \frac{3}{16}xy^2 $$ \end{enumerate} \end{example}
+
+\section{Functions of Several Random Variables; Central Limit Theorem}
+\begin{example} Suppose $X$ and $Y$ have joint probability density function as shown in the following table: $$\begin{tabular}{llll}
+$f(x, y)$ & 1   & 2    & 3    \\ \hline
+1         & 0.1 & 0.1  & 0.2  \\ \hline
+2         & 0.5 & 0.03 & 0.12 \\ \hline
+3         & 0.2 & 0.15 & 0.05 \\ \hline
+\end{tabular} $$ Find the probability function of $Z = X + Y$ and $W = XY$ 
+$$ \begin{tabular}{ll}
+$Z$ & $f_Z(z)$ \\ \hline
+2   & 0.1      \\ \hline
+3   & 0.15     \\ \hline
+4   & 0.43     \\ \hline
+5   & 0.27     \\ \hline
+6   & 0.05    \\ \hline
+\end{tabular} $$ 
+$$ \begin{tabular}{ll}
+$W$ & $f_W(w)$ \\ \hline
+1   & 0.1      \\ \hline
+2   & 0.15     \\ \hline
+3   & 0.4      \\ \hline
+4   & 0.03     \\ \hline
+6   & 0.27     \\ \hline
+9   & 0.05    \\ \hline
+\end{tabular} $$ \end{example}
+\begin{definition} $$ \mathrm{E[g(x, y)]} = \sum_x \sum_y g(x, y)f(x, y) $$ $$\mathrm{E[g(x, y)]} = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x, y)f(x, y)dydx $$ \end{definition} 
+\begin{theorem} $$\mathrm{E[X + Y]} = \sum_x \sum_y (x + y)f(x, y) $$ \end{theorem} 
+\begin{proof} $$\begin{aligned} \mathrm{E[X + Y]} &= \sum_x \sum_y xf(x, y) + yf(x, y) \\ &= \sum_x \sum_x xf(x, y) + \sum_y \sum_y yf(x, y) \\ &= \mathrm{E[X]} + \mathrm{E[Y]} \end{aligned} $$ \end{proof} 
+\begin{theorem} $$\mathrm{E[X + Y]} = \mathrm{E[X]} + \mathrm{E[Y]} $$ $$\mathrm{E[X - Y]} = \mathrm{E[X]} - \mathrm{E[Y]} $$ \end{theorem} 
+It is not always the case that $\mathrm{E[XY]} = \mathrm{E[X]}\mathrm{E[Y]} $ 
+\begin{theorem} If $X$ and $Y$ are independent, then $$\mathrm{E[XY]} = \mathrm{E[X]}\mathrm{E[Y]} $$ \end{theorem} 
+\begin{proof} $$\begin{aligned} \mathrm{E[XY]} &= \sum_x \sum_y (xy)f(x, y) \\ &= \sum_x \sum_y (xy)f_X(x)f_Y(y) \\ &= \sum_x xf_X(x) + \sum_y yf_Y(y) \\ &= \mathrm{E[X]}\mathrm{E[Y]} \end{aligned} $$ \end{proof} 
+\begin{definition} Let $X$ and $Y$ be random variables with means $\mu_X$ and $\mu_Y$ respectively. The covariance of $X$ with $Y$ is $$\mathrm{Cov[X,Y]} = \mathrm{E[(X - \mu_X)(Y - \mu_Y)]} $$ \end{definition} 
+\begin{theorem} $$\mathrm{Cov[X,Y]} = \mathrm{E[XY]} - \mathrm{E[X]}\mathrm{E[Y]} $$ \end{theorem} 
+\begin{proof} $$\begin{aligned} \mathrm{Cov[X,Y]} &= \mathrm{E[(X - \mu_X)(Y - \mu_Y)]} \\ &= \mathrm{E[XY - \mu_XY - \mu_YX + \mu_X\mu_Y]} \\ &= \mathrm{E[XY]} - \mathrm{E[\mu_XY]} - \mathrm{E[\mu_YX]} + \mathrm{E[\mu_X\mu_Y]} \\ &= \mathrm{E[XY]} - \mu_XE[Y] - \mu_YE[X] + \mu_X\mu_Y \\ &= \mathrm{E[XY]} - \mu_X\mu_Y - \mu_X\mu_Y + \mu_X\mu_Y \\ &= \mathrm{E[XY]} - \mu_X\mu_Y \\ &= \mathrm{E[XY]} - \mathrm{E[X]}\mathrm{E[Y]} \end{aligned} $$ \end{proof} 
+\begin{theorem} If $X$ and $Y$ are independent, then $$\mathrm{Cov[X,Y]} = 0$$ \end{theorem} 
+Note: If $\mathrm{Cov[X,Y]} = 0$, then $X$ and $Y$ may or may not be independent. Thus, if $\mathrm{Cov[X,Y]} = 0$, we say that $X$ and $Y$ are uncorrelated. \newline
+In general, $$-\infty < \mathrm{Cov[X,Y]} < \infty $$ 
+\begin{definition} Correlation Coefficient: $$\rho(X, Y) = \frac{\mathrm{Cov[X,Y]}}{\mu_X\mu_Y}$$ \end{definition} 
+Properties of the Correlation Coefficient: \begin{enumerate} 
+\item $ -1 \leq \rho(X, Y) \leq 1 $
+\item If $\rho(X, Y) = 1$, $Y = aX + b$ with $a > 0$ 
+\item If $\rho(X, Y) = -1$, $Y = aX + b$ with $a < 0$ \end{enumerate} 
+\begin{theorem} $$\mathrm{Var[X + Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} + 2\mathrm{Cov[X, Y]} $$ $$\mathrm{Var[X - Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} - 2\mathrm{Cov[X, Y]} $$ \end{theorem} 
+\begin{proof} Let $Z = X + Y$ $$\mathrm{E[Z]} = \mathrm{E[X]} + \mathrm{E[Y]} $$ $$\begin{aligned} \mathrm{Var[Z]} &= \mathrm{E[Z^2]} - \mathrm{E^2[Z]} \\ &= \mathrm{E[X + Y]^2} - [\mathrm{E[X]} + \mathrm{E[Y]}]^2 \\ &= \mathrm{E[X^2 + 2XY + Y^2]} - [\mathrm{E^2[X]} + 2\mathrm{E[X]}\mathrm{E[Y]} + \mathrm{E^2[Y]}] \\ &= \mathrm{E[X^2]} + 2\mathrm{E[XY]} + \mathrm{E[Y^2]} - \mathrm{E^2[X]} - 2\mathrm{E[X]}\mathrm{E[Y]} \\ &= \mathrm{E[X^2]} - \mathrm{E^2[X]} + \mathrm{E[Y^2]} - \mathrm{E^2[Y]} + 2[\mathrm{E[XY]} - \mathrm{E[X]}\mathrm{E[Y]}] \\ &= \mathrm{Var[X]} + \mathrm{Var[Y]} + 2\mathrm{Cov[X,Y]} \end{aligned} $$\end{proof} 
+If $X$ and $Y$ are independent, $$\mathrm{Var[X + Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} $$ $$ \mathrm{Var[X - Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} $$
+\begin{example} Suppose $X$ and $Y$ have joint probability function as follows: $$\begin{tabular}{llll}
+$f(x, y)$ & 1   & 2    & 3    \\ \hline
+1         & 0.1 & 0.1  & 0.2  \\ \hline
+2         & 0.5 & 0.03 & 0.12 \\ \hline
+3         & 0.2 & 0.15 & 0.05 \\ \hline
+\end{tabular} $$ $$ \begin{aligned} \mathrm{E[X + Y]} &= \sum_{x = 1}^3 \sum_{y = 1}^3 (x + y)f(x, y) \\ &= (1 + 1)(0.1) + (1 + 2)(0.1) + (1 + 3)(0.2) \\ &+ (2 + 1)(0.05) + (2 + 2)(0.03) + (2 + 3)(0.12) \\ &+ (3 + 1)(0.2) + (3 + 2)(0.03) + (3 + 3)(0.05) \\ &= 4.02 \end{aligned} $$ 
+$$\begin{aligned} \mathrm{E[X]} &= \sum_{x = 1}^3 xf(x, y) \\ &= (1)(0.1) + (2)(0.1) + (3)(0.2) \\ &+ (1)(0.05) + (2)(0.03) + (3)(0.12) \\ &+ (1)(0.2) + (2)(0.15) + (3)(0.05) \\ &= 2.02 \end{aligned} $$ $$\mathrm{E[X]} = \sum_{x = 1}^3 xf_X(x) = (1)(0.35) + (2)(0.28) + (3)(0.37) = 2.02 $$ $$ \mathrm{E[Y]} = 2.00 $$
+$$\begin{aligned} \mathrm{E[XY]} &= (1 \cdot 1)(0.1) + (1 \cdot 2)(0.0.1) + (1 \cdot 3)(0.2) \\ &+ (2 \cdot 1)(0.05) + (2 \cdot 2)(0.03) + (2 \cdot 3)(0.12) \\ &+ (3 \cdot 1)(0.2) + (3 \cdot 2)(0.15) + (3 \cdot 3)(0.05) \\ &= 3.79 \end{aligned} $$ $$ \mathrm{Cov[X, Y]} = \mathrm{E[XY]} - \mathrm{E[X]}\mathrm{E[Y]} = 3.79 - (2.02)(2) = -0.25$$ 
+ \end{example}
+\begin{theorem} If $X_1, X_2, \dots, X_n$ are independent, $$ \mathrm{Var[X_1, X_2, \dots, X_n]} = \mathrm{Var[X_1]} + \mathrm{Var[X_2]} + \dots + \mathrm{Var[X_n]} $$ Note: if 1 or more of the plus signs on the left hand side are minuses, the result remains the same. \end{theorem} 
+\begin{example} Let $f(x, y) = \begin{cases} \frac{3}{16}xy^2 &\text{if } 0 \leq x, y \leq 2 \\ 0 &\text{elsewhere} \end{cases} $. Compute the following: \begin{itemize} 
+\item $\mathrm{E[X]} = \int_0^2 \int_0^2 x\frac{3}{16}xy^2dydx = \int_0^2 \int_0^2 \frac{3}{16}x^2y^2dydx = \frac{4}{3} $
+\item $\mathrm{E[Y]} = \int_0^2 \int_0^2 y\frac{3}{16}xy^2dydx = \int_0^2 \int_0^2 \frac{3}{16}xy^3dydx = \frac{3}{2} $
+\item $\mathrm{E[X^2]}= \int_0^2 \int_0^2 x^2\frac{3}{16}xy^2dydx = \int_0^2 \int_0^2 \frac{3}{16} x^3y^2dydx = 2 $
+\item $\mathrm{E[Y^2]} = \int_0^2 \int_0^2 y^2\frac{3}{16}xy^2dydx = \int_0^1 \int_0^2 \frac{3}{16}xy^4dydx = \frac{12}{5} $
+\item $\mathrm{E[XY]} = \int_0^2 \int_0^2 xy\frac{3}{16}xy^2dydx = \int_0^1 \int_0^1 \frac{3}{16}x^2y^3dydx = 2 $
+\item $\mathrm{Var[X]} = \mathrm{E[X^2]} - \mathrm{E^2[X]} = 2 - (\frac{4}{3})^2 = \frac{2}{9} $
+\item $\mathrm{Var[Y]} = \mathrm{E[Y^2]} - \mathrm{E^2[Y]} = \frac{12}{5} - (\frac{3}{2})^2 = \frac{3}{20} $
+\item $\mathrm{E[X + Y]} = \mathrm{E[X]} + \mathrm{E[Y]} = \frac{4}{3} + \frac{3}{2} = \frac{17}{6} $ 
+\item $\mathrm{E[X - Y]} = \mathrm{E[X]} - \mathrm{E[Y]} = \frac{4}{3} - \frac{3}{2} = -\frac{1}{6} $
+\item $\mathrm{Cov[X, Y]} = \mathrm{E[XY]} - \mathrm{E[X]}\mathrm{E[Y]} = 2 - (\frac{4}{3})(\frac{3}{2}) = 0 $
+\item $\mathrm{Var[X + Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} + 2\mathrm{Cov[X, Y]} = \frac{2}{9} + \frac{3}{10} + 2(0) = \frac{67}{180} $
+\item $\mathrm{Var[X - Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} - 2\mathrm{Cov[X, Y]} = \frac{2}{9} + \frac{3}{10} - 2(0) = \frac{67}{180} $ \end{itemize} \end{example} 
+\begin{definition} Random Variables $X$ and $Y$ are identically distributed if they have the same probability distributions with identical parameters. \end{definition} 
+\begin{example} Toss a single dice twice. Let $X$ = the result of the first toss and $Y$ = the result of the second toss. $$
+\begin{tabular}{llll}
+$x$ & $f(x)$        & $y$ & $f(y)$        \\ \hline 
+1   & $\frac{1}{6}$ & 1   & $\frac{1}{6}$ \\ \hline 
+2   & $\frac{1}{6}$ & 2   & $\frac{1}{6}$ \\ \hline
+3   & $\frac{1}{6}$ & 3   & $\frac{1}{6}$ \\ \hline
+4   & $\frac{1}{6}$ & 4   & $\frac{1}{6}$ \\ \hline
+5   & $\frac{1}{6}$ & 5   & $\frac{1}{6}$ \\ \hline
+6   & $\frac{1}{6}$ & 6   & $\frac{1}{6}$ \\ \hline
+\end{tabular} $$ With respect to $X$, this is a uniform distribution with parameter 6. With respect to $Y$, this is also a uniform distribution with parameter 6. Thus, $X$ and $Y$ are identically distributed. $X$ and $Y$ are also IID. \end{example} 
+\begin{definition} If $X$ and $Y$ are identically distributed and are independent, we say they are IID. \end{definition} 
+\begin{theorem} If $X_1, X_2, \dots, X_n$ are IID, with mean $\mu$ and standard deviation $\sigma$: \begin{enumerate} 
+\item If $S = X_1 + X_2 + \dots + X_n$, $$\mathrm{E[S]} = n\mu$$ $$\mathrm{Var[S]} = n\sigma^2$$ $$\sigma_S = \sigma\sqrt{n} $$ 
+\item If $\bar{X} = \frac{X_1 + X_2 + \dots + X_N}{n}$, $$\mathrm{E[\bar{X}]} = \mu $$ $$\mathrm{Var[\bar{X}]} = \frac{\sigma^2}{n} $$ $$\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} $$ \end{enumerate} \end{theorem} 
+\begin{proof} $$\bar{X} = \frac{1}{n}S $$ $$\mathrm{E[\bar{X}]} = \mathrm{E[\frac{1}{n}S]} = \frac{1}{n}\mathrm{E[S]} = \frac{1}{n}n\mu = \mu $$ 
+$$\mathrm{Var[\bar{X}]} = \mathrm{Var[\frac{1}{n}S]} = \frac{1}{n^2}\mathrm{Var[S]} = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n} $$ \end{proof} 
+\begin{example} A pair of dice is tossed 100 times. a) Compute the expected value and standard deviation of the sum of the tosses. \newline If $X$ represents the sum of the dices on the $i^\text{th}$ toss, then $S = X_1 + X_2 + \dots + X_{100}$. Furthermore, $X_1, X_2, \dots, X_{100}$ are IID. $$ 
+\begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline
+2 & $\frac{1}{36}$  \\ \hline
+3 & $\frac{2}{36}$ \\ \hline
+4 & $\frac{3}{36}$ \\ \hline
+5 & $\frac{4}{36}$ \\ \hline
+6 & $\frac{5}{36}$ \\ \hline
+7 & $\frac{6}{36}$ \\ \hline
+8 & $\frac{5}{36}$ \\ \hline
+9 & $\frac{4}{36}$ \\ \hline
+10 & $\frac{3}{36}$ \\ \hline
+11 & $\frac{2}{36}$ \\ \hline
+12 & $\frac{1}{36}$ 
+\end{tabular} $$ $$\mathrm{E[X]} = 7 $$ $$\mathrm{Var[X]} = \mathrm{E[X^2]} - \mathrm{E^2[X]} = 54.833 - 7^2 = 5.833 $$ $$ \mathrm{E[S]} = 100\mathrm{E[X]} = 100 \cdot 7 = 700 $$ $$\mathrm{Var[S]} = 100\mathrm{Var[X]} = 100 \cdot 5.833 = 583.3 $$ $$\sigma_S = \sigma_X\sqrt{100} = 10\sqrt{5.833} = 2.415 $$ b) Compute $\mathrm{E[\bar{x}]}$, $\mathrm{Var[\bar{X}]}$ and $\sigma_{\bar{X}}$. $$\mathrm{E[\bar{X}]} = \mu = 7 $$ $$\mathrm{Var[\bar{X}]} = \frac{\mathrm{Var[X]}}{n} = \frac{5.833}{100} = 0.05833 $$ $$\sigma_{\bar{X}} = \frac{\sigma_x}{\sqrt{n}} = \frac{2.415}{\sqrt{100}} = 0.2415$$ \end{example} 
+\begin{theorem} If $X_1, X_2, \dots, X_n$ are independent random variables having Bernoulli distribution, with parameter $p$, then $S = X_1 + X_2 + \dots + X_n$ has a binomial distribution with parameters $n$ and $p$ such that $$\mathrm{E[S]} = n\mathrm{E[X]} = np $$ $$\mathrm{Var[S]} = n\mathrm{Var[X]} = npq $$ \end{theorem} 
+\begin{proof} $$ \begin{tabular}{ll}
+$x$ & $f(x)$ \\ \hline 
+1   & $p$    \\ \hline 
+0   & $q$  \\ \hline 
+\end{tabular} $$ $S = X_1 + X_2 + \dots + X_n = $ number of successes in $n$ Bernoulli trials \end{proof} 
+\begin{theorem} If $X$ and $Y$ are independent random variables having Poisson distribution, with parameters $\lambda_X$ and $\lambda_Y$, then $X + Y$ also has a Poisson distribution with parameter $\lambda_X + \lambda_Y$. This extends to any number of random variables having a Poisson distribution. \end{theorem} 
+\begin{example} The number of cars coming at a certain toll booth in a one minute time interval obeys a Poisson distribution with $\lambda = 3$. a) Compute the probability that no more than 2 cars will arrive between 6:00 and 6:01. Let $X$ = the number of cars. $$P[X \leq 2] = \text{poissoncdf}(3, 2) = 0.42319$$ b) Compute the probability that no more than 160 cars will arrive between 6:00 and 7:00. Let $X_1$ = the number of cars arriving in the first minute, $X_2$ = the number of cars arriving in the second minute, $\dots$, $X_{60}$ = the number of cars arriving in the sixtieth minute. $$S = X_1 + X_2 + \dots + X_{60}$$ By the previous theorem, $S$ is a Poisson distribution with parameter $$\lambda_S = 60\lambda = 60 \cdot 3 = 180 $$ $$P[S \leq 160] = \text{poissoncdf}(180, 160) = 0.07101$$ \end{example}
+\begin{theorem} If $X$ and $Y$ are independent random variables having Poisson distributions with parameters $\lambda_X$ and $\lambda_Y$, then $X + Y$ has a Poisson distribution with parameter $\lambda_X + \lambda_Y$. \end{theorem}
+\begin{proof} Let $Z = X + Y$ such that $f_Z(z) = P[Z = z] = P[X + Y = z]$. \newline 
+If $X = k$, then $Y = Z - k$ in order for $X + Y = Z$. Thus: $$\begin{aligned} f_Z(z) &= \sum_{k = 0}^z P[X = k, Y = Z - k] \\ &= \sum_{k = 0}^z P[X = k] \cdot P[Y = Z - k] \\ &= \sum_{k = 0}^z \frac{\lambda_X^ke^{-\lambda_X}}{k!} \cdot \frac{\lambda_Y^{Z - k}e^{-\lambda_Y}}{(Z - k)!} \\ &= e^{-\lambda_X}e^{-\lambda_Y}\sum_{k = 0}^z \frac{\lambda_X^k\lambda_Y^{Z - k}}{k!(Z - k)!} \\ &= \frac{e^{-(\lambda_X + \lambda_Y)}}{z!}\sum_{k = 0}^z \frac{z!}{k!(Z - k)!}\lambda_X^k \lambda_Y^{Z - k} \\ &= \frac{e^{-(\lambda_X + \lambda_Y)}}{z!}(\lambda_X + \lambda_Y)^z \end{aligned} $$ If $\lambda = \lambda_X + \lambda_Y$, $f_Z(z) = \frac{e^{-\lambda}\lambda^z}{z!}$. This is the Poisson distribution with parameter $\lambda = \lambda_1 + \lambda_2$. \end{proof}
+\begin{theorem} If $X$ and $Y$ are independent random variables having normal distributions with parameters $\mu_X$, $\sigma_X$ and $\mu_Y$, $\sigma_Y$ respectively, then $X + Y$ has a normal distribution with parameters $\mu_{X + Y} = \mu_X + \mu_Y$ and $\sigma_{X + Y} = \sqrt{\sigma_X^2 + \sigma_Y^2}$. In addition, $X - Y$ has a normal distribution with parameters $\mu_{X - Y} = \mu_X - \mu_Y$ and $\sigma_{X + Y} = \sqrt{\sigma_X^2 + \sigma_Y^2}$. \end{theorem} 
+\begin{proof} $$\mu_{X + Y} = \mathrm{E[X + Y]} = \mathrm{E[X]} + \mathrm{E[Y]} = \mu_X + \mu_Y$$ $$\mu_{X - Y} = \mathrm{E[X - Y]} = \mathrm{E[X]} - \mathrm{E[Y]} = \mu_X - \mu_Y$$ $$\mathrm{Var[X + Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} \rightarrow \sigma_{X + Y} = \sqrt{\mathrm{Var[X]} + \mathrm{Var[Y]}} = \sqrt{\sigma_X^2 + \sigma_Y^2} $$ $$\mathrm{Var[X - Y]} = \mathrm{Var[X]} + \mathrm{Var[Y]} \rightarrow \sigma_{X + Y} = \sqrt{\mathrm{Var[X]} + \mathrm{Var[Y]}} = \sqrt{\sigma_X^2 + \sigma_Y^2} $$ \end{proof} 
+\begin{example} To get to an important meeting, Bill has to drive on two highways to catch a train to Philadelphia. His travel time $X$ on the first highway is a normally distributed random variable with mean 30 minutes and standard deviation 6 minutes. His travel time $Y$ on the second highway is also a normally distributed random variable with mean 45 minutes and standard deviation 8 minutes. If he leaves his home at 8:00, what is the probability he will miss his train which leaves promptly at 9:20? Assume independence. \newline Let $Z = X + Y$. Then $Z$ has a normal distribution and $$\mu_Z = \mu_X + \mu_Y = 30 + 45 = 75 $$ $$\sigma_Z = \sqrt{\sigma_X^2 + \sigma_Y^2} = \sqrt{6^2 + 8^2} = 10 $$ $$P[Z > 80] = \text{normalcdf}(80, E99,75,10) = 0.3085 $$ \end{example} 
+\begin{theorem} Central Limit Theorem: Let $X_1, X_2, \dots, X_n$ be IID random variables, each having mean $\mu$ and standard deviation $\sigma$. Let $\bar{X} = \frac{X_! + X_2 + \dots + X_n}{n}$ and let $X* = \frac{\bar{X} - mu}{\frac{\sigma}{\sqrt{n}}}$. As $n \to \infty$, the distribution of $X*$ approaches a standard normal distribution. \newline Consequences: \begin{enumerate} 
+\item If $n$ is large, $X*$ is approximately normal with $\mathrm{E[X*]} = 0$ and $\sigma_{X*} = 1$ 
+\item If $n$ is large, $\bar{X}$ is approximately normal with $\mathrm{E[\bar{X}]} = \mu$ and $\sigma_{\bar{X}} = \frac{\mu}{\sqrt{n}}$ 
+\item If $n$ is large, $S = X_1 + X_2 + \dots + X_n$ is approximately normal with $\mathrm{E[S]} = n\mu$ and $\sigma_S = \sigma\sqrt{n}$ \end{enumerate} 
+Recall that $$\begin{aligned} \mathrm{E[S]} &= \mathrm{E[X_1 + X_2 + \dots + X_n]} \\ &= \mathrm{E[X_1]} + \mathrm{E[X_2]} + \dots + \mathrm{E[X_n]} \\ &= \mu + \mu + \dots + \mu = n\mu \end{aligned} $$ $$\begin{aligned} \mathrm{Var[S]} &= \mathrm{Var[X_1 + X_2 + \dots + X_n]} \\ &= \mathrm{Var[X_1]} + \mathrm{Var[X_2]} + \dots + \mathrm{Var[X_n]} \\ &= \sigma^2 + \sigma^2 + \dots + \sigma^2 = n\sigma^2 \end{aligned} $$ $$\sigma_S = \sigma\sqrt{n} $$ $$\begin{aligned} \mathrm{E[\bar{X}]} &= \mathrm{E[\frac{S}{n}]} \\ &= \frac{1}{n}\mathrm{E[S]} \\ &= \frac{1}{n}\cdot n\mu = \mu \end{aligned} $$ $$\begin{aligned} \mathrm{Var[\bar{X}]} &= \mathrm{Var[\frac{S}{n}]} \\ &= \frac{1}{n^2}\mathrm{Var[S]} \\ &= \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n} \end{aligned} $$ $$\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} $$ Note: For most applications, "large" means $n \geq 30$. \end{theorem} 
+\begin{example} The life of a lithium battery has an exponential distribution with parameter $\theta = 10$ years. \newline a) Compute the probability that a single battery will last between 10 and 12 years. $$f(x) = \begin{cases} \frac{1}{10}e^{-\frac{x}{10}} &\text{ if } x \geq 0 \\ 0 &\text{ elsewhere } \end{cases} $$ $$P[10 \leq x \leq 12] = \int_{10}^{12} \frac{1}{10}e^{-\frac{x}{10}}dx = -e^{-\frac{x}{10}}\Big|_{10}^{12} = -e^{-12} + e^{-1} = 0.0667 $$ b) Compute the probability that 100 batteries will have an average between 10 and 12 years. $$\mathrm{E[X]} = \theta = 10 $$ $$ \bar{X} = \frac{X_1 + X_2 + \dots + X_{100}}{100} $$ $$ \mu_{\bar{X}} = \mu_X = \mathrm{E[X]} = 10 $$ $$\mathrm{Var[X]} = \theta^2 = 100 $$ $$\sigma_X = 10 $$ $$\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} = 1 $$ $$P[10 \leq x \leq 12] = \text{normalcdf}(10, 12, 10, 1) = 0.477 $$ 
+\end{example} 
+If $X_1, X_2, \dots, X_n$ have Bernoulli distributions, with parameter $p$, assuming independence, the random variable $S = X_1 + X_2 + \dots + X_n$ will have a binomial distribution with parameters $n$ and $p$. Furthermore, $S$ has a mean of $np$ and a standard deviation of $\sqrt{npq}$. Since $S$ is the sum of IID random variables, $S$ can be approximated by a normal distribution having the same mean and standard deviation (assuming $n$ is large). 
+\begin{definition} Continuity Correction Factor: a factor of half a number placed in addition at both ends of a probability distribution calculation \end{definition} 
+\begin{example} Binomial distribution: $n = 16$, $p = \frac{1}{2}$ \newline Exact Binomial probability: $$P[5 \leq x \leq 11] = \text{binomcdf}(16, \frac{1}{2}, 11) - \text{binomcdf}(16, \frac{1}{2}, 4) = 0.9232 $$ Normal Distribution without CCF: $\mu = np = 8$, $\sigma = \sqrt{npq} = 2$ \newline $$P[5 \leq x \leq 11] = \text{normalcdf}(5, 11, 8, 2) = 0.8664 $$ $$\text{Percent Error} = \frac{0.9232 - 0.8664}{0.9232} = 0.062 = 6.2\% $$ Normal Distribution with CCF: $$P[5 \leq x \leq 11] = \text{normalcdf}(4.5, 11.5, 8, 2) = 0.91922 $$ $$\text{Percent Error} = \frac{0.9232 - 0.9192}{0.9232} = 0.004 = 0.4\% $$ \end{example}
+
+\section{Elements of Statistical Inference}
+\begin{definition} Consider a population of size $N$ $$P = \{x_1, x_2, \dots, x_n\}$$ Population Mean: $$\mu = \frac{1}{N}\sum_{i = 1}^N x_i $$ 
+Population Variance: $$\sigma^2 = \frac{1}{N}\sum_{i = 1}^N (x_i - \mu)^2 $$ Population Standard Deviation: $$\sigma$$ \end{definition} 
+\begin{definition} Select a random sample of size $n$ where $n << N$ $$\text{Sample} = \{x_1, x_2, \dots, x_n\} $$ Sample Mean: $$\bar{x} = \frac{1}{n}\sum_{i = 1}^n x_i $$ We would like to use $\bar{x}$ to approximate $\mu$ (mean of the population). \begin{itemize} 
+\item Point Estimate: $\mu = \bar{x}$ - AVOID \item Interval Estimate: $\mu \in (\bar{x} - \epsilon, \bar{x} + \epsilon) $ \end{itemize} The larger the value of $\epsilon$, the more likely our estimate is correct. However, if $\epsilon$ is too large, our estimate is useless. Ideally, we sample without replacement. However, if $n << N$, we can assume sampling is with replacement. \end{definition} 
+\begin{definition} Sample Standard Deviation: $$s^2 = \sum_{i = 1}^n \frac{(x_i - \bar{x})^2}{n - 1} $$ \end{definition} 
+\begin{theorem} $$\mathrm{E[s^2]} = \sigma^2 $$ $s^2$ is called an unbiased estimator of $\sigma^2$. \end{theorem} 
+\begin{proof} Verification for $n = 3$: $$\begin{aligned} s^2 &= \frac{1}{2}\sum_{i = 1}^3 (x_i - \bar{x})^2 \\ &= \frac{1}{2}[(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + (x_3 - \bar{x})^2] \\ &= \frac{1}{2}[(x_1 - \frac{x_1 + x_2 + x_3}{3})^2 + (x_2 - \frac{x_1 + x_2 + x_3}{3})^2 + (x_3 - \frac{x_1 + x_2 + x_3}{3})^2] \\ &= \frac{1}{2}[(\frac{2x_1 - x_2 - x_3}{3})^2 + (\frac{2x_2 - x_1 - x_3}{3})^2 + (\frac{2x_3 - x_1 - x_2}{3})^2] \\ &= \frac{1}{18}[(2x_1 - x_2 - x_3)^2 + (2x_2 - x_1 - x_3)^2 + (2x_3 - x_1 - x_2)^2] \\ &= \frac{1}{18}[6x_1^2 + 6x_2^2 + 6x_3^2 - 6x_1x_2 - 6x_2x_3 - 6x_1x_3] \\ &= \frac{1}{3}[x_1^2 + x_2^2 + x_3^2 - x_1x_2 - x_2x_3 - x_1x_3] \\ \mathrm{E[s^2]} &= \frac{1}{3}[\mathrm{E[x_1^2]} + \mathrm{E[x_2^2]} + \mathrm{E[x_3^2]} - \mathrm{E[x_1x_2]} - \mathrm{E[x_2x_3]} - \mathrm{E[x_1x_3]}] \\ &\text{Assuming that $x_1, x_2, x_3$ are independent} \\ &= \frac{1}{3}[\mathrm{E[x_1^2]} + \mathrm{E[x_2^2]} + \mathrm{E[x_3^2]} - \mathrm{E[x_1]E[x_2]} - \mathrm{E[x_2]E[x_3]} - \mathrm{E[x_1]E[x_3]}] \\ &= \frac{1}{3}[\mathrm{E[x_1^2]} + \mathrm{E[x_2^2]} + \mathrm{E[x_3^2]} - \mu - \mu - \mu] \\ &= \frac{1}{3}[\mathrm{Var[x_1]} + \mathrm{Var[x_2]} + \mathrm{Var[x_3]}] \\ &= \frac{1}{3}[\sigma^2 + \sigma^2 + \sigma^2] \\ &= \sigma^2 \end{aligned} $$ \end{proof}
+
+Four Cases: \begin{enumerate} 
+\item Assume the population is normally distributed. We know that $\bar{x}$ will have a normal distribution regardless of the size of $n$. $$\mathrm{E[\bar{x}]} = \mathrm{E[x]} = \mu (\mu_{\bar{x}} = \mu) $$ $$\mathrm{Var[\bar{x}]} = \frac{1}{n}\mathrm{Var[x]} $$ $$ \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} $$ We would like to mathematically determine $\epsilon$ so that $$P[\bar{x} - \epsilon < \mu < \bar{x} + \epsilon] = 1 - \alpha $$ If $\alpha$ is known, we can compute $-z_{\frac{\alpha}{2}}$ and $z_{\frac{\alpha}{2}}$ so that the area between them is $1 - \alpha$ on the standard normal curve. 
+\begin{example} $\alpha = 0.05, \frac{\alpha}{2} = 0.025, 1 - \alpha = 0.95$ $$-z_{\frac{\alpha}{2}} = \text{invNorm}(0.025, 0, 1) = -1.96 $$ $$z_{\frac{\alpha}{2}} = 1.96$$ 
+Let $z = \frac{\bar{x} - \mu_{\bar{x}}}{\sigma_{\bar{x}}}$. $$\begin{aligned} P[-1.96 < z < 1.96] &= 0.95 \\ P[-1.96 < \frac{\bar{x} - \mu_{\bar{x}}}{\sigma_{\bar{x}}} < 1.96] &= 0.95 \\ P[-1.96 < \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} < 1.96] &= 0.95 \\ P[-1.96\frac{\sigma}{\sqrt{n}} < \bar{x} - \mu < 1.96\frac{\sigma}{\sqrt{n}}] &= 0.95 \\ P[-1.96\frac{\sigma}{\sqrt{n}} < \mu - \bar{x} < 1.96\frac{\sigma}{\sqrt{n}}] &= 0.95 \\ P[\bar{x} - \underbrace{1.96\frac{\sigma}{\sqrt{n}}}_{-\epsilon} < \mu < \bar{x} + \underbrace{1.96\frac{\sigma}{\sqrt{n}}}_{\epsilon}] &= 0.95 \end{aligned} $$ $$(\bar{x} - 1.96\frac{\sigma}{\sqrt{n}}, \bar{x} + 1.96\frac{\sigma}{\sqrt{n}}) $$ is called the 95\% confidence interval for $\mu$. \end{example} 
+\begin{example} A population is normally distributed and is known to have a standard deviation $\sigma = 10$. A random sample of size 25 is selected and $\bar{x}$ is computed to be 80. Find the 95\% confidence interval for $\mu$. $$(80 - 1.96\frac{10}{\sqrt{25}}, 80 + 1.96\frac{10}{\sqrt{25}}) $$ $$(76.08, 83.92) $$ \end{example} 
+\begin{example} Repeat for the 98\% confidence interval. $\alpha = 1 - 0.98 = 0.02$ $$z_{\frac{\alpha}{2}} = z_{0.01} = \text{invNorm}(0.01, 0, 1) = 2.33 $$ 
+$$(80 - 2.33\frac{10}{\sqrt{25}}, 80 + 2.33\frac{10}{\sqrt{25}})$$ $$(75.34, 84.66)$$ \end{example} 
+\item If the population is not normally distributed, $\bar{x}$ will have an approximately normal distribution provided that $n$ is large ($n \geq 30$) by the Central Limit Theorem. Proceed the same way as (1). 
+\item The population standard deviation is unknown. If $n$ is large, we can use the t- distribution with $n - 1$ degrees of freedom. Then the confidence interval is: $$(\bar{x} - t_{\frac{\alpha}{2}}\frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{\frac{\alpha}{2}}\frac{s}{\sqrt{n}}) $$ 
+\begin{example} Find the t value for the 95\% confidence interval if $n = 30$ and $df = 29$. $$-t_{\frac{\alpha}{2}} = \text{invT}(0.025, 29) = -2.045 $$ $$t_{\frac{\alpha}{2}} = 2.045 $$ \end{example} 
+\begin{example} In a study of 100 randomly selected NYC high school students, the mean number of hours per week they study was found to be 16.6 with a standard deviation of 2.8. Construct the 95\% confidence interval for the mean study time of all NYC high school students. $$\bar{x} = 16.6, s = 2.8, df = 99, \frac{\alpha}{2} = 0.025 \rightarrow t_{\frac{\alpha}{2}} = 1.984$$ $$(16.6 - 1.984\frac{2.8}{\sqrt{100}}, 16.6 + 1.984\frac{2.8}{\sqrt{100}}) $$ $$(16.044, 17.156)$$ \end{example} 
+\item The population is assumed to be normally distributed. Sample size does not matter. Use the t- distribution with $n- 1$ degrees of freedom. 
+\begin{example} The prices, in dollars, for a particular model of camera at 10 dealers randomly selected in NYC are: 225, 240, 215, 206, 211, 210, 193, 250, 225, 202. Assuming the population is normal, construct a 99\% confidence interval for the mean price of all dealers in NYC. Using T-Interval: 
+$$\bar{x} = 217.7, S_x = 17.486, n = 10 $$ $$(207.56, 227.84)$$ \end{example} \end{enumerate}
+Suppose we would like to estimate the mean $\mu$ of a population with an absolute error less than $\epsilon$: \begin{enumerate} 
+\item Case 1: If $\sigma$ is known and the population is normal OR $\sigma$ is known and the sample size is large 
+$$ \begin{aligned} \bar{x} - z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} < &\mu < \bar{x} + z_{\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}} \\ |\text{error}| &< \epsilon \\ z_{\frac{\alpha}{2}}\sigma &< \mu\sqrt{n} \\ \sqrt{n} &< \frac{z_{\frac{\alpha}{2}}\sigma}{\epsilon} \\ n &> (\frac{z_{\frac{\alpha}{2}\sigma}}{\epsilon})^2 \end{aligned} $$ 
+\begin{example} Consider the example of NYC high school students with $n = 100, \bar{x} = 16.6$ hours of study time and $s = 2.8$. \newline
+At the 95\% confidence level, $(16.044 < \mu < 17.158) $, determine an appropriate sample size so that at the 95\% confidence level, $|$error$| < 0.5$. 
+$$n > (\frac{(1.96)(2.08)}{0.5}) = 120.47 \rightarrow n \geq 121 $$ \end{example} 
+\item Case 2: If $\sigma$ is unknown but $n \geq 30$, we replace $\sigma$ by $s$ and proceed as in case 1. $$ n > (\frac{z_{\frac{\alpha}{2}}{\sigma}}{\epsilon})^2 $$ 
+\item Case 3: If the population is normal, $\sigma$ is unknown and the sample size is not necessarily small. Use case 2 with $z_{\frac{\alpha}{2}}$ in place of $t_{\frac{\alpha}{2}}$. Then compute $n$ as in case 2, and then check the confidence interval using $t_{\frac{\alpha}{2}}$ with $n - 1$ degrees of freedom. If $|$error$| < \epsilon$, then use this value of $n$. Otherwise increase $n$ until $|$error$| < \epsilon$. \end{enumerate} 
+
+\section{Estimation}
+
+Suppose we have 2 large populations $X$ and $Y$ which have means $\mu_X$ and $\mu_Y$ respectively. From population $X$, we select a random sample of size $n_x$ and compute $\bar{x}$ and $s_x$. From population $Y$, we select a sample of size $n_y$ and compute $\bar{y}$ and $s_y$. We would like to use $\bar{x} - \bar{y}$ to estimate the difference in the means of the 2 populations or $\sigma_X - \sigma_Y$. $$\begin{aligned} \mathrm{E[\bar{x} - \bar{y}]} &= \mathrm{E[\bar{x}]} - \mathrm{E[\bar{y}]} = \sigma_x - \sigma_y \\ \mu_{\bar{x} - \bar{y}} &= \mu_X - \mu_Y \\ \mathrm{Var[\bar{x} - \bar{y}]} &= \mathrm{Var[\bar{x}]} + \mathrm{Var[\bar{y}]} = \frac{s_x^2}{n_x} + \frac{s_y^2}{n_y} \end{aligned}$$ 
+Here we are using $s_x$ and $s_y$ in place of $\sigma_X$ and $\sigma_Y$ provided the sample size is large enough. $$\sigma_{\bar{x} - \bar{y}} = \sqrt{\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}} $$ We proceed to find a confidence interval using the same procedure as for a single population but using $\bar{x} - \bar{y}$ in place of  just $\bar{x}$, $\mu_{\bar{x} - \bar{y}}$ in place of $\mu_x$ and $s_{\bar{x} - \bar{y}}$ in place of $s_{\bar{x}}$. 
+\begin{example} A random sample of 169 pages typed by Ms. X showed a mean of 3.1 mistakes and standard deviation of 0.65. A random sample of 121 pages typed by Ms. Y showed an average of 2.7 mistakes per page with a standard deviation of 0.66. Find a 95\% confidence interval for the difference in the mean number of mistakes for all pages typed by the two typists. 
+$$\begin{aligned} \bar{x} = 3.1 &, \bar{y} = 2.7 \\ s_x = 0.65 &, s_y = 0.66 \\ n_x = 1.69 &, n_y = 1.21 \\ z_{\frac{\alpha}{2}} &= 1.96 \\ (\bar{x} - \bar{y}) - z_{\frac{\alpha}{2}}s_{\bar{x} - \bar{y}} < \mu_x &- \mu_y <  (\bar{x} - \bar{y}) + z_{\frac{\alpha}{2}}s_{\bar{x} - \bar{y}} \\ \bar{x} - \bar{y} &= 0.4 \\ s_{\bar{x} - \bar{y}} &= \sqrt{\frac{0.65^2}{169} + \frac{0.66^2}{121}} = 0.0781 \\ 0.4 < (1.96)(0.0781) < \mu_x &- \mu_y < 0.4 + (1.96)(0.0781) \\ 0.2469 < \mu_x &- \mu_y < 0.5531 \end{aligned} $$ \end{example} 
+
+
+
+
+\end{document}
+
+
+
+
+

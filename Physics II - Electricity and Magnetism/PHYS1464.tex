@@ -1,0 +1,1030 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Physics 146: Electricity and Magneticism}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\title{Physics 146: Electricity and Magnetism}
+\author{Darshan Patel}
+\date{Fall 2016}
+\maketitle
+
+\tableofcontents
+
+\newpage
+\section{Electric Charge and Electric Field}
+\subsection{Electric Charge}
+\begin{definition} Electrostatics: the interaction between electric charges that are at rest (or nearly so) \end{definition} 
+Two positive charges or two negative charges repel each other. A positive charge and a negative charge attract each other. 
+\begin{example} Plain plastic rods neither attract nor repel each other but after being rubbed with fur, the rods repel each other due to negative charge in both. Plain glass rods neither attract nor repel each other but after being rubbed with silk, the rods repel each other due to positive charge in both. The fur-rubbed plastic rod and the silk-rubbed glass rod attract each other and the fur and silk each attracts the rod it rubbed. \end{example} 
+The algebraic sum of all the electric charges in any closed system is constant. The magnitude of charge of the electron or proton is a natural unit of charge. 
+
+\subsection{Conductors, Insulators, and Induced Charges}
+\begin{definition} Conductor: permits the easy movement of charge through them \end{definition} \begin{definition} Insulator: does not permit the easy movement of charge through them \end{definition} 
+\begin{definition} Charging by Induction: a charged object is brought near but not touched to a neutral conducting object; the presence of a charged object near a neutral conductor will force (or induce) electrons within the conductor to move \end{definition} 
+A charged object of either sign exerts an attractive force on an uncharged insulator. 
+\begin{definition} Polarization: the process of separating opposite charges within an object \end{definition} 
+
+\subsection{Coulomb's Law}
+\begin{definition} Coulomb's Law: the magnitude of the electric force between 2 point charges is directly proportional to the product of the charges and inversely proportional to the square of the distance between them $$ F = k \frac{|q_1q_2|}{r^2} $$ where $k$ is a proportionality constant, and the force magnitude $F$ is always positive. \end{definition} 
+When the 2 charges have the same sign, the forces are repulsive; when the charges have opposite signs, the forces are attractive. \newline
+The SI unit of electric charge is called one coulomb (1 C). In SI units, the constant $k$ is written as $\frac{1}{4\pi \varepsilon_0}$ where $\varepsilon_0$ is called the electric constant. Thus, Coulomb's law becomes: $$ F = \frac{1}{4\pi \varepsilon_0}\frac{|q_1q_2|}{r^2} $$ 
+\begin{definition} Principle of Superposition of Forces: when two (or more) charges exert forces simultaneously on a third force, the total force acting on that charge is the vector sum of the forces that two (or more) charges would exert individually \end{definition} 
+
+\subsection{Electric Field and Electric Forces}
+\begin{definition} Electric Field: produced/caused by a point charge $q_0$  on body A causing a force $F_0$ on body $A$; this is an interaction between two charged bodies; a single charge produces an electric field in the surrounding space but this electric field cannot exert a net force on the charge that created it. $$ \vec{E} = \frac{\vec{F_0}}{q_0} $$ \end{definition} 
+The electric force on a charged body is exerted by the electric field created by other charged bodies. 
+\begin{definition} Test Charge: a small charged body \end{definition} 
+In SI units, the units for electric field is 1 newton per coulomb (N/C). 
+$$ \vec{F_0} = q_0\vec{E} $$ (force exerted on a point charge by an electric field E) \newline The charge $q_0$ can be either positive or negative. If $q_0$ is positive, the force experienced by the charge is in the same direction as the electric field; if $q_0$ is negative, the force and the electric field are in opposite directions. \newline
+The electric field due to a point charge can be calculated as follows: 
+$$ \vec{E} = \frac{1}{4\pi \varepsilon_0}\frac{q}{r^2}\hat{r} $$ where $q$ is the value of the point charge, $r^2$ is the distance from point charge to where field is measured and $\hat{r}$ is the unit vector from point charge toward where field is measured. \newline
+By definition, the electric field of a point charge always points away from a positive charge (in the same direction as $\hat{r}$) but towards a negative charge (opposite $\hat{r}$). \newline
+In electrostatics, the electric field at every point within the material of a conductor must be zero. The field is not necessarily zero in a hole inside a conductor though. 
+
+\subsection{Electric-Field Calculations}
+\begin{definition} Principle of Superposition of Electric Fields: the total electric field at P is the vector sum of the fields at P due to each point charge in the charge distribution \end{definition} 
+\begin{definition} Linear Charge Density ($\lambda$): charge per unit length \newline
+Surface Charge Density ($\sigma$): charge per unit area \newline
+Volume Charge Density ($\rho$): charge per unit volume \end{definition}
+\begin{definition} For a ring of charge, the electric field is: $$ dE_x = dE\cos{\alpha} = \frac{1}{4\pi \varepsilon_0}\frac{dQ}{x^2 + a^2}\frac{x}{\sqrt{x^2 + a^2}} = \frac{1}{4\pi \varepsilon_0}\frac{\lambda x}{(x^2  + a^2)^\frac{3}{2}}ds $$ When integrated over the entire ring for s from 0 to $2\pi a$, the electric field becomes: $$ \vec{E} = \frac{1}{4\pi \varepsilon_0}\frac{Qx}{(x^2 + a^2)^\frac{3}{2}} $$ where $x$ is the distance from the center of the ring to point P and $a$ is the radius. If we let $ x >> a$, then the electric field is basically similar to one of a point charge. \end{definition}
+\begin{definition} For a charged line segment, the electric field is $$ dE_x = \frac{1}{4\pi \varepsilon_0}\frac{Q}{2a}\frac{xdy}{(x^2 + y^2)^\frac{3}{2}} $$ $$ dE_y = -\frac{1}{4\pi \varepsilon_0}\frac{Q}{2a}\frac{ydy}{(x^2 + y^2)^\frac{3}{2}} $$ When integrated over the entire line from y = -a to y = a, the electric field becomes: $$ E_x = \frac{1}{4\pi \varepsilon_0}\frac{Q}{x\sqrt{x^2 + a^2}}$$ $$ E_y = 0 $$ 
+For an infinite line of charge, the electric field is $$ E = \frac{\lambda}{2\pi \epsilon_0 r} $$ \end{definition} 
+\begin{definition} For an uniformly charged disk, the electric field is: $$ dE_x = \frac{1}{4\pi \varepsilon_0} \frac{2\pi \sigma rxdr}{(x^2 + r^2)^\frac{3}{2}} $$ 
+When integrated over all rings, from r = 0 to r = R, the electric field is: $$ E_x = \frac{\sigma x}{2\varepsilon_0}[-\frac{1}{\sqrt{x^2 + R^2}} + \frac{1}{x}] = \frac{\sigma}{2\varepsilon_0}[1 - \frac{1}{\sqrt{(R^2/x^2) + 1}}] $$ If the disk is very large, or R >> x, then the electric field becomes: $$ E = \frac{q}{2\epsilon_0} $$ \end{definition} 
+\begin{definition} For two oppositely charged infinite sheets, the electric field is $$ E = \frac{\rho}{2\epsilon_0}$$ for both sheets thus when summed up, the electric field is: $$ E = \frac{\rho}{\epsilon_0} $$ between the sheets and 0 above and below the sheets. \end{definition}
+
+\subsection{Electric Field Lines}
+\begin{definition} Electric Field Line: an imaginary line or curve drawn through a region of space so that its tangent at any point is in the direction of the electric field vector at that point \end{definition} 
+Note: Field lines never intersect. \newline Field lines are directed away from positive charges and towards negative charge. In regions where the field magnitude is large, such as between positive and negative charge, the field lines are drawn close together; in regions where the field magnitude is small, such as between two positive charges, the lines are widely separated. In a uniform field, the field lines are straight, parallel and uniformly spaced. 
+
+\subsection{Electric Dipoles}
+\begin{definition} Electric Dipole: a pair of point charges with equal magnitude and opposite sign separated by a distance d \end{definition} 
+The net force on an electric dipole in a uniform electric field is zero. However, their torques don't add up to zero since the two forces don't act along the same line. \newline 
+The torque of an electric dipole is; $$ \tau = (qE)(d\sin{\phi}) $$ where $d\sin{\phi}$ is the perpendicular distance between the lines of action of the two forces. \newline
+The product of the charge $q$ and the separation $d$ is the magnitude of the electric dipole moment, denoted by p: $$ p = qd $$ 
+Thus, the magnitude of the torque exerted by the field becomes: $$ \tau = pE\sin{\phi} $$ where $\tau$ is the magnitude of the torque on an electric dipole, $p$ is the magnitude of the electric dipole moment and $\phi$ is the angle between $\vec{p}$ and $\vec{E}$. This can also be written as: $$ \tau = \vec{p} \times \vec{E} $$
+The potential energy for an electric dipole in an electric field is: $$ U = -\vec{p} \cdot \vec{E} $$ 
+
+\section{Gauss's Law} 
+\subsection{Charge and Electric Flux} 
+\begin{definition} Electric Flux: flow of electric charge through a surface \end{definition} 
+Positive charge inside a box goes with an outward electric flux through the box's surface and negative charge inside goes with an inward electric flux. There is no net electric flux through the surface of the box when (1) the electric field is zero (2) there's zero net charge inside the box and so inward flux cancels outward flux and (3) there's no charge inside the box and a charge outside cancels inward and outward flux on the box. \newline
+For the special cases of a closed surface in the shape of a rectangular box and charge distributions made up of point charges or infinite charged sheets: \begin{enumerate} \item Whether there is a net outward or inward electric flux through a closed surface depends on the sign of the enclosed charge \item Charges outside the surface do not give a net electric flux through the surface \item The net electric flux is directly proportional to the net amount of charge enclosed within the surface but is otherwise independent of the size of the closed surface \end{enumerate}
+
+\subsection{Calculating Electric Flux} 
+\begin{definition} Gauss's Law: the net electric flux through a closed surface is directly proportional to the net charge inside that surface \end{definition} 
+The flux of a uniform electric field is defined as follows: $$ \Phi_E = EA $$ where E is the magnitude of the electric field and A is the area of the surface \newline Three Scenarios: \begin{enumerate} 
+\item When the surface is face-on to electric field: E and A are parallel and the angle in between is zero and the flux is simply EA 
+\item When the surface is tilted from a face-on orientation by an angle $\phi$: the flux is EA$\cos \phi$ 
+\item When the surface is edge-on to electric field: E and A are perpendicular and the angle between E and A is 90 and the flux is 0 \end{enumerate}
+\begin{definition} Flux of a Nonuniform Electric Field $$ \Phi_E = \int E\cos \phi dA = \int E_\perp dA = \int \vec{E} \cdot d\vec{A} $$ where $\Phi_E$ is the electric flux through a surface, $\phi$ is the angle between E and normal to surface, dA is the element of surface area, $E_\perp$ is the component of E perpendicular to the surface, and $d\vec{A}$ is the vector element of surface area. \end{definition} 
+
+\subsection{Gauss's Law} 
+\begin{definition} Point Charge inside a Spherical Surface $$ \Phi_E = EA = \frac{1}{4\pi \varepsilon_0}\frac{q}{R^2}(4\pi R^2) = \frac{q}{\varepsilon_0} $$ 
+The flux is independent of the radius of the sphere. It depends on only the charge q enclosed by the surface. \end{definition} 
+\begin{definition} Point Charge inside a Nonspherical Surface: $$ \Phi_E = \oint \vec{E} \cdot d\vec{A} = \frac{q}{\varepsilon_0} $$ The circle on the integral sign reminds us that the integral is always taken over a closed surface. \newline 
+For a closed surface enclosing no charge: $$ \Phi_E = \oint \vec{E} \cdot d\vec{A} = 0 $$ When a region contains no charge, any field lines caused by charges outside the region that enter on one side must again on the other side. Electric field lines can begin or end inside a region of space only when there is charge in that region. \end{definition} 
+General form of Gauss's Law: $$ \Phi_E = \oint \vec{E} \cdot d\vec{A} = \frac{Q_\text{encl}}{\varepsilon_0} $$ The total electric flux through a closed surface equal to the total (net) electric charge inside the surface, divided by $\varepsilon_0$. 
+\begin{definition} For a spherical Gaussian surface around a positive point charge (positive, outward flux): $$ \Phi_E = \oint E_\perp dA = \oint (\frac{q}{4\pi \varepsilon_0 r^2})dA = \frac{q}{4\pi \varepsilon_0 r^2}\oint dA = \frac{q}{4\pi \varepsilon_0 r^2}4\pi r^2 = \frac{q}{\varepsilon_0} $$ \end{definition} 
+\begin{definition} For a spherical Gaussian surface around a negative point charge (negative, inward flux): $$ \Phi_E = \oint E_\perp dA = \oint (\frac{-q}{4\pi \varepsilon_0 r^2})dA = \frac{-q}{4\pi \varepsilon_0 r^2}\oint dA = \frac{-q}{4\pi \varepsilon_0 r^2}4\pi r^2 = \frac{-q}{\varepsilon_0} $$ \end{definition}
+\subsection{Applications of Gauss's Law} 
+When excess charge is placed on a solid conductor and is at rest, it resides entirely on the surface, not in the interior of the material. There can be no excess charge at any point within a solid conductor; any excess charge must reside on the conductor's surface. 
+\begin{definition} Field of a Charged Conducting Sphere: \newline Inside the sphere, the electric field is zero. \newline Outside the sphere, the magnitude of the electric field decreases with the square of the radial distance from the center of the sphere $$ E = \frac{1}{4\pi \varepsilon_0}\frac{q}{r^2} $$ At the surface of the charged conducting sphere, $$ E = \frac{1}{4\pi \varepsilon_0}\frac{q}{R^2} $$ \end{definition} 
+\begin{definition} Field of a Uniform Line Charge: \newline
+The flux through both sides of the of the cylindrical Gaussian surface is 0 leaving only the curved rectangular surface that has flux $$ Q_\text{encl} = \lambda l $$ $$ \Phi_E = EA = (2\pi rl)E = \frac{\lambda l}{\varepsilon_0} $$ and $$ E = \frac{1}{2\pi \epsilon_0}\frac{\lambda}{r} $$ for the field of an infinite line of charge. \end{definition}
+\begin{definition} Field of an Infinite Plane Sheet of Charge: \newline
+The flux through the cylindrical part of the Gaussian surface is zero but the flux through each end cap is $EA$. Since there 2 end caps, $$ 2EA = \frac{\sigma A}{\varepsilon_0} $$ and $$ E = \frac{\sigma}{2\varepsilon_0} $$ for a field of an infinite sheet of charge. \end{definition}
+\begin{definition} Field between Oppositely Charged Parallel Conducting Plates: \newline
+The flux, calculated using cylindrical Gaussian surfaces, is $$ EA = \frac{\sigma A}{\varepsilon_0} $$ and $$ E = \frac{\sigma}{\varepsilon_0} $$ for a field between oppositely charged conducting plates. \end{definition} 
+\begin{definition} Field of a Uniformly Charged Sphere: \newline
+Positive (or negative) charge Q is distributed uniformly throughout the volume of an insulating sphere with a radius R. $$Q_\text{encl} = \rho V_\text{encl} = (\frac{Q}{4\pi R^3/3})(\frac{4}{3}\pi r^3) = Q\frac{r^3}{R^3} $$ where r is the distance from the center of the sphere and R is the radius of the sphere. Then for inside the sphere, $$ EA = 4\pi r^2 E = \frac{Q}{\varepsilon_0}\frac{r^3}{R^3} $$ or $$ E = \frac{1}{4\pi \varepsilon_0}\frac{Qr}{R^3} $$ for a field inside a uniformly charged sphere. \newline For the electric field at the surface, $$ E = \frac{1}{4\pi \varepsilon_0}\frac{Q}{R^2} $$ 
+For the electric field outside the surface, $$ E = \frac{1}{4\pi \varepsilon_0}\frac{Q}{r^2} $$ Note which r is which. \end{definition} 
+\begin{definition} Charge on a Hollow Sphere: $$ q = EA = E(4\pi \varepsilon_0 r^2) $$ \end{definition} 
+
+\subsection{Charges on Conductors} 
+For finding the electric field within a charged conductor with a cavity, \begin{enumerate} 
+\item The total charge of the conductor is $q_c$
+\item The charge inside the cavity is $q$
+\item The charge outside the cavity but inside the Gaussian surface is $-q$
+\item The charge on the outer surface of the conductor is $q_c + q$
+\end{enumerate}
+ \begin{definition} Electric Field at Surface of a Conductor: $$ E_\perp = \frac{\sigma}{\varepsilon_0} $$ where $\sigma$ is the surface charge density and $E$ is the electric field perpendicular to the surface. \end{definition} 
+
+\section{Electric Potential} 
+
+\subsection{Electric Potential Energy}
+\begin{definition} Work Done by a Conservative Force: $$ W_{a \rightarrow b} = U_a - U_b = -(U_b - U_a) = -\Delta U $$ where $U_b$ is the potential energy at final position and $U_a$ is the potential energy at initial position \end{definition} 
+ \begin{theorem} Work-Energy Theorem: $$ k_a + U_a = K_b + U_b$$ This only all forces are conservative \end{theorem} 
+\begin{definition} Electric Potential Energy in a Uniform Field: $$ W_{a \rightarrow B} = Fd = q_0Ed $$ where $q_0$ is the test charge, $E$ is the electric field. This work is positive since the force is in the same direction as the net displacement of the test charge. \newline
+The potential energy for the electric field is $$ U = q_0Ey$$ where the units for $U$ is joules, J, and so, when the test charge moves from height $y_a$ to $y_b$, the work done on the charge by the field is given be: $$ W_{a \rightarrow b} = -\Delta U = -(U_b - U_a) = -(q_0Ey_b - q_0Ey_a) = q_0E(y_a - y_b) $$ \end{definition} 
+Note: $U$ increases if the test charge $q_0$ moves in the same direction opposite the electric force and decreases if $q_0$ moves in the same direction as the electric force. 
+\begin{definition} Electric Potential Energy of Two Point Charges: \newline
+Te work done by moving a test charge in the presence of another charge is:: $$ W_{a \rightarrow b} = \int_{r_a}^{r_b} F_rdr = \int_{r_a}^{r_b} \frac{1}{4\pi \varepsilon_0}\frac{qq_0}{r^2}dr = \frac{qq_0}{4\pi \varepsilon_0}(\frac{1}{r_a} - \frac{1}{r_b}) $$ The work done on $q_0$ during any displacement is: $$ W_{a \rightarrow b} = \int_{r_a}^{r_b} F\cos(\phi)dl = \int_{r_a}^{r_b} \frac{1}{4\pi \varepsilon_0}\frac{qq_0}{r^2}\cos(\phi)dl $$ Thus, the electric potential energy of two point charges is: $$ U = \frac{1}{4\pi \varepsilon_0}\frac{qq_0}{r} $$ where $r$ is the distance between the 2 charges \end{definition} 
+The potential energy is positive if the charges have the same sign and negative if they have negative signs. \newline Gauss's Law says that that if the electric field is outside a spherically symmetric charge distribution, it is the same as if all of its charge was concentrated at its center. Thus, the electric potential energy of 2 point charges equation would still be the same. 
+\begin{definition} Electric Potential Energy with Several Point Charges: $$ U = \frac{q_0}{r\pi \varepsilon_0}(\frac{q_1}{r_1} + \frac{q_2}{r_2} + \frac{q_3}{r_3} + \dots ) = \frac{q_0}{4\pi \varepsilon_0}\sum\limits_i \frac{q_i}{r_i} $$ where $r_1, r_2, r_3, \dots$ is the distance of its respective charge from the test charge \end{definition}
+For every electric field due to a static charge distribution, the force exerted by that field is conservative. \newline
+There is potential energy involved in assembling a system of charges due to the interactions amongst the other charges, which is: $$ U = \frac{1}{4\pi \varepsilon_0}\sum\limits_{i < j} \frac{q_iq_j}{r_ij} $$
+The potential energy difference $U_a - U_b$ equal the work that is done by the electric force when the particle moves from $a$ to $b$. When $U_a$ is greater than $U_b$, the field does positive work on the particle as it "falls" from a point of higher potential energy (a) to a point of lower potential energy (b). \newline The potential difference can also be viewed as the work that must be done by an external force to move the particle slowly from $b$ to $a$ against the electric force. 
+
+\subsection{Electric Potential}
+\begin{definition} Potential is potential energy per unit charge $$ V = \frac{U}{q_0} \text{ or } U = q_0V $$ 
+The units for potential is volts (V) or joule/coulomb (J/C) \end{definition}
+The potential done by the electric force during a displacement $a$ to $b$ is: $$ \frac{W_{a \rightarrow b}}{q_0} = -\frac{\Delta U}{q_0} = (\frac{U_b}{q_0} - \frac{U_a}{q_0}) = -(V_b - V_a) = V_a - V_b $$ where $V_a = \frac{U_a}{q_0}$ is the potential energy per unit charge at point $a$. Thus it is called the potential at point $a$. \newline
+Two ways to look at this: (1) the potential (in V) of $a$ with respect to $b$ equals the work (in J) done by the electric field when a unit (1 C) charge moves from $a$ to $b$; (2) the potential (in V) of $a$ with respect to $b$ equals the work (in J) that must be done to move a unit (I C) charge slowly from $b$ to $a$ against the electric force.
+\begin{definition} Electric Potential due to a Point Charge: $$ V = \frac{1}{4\pi \varepsilon_0}\frac{q}{r} $$ where $r$ is the distance from the point charge to where potential is measured \end{definition} 
+\begin{definition} Electric Potential due to a Collection of Point Charges: $$ V = \frac{1}{4\pi \varepsilon_0}\sum \limits_i \frac{q_i}{r_i} $$ \end{definition} 
+\begin{definition} Electric Potential due to a Continuous Distribution of Charge: $$ V = \frac{1}{4\pi \varepsilon_0}\int \frac{dq}{r} $$ where $dq$ is the charge element \end{definition} 
+\begin{definition} Electric Potential Difference: $$ V_a - V_b = \int\limits_a^b \vec{E} \cdot d\vec{l} = \int\limits_a^b E\cos(\phi)dl $$ where $l$ is the displacement. \end{definition} If the line integral is positive, the electric field does positive work on a positive test charge as it moves from $a$ to $b$ and so the electric potential energy decreases as the test charge moves and so the potential energy per unit charge (or potential) decreases as well and so, $V_b$ is less than $V_a$ and $V_a - V_b$ is positive. \newline
+General Rule: Moving with the direction of $\vec{E}$ means moving in the direction of decreasing $V$ and moving against the direction of $\vec{E}$ means moving the direction of increasing $V$. A positive test charge experiences an electric force in the direction of the field, towards lower values of $V$; a negative test charge experiences a force opposite the direction of the field, toward higher values of $V$. Thus a positive charge tends to "fall" from a high potential region to a lower potential region and opposite for a negative charge. \newline 
+Note that the potential difference can be rewritten as: $$ V_a - V_b = -\int\limits_a^b \vec{E} \cdot d\vec{l} $$ 
+\begin{definition} Electron Volt: the amount of energy required to move an electron through 1 V $$ U_a - U_b = q(V_a - V_b) = (1.602 \times 10^-19 C)(1 V) = 1.602 \times 10^-19 J = 1 eV $$ \end{definition}
+
+\subsection{Calculating Electric Potential}
+The voltage inside a solid positively charged spherical conductor is constant $$ V = \frac{1}{4\pi \varepsilon_0}\frac{q}{R} $$ and then varies with distance $r$ for distance from the center of the conductor $$ V = \frac{1}{4\pi \varepsilon_0}\frac{q}{r} $$
+
+For 2 oppositely charged parallel plates, the potential energy per unit charge is $$ V(y) = \frac{U(y)}{q_0} = \frac{q_0Ey}{q_0} = Ey $$ The potential decreases from positive to negative plate and so, $$ V_a - V_b = Ed $$ and $$ E = \frac{V_{ab}}{d} $$ where $V_{ab}$ is the potential of the positive plate with respect to the negative plate. Note that $ V = 0$ at the bottom negative plate. 
+
+For an infinite line charge or charged conducting cylinder, $$ V_a - V_b = \int\limits_a^b \vec{E} \cdot d\vec{l} = = \int_a^b E_rdr = \frac{\lambda}{2\pi \varepsilon_0}\int\limits_{r_a}^{r_b} \frac{dr}{r} = \frac{\lambda}{2\pi \varepsilon_0}ln\frac{r_b}{r_a} $$ The potential at pont $a$ at a radial distance $r$ is $$ V = \frac{\lambda}{2\pi \varepsilon_0}ln\frac{r_0}{r} $$ 
+
+For a ring of charge, the potential is: $$ V = \frac{1}{4\pi \varepsilon_0}\int\frac{dq}{r} = \frac{1}{4\pi \varepsilon_0} \frac{1}{\sqrt{x^2 + a^2}}\int dq = \frac{1}{4\pi \varepsilon_0}\frac{Q}{\sqrt{x^2 + a^2}} $$ 
+
+For a line of charge, the potential is $$ V = \frac{1}{4\pi \varepsilon_0}\frac{Q}{2a}\int\limits_{-a}^{a} frac{dy}{\sqrt{x^2 + y^2}} = \frac{1}{4\pi \varepsilon_0}\frac{Q}{2a}\ln(\frac{\sqrt{a^2 + x^2} + a}{\sqrt{a^2  + x^2} - a}) $$ 
+
+\subsection{Equipotential Surfaces} 
+\begin{definition} An equipotential surface is a 3 dimensional surface on which the electric potential $V$ is the same at every point. No point can be at 2 different potentials, so equipotential surfaces for different potentials can never touch or intersect. Field lines and equipotential surfaces are always mutually perpendicular. \end{definition} 
+In the special case of a uniform field, the field lines are straight, parallel and equally spaced while the equipotentials are parallel planes perpendicular to the field lines. \newline
+When all charges are at rest, the surface of a conductor is always  an equipotential surface. When all charges are at rest, the electric field just outside a conductor must be perpendicular to the surface at every point. When all charges are at rest, the entire solid volume of a conductor is at the same potential. 
+
+\subsection{Potential Gradient} 
+\begin{definition} Electric Field Components found from Potenial: $$ E_x = -\frac{\partial V}{\partial x} $$ $$ E_y= -\frac{\partial V}{\partial y} $$ $$ E_z = -\frac{\partial V}{\partial z} $$ \end{definition} 
+\begin{definition} Electric Field Vector found from Potential: $$ \vec{E} = -(\hat{i}\frac{\partial V}{\partial x} + \hat{j}\frac{\partial V}{\partial y} + \hat{k}\frac{\partial V}{\partial z}) $$ \end{definition} 
+If $\vec{E}$ has a radial component $E_r$ with respect to a point or an axis and $r$ is the distance from the point or axis, $$ E_r = -\frac{\partial V}{\partial r} $$ 
+
+\section{Capacitance and Dielectrics}
+
+\subsection{Capacitors and Capacitance} 
+\begin{definition} Capacitor: any two conductors separated by an insulator \end{definition} 
+\begin{definition} Capacitance: $$ C = \frac{Q}{V_{ab}} $$ where $Q$ is the magnitude of charge on each conductor and $V_{ab}$ is the potential difference between the conductors. The SI units of capacitance is farad, F, or C/V. \newline Capacitance is a measure of the ability of a capacitor to store energy. \end{definition} 
+\begin{definition} Capacitance of a Parallel Plate Capacitor: $$ C = \frac{Q}{V_{ab}} = \varepsilon_0\frac{A}{d} $$ where $\varepsilon_0$ is the electric constant, $A$ is the area of each plate, and $d$ is the distance between the plates. \end{definition} 
+\begin{definition} For a spherical capacitor: $$ V_{ab} = V_a - V_b = \frac{Q}{4\pi \varepsilon_0r_a} - \frac{Q}{4\pi \varepsilon_0r_b} = \frac{Q}{4\pi \varepsilon_0}(\frac{r_b - r_a}{r_ar_b}) $$ and so, $$ C = \frac{Q}{V_{ab}} = 4\pi \varepsilon_0\frac{r_ar_b}{r_b - r_a} $$ \end{definition} 
+\begin{definition} For a cylindrical capacitor: $$ V = \frac{\lambda}{2\pi \varepsilon_0}\ln\frac{r_0}{r} = \frac{\lambda}{2\pi \varepsilon_0}\ln\frac{r_b}{r_a} $$ and so $$ C = \frac{Q}{V_{ab}} = \frac{\lambda L}{\frac{\lambda}{2\pi \varepsilon_0}\ln(\frac{r_b}{r_a})} = \frac{2\pi \varepsilon_0 L}{\ln\frac{r_b}{r_a}} $$ The capacitance for unit length is: $$ \frac{C}{L} = \frac{2\pi \varepsilon_0}{\ln\frac{r_b}{r_a}} $$ \end{definition}
+
+\subsection{Capacitors in Series and Parallel}
+\begin{definition} Equivalence Capacitance: the capacitance of an entire network of capacitors \end{definition} 
+\begin{definition} In a series connection, the magnitude of charge on all plates is the same and voltage is summed up to get total voltage of the circuit. $$ \frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3} + \dots $$ The reciprocal of the equivalence capacitance of a series connection equals the sum of the reciprocals of the individual capacitances. The equivalence capacitance is always less than any individual capacitance. \end{definition} 
+\begin{definition} In a parallel connection, the potential difference for all individual capacitors is the same and to get the total charge of the system, the capacitances are summed up and multiplied by voltage: $$ Q = (C_1 + C_2)V $$ 
+Thus the equivalence capacitance is $$ C_{eq} = C_1 + C_2 + C_3 + \dots $$ The equivalence capacitance of a parallel combination equals the sum of the individual capacitances. The equivalence capacitance is always greater than any individual capacitance. \end{definition} 
+
+\subsection{Energy Stored in Capacitors and Electric-Field Energy}
+The total work $W$ needed to increase the capacitor charge $q$ from zero to $Q$ is: $$ W = \int\limits_0^W dW = \frac{1}{C}\int\limits_0^Q qdq = \frac{Q^2}{2C} $$ 
+\begin{definition} Potential Energy stored in a Capacitor: $$ U = \frac{Q^2}{2C} = \frac{1}{2}CV^2 = \frac{1}{2}QV $$ \end{definition} 
+\begin{definition} Energy Density: the energy per unit volume in the space between the plates of a parallel plate capacitor with plate area $A$ and separation $d$ $$ u = \frac{\frac{1}{2}CV^2}{Ad}= \frac{1}{2}\varepsilon_0E^2 $$ \end{definition} 
+
+\subsection{Dielectrics}
+\begin{definition} Dielectric: a nonconducting material between 2 conducting plates \end{definition} 
+By having a dielectric, two large metal sheets at a very small separation can be maintained, the maximum potential difference between the capacitor plates can be increased, and the capacitance of the capacitor is greater. 
+\begin{definition} Dielectric constant: the ratio of the capacitance between having a dielectric inserted and not $$ K = \frac{C}{C_0} $$ where $C$ is the capacitance with the dielectric present and $C_0$ is the capacitance with the dielectric removed. Note: there are no SI units for $K$. \end{definition} Thus, when the charge is constant, $$ V = \frac{V_0}{K} $$ That is to say, with the dielectric present, the potential difference for a given charge $Q$ is reduced by a factor $K$. Thus, the electric field between the plats must also decrease by the same factor: $$ E = \frac{E_0}{K} $$ (when $Q$ is constant). \newline 
+If $\sigma_i$ is the magnitude of the charge per unit area induced on the surfaces of the dielectric (the induced surface charge density), and $\sigma$ is the magnitude of the surface charge density on the capacitor plates, then the net surface charge on each side of the capacitor is $(\sigma - \sigma_i)$. Thus, without the dielectric, $$ E_0 = \frac{\sigma}{\varepsilon_0} $$ and with the dielectric, $$ E = \frac{\sigma - \sigma_i}{\varepsilon_0} $$ Rearranging this shows that $$ \sigma_i = \sigma(1 - \frac{1}{K})$$ which is the induced surface charge density. This shows that when $K$ is very large, $\sigma_i$ is as large as $\sigma$ and so the field and potential difference are much smaller than their values in the vacuum. 
+\begin{definition} Permittivity: the product $K\varepsilon_0$ of the dielectric $$ \varepsilon = K\varepsilon_0$$ \end{definition} 
+in terms of $\varepsilon$, the electric field within the dielectric is expressed as: $$ E = \frac{\sigma}{\varepsilon} $$ 
+\begin{definition} Capacitance of a Parallel Plate with a Dielectric between Plates: $$ C = KC_0 = K\varepsilon_0\frac{A}{d} = \varepsilon\frac{A}{d} $$ \end{definition} 
+\begin{definition} Electric Energy Density in a Dielectric: $$ u = \frac{1}{2}K\varepsilon_0E^2 = \frac{1}{2}\varepsilon_0E^2 $$ \end{definition} 
+
+\subsection{Gauss's Law in Dielectrics}
+Gauss's Law gives $$ EA = \frac{(\sigma - \sigma_i)A}{\varepsilon_0} $$ where $E$ is the electric field inside the dielectric and $\sigma_i$ is the induced surface charge density 
+\begin{definition} Gauss's Law in a Dielectric: $$ \oint K\vec{E} \cdot d\vec{A} = \frac{Q_\text{encl - free}}{\varepsilon_0} $$ where $Q_\text{encl - free}$ is the total free charge (not bound charge) enclosed by the Gaussian surface. This is the free charge on the conductor, not the induced charge. \end{definition} 
+
+\section{Current, Resistance and Electromotive Force} 
+\subsection{Current}
+\begin{definition} Current: any motion of charge from one region to another $$ I = \frac{dq}{dt} $$ The SI unit of current is the ampere (1 A = 1 C/s) \end{definition} 
+\begin{definition} Drift Velocity: slow net motion or drift of moving charged particles as a group in the direction of the electric force resulting in a net current in a conductor  \end{definition} 
+\begin{definition} Conventional Current: choice of convention for the direction of current flow as a flow of positive charge regardless of whether the free charges in the conductor are positive, negative or both \end{definition} 
+\begin{definition} Current through an Area: $$ I = \frac{dQ}{dt} = n|q|v_dA$$ where $n$ is the concentration of moving charged particles, $q$ is the charge per particle, $v_d$ is the drift speed and $A$ is the cross-sectional area \end{definition} 
+\begin{definition} Vector Current Density: $$ J = \frac{I}{A} = nq\vec{v}_d $$ \end{definition} 
+The rate of flow of charge at one end of a segment at any instant equals the rate of flow of charge in the other end of the segment and the current is the same at all cross sections of the circuit. 
+
+\subsection{Resistivity}
+\begin{definition} Resistivity: $$\rho = \frac{E}{J} $$ where $\rho$ is the resistivity of a material, $E$ is the magnitude of electric field in material, and $J$ is the magnitude of current density caused by electric field. The SI units are $\Omega \cdot $m \end{definition} 
+The greater the resistivity, the greater the field needed to cause a given current density or the smaller the current density caused by a given field \newline The reciprocal of resistivity is conductivity. Good conductors of electricity have large conductivity than insulators. 
+\begin{definition} Temperature Dependence of Resistivity: $$ \rho(T) = \rho_0[1 + \alpha(T - T_0)] $$ where $\rho(T)$ is the resistivity at temperate $T$, $\rho_0$ is the resistivity at reference temperature $T_0$, and $\alpha$ is the temperature coefficient of resistivity. The reference temperature is often taken as 0 or 20 degrees C. \end{definition} 
+For a normal metal, resistivity increases with increasing temperature. For a semiconductor, resistivity decreases with increasing temperature. For a superconductor, the resistivity is 0 below a certain temperature and increases afterward. 
+
+\subsection{Resistance} 
+\begin{definition} Resistance: the ratio of $V$ to $I$ for a particular conductor $$ R = \frac{V}{I} = \frac{\rho L}{A} $$ where $\rho$ is the resistivity of the conductor material, $L$ is the length of the conductor and $A$ is the cross sectional area of the conductor. The SI units for resistivity is ohms (1 $\Omega$ = 1 V/A) Note: if $\rho$ is constant, then so is $R$. \end{definition} 
+\begin{definition} Ohm's Law: $$ V = IR $$ \end{definition} 
+Because the resistivity of a material varies with temperature, the resistance of a specific conductor also varies with temperature $$ R(T) = R_0[1 + \alpha(T - T_0)] $$ 
+In an ohmic resistor, at a given temperature, current is proportional to voltage. In a semiconductor diode (a nonohmic resistor), there is little current flow in the direction of negative current voltage and in the direction of positive current and voltage, $I$ increases nonlinearly with $V$. 
+
+\subsection{Electromotive Force and Circuits} 
+\begin{definition} Complete Circuit: a circuit with a path that forms a closed loop so that it has a steady current \end{definition} 
+\begin{definition} Electromotive Force: the influence that makes current flow from lower to higher potential. The SI units is the same as potential, the volt, $V$. \end{definition} 
+For an ideal source of emf $$ V_{ab} = \mathcal{E} = IR $$ 
+When a positive charge $q$ flows around a circuit, the potential rise $\mathcal{E}$ as it passes through the ideal source is numerically equal to the potential drop $V_{ab}$ as it passes through the remainder of the circuit. 
+\begin{definition} Internal Resistance: charge moving through a material of any real source encounters resistance $r$ \end{definition} if this resistance behaves according to Ohm's law, $r$ is constant and independent of the current $I$. As the current moves through $r$, it experiences an associated drop in potential equal to $Ir$. Thus when a current is flowing through a source from the negative terminal $b$ to positive terminal $a$, the potential different $V_{ab}$ between the terminals is: $$V_{ab} = \mathcal{E} - Ir $$ The potential $V_{ab}$ is called the terminal voltage and is less than the emf because of the term $Ir$ representing the potential drop across the internal resistance. \newline
+For a real source of emf, the terminal voltage equals the emf if and only if no current is flowing through the source. \newline 
+The current in the external circuit while connected to a source terminals $a$ and $b$ is now $$\mathcal{E} - Ir = IR = V_{ab}$$ or $$I = \frac{\mathcal{E}}{R + r} $$ The current equals the source emf divided by the total circuit resistance. 
+\begin{definition} Voltmeter: measures the potential difference between its terminals; an idealized voltmeter has infinitely large resistance and measures potential difference without having any current diverted through it \end{definition} 
+\begin{definition} Ammeter: measures the current passing through it; an idealized ammeter has zero resistance and has no potential difference between its terminals \end{definition} 
+The net change in potential energy for a charge making a round trip around a complete circuit must be zero; hence, the net change in potential around the circuit must also be zero. Thus, the algebraic sum of the potential difference and emfs around the loop is zero. $$\mathcal{E} - Ir - IR = 0$$ 
+
+\subsection{Energy and Power in Electric Circuits} 
+\begin{definition} Power: the rate at which energy is transferred either into or out of the circuit element $$ P = V_{ab}I $$ where $V{ab}$ is the voltage across the circuit element and $I$ is the current in circuit element. The SI unit is 1 W (1 W = 1 J/s) \end{definition} 
+\begin{definition} Power Delivered to a Resistor: $$ P = V_{ab}I = I^2R = \frac{V_{ab}^2}{R} $$ \end{definition} 
+For a source that can be described by an emf and an internal resistance, $$ P = V_{ab}I = \mathcal{E}I - I^2r $$ The term $\mathcal{E}I$ is the rate at which work is done on the circulating charges by whatever causing the nonelectrostatic force in the source. It represents the rate of conversion of nonelectrical energy to electrical energy within the source. The term $I^2r$ is the rate at which electrical energy is dissipated in the internal resistance of the source. Thus the difference is the net electrical power output of the source, the rate at which the source delivers electrical energy to the remainder of the circuit. \newline
+For a power input to a source, there is a reversal of current flow and so $$ V_{ab} = \mathcal{E} + Ir $$ and $$ P = V_{ab}I = \mathcal{E}I + I^2r $$ 
+
+\subsection{Theory of Metallic Conduction} 
+\begin{definition} Resistivity of a Metal: $$ \rho = \frac{m}{ne^2\tau} $$ where $m$ is the electron mass, $n$ is the number of free electrons per unit volume, $e$ is the magnitude of electron charge, and $\tau$ is the average time between collisions. \end{definition} 
+
+\section{Direct-Current Circuits} 
+\subsection{Resistors in Series and Parallel} 
+\begin{definition} Direct Current (DC) Circuit: type of circuit where the direction of the circuit does not change with time \end{definition} 
+\begin{definition} Alternating Current (AC) Circuit: type of circuit where the current oscillates back and forth \end{definition} 
+\begin{definition} Resistors in Series: $$ R_{eq} = R_1 + R_2 + R_3 + \dots $$ The equivalent resistance of a series combination equals the sum of the individual resistances. The current $I$ is the same in all of them. \end{definition} 
+\begin{definition} Resistors in Parallel: $$ \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \dots $$ The reciprocal of the equivalent resistance of a parallel combination equals the sum of the reciprocals of the individual resistances. The potential difference between the terminals of each resistor much be the same and equal to $V_{ab}$. \end{definition}
+
+\subsection{Kirchhoff's Rules} 
+\begin{definition} Junction: a point in a circuit where three or more conductors meet \end{definition} 
+\begin{definition} Loop: any closed conducting path in a circuit \end{definition} 
+\begin{definition} Kirchhoff's Junction Rule: $$ \sum I = 0 $$ The sum of the currents into any junction equals zero. In other words, the current leaving a junction equals the current entering it. \end{definition} 
+\begin{definition} Kirchhoff's Loop Rule: $$ \sum V = 0 $$ The sum of the potential differences around any loop equals zero. \end{definition} 
+Sign Conventions: \begin{itemize} 
+\item For emfs: \begin{itemize} \item $+\mathcal{E}$ for traveling from $-$ to $+$ 
+\item $-\mathcal{E}$ for traveling from $+$ to $-$ \end{itemize} 
+\item For resistors: \begin{itemize} \item $+IR$ for traveling opposite to current direction
+\item $-IR$ for traveling in current direction \end{itemize} \end{itemize} 
+
+\subsection{RC Circuits}
+\begin{definition} RC Circuit: a circuit that has a resistor and a capacitor in series \end{definition} 
+Before the switch is closed, the charge $q$ is zero. When the switch closes (at $t = 0$), the current jumps from zero to $\mathcal{E}/R$. As time passes, $q$ approaches $Q_f$ and the current $i$ approaches zero. 
+\begin{definition} RC Circuit, charging capacitor: $$ q = C\mathcal{E}(1 - e^{-\frac{t}{RC}}) = Q_f(1 - e^{-\frac{t}{RC}}) $$ where $q$ is the capacitor charge, $\mathcal{E}$ is the battery emf, $t$ is the time since the switch closed, and $Q_f$ is the final capacitor charge ($=C\mathcal{E}$). $$i = \frac{dq}{dt} = \frac{\mathcal{E}}{R}e^{-\frac{t}{RC}} = I_0e^{-\frac{t}{RC}} $$ where $i$ is the current, $\frac{dq}{dt}$ is the rate of change of capacitor charge, $\mathcal{E}$ is the battery emf, $t$ is the time since switch closed, and $I_0$ is the initial current ($=\frac{\mathcal{E}}{R}$). \end{definition} 
+\begin{definition} Time Constant: the product $RC$ which is a measure of how quickly the capacitor charges $$ \tau = RC $$ \end{definition}
+When $\tau$ is small, the capacitor charges quickly; when it is larger, the charging takes more time. If the resistance is small, it's easier for current to flow and the capacitor charges more quickly. \newline 
+After the capacitor has acquired a charge $Q_0$, the battery is removed from the RC circuit and the circuit is open. The switch is then closed and now the capacitor discharges through the resistor and its charge eventually decreases to zero. 
+\begin{definition} RC Circuit, discharging capacitor: $$ q = Q_0e^{-\frac{t}{RC}} $$ where $q$ is the capacitor charge, $Q_0$ is the initial capacitor charge, and $t$ is the time since switch closed. $$ i = \frac{dq}{dt} = -\frac{Q_0}{RC}e^{-\frac{t}{RC}} = I_0e^{-\frac{t}{RC}} $$ where $i$ is current, $\frac{dq}{dt}$ is the rate of change of capacitor charge, $Q_0$ is the initial capacitor charge, $I_0$ is the initial current ($=\frac{Q_0}{RC}$) and $t$ is the time since switch closed. \end{definition} 
+
+\section{Magnetic Field and Magnetic Forces} 
+\subsection{Magnetism}
+Interactions of permanent magnets and compass needles are described in terms of magnetic poles. One end is the north pole and the other end is the south pole. Opposite poles attract each other and like poles repel each other. An object that contains iron but is not itself magnetized, is attracted by either pole of a permanent magnet. 
+\begin{definition} Magnetic Monopole: the existence of an isolated magnetic pole. If a bar magnet is broken in two, each broken end becomes a pole. \end{definition} 
+
+\subsection{Magnetic Field} 
+\begin{definition} Magnetic Field: created when there's a moving charge or current in the surrounding space in addition to its electric field; it exerts a force on any other moving charge or current that is present in the field \end{definition} 
+The symbol $\vec{B}$ is used for magnetic field and the direction of it is defined as the direction in which the north pole of a compass needle tends to point. 
+\begin{definition} Magnetic Force on a Moving Charged Particle: $$\vec{F} = q\vec{v}\times \vec{B}$$ where $q$ is the particle's charge, $\vec{v}$ is the particle's velocity and $\vec{B}$ is the magnetic field. The SI unit of $B$ is 1 tesla (1 T = 1 N/A * m), as well as the gauss. \end{definition} 
+\begin{definition} Right-Hand Rule \begin{enumerate} 
+\item Draw the vectors $\vec{v}$ and $\vec{B}$  with their tails together 
+\item Imagine turning $\vec{v}$ until it points in the direction of $\vec{B}$ (turning through the smaller of the 2 angles)
+\item Wrap the fingers of your right hand around the line perpendicular to the plane of $\vec{v}$ and $\vec{B}$ so that they curl around with the sense of rotation from $\vec{v}$ to $\vec{B}$
+\item Your thumb now points in the direction of the force $\vec{F}$ on a positive charge \end{enumerate} \end{definition} 
+Note: $\vec{F}$ is always perpendicular to the plane containing $\vec{v}$ and $\vec{B}$. \newline
+When a charged particle moves through a region of space where both electric and magnetic fields are present, both fields exert forces on the particle. The total force $\vec{F}$ is the vector sum of the electric and magnetic forces: $$ \vec{F} = q(\vec{E} + \vec{v} \times \vec{B}) $$ 
+To find the magnitude of the magnetic force: $$ F = qvB\sin(\phi) $$ 
+
+\subsection{Magnetic Field Lines and Magnetic Flux} 
+\begin{definition} Magnetic field lines: represents the magnetic field; drawn so that the line through any point is tangent to the magnetic field vector $\vec{B}$ at that point. When adjacent field lines are close together, the field magnitude is large; when these field lines are far apart, the field magnitude is small. The field lines never intersect because the direction of $\vec{B}$ is unique at every point. \newline Note: A dot represents a vector directed out of the plane and a cross represents a vector drawn into the plane. \end{definition} 
+\begin{definition} Magnetic Flux($\Phi_B$) through a Surface: $$\Phi_B = \int B\cos(\phi)dA = \int B_\perp dA = \int \vec{B} \cdot d\vec{A} $$ The SI unit of magnetic flux is equal to 1 weber ($1 Wb = 1 T * m^2 = 1 N * \frac{m}{A} $). \end{definition}
+If $B$ is also perpendicular to the surface, then flux is just $\Phi_B = BA$. 
+\begin{definition} Gauss's Law for Magnetism: $$\oint \vec{B} \cdot d\vec{A} = 0 $$ \end{definition} 
+If the element of $dA$ is at right angles to the field lines, then $B_\perp = B$; calling the area $dA_\perp$, we have: $$ B = \frac{d\Phi_B}{dA_\perp}$$ That is, the magnitude of magnetic field is equal to flux per unit are across an area at right angles to the magnetic field. This is why the magnetic field $\vec{B}$ is sometimes called magnetic flux density. 
+
+\subsection{Motion of Charged Particles in a Magnetic Field} 
+Motion of a charged particle under the action of a magnetic field alone is always motion with constant speed. This is because the magnetic force never has a component parallel to the particle's motion and so, the magnetic force can never do work on the particle. \newline
+\begin{definition} Radius of a Circular Orbit in a Magnetic Field: $$ R = \frac{mv}{|q|B} $$ where $m$ is the particle's mass, $v$ is the particle's speed, $q$ is the particle's charge and $B$ is the magnitude of the of magnetic field. \newline This equation is derived from $$ F = |q|vB = m\frac{v^2}{R} $$ If the charge $q$ is positive, the particle moves counterclockwise and if the particle $q$ is negative, the particle moves clockwise around the orbit. \newline 
+The angular speed $\omega$ of the particle is $$ \omega = \frac{v}{R} = v\frac{|q|B}{mv} = \frac{|q|B}{m} $$ Remember that $ \omega = 2\pi f $. \end{definition} 
+
+\subsection{Magnetic Force on a Current-Carrying Conductor} 
+\begin{definition} Magnetic Force on a Straight Wire Segment: $$\vec{F} = I\vec{l} \times \vec{B}$$ where $I$ is the current, $\vec{l}$ is the vector length of segment (points in current direction) and $\vec{B}$ is the magnetic field. \end{definition} 
+\begin{definition} Magnetic Force on an Infinitesimal Wire Segment: $$d\vec{F} = Id\vec{l} \times \vec{B} $$ The line integral of this expression along the wire gives the total force on a conductor of any shape. \end{definition} 
+
+\subsection{Force and Torque on a Current Loop} 
+The net force on a current loop in a uniform magnetic field is zero. However, the net torque is not in general equal to zero. 
+\begin{definition} Magnitude of Magnetic Torque on a Current Loop: $$\tau = IBA\sin(\phi) $$ where $I$ is the current, $B$ is the magnetic field magnitude, $A$ is the area of the loop, and $\phi$ is the angle between normal to loop plane and field direction. \end{definition} 
+\begin{definition} Magnetic Dipole Moment/ Magnetic Moment: $$\mu = IA $$ \end{definition} 
+Thus in terms of $\mu$, the magnitude of the torque on a current loop is $$ \tau = \mu B\sin(\phi) $$ where $\phi$ is the angle between the normal to the loop (the direction of the vector area $\vec{A}$) and $\vec{B}$. A current loop, or any other body that experiences a magnetic torque is also called a magnetic dipole. 
+\begin{definition} Vector Magnetic Torque on a Current Loop: $$ \vec{\tau} = \vec{\mu}\times \vec{B} $$ where $\vec{\mu}$ is the magnetic dipole moment and $\vec{B}$ is the magnetic field. \end{definition} 
+\begin{definition} Potential Energy for a Magnetic Dipole in a Magnetic Field: $$ U = 0\vec{\mu} \cdot \vec{B} = -\mu B\cos(\phi) $$ where $\vec{\mu}$ is the magnetic dipole moment, $\vec{B}$ is the magnetic field and $\phi$ is the angle in between $\vec{\mu}$ and $\vec{B}$. \end{definition} $U$ is zero when the magnetic dipole moment is perpendicular to the magnetic field. 
+\begin{definition} Solenoid: a helical winding of wire, such as a coil wound on a circular cylinder \end{definition} 
+For a solenoid with $N$ turns in a uniform field $B$, the magnetic moment is $\mu = NIA$ and $$\tau = NIAB\sin(\phi) $$ where $\phi$ is the angle between the axis of the solenoid and the direction of the field. The magnetic moment vector $\vec{\mu}$ is along the solenoid axis. 
+
+\subsection{The Direct-Current Motor} 
+In a DC motor, a magnetic field exerts a torque on a current in the rotor. Motion of the rotor through the magnetic field causes an induced emf called a back emf. For a series motor, in which the rotor coil is in series with coils that produce the magnetic field, the terminal voltage is the sum of the back emf and the drop $Ir$ across the internal resistance. 
+\subsection{The Hall Effect} 
+\begin{definition} Hall Effect: a potential difference perpendicular to the direction of current in a conductor. Hall potential is determined by the requirement that the associated electric field must just balance the magnetic force on a moving charge. $$ nq = \frac{-J_xB_y}{E_z} $$ where $n$ is the concentration of mobile charge carriers, $q$ is the charge per carrier, $J_x$ is the current density, $B_y$ is the magnetic field and $E_z$ is the electrostatic field in conductor. \end{definition} 
+
+\section{Sources of Magnetic Field} 
+\subsection{Magnetic Field of a Moving Charge} 
+\begin{definition} Magnetic Field due to a Point Charge with Constant Velocity: $$ \vec{B} = \frac{\mu_0}{4\pi}\frac{q\vec{v}\times\hat{r}}{r^2}$$ where $\mu_0$ is the magnetic constant, $q$ is the charge, $\vec{v}$ is the velocity, $r^2$ is the distance from point charge to where field is measured and $\vec{r}$ is the unit vector from point charge toward where field is measured. The units of $B$ is 1 tesla (1 T = 1 N/A * m). \end{definition} 
+At all points along a line through the charge parallel to the velocity, the field is zero because $\sin(\phi) = 0$ at all such points. At any distance $r$ from $q$, $\vec{B}$ has its greatest magnitude at points lying in the plane perpendicular to $\vec{v}$. For a point charge moving with velocity $\vec{v}$, the magnetic field lines are circles centered on the line of $\vec{v}$ and lying in planes perpendicular to this line. \newline
+Right Hand Rule: \begin{enumerate} \item Grasp the velocity vector with your right hand so that your right thumb points in the direction of $\vec{v}$ \item Your fingers then curl around the line of $\vec{v}$ in the same sense as field lines, assuming that $q$ is positive 
+\item If the point charge is negative, the directions of the field and field lines are opposite \end{enumerate} 
+
+\subsection{Magnetic Field of a Current Element} 
+\begin{definition} Principle of Superposition of Magnetic Fields: The total magnetic field causes by several moving charges is the vector sum of the fields caused by the individual charges \end{definition} 
+\begin{definition} Magnetic Field due to an Infinitesimal Current Element: $$d\vec{B} = \frac{\mu_0}{4\pi}\frac{Id\vec{l}\times\hat{r}}{r^2}$$ where $I$ is the current, $d\vec{l}$ is the vector length of element (points in current direction), $r$ is the distance from element to where field is measured and $\hat{r}$ is the unit vector from element toward where field is measured \end{definition} 
+\begin{definition} Law of Biot and Savart: used to find the total magnetic field $\vec{B}$ at any point in space due to the current in a complete circuit: $$ \vec{B} = \frac{\mu_0}{4\pi}\int \frac{Id\vec{l}\times\hat{r}}{r^2} $$ \end{definition} 
+
+\subsection{Magnetic Field of a Straight Current-Carrying Conductor}
+\begin{definition} Magnetic Field near a Long, Straight, Current-Carrying Conductor: $$B = \frac{\mu_0I}{2\pi r}$$ where $I$ is the current and $r$ is the distance from conductor. \end{definition} 
+
+\subsection{Force between Parallel Conductors} 
+\begin{definition} Magnetic Force per Unit Length between 2 Long, Parallel, Current-Carrying Conductors: $$\frac{F}{L} = \frac{\mu_0II'}{2\pi r} $$ where $I$ is the current in the first conductor, $I'$ is the current in the second conductor and $r$ is the distance between conductors. \end{definition} 
+Two parallel conductors carrying current in the same direction attract each other ; if the direction of either current is reversed, the forces also reverse. Parallel conductors carrying currents in opposite directions repel each other. 
+\begin{definition} Ampere: One ampere is that unvarying current that, if present in each of two parallel conductors of infinite length and one meter apart in empty space, causes each conductor to experience a force of exactly $2 \times 10^{-7}$ newtons per meter of length \end{definition} 
+
+\subsection{Magnetic Field of a Circular Current Loop} 
+\begin{definition} Magnetic Field on Axis of a Circular Current-Carrying Loop: $$B_x = \frac{\mu_0Ia^2}{2(x^2 + a^2)^{3/2}}$$ where $I$ is the current, $x$ is the distance along axis from center of loop to field point and $a$ is the radius of loop \end{definition} 
+\begin{definition} Magnetic Field at Center of N Circular Current-Carrying Loops: $$ B_x = \frac{\mu_0 NI}{2a} $$ where $N$ is the number of loops, $I$ is the current and $a$ is the radius of loop \end{definition} 
+The magnetic moment of a single loop is: $\mu = I\pi a^2$; for $N$ loops, $\mu = NI\pi a^2$. 
+
+\subsection{Ampere's Law} 
+\begin{definition} Ampere's Law: $$\oint \vec{B} \cdot d\vec{l} = \mu_0I_\text{encl} $$ where the left side of the equation is a line integral around a closed path, $\vec{B} \cdot d\vec{l}$ is the scalar product of magnetic field and vector segment of path and $I$ is the net current enclosed by path. \end{definition} 
+Note: if $\oint \vec{B} \cdot d\vec{l} = 0$, it does not necessarily mean that $\vec{B} = 0$ everywhere along the path, only that the total current through an area bounded by the path is zero. 
+
+\subsection{Applications of Ampere's Law} 
+\begin{definition} Field of a Long, Straight, Current-Carrying Conductor: 
+$$\oint \vec{B} \cdot d\vec{l} = \oint B_\parallel dl = B(2\pi r) = \mu_0I $$ \end{definition} 
+\begin{definition} Field of a Long Cylindrical Conductor:
+$$B = \frac{\mu_0I}{2\pi}\frac{r}{R^2}, r < R $$ inside the conductor, where $r$ is the distance from the conductor axis to the point being measured 
+$$B = \frac{\mu_0I}{2\pi r}, r > R $$ outside the conductor \end{definition} 
+\begin{definition} Field of a Solenoid: $$ B = \mu_0nI $$ \end{definition} 
+\begin{definition} Field of a Toroidal Solenoid: $$ B = \frac{\mu_0 NI}{2\pi r} $$ \end{definition} 
+
+\section{Electromagnetic Induction}
+\subsection{Induction Experiments} 
+\begin{definition} Induced Current: current induced by the presence of a moving coil \end{definition} 
+\begin{definition} Induced EMF: the emf required to cause an induced current \end{definition} 
+induced Current: \begin{itemize} 
+\item A stationary magnet does not induce a current in a coil 
+\item Moving the magnet towards or away from the coil induces a current 
+\item Moving a second, current-carrying coil towards or away from the coil induces a current 
+\item Varying the current in the second coil (by closing or opening a switch) induces a current \end{itemize} 
+A coil of wire is connected to a galvanometer and then a coil is placed between an electromagnet whose magnetic field can vary; Observations: \begin{itemize} 
+\item When there is no current int he electromagnet, so that $\vec{B} = 0$, the galvanometer shows no current 
+\item When the electromagnet is turned on, there is a momentary current through the meter as $\vec{B}$ increases 
+\item When $\vec{B}$ levels off at a steady value, the current drops to zero 
+\item With the coil in a horizontal plane, the coil is squeezed so as to decrease the cross-sectional area of the coil. The meter detects current only during the deformation, not before or after. When the area is increased to return the coil to its original shape, there is current in the opposite direction, but only while the area of the coil is changing 
+\item If the coil is rotates a few degrees about a horizontal axis, the meter detects current during the rotation, in the same direction as when the area was decreased. If the coil is rotated back, there is a current in the opposite direction during the rotation
+\item If the coil is jerked out of the magnetic field, there is a current during the morion, in the same direction as when the area was decreased
+\item If the number of turns in the coil is decreased by unwinding one or more turns, there is a current during the unwinding, in the same direction as when the area was decreased; if more turns are winded onto the coil, there is a current in the opposite direction during the winding 
+\item When the magnet is turned off, there is a momentary current in the direction opposite to the current when it was turned on
+\item The faster the changes occur, the greater the current 
+\item If all these experiments are repeated with a coil that has the same shape but different material and different resistance, the current in each case is inversely proportional to the total circuit resistance; this shows that the induced emfs that are causing the current do not depend on the material of the coil bot only on its shape and the magnetic field \end{itemize} 
+
+\subsection{Faraday's Law}
+\begin{definition} Faraday's Law of Induction: $$\varepsilon = -\frac{d\Phi_B}{dt} $$ where $\varepsilon$ is the induced emf in a closed loop, and $-\frac{d\Phi_B}{dt}$ is the time rate of change of the magnetic flux through the loop \end{definition} 
+Direction of Induced emf: \begin{enumerate} 
+\item Define a positive direction for the vector area $\vec{A}$ 
+\item From the directions of $\vec{A}$ and the magnetic field $\vec{B}$, determine the sign of the magnetic flux $\Phi_B$ and its rate of change $\frac{d\Phi_B}{dt}$
+\item Determine the sign of the induced emf or current. If the flux is increasing, so $\frac{d\Phi_B}{dt}$ is positive, then the induced emf or current is negative; if the flux is decreasing, $\frac{d\Phi_B}{dt}$ is negative and the induced emf or current is positive 
+\item Finally, use the right hand to determine the direction of the induced emf or current. Curl the fingers of the right hand around the $\vec{A}$ vector, with the right thumb in the direction of $\vec{A}$. If the induced emf or current in the circuit is positive, it is in the same direction as the curled fingers; if the induced emf or current is negative, it is in the opposite direction \end{enumerate} 
+If a coil has $N$ identical turns and if the flux varies at the same rate through each turn, the total rate of change through all turns is $N$ times that for a single turn. If $\Phi_B$ is the flux through each turn, the total emf in a coil with $N$ turns is $$\varepsilon = -N\frac{d\Phi_B}{dt}$$ 
+
+\subsection{Lenz's Law}
+\begin{definition} Lenz' Law: the direction of any magnetic induction is such as to oppose the cause of the effect \end{definition} 
+If the flux in a stationary circuit changes, the induced current sets up a magnetic field of its own. Within the area bounded by the circuit, this field is opposite to the original field if the original field is increasing, but is in the same direction as the original field if the latter is decreasing. That is, the induced current opposes the change in flux through the circuit (not the flux itself). If the flux change is due to motion of the conductors, the direction of the induced current in the moving conductor is such that the direction of the magnetic field force on the conductor is opposite in direction to its motion; thus the motion of the conductor, which caused the induced current, is opposed. \newline 
+The greater the current resistance, the less the induced current that appears to oppose any change in flux and the easier it is for a flux change to take effect. In the extreme case where the resistance of the circuit is zero, the induced current will continue to flow even after the induced emf has disappeared, that is, even after the magnet has stopped moving relative to the loop. 
+
+\subsection{Motional Electromotive Force}
+\begin{definition} Motional Electromotive Force: the emf in the presence of a moving rod or any conductor $$\varepsilon = vBL$$ where $v$ is the speed of the conductor, $B$ is the magnitude of the uniform magnetic field and $L$ is the length of the conductor \end{definition} 
+\begin{definition} Motional EMF: $$\varepsilon = \oint (\vec{v} \times \vec{B}) \cdot d\vec{l} $$ where $\vec{v}$ is the velocity of the conductor element, $\vec{B}$ is the magnetic field at position of element and $d\vec{l}$ is the length vector of conductor element and the entire right hand side is the line integral over all elements of a closed conducting loop. \end{definition} 
+
+\subsection{Induced Electric Force} 
+\begin{definition} Induced Electric Field: an electric field in a conductor induced by the changing magnetic flux \end{definition} 
+\begin{definition} Faraday's Law for a Stationary Integration Path: $$\oint \vec{E} \cdot d\vec{l} = -\frac{d\Phi_B}{dt} $$ where the left hand side is the line integral of electric field around a path and the right hand side is the negative of the time rate of change of magnetic flux through path \end{definition} 
+\begin{definition} Nonelectrostatic Field: a field with no meaning of potential, field does a nonzero work on it (nonconservative) \end{definition} 
+A changing magnetic field acts as a source of electric field of a sort that we cannot produce with any static charge distribution. 
+
+\subsection{Eddy Currents} 
+\begin{definition} Eddy Current: induced current that circulate throughout the volume of a material \end{definition} 
+
+
+
+\subsection{Displacement Current and Maxwell's Equations}
+A varying electric field gives rise to a magnetic field. 
+\begin{definition} Displacement Current: $$ i_D = \epsilon\frac{d\Phi_E}{dt} $$ where $\epsilon$ is the permittivity of material in area \end{definition} 
+\begin{definition} Generalized Ampere's Law: $$\oint \vec{B} \cdot d\vec{l} = \mu_0(i_C + i_D)_{\text{encl}} $$ \end{definition} 
+\begin{definition} Maxwell's Equations \begin{itemize} 
+\item Gauss's Law for $\vec{E}$: $$\oint \vec{E} \cdot d\vec{A} = \frac{Q_{\text{encl}}}{\epsilon_0} $$ where the left hand side is the flux of electric field through a closed surface, $Q_{\text{encl}}$ is the change enclosed by surface and $\epsilon_0$ is the electric constant
+\item Gauss's Law for $\vec{B}$: $$\oint \vec{B} \cdot d\vec{A} = 0$$ where the left hand side is the flux of magnetic field through any closed surface
+\item Faraday's Law for a Stationary Integration Path: $$\oint \vec{E} \cdot d\vec{l} = -\frac{d\Phi_B}{dt}$$ where the left hand side is the line integral of electric field around path and the right hand side is the negative of the time rate of change of magnetic flux through path
+\item Ampere's Law for a Stationary Integration Path: $$\oint \vec{B} \cdot d\vec{l} = \mu_0(i_C + \epsilon_0\frac{d\Phi_E}{dt})_{\text{encl}} $$ where the left hand side is the line integral of magnetic field around path, $\mu_0$ is the magnetic constant, $i_C$ is the conduction current through path and $\epsilon_0\frac{d\Phi_E}{dt}$ is the displacement current through path \end{itemize} \end{definition}
+In empty space, there are no charges, so the fluxes of $\vec{E}$ and $\vec{B}$ through any closed surface are equal to zero: $$\oint \vec{E} \cdot d\vec{A} = 0 $$ $$\oint \vec{B} \cdot d\vec{A} = 0$$ 
+In empty space, where there is no charge or conducting current, $i_C = 0$ and $Q_{\text{encl}} = 0$ and thus $$\oint \vec{E} \cdot d\vec{l} = -\frac{d}{dt}\int \vec{B} \cdot d\vec{A} = -\frac{d\Phi_B}{dt}$$ $$\oint \vec{B} \cdot d\vec{l} = \mu_0\epsilon_0\int \vec{E} \cdot d\vec{A} = \mu_0\epsilon_0\frac{d\Phi_E}{dt} $$ 
+
+\section{Inductance} 
+\subsection{Mutual Inductance} 
+\begin{definition} Mutual Inductance: the changing flux in a coil caused by a changing current or emf in another nearby coil $$\varepsilon_2 = -N_2\frac{d\Phi_{B2}}{dt} $$ $$M_{21} = \frac{N_2\Phi_{B2}}{i_1} $$ 
+where $\Phi_{B2}$ is the flux through a single turn of coil 2, $N_2$ is the number of turns in coil 2, $\varepsilon_2$ is the emf in coil 2, $i_1$ is the current in coil 1 and $M_{21}$ is the proportionality constant or mutual inductance of the two coils. \end{definition} 
+\begin{definition} Mutually Induced EMFs: $$\varepsilon_2 = -M\frac{di_1}{dt}$$ $$\varepsilon_1 = -M\frac{di_2}{dt} $$ where $\varepsilon_2$ is the induced emf in coil 2, $M$ is the mutual inductance of coils 1 and 2, $\frac{di_1}{dt}$ is the rate of change of current in coil 1, $\varepsilon_1$ is the induced emf in coil 1 and $\frac{di_2}{dt}$ is the rate of change of current in coil 2 \end{definition} 
+\begin{definition} Mutual Inductance of Coils 1 and 2: $$M = \frac{N_2\Phi_{B2}}{i_1} = \frac{N_1\Phi_{B1}}{i_2}$$ where $N_2$ is the number of turns in coil 2, $\Phi_{B2}$ is the magnetic flux through each turn of coil 2, $i_1$ is the current in coil 1 (causes flux through coil 2), $N_1$ is the number of turns in coil 1, $\Phi_{B1}$ is the magnetic flux through each turn of coil 1 and $i_2$ is the current in coil 2 (causes flux through coil 1) \newline The SI unit of mutual inductance is the henry (1 H = 1 Wb/A) \end{definition} 
+
+\subsection{Self-Inductance and Inductors} 
+\begin{definition} Self-Induced EMF: emf induced by a varying current in its own magnetic field; opposes the change in the current that caused the emf and so tends to make it more difficult for variations in current to occur \end{definition} 
+\begin{definition} Self-Inductance(or Inductance of a Coil): the changing current/flux through a coil inducing an emf in the coil (or Inductance of a Coil) $$L = \frac{N\Phi_B}{i}$$ where $N$ is the number of turns in coil, $\Phi_B$ is the flux due to current through each turn of coil and $i$ is the current in coil \end{definition} 
+\begin{definition} Self-Induced EMF in a Circuit: $$\varepsilon = -L\frac{di}{dt}$$ where $L$ is the inductance of circuit and $\frac{di}{dt}$ is the rate of change of current in circuit \end{definition}
+ The minus sign is a reflection of Lenz's law; it says that the self-induced emf in a circuit opposes any change in the current in that circuit. 
+\begin{definition} Inductor: a circuit device that is designed to have a particular inductance \end{definition} 
+
+
+\subsection{Magnetic-Field Energy} 
+\begin{definition} Energy Stored in an Inductor: $$U = L\int_0^I idi = \frac{1}{2}LI^2 $$ where $I$ is the final current and $L$ is the inductance \end{definition} 
+\begin{definition} Magnetic Energy Density in Vacuum: $$u = \frac{B^2}{2\mu_0}$$ where $B$ is the magnetic field magnitude and $\mu_0$ is the magnetic constant \end{definition} 
+\begin{definition} Magnetic Energy Density in a Material: $$u = \frac{B^2}{2\mu}$$ where $B$ is the magnetic field magnitude and $\mu$ is the permittivity of material \end{definition} 
+
+\subsection{The R-L Circuit} 
+\begin{definition} R-L Circuit: a circuit that includes both a resistor and an inductor and possible a source of emf \end{definition} 
+\begin{definition} Time Constant for an R-L Circuit: $$\tau = \frac{L}{R}$$ where $L$ is the inductance and $R$ is the resistance \newline The term $\frac{L}{R}$ is a measure of how quickly the current builds towards its final value. \end{definition} 
+\begin{definition} Current in an R-L Circuit with EMF: $$i = \frac{\varepsilon}{R}(1- e^{-\frac{R}{L}t}) $$ $$\frac{di}{dt} = \frac{\varepsilon}{L}e^{-\frac{R}{L}t} $$ \end{definition} 
+\begin{definition} Current Decay: $$i = I_0e^{-\frac{R}{L}t} $$ \end{definition} 
+\begin{definition} Stored Energy in a R-C Circuit: $$U = \frac{1}{2}LI_0^2e^{-2(\frac{R}{L})t} = U_0e^{-2(\frac{R}{L}t)} $$ \end{definition} 
+
+\subsection{The L-C Circuit} 
+\begin{definition} L-C Circuit: a circuit containing an inductor and a capacitor \end{definition} 
+\begin{definition} Electrical Oscillation: process where charge on the capacitor continues to oscillate back and forth indefinitely \end{definition} 
+\begin{definition} Angular Frequency of Oscillation in an L-C Circuit: $$\omega = \sqrt{\frac{1}{LC}} $$ where $L$ is the inductance and $C$ is the capacitance \end{definition} 
+\begin{definition} Instantaneous Current in a L-C Circuit: $$i = -\omega Q\sin(\omega t + \phi) $$ \end{definition} 
+\begin{definition} Total Energy of the System: $$\frac{1}{2}Li^2 + \frac{q^2}{2C} = \frac{Q^2}{2C} $$ \end{definition} 
+\begin{definition} Current in L-C Circuit when charge on Capacitor is $q$: $$i = ±\sqrt{\frac{1}{LC}}\sqrt{Q^2 - q^2} $$ $$q = Q\cos(\omega t + \phi) $$ \end{definition} 
+
+\subsection{The L-R-C Circuit}
+\begin{definition} L-R-C Circuit: a circuit where an inductor and resistor are connected in series across a charged capacitor \end{definition} 
+\begin{definition} Damped Harmonic motion: occurs when the circuit's resistance $R$ is relatively small and so the circuit still oscillates and is thus underdamped \end{definition} 
+\begin{definition} Critically Damped: when the circuit no longer oscillates due to a certain large value of $R$ \end{definition} 
+\begin{definition} Overdamped: when the resistance is even higher and thus the capacitor charge approaches zero even more slowly \end{definition} 
+\begin{definition} Charge in L-R-C Circuit: $$q = Ae^{-(\frac{R}{2L})t}\cos(\sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}t} + \phi) $$ \end{definition} 
+\begin{definition} Angular Frequency of Underdamped Oscillations in an L-R-C series Circuit: $$\omega' = \sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}} $$ where $L$ is the inductance, $C$ is the capacitance, and $R$ is the resistance \end{definition} 
+
+\section{Alternating Current} 
+\subsection{Phasors and Alternating Currents} 
+\begin{definition} Alternating Current (AC): a circuit where current and voltages vary sinusoidally \end{definition} 
+\begin{definition} AC Source: any device that supplies a sinusoidally varying voltage (potential difference) $v$ or current $i$ $$v = V\cos(\omega t) $$ where $V$ is the maximum potential difference, or voltage amplitude, $v$ is the instantaneous potential difference and $\omega$ is the angular frequency \end{definition} 
+\begin{definition} Sinusoidal Alternating Current: $$i = I\cos(\omega t) $$ where $i$ is the instantaneous current, $I$ is the current amplitude (maximum current), $\omega$ is the angular frequency and $t$ is time \end{definition} 
+\begin{definition} Phasor/Phasor Diagrams: diagrams showing counterclockwise rotating vectors that signify current \end{definition} 
+\begin{definition} Rectified Average Value of a Sinusoidal Current: $$I_{\text{rav}} = \frac{2}{\pi}I = 0.637I $$ where $I$ is the current amplitude \end{definition} 
+\begin{definition} Root-Mean-Square (RMS) Value of a Sinusoidal Current: $$I_{\text{rms}} = \frac{I}{\sqrt{2}} $$ \end{definition} 
+\begin{definition} Root-Mean-Square (RMS) Value of a Sinusoidal Voltage: $$V_{\text{rms}} = \frac{V}{\sqrt{2}} $$ \end{definition} 
+
+\subsection{Resistance and Reactance} 
+\begin{definition} Amplitude of Voltage Across a Resistor, AC Circuit: $$V_R = IR $$ where $I$ is the current amplitude and $R$ is the resistance \end{definition} 
+Both the current $i$ and the voltage $v_R$ are proportional to $\cos(\omega t)$ so the current is in phase with the voltage (crests and troughs occur together).
+Current and voltage phasors are in phase; they rotate together. 
+\begin{definition} Phase Angle: the phase of the voltage relative to the current; for a pure resistor, $\phi = 0$ and for a pure inductor, $\phi = 90^\circ$. \end{definition}
+\begin{definition} Inductive Reactance: the relationship between the angular frequency and inductance $$X_L = \omega L$$ \end{definition}
+\begin{definition} Amplitude of Voltage Across an Inductor, AC Circuit: $$V_L = IX_L$$ where $I$ is the current amplitude and $X_L$ is the inductive reactance \end{definition}
+Voltage curve leads current curve by a quarter cycle (corresponding to $\phi = 90^\circ$). Voltage phasor leads current phasor by $\phi = 90^\circ$ when an inductance $L$ is connected across an AC source. 
+\begin{definition} Capacitive Reactance: the relationship between angular frequency and capacitance $$X_C = \frac{1}{\omega C} $$ \end{definition} 
+\begin{definition} Amplitude of Voltage Across a Capacitor, AC Circuit: $$V_C = IX_C $$ where $I$ is the current amplitude and $X_C$ is the capacitive reactance \end{definition} 
+Voltage curve lags current curve by a quarter cycle (corresponding to $\phi = -90^\circ$). Voltage phasor lags current phase by $\phi = -90^\circ$. 
+
+\subsection{The L-R-C Circuit} 
+\begin{definition} Impedance: the ratio of the voltage amplitude across the current to the current amplitude in the circuit $$Z = \sqrt{R^2 + (X_L - X_C)^2} $$ \end{definition} 
+\begin{definition} Amplitude of Voltage across an AC Circuit: $$V = IZ$$ where $I$ is the current amplitude and $Z$ is the impedance \end{definition} 
+\begin{definition} Impedance of an L-R-C Series Circuit: $$Z = \sqrt{R^2 + [\omega L - (\frac{1}{\omega C})]^2} $$ where $R$ is the resistance, $\omega$ is the angular frequency, $L$ is the inductance and $C$ is the capacitance \end{definition} 
+\begin{definition} Phase Angle of Voltage with Respect to Current in an L-R-C Series Circuit: $$\tan(\phi) = \frac{V_L - V_C}{V_R} = \frac{I(X_L - X_C)}{IR} = \frac{X_L - X_C}{R} $$ $$\tan(\phi) = \frac{\omega L - \frac{1}{\omega C}}{R} $$ where $\omega$ is the angular frequency, $L$ is the inductance, $C$ is the capacitance and $R$ is the resistance \end{definition} 
+If the current is $i = I\cos(\omega t)$, then the source voltage $v$ is $$v = V\cos(\omega t + \phi) $$ 
+
+\subsection{Power in Alternating-Current Circuits} 
+\begin{definition} Power in a Pure Resistor: $$P_{av} = \frac{1}{2}VI = \frac{V}{\sqrt{2}}\frac{I}{\sqrt{2}} = V_{rms}I_{rms} $$ $$P_{av} = I_{rms}^2R = \frac{V_{rms}^2}{R} = V_{rms}I_{rms} $$ For a resistor, $p = vi$ is always positive because $v$ and $i$ are either both positive or both negative at any instant. \end{definition} 
+\begin{definition} Power in a Pure Inductor: $$P_{av} = 0$$
+For an inductor, $p = vi$ is alternately positive or negative, and the average power is zero. \end{definition} 
+\begin{definition} Power in a Pure Capacitor: $$P_{av} = 0$$
+For a capacitor, $p = vi$ is alternately positive or negative, and the average power is zero. \end{definition} 
+\begin{definition} Power in an Arbitrary AC Circuit: the average power is positive \end{definition} 
+\begin{definition} Average Power into a General AC Circuit: $$P_{av} = \frac{1}{2}VI\cos(\Phi) = V_{rms}I_{rms}\cos(\Phi) $$ where $\Phi$ is the phase angle of voltage with respect to current, $V$ is the voltage amplitude, $I$ is the current amplitude, $V_{rms}$ is the rms voltage and $I_{rms}$ is the rms current \end{definition} 
+When $v$ and $i$ are in phase, so $\Phi = 0$ the average power equals $\frac{1}{2}VI = V_{rms}I_{rms}$; when $v$ and $i$ are $90^\circ$ out of phase, the average power is zero. In the general case, when $v$ has a phase angle $\Phi$ with respect to $i$, the average power equals $\frac{1}{2}I$ multiplied by $V\cos(\Phi)$, the component of the voltage phasor that is in phase with the current phasor. 
+\begin{definition} Power Factor: the factor $\cos(\Phi)$ \end{definition} 
+
+\subsection{Resonance in Alternating-Current Circuits} 
+\begin{definition} Resonance: peaking of the current amplitude at a certain frequency \end{definition} 
+\begin{definition} Resonance Angular Frequency: $$\omega_0 = \frac{1}{\sqrt{LC}} $$ where $L$ is the inductance and $C$ is the capacitance \end{definition} 
+\begin{definition} Resonance Frequency: $$f_0 = \frac{\omega_0}{2\pi} $$ \end{definition} 
+
+\subsection{Transformers} 
+\begin{definition} Transformers: allows for voltage conversion \end{definition} 
+\begin{definition} Primary: the winding to which power is supplied \end{definition} 
+\begin{definition} Secondary: the winding from which power is delivered \end{definition} 
+\begin{definition} Terminal Voltages in a Transformer: $$\frac{V_2}{V_1} = \frac{N_2}{N_1} $$ where $V_2$ is the secondary voltage amplitude or rms value, $V_1$ is the primary voltage amplitude or rms value, $N_2$ is the number of turns in secondary and $N_1$ is the number of turns in primary \end{definition} 
+\begin{definition} Terminal Voltages and Currents in a Transformer: $$V_1I_1 = V_2I_2$$ where $V_1$ is the primary voltage amplitude or rms value, $I_1$ is the current in primary, $V_2$ is the secondary voltage amplitude or rms value and $I_2$ is the current in secondary 
+\end{definition} 
+It is also true that $$\frac{V_1}{I_1} = \frac{R}{(N_2/N_1)^2} $$ 
+
+\section{Mechanical Waves} 
+\subsection{Types of Mechanical Waves} 
+\begin{definition} Mechanical Wave: a disturbance that travels through some material or substance called the medium for the wave \end{definition} 
+\begin{definition} Transverse Wave: a wave where the displacements of the medium are perpendicular or transverse to the direction of the wave along the medium \end{definition} 
+\begin{definition} Longitudinal Wave: a wave where the motions of the particles of the medium are back and forth along the same direction that the wave travels \end{definition} 
+\begin{definition} Wave Speed: the speed of propagation, determined by the mechanical properties of the medium \end{definition} 
+Waves transport energy, but not matter, from one region to another. 
+
+\subsection{Periodic Waves} 
+\begin{definition} Periodic Wave: a wave where each particle in the string undergoes periodic motion as the wave propagates \end{definition} 
+\begin{definition} Sinusoidal Wave: a periodic wave that follows simple harmonic motion (SHM) \end{definition} 
+When a sinusoidal wave passes through a medium, every particle in the medium undergoes simple harmonic motion with the same frequency. 
+\begin{definition} Wavelength: the distance from one crest to the next, or from one trough to the next or from any point to the corresponding point on the next repetition of the wave shape $$\text{For a periodic wave} v = \lambda f$$ where $v$ is the wave speed, $\lambda$ is the wavelength and $f$ is the frequency. \end{definition} 
+
+\subsection{Mathematical Description of a Wave} 
+\begin{definition} Wave Function: a function $y(x, t)$ that describes a wave \end{definition} 
+\begin{definition} Wave Number: $$k = \frac{2\pi}{\lambda}$$ where $\lambda$ is the wavelength \newline Substituting $\lambda = \frac{2\pi}{k}$ and $f = \frac{\omega}{2\pi}$ into $v = \lambda f$ gives $$\omega = vk$$ \end{definition} 
+\begin{definition} Wave Function for a Sinusoidal Wave Propagating in the $+x$ direction: $$y(x, t) = A\cos[\omega(\frac{x}{v} - t)] $$ where $A$ is the amplitude, $\omega$ is the angular frequency ($\omega = 2\pi f$), $x$ is the position, $v$ is the wave speed and $t$ is the time $$y(x, t) = A\cos[2\pi(\frac{x}{\lambda} - \frac{t}{T})] $$ where $A$ is the amplitude, $x$ is the position, $\lambda$ is the wavelength, $t$ is the time and $T$ is the period $$y(x, t) = A\cos(kx - \omega t)$$ where $A$ is the amplitude, $k$ is the wave number ($k = \frac{2\pi}{\lambda}$), $x$ is the position, $\omega$ is the angular frequency and $t$ is the time \end{definition} 
+\begin{definition} Phase: plays the role of an angular quantity and its value for any values of $x$ and $t$ determines what part of the sinusoidal cycle is occurring at a particular point and time $$(kx \pm \omega t) $$ \end{definition} 
+\begin{definition} Particle Velocity in a Sinusoidal Wave: $$v_y(x, t) = \frac{\partial y(x, t)}{\partial t} = \omega A\sin(kx - \omega t) $$ \end{definition} 
+\begin{definition} Particle Acceleration in a Sinusoidal Wave: $$ a_y(x, t) = \frac{\partial^2y(x, t)}{\partial t^2} = -\omega^2A\cos(kx - \omega t) = -\omega^2y(x, t) $$ \end{definition} The acceleration of a particle equals $-\omega^2$ times its displacement. 
+\begin{definition} Curvature of the String: $$ \frac{\partial^2y(x, t)}{\partial x^2} = -k^2A\cos(kx - \omega t) = -k^2y(x, t) $$ \end{definition} 
+\begin{definition} Wave Equation (involving Second Partial Derivatives of Wave Function): $$\frac{\partial^2y(x, t)}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2y(x, t)}{\partial t^2} $$ \end{definition} 
+
+\subsection{Speed of a Traverse Wave} 
+\begin{definition} Speed of a Traverse Wave on a String: $$v = \sqrt{\frac{F}{\mu}} $$ where $F$ is the tension in string and $\mu$ is the mass per unit length \end{definition} 
+\begin{definition} General Form of Wave Speed: $$v = \sqrt{\frac{\text{Restoring force returning the system to equilibrium}}{\text{Inertia resisting the return to equilibrium}}} $$ \end{definition} 
+
+\subsection{Energy in Wave Motion} 
+\begin{definition} Average Power of a Sinusoidal Wave on a String: $$P_{av} = \frac{1}{2}\sqrt{\mu F}\omega^2A^2 $$ where $\mu$ is the mass per unit length, $F$ is the tension in string, $\omega$ is the wave angular frequency and $A$ is the wave amplitude \end{definition} 
+\begin{definition} Maximum Power of a Sinusoidal Wave on a String: $$P_{max}  = \sqrt{\mu F}\omega^2A^2 $$ \end{definition} 
+\begin{definition} Intensity: the time average rate at which energy is transported by the wave, per unit area, across a surface perpendicular to the direction of propagation; it is the average power per unit area  $$ I_1 = \frac{P}{4\pi r_1^2} $$ \end{definition} 
+\begin{definition} Inverse Square Law for Intensity: intensity is inversely proportional to the square of the distance from source. $$\frac{I_1}{I_2} = \frac{r_2^2}{r_1^2} $$ where $I_1$ is the intensity at point 1, $I_2$ is the intensity at point 2, $r_2$ is the distance from source to point 2 and $r_1$ is the distance from source to point 1 \end{definition} 
+
+\subsection{Wave Interference, Boundary Conditions and Superposition} 
+\begin{definition} Interference: refers to what happens when two or more waves pass through the same region at the same time \end{definition} 
+\begin{definition} Boundary Conditions: the conditions at the end of the string, such as a rigid support or the complete absence of transverse force \end{definition} 
+\begin{definition} Principle of Superposition: when two waves overlap, the actual displacement of any point on the string at any time is obtained by adding the displacement the point would have if only the first wave were present and the displacement it would have if only the second wave were present $$y(x, t) = y_1(x, t) + y_2(x, t)$$ where the RHS is the wave functions of two overlapping waves and the LHS is the wave function of combined wave \end{definition} 
+
+\subsection{Standing Waves of a String} 
+\begin{definition} Nodes: particular points on a wave that never move at all \end{definition} 
+\begin{definition} Antinodes: the midpoint of two successive nodes; amplitude of motion is greatest here \end{definition} 
+\begin{definition} Standing Wave: a wave that does not appear to be moving in either direction along a string \end{definition} 
+\begin{definition} Destructive Interference: interference where at a node, the displacements of 2 waves are equal and opposite and cancel each other out; midway between the nodes are the points of greatest amplitude, or the antinodes \end{definition} 
+\begin{definition} Constructive Interference: interference where at the antinodes, the displacements of the two waves are always identical, giving a large resultant displacement \end{definition} 
+\begin{definition} Standing Wave on a String, fixed end at $x = 0$: $$y(x, t) = A_{SW}\sin(kx)\sin(\omega t) $$ where $A_{SW}$ is the standing wave amplitude, $k$ is the wave number, $x$ is the position, $\omega$ is the angular frequency and $t$ is time \end{definition} The standing-wave amplitude is twice the amplitude $A$ of either of the original traveling waves: $A_{SW} = 2A$. A standing wave, unlike a traveling wave, does not transfer energy from one end to the other. 
+
+\subsection{Normal Modes of a String} 
+\begin{definition} Fundamental Frequency: the smallest frequency corresponding to the largest wavelength: $\lambda_1 = 2L$ $$f_1 = \frac{v}{2L} \text{ string fixed at both ends} $$ \end{definition} 
+\begin{definition} Standing-wave Frequencies, Strings fixed at both ends: $$f_n = n\frac{v}{2L} = nf_1 (n = 1, 2, 3, \dots) $$ where $v$ is the wave speed, $L$ is the length of string and $f_1$ is the fundamental frequency $( = \frac{v}{2L})$ \end{definition} 
+\begin{definition} Normal Mode: a motion in which all particles of an oscillating system move sinusoidally with the same frequency \end{definition} 
+\begin{definition} Fundamental Frequency, String fixed at both ends: $$f_1 = \frac{1}{2L}\sqrt{\frac{F}{\mu}} $$ where $L$ is the length of string, $F$ is the tension in the string and $\mu$ is the mass per unit length \end{definition} 
+
+\section{Sound and Hearing} 
+\subsection{Sound Waves} 
+\begin{definition} Sound: a longitudinal wave in a medium \end{definition} 
+\begin{definition} Pitch: determined by the frequency of a sound wave \end{definition} 
+\begin{definition} Timbre: the difference in sound due to difference harmonic content but same frequency \end{definition} 
+
+\subsection{Speed of Sound Waves} 
+\begin{definition} Speed of a Longitudinal Wave in a Fluid: $$v = \sqrt{\frac{B}{\rho}} $$ where $B$ is the bulk modulus and $\rho$ is the density of fluid \end{definition} 
+\begin{definition} Speed of a Longitudinal Wave in a Solid Rod: $$ v = \sqrt{\frac{Y}{\rho}} $$ where $Y$ is the Young's modulus of rod material and $\rho$ is the density of rod material \end{definition} 
+\begin{definition} Speed of Sound in an Ideal Gas: $$v = \sqrt{\frac{\gamma RT}{M}} $$ where $\gamma$ is the ratio of heat capacitances, $R$ is the gas constant, $T$ is the absolute temperature and $M$ is the molar mass \end{definition} 
+
+\subsection{Sound Intensity} 
+\begin{definition} Intensity of a Sinusoidal Sound Wave in a Fluid: $$I = \frac{1}{2}\sqrt{\rho B}\omega^2A^2 $$ where $\rho$ is the density of fluid, $B$ is the bulk modulus of fluid, $\omega$ is the angular frequency and $A$ is the displacement amplitude \end{definition} 
+\begin{definition} Intensity of a Sinusoidal Sound Wave in a Fluid: $$I = \frac{p_{max}^2}{2\rho v} = \frac{p_{max}^2}{2\sqrt{\rho B}} $$ where $p_{max}$ is the pressure amplitude, $\rho$ is the density of fluid, $B$ is the bulk modulus of fluid and $v$ is the wave speed \end{definition} 
+\begin{definition} Sound Intensity Level: $$\beta = (10 dB)\log(\frac{I}{I_0}) $$ where $I$ is the intensity of the sound wave and $I_0$ is the reference intensity ($10^{-12} W/m^2$) \end{definition} 
+
+\subsection{Standing Sound Waves and Normal Modes} 
+\begin{definition} Displacement Node: the points where particle of the fluid have zero displacement \end{definition}
+\begin{definition} Displacement Antinode: the points where particle of the fluid have maximum displacement \end{definition} 
+\begin{definition} Pressure Node: the points in a standing sound wave at which the pressure and density do not vary \end{definition} 
+\begin{definition} Pressure Antinode: the points in a standing sound wave at which the variations in pressure and density are greatest \end{definition} 
+A pressure node is always a displacement antinode and a pressure antinode is always a displacement node. 
+\begin{definition} Standing Waves, open pipe: $$f_n = \frac{nv}{2L} $$ where $n$ is the $n$th harmonic ($n = 1, 2, \dots$), $v$ is the speed of sound in pipe and $L$ is the length of pipe \end{definition} 
+\begin{definition} Standing Waves, stopped pipe: $$f_n = \frac{nv}{4L} $$ where $n$ is the $n$th harmonic ($n = 1, 2, \dots$), $v$ is the speed of sound in pipe and $L$ is the length of pipe \end{definition} 
+
+\subsection{Resonance and Sound} 
+\begin{definition} Resonance: occurs when a periodically varying force is applied to a system with many normal modes \end{definition}
+If the frequency of the force is precisely equal to a normal-mode frequency, the system is in resonance and the amplitude of the forced oscillation is maximum.
+
+\subsection{Interference of Waves}
+Constructive interference occurs when two waves from 2 difference sources travel the same distance and arrive at the same point at the same time; these waves arrive in phase;  the total wave amplitude is twice the amplitude from each individual wave. If the distances from the 2 sources to the meeting point differ by a half wavelength, then the 2 waves arrive a half-cycle out of step, or out of phase and destructive interference takes place and the amplitude is much smaller. If the amplitudes from the 2 sources are equal, the 2 waves cancel each other out completely and the total amplitude is zero. \newline 
+Constructive interference occurs whenever the distances traveled by the 2 waves differ by a whole number of wavelengths and the wave arrive in phase; if the distances from the 2 sources to the meeting point differ by any half-integer number of wavelengths, the waves arrive out of phase and there will be destructive interference. 
+
+\subsection{Beats}
+\begin{definition} Beats: variations in loudness caused by amplitude variation \end{definition} 
+\begin{definition} Beat Frequency: the frequency with which the loudness varies \end{definition} 
+\begin{definition} Beat Frequency for Waves $a$ and $b$: $$f_{beat} = f_a - f_b $$ where $f_a$ is the frequency of wave $a$ and $f_b$ is the frequency of wave $b$ (lower that $f_a$) \end{definition} 
+
+\subsection{The Doppler Effect}
+\begin{definition} Doppler Effect: the effect where the pitch drops as a source travels further away \end{definition} 
+When a source of sound and a listener are in motion relative to each other, the frequency of the sound heard by the listener is not the same as the sound frequency. 
+\begin{definition} Wavelength in front of a Moving Source: $$\lambda_{\text{in front}} = \frac{v - v_S}{f_S} $$ \end{definition} 
+\begin{definition} Wavelength behind a Moving Source: $$\lambda_{\text{behind}} = \frac{v + v_S}{f_S} $$ \end{definition}
+\begin{definition} Doppler Effect for moving listener L and moving source S: $$f_L = \frac{v + v_L}{v + v_S}f_S $$ where $f_L$ is the frequency heard by the listener, $v$ is the speed of sound, $v_L$ is the velocity of listener ($+$ if from L toward S, $-$ if opposite), $v_S$ is the velocity of source ($+$ is from L toward S, $-$ if opposite), and $f_S$ is the frequency emitted by source \end{definition}
+\begin{definition} Doppler Effect for Light: $$f_R = \sqrt{\frac{c - v}{c + v}}f_S $$ where $c$ is the speed of light, $v$ is the speed of the source, $f_R$ is the frequency measured by the receiver R and $f_S$ is the source frequency \end{definition} 
+
+\subsection{Shock Waves}
+\begin{definition} Shock wave: large-amplitude crest \end{definition} 
+\begin{definition} Shock wave produced by sound source moving faster than sound: $$\sin(\alpha) = \frac{v}{v_S}$$ where $\alpha$ is the angle of shock wave, $v$ is the speed of sound and $v_S$ is the speed of source \end{definition} 
+\begin{definition} Mach Number: the ratio $\frac{v_S}{v}$ \end{definition} 
+
+\section{Electromagnetic Waves} 
+\subsection{Maxwell's Equations and Electromagnetic Waves} 
+\begin{definition} Electromagnetic Waves: waves that exhibit the property of changing electric/magnetic fields with time that propagate through space from one region to another \end{definition} 
+\begin{definition} Electromagnetic Spectrum: encompasses electromagnetic waves of all frequencies and wavelengths  \end{definition} 
+\begin{definition} Visible Light: the range of electromagnetic spectrum that can be detected from human eye $$ \begin{tabular}{cc}380-450 nm & Violet \\450-495 nm & Blue \\495-570 nm & Green \\570-590 nm & Yellow \\590-620 nm & Orange \\620-750 & Red \end{tabular} $$ \end{definition} 
+
+\subsection{Plane Electromagnetic Waves and the Speed of Light} 
+To satisfy Maxwell's first and second equations, the electric and magnetic fields must be perpendicular to the direction of propagation; that is, the wave must be traverse. 
+\begin{definition} Electromagnetic Wave in Vacuum: $$E = cB $$ where $c$ is the speed of light in vacuum and $B$ is the magnetic-field magnitude \end{definition} 
+Electromagnetic waves are consistent with Faraday's law only if the wave speed $c$ and the magnitudes of $\vec{E}$ and $\vec{B}$ are related as above. 
+\begin{definition} Electromagnetic Wave in Vacuum: $$B = \varepsilon_0\mu_0cE$$ where $\varepsilon_0$ is the electric constant, $\mu_0$ is the magnetic constant, $c$ is the speed of light in vacuum and $R$ is the electric-field magnitude \end{definition} 
+Electromagnetic waves obeys Ampere's law only if the $B$, $c$ and $E$ are related as above. 
+\begin{definition} Speed of Electromagnetic Waves in Vacuum: $$c = \frac{1}{\sqrt{\varepsilon_0\mu_0}} $$ where $\varepsilon_0$ is the electric constant and $\mu_0$ is the magnetic constant \end{definition} 
+Key Properties of Electromagnetic Waves: \begin{itemize} 
+\item The wave is traverse; both $\vec{E}$ and $\vec{B}$ are perpendicular to the direction of propagation of the wave. The electric and magnetic fields are also perpendicular to one other. The direction of propagation is the direction of the vector product $\vec{E} \times \vec{B}$
+\begin{definition} Right Hand Rule for Electromagnetic Waves: \begin{enumerate} 
+\item Point the thumb of the right hand in the wave's direction of propagation 
+\item Imagine rotating the $\vec{E}$ field vector $90^\circ$ in the sense the fingers curl; that is the direction of the $\vec{B}$ field \end{enumerate} \end{definition} 
+\item There is a definite ratio between the magnitudes of $\vec{E}$ and $\vec{B}$: $E = cB$
+\item The wave travels in vacuum with a definite and unchanging speed 
+\item Unlike mechanical waves, which need the particles of a medium such as air to transmit a wave, electromagnetic waves require no medium \end{itemize} 
+\begin{definition} Electromagnetic Wave Equation in Vacuum: $$\frac{\partial^2 E_y(x, t)}{\partial x^2} = \varepsilon_0\mu_0\frac{\partial^2 E_y(x, t)}{\partial t^2} $$ \end{definition} 
+
+\subsection{Sinusoidal Electromagnetic Waves} 
+\begin{definition} Sinusoidal Electromagnetic Plane Wave, propagating in $+x$-direction: 
+$$\vec{E}(x, t) = \hat{j}E_{\text{max}}\cos(kx - \omega t) $$  
+$$\vec{B}(x, t) = \hat{k}B_{\text{max}}\cos(kx - \omega t) $$ where $E_{\text{max}}$ is the electric field magnitude, $B_{\text{max}}$ is the magnetic field magnitude, $k$ is the wave number and $\omega$ is the angular frequency \end{definition} 
+\begin{definition} Sinusoidal Electromagnetic Wave in Vacuum: $$E_{\text{max}} = cB_{\text{max}} $$ where $c$ is the speed of light in vacuum, $B_{\text{max}}$ is the magnetic field magnitude and $E_{\text{max}}$ is the electric field magnitude \end{definition}
+\begin{definition} Speed of Electromagnetic Waves in a Dielectric: $$v = \frac{1}{\sqrt{\varepsilon \mu}} = \frac{1}{\sqrt{KK_m}}\frac{1}{\sqrt{\varepsilon_0\mu_0}} = \frac{c}{\sqrt{KK_m}} $$ where $\varepsilon$ is the permittivity, $\mu$ is the permeability, $K$ is the dielectric constant, $K_m$ is the relative permeability, $\varepsilon_0$ is the electric constant, $\mu_0$ is the magnetic constant and $c$ is the speed of light in vacuum \end{definition} 
+
+\subsection{Energy and Momentum in Electromagnetic Waves} 
+\begin{definition} Energy Density $u$ in Electromagnetic Wave in Vacuum: 
+$$u = \frac{1}{2}\varepsilon_0E^2 + \frac{1}{2\mu_0}(\sqrt{\varepsilon_0\mu_0}E)^2 = \varepsilon_0E^2 $$ where $\varepsilon_0$ is the electric constant and $E$ is the electric field magnitude \end{definition} 
+\begin{definition} Poynting Vector: describes the magnitude and direction of the energy flow rate $$\vec{S} = \frac{1}{\mu_0}\vec{E} \times \vec{B} $$ where $\mu_0$ is the magnetic constant, $\vec{E}$ is the electric field and $\vec{B}$ is the magnetic field \end{definition} 
+\begin{definition} Intensity of a Sinusoidal Electromagnetic Wave in Vacuum: 
+$$I = S_{\text{av}} = \frac{E_{\text{max}}B_{\text{max}}}{2\mu_0} = \frac{E_{\text{max}}^2}{2\mu_0c} = \frac{1}{2}\sqrt{\frac{\varepsilon_0}{\mu_0}}E_{\text{max}}^2 = \frac{1}{2}\varepsilon_0cE_{\text{max}}^2 $$ \end{definition}
+\begin{definition} Flow Rate of Electromagnetic Momentum: $$\frac{1}{A}\frac{dp}{dt} = \frac{S}{c} = \frac{EB}{\mu_0c} $$ where the left hand side is the momentum transferred per unit surface area per unit time and $S$ is the Poynting vector magnitude \end{definition} 
+
+\subsection{Standing Electromagnetic Waves}
+\begin{definition} Standing Wave: formed by the superposition of an incident wave and a reflected wave \end{definition} 
+Nodal plans for $\vec{E}$ occur at $kx = 0, \pi = 2\pi, \dots $ and nodal planes for $\vec{B}$ at $kx = \frac{\pi}{2} = \frac{3\pi}{2} = \frac{5\pi}{2} = \dots $. At each point, the sinusoidal variations of $\vec{E}$ and $\vec{B}$ with time are $90^\circ$ out of phase. 
+
+\section{The Nature and Propagation of Light} 
+\subsection{The Nature of Light} 
+\begin{definition} Optics: the branch of physics that deals with the behavior of light and other electromagnetic waves \end{definition} 
+\begin{definition} Wave Front: the focus of all adjacent points at which the phase of vibration of a physical quantity associated with the wave is the same \end{definition} 
+\begin{definition} Ray: an imaginary line along the direction of travel of the wave \end{definition} 
+
+\subsection{Reflection and Refraction}
+\begin{definition} Reflection: when a light wave strikes a smooth interface separating two transparent materials and reflects back \end{definition} 
+\begin{definition} Refraction: when a light wave strikes a smooth interface separating two transparent materials and refracts (transmits) into the second material \end{definition} 
+\begin{definition} Specular Reflection: reflection at a definite angle \end{definition} 
+\begin{definition} Diffuse Reflection: scattered reflection from a rough surface \end{definition} 
+\begin{definition} Index of Refraction of an Optical Material: $$n = \frac{c}{v} $$ where $c$ is the speed of light in vacuum and $v$ is the speed of light in the material \end{definition} 
+Light always travels more slowly in a material than in vacuum, so the value of $n$ in another other than vacuum is always greater than unity ($ n > 1 $). \newline 
+The Laws of Reflection and Refraction (Snell's Law): \begin{enumerate} 
+\item The incident, reflected and refracted rays and the normal to the surface all lie in the same plane (the place of incidence); this plane is perpendicular to the plane of the boundary surface between the two materials
+\item Law of Reflection: $$\theta_r = \theta_i$$ where $\theta_r$ is the angle of reflection (measured from normal) and $\theta_i$ is the angle of incidence (measured from normal) 
+\item Law of Refraction: $$n_1\sin(\theta_1) = n_2\sin(\theta_2) $$ where $n_1$ is the index of refraction for material with incident light, $\theta_1$ is the angle of incidence (measured from normal), $n_2$ is the index of refraction for material with refracted light and $\theta_2$  is the angle of refraction (measured from normal) \end{enumerate} 
+Note: a ray entering a material of larger index of refraction bends toward the normal; a ray entering a material of smaller index of refraction bends away from the normal; a ray oriented along the normal does not bend, regardless of the material. \newline 
+The frequency $f$ of the wave does not change when passing from one material to another. But the wavelength $\lambda$ of the wave is different in general in different materials. 
+\begin{definition} Wavelength of Light in a Material: $$\lambda = \frac{\lambda_0}{n} $$ where $\lambda_0$ is the wavelength of light in vacuum and $n$ is the index of refraction of the material \end{definition} 
+
+\subsection{Total Internal Reflection}
+\begin{definition} Critical Angle: the angle of incidence for which the refracted ray emerges tangent to the surface \end{definition} 
+\begin{definition} Total Internal Refraction: occurs when a ray in material $a$ is incident on a second material $b$ whose index of refraction is smaller than that of material $a$ \end{definition} 
+\begin{definition} Critical Angle for Total Internal Refraction: $$\sin(\theta_{\text{crit}}) = \frac{n_2}{n_1} $$ where $n_2$ is the index of refraction of the second material and $n_1$ is the index of refraction of the first material \end{definition} 
+
+\subsection{Dispersion}
+\begin{definition} Dispersion: the dependency of wave speed and index of refraction on wavelength \end{definition} 
+In most materials, the value of $n$ decreases with increasing wavelength and decreasing frequency and thus $n$ increases with decreasing wavelength and increasing frequency. \newline 
+The light is said to be dispersed throughout a prism based on the color's wavelength.
+
+\subsection{Polarization}
+\begin{definition} Linearly-Polarized: when a wave has displacement in only 1 of $x, y, z$ directions \end{definition} 
+\begin{definition} Polarizing Filter/ Polarizer: a filter that permits only waves with a certain polarization direction to pass for mechanical waves \end{definition} 
+\begin{definition} Dichroism: a selective absorption in which one of the polarized components is absorbed much more strongly than the other \end{definition} 
+\begin{definition} Malus's Law: $$I = I_\text{max}\cos^2\Phi $$ where $I_\text{max}$ is the maximum transmitted intensity, $I$ is the intensity of polarized light passed through an analyzer, and $\Phi$ is the angle between polarization axis of light and polarizing axis of analyzer \end{definition} 
+Malus's Law only applies if the incidence light passing through the analyzer is already linearly polarized. 
+\begin{definition} Polarizing Angle: the angle of incidence where the light is not reflected at all abut is completely refracted \end{definition} 
+\begin{definition} Brewster's Law for the Polarizing Angle: when unpolarized light strikes an interface between two materials, the reflected light is completely polarized perpendicular to the place of incidence (parallel to the surface) if the angle of incidence equals the polarizing angle $\theta_p$ $$\tan(\theta_p) = \frac{n_2}{n_1} $$ where $\theta_p$ is the polarizing angle (angle of incidence for which the reflected light is 100\% polarized), $n_2$ is the index of refraction for the second material and $n_1$ is the index of refraction for the first material \end{definition} 
+
+\subsection{Scattering of Light}
+\begin{definition} Scattering: the process where light is absorbed and re-radiated in a variety of directions \end{definition} 
+
+\subsection{Huygen's Principle} 
+\begin{definition} Huygen's Principle: every point of a wave front may be considered the source of secondary wavelets that spread out in all directions with a speed equal to the speed of propagation of the ave \end{definition} 
+
+
+\section{Geometric Optics} 
+\subsection{Reflection and Refraction at a Plane Surface} 
+\begin{definition} Object: anything from which light rays radiate \end{definition} 
+\begin{definition} Point Object: has no physical extent \end{definition} 
+\begin{definition} Extended Object: real objects with length, width and height \end{definition} 
+\begin{definition} Object Point: source of rays \end{definition} 
+\begin{definition} Image Point: apparent source of reflected rays \end{definition} 
+\begin{definition} Virtual Image: an image formed by outgoing rays that don't pass through the image point \end{definition} 
+\begin{definition} Real Image: an image formed by outgoing rays that do pass through the image point \end{definition} 
+\begin{definition} Object Distance: the distance from the object to the mirror/surface \end{definition} 
+\begin{definition} Image Distance: the distance from the image to the mirror/surface \end{definition} 
+Sign Rules: \begin{enumerate} 
+\item For object distance, when the object is on the same side of the reflecting or refracting surface as the incoming light, object distance $s$ is positive; otherwise, it is negative 
+\item For image distance, when the image is on the same side of the reflecting or refracting surface as the outgoing light, image distance $s'$ is positive; otherwise, it is negative 
+\item For the radius of curvature of a spherical surface, when the center of curvature $C$ is on the same side as the outgoing light, the radius of curvature is positive; otherwise, it is negative \end{enumerate} 
+For a plane mirror: $$s = -s' $$
+For a plane reflecting or refracting surface, the radius of curvature is infinite. 
+\begin{definition} Lateral Magnification: $$m = \frac{y'}{y} $$ where $y'$ is the image height and $y$ is the object height \end{definition} 
+For a plane mirror, $y = y'$, so the lateral magnification is unity. 
+\begin{definition} Erect: used to describe an image where the image arrow points in the same direction as the object arrow; $y$ and $y'$ have the same sign and the lateral magnification is positive \end{definition} 
+\begin{definition} Inverted: used to describe an image where the image arrow points in the direction opposite to that of the object arrow; $y$ and $y'$ have opposite signs and the lateral magnification is negative \end{definition} 
+
+\subsection{Reflection at a Spherical Surface}
+\begin{definition} Center of Curvature: the center of the sphere of which the surface is a part \end{definition} 
+\begin{definition} Vertex: the center of the mirror surface \end{definition} 
+\begin{definition} Optic Axis: the line connecting the center of curvature and the vertex \end{definition} 
+\begin{definition} Object-Image Relationship, Spherical Mirror: $$\frac{1}{s} + \frac{1}{s'} = \frac{2}{R} $$ where $s$ is the object distance, $s'$ is the image distance and $R$ is the radius of curvature \end{definition} 
+\begin{definition} Paraxial Rays: rays that are parallel to an axis \end{definition} 
+\begin{definition} Spherical Aberration: the property of a spherical mirror where it does not form a precise point image of a point object; causes a "smeared out" image to form \end{definition} 
+\begin{definition} Focal point: the point at which the incident parallel rays converge \end{definition} 
+\begin{definition} Focal Length: the distance from the vertex to the focal point \end{definition}
+For a spherical mirror: $$f = \frac{R}{2} $$ 
+The focal point $F$ of a spherical mirror has the properties that: \begin{enumerate} 
+\item any incoming ray parallel to the optic axis is reflected through the focal point 
+\item any incoming ray that passes through the focal point is reflected parallel to the optic axis \end{enumerate} 
+\begin{definition} For a spherical mirror: $$\frac{1}{s} + \frac{1}{s'} = \frac{1}{f} $$ 
+where $s$ is the object distance, $s'$ is the image distance and $f$ is the focal length \end{definition} 
+In concave mirrors, if the object lies outside or at the focal point, so that the object distance is greater than or equal to the positive focal length, then the image point is on the same side of the mirror as the outgoing rays and the image is real and inverted. If the object is inside the focal point of a concave mirror, the resulting image is virtual (image point is on the opposite side of the mirror from the object), erect and larger than the object. \newline 
+For a convex mirror, $R$ is negative, $s$ is positive and $s'$ is negative. Incoming rays that are parallel to the optic axis diverge as though they had come from the point $F$ at a distance $f$ behind the mirror. Thus, $f$ is the focal length and $F$ is called a virtual focal point. \newpage Graphical Methods for Mirrors: \begin{enumerate} 
+\item A ray parallel to the axis, after reflection, passes through the focal point $F$ of a concave mirror or appears to come from the (virtual) focal point of a convex mirror 
+\item A ray through (or proceeding through) the focal point $F$ is reflected parallel to the axis 
+\item A ray along the radius through or away from the center of curvature $C$ intersects the surface normally and is reflected back along its original path
+ \item A ray to the vertex $V$ is reflected forming equal angles with the optic axis \end{enumerate} 
+
+\subsection{Refraction at a Spherical Surface} 
+\begin{definition} Object-Image Relationship, Spherical Refracting Surface: 
+$$\frac{n_a}{s} + \frac{n_b}{s'} = \frac{n_b - n_a}{R} $$ where $n_a$ is the index of refraction for material $a$, $n_b$ is the index of refraction for material $b$, $s$ is the object distance, $s'$ is the image distance and $R$ is the radius of curvature \end{definition} 
+\begin{definition} Lateral Magnification, Spherical Refracting Surface (both concave and convex) : 
+$$m = \frac{y'}{y} = -\frac{n_as'}{n_bs} $$ \end{definition} 
+For a plane refracting surface $$\frac{n_a}{s} + \frac{n_b}{s'} = 0$$ $$m = 1$$ The image formed by a plane refracting surface always has the same lateral size as the object and is always erect. 
+
+\subsection{Thin Lenses} 
+\begin{definition} Thin Lens: a lens made of two spherical surfaces close enough together that the distance between them (the thickness of the lenses) can be ignored \end{definition} 
+\begin{definition} Converging Lens: lens where if a beam of rays parallel to the axis passes through the lens, the rays converge to a focal point and form a real image at that point \end{definition} 
+For a converging lens, the focal length is always the same on both side of the lens and positive. 
+\begin{definition} Object-Image Relationship, Thin Lens: $$\frac{1}{s} + \frac{1}{s'} = \frac{1}{f} $$ where $s$ is the object distance, $s'$ is the image distance and $f$ is the focal length of lens \end{definition} 
+\begin{definition} Lateral Magnification, Thin Lens: $$m = -\frac{s'}{s} $$ \end{definition} 
+\begin{definition} Diverging Lens: lens where if a beam of rays parallel to the axis passes through the lens, the rays diverge after refraction \end{definition} 
+For a diverging lens, the above equations still hold. \newline 
+Any lens that is thicker at its center than at its edges is a converging lens with positive $f$; and any lens that is thicker at its edges than at its center is a diverging lens with negative $f$. 
+\begin{definition} Lensmaker's Equation for a Thin Lens: $$\frac{1}{f} = (n - 1)(\frac{1}{R_1} - \frac{1}{R_2}) $$ where $f$ is the focal length, $n$ is the index of refraction of lens material, $R_1$ is the radius of curvature of first surface and $R_2$ is the radius of curvature of second surface \end{definition} Graphical Method for Lenses: \begin{enumerate} 
+\item A ray parallel to the axis emerges from the lens in a direction that passes through the second focal point $F_2$ of a converging lens, or appears to come from the second focal point of a diverging lens 
+\item A ray through the center of the lens is not appreciably deviated; at the center of the lens, the two surfaces are parallel, so this ray emerges at essentially the same angle at which it enters and along essentially the same line 
+\item A ray through (or proceeding toward) the first focal point $F_1$ emerges parallel to the axis \end{enumerate} 
+
+\subsection{Cameras} 
+\begin{definition} f-Number of the lens: $$f-\text{number of a lens} = \frac{f}{D} $$ where $f$ is the focal length of lens and $D$ is the aperture diameter \end{definition} 
+
+\subsection{The Magnifier} 
+\begin{definition} Angular Magnification for a Simple Magnifier: $$M = \frac{\theta'}{\theta} = \frac{y/f}{y/25\text{ cm}} = \frac{25 \text{ cm}}{f} $$ where $\theta'$ is the angular size of object seen with magnifier, $\theta$ is the angular size of object seen without magnifier, $f$ is the focal length, $y$ is the object height and 25 cm is near point \end{definition} 
+
+\subsection{Microscopes and Telescopes} 
+\begin{definition} Angular Magnification for a Microscope: $$M = m_1M_2 = \frac{(25\text{ cm})s_1'}{f_1f_2} $$ where $m_1$ is the lateral magnification of the objective, $M_2$ is the angular magnification of the eyepiece, $s_1'$ is the image distance, $f_1$ is the focal length of the objective and $f_2$ is the focal length of the eyepiece \end{definition} 
+\begin{definition} Angular Magnification for a Telescope: $$M = \frac{\theta'}{\theta} = -\frac{y'/f_2}{y'/f_1} = -\frac{f_1}{f_2} $$ \end{definition} 
+
+In a compound microscope, the objective lens forms a first image in the barrel of the instrument and the eyepiece forms a final virtual image, often at infinity, of the first image. The telescope operates on the same principle but the object is far away. In a reflecting telescope, the objective lens is replaced by a concave mirror, which eliminates chromatic aberrations. 
+
+\section{Interference} 
+\subsection{Interference and Coherent Sources} 
+\begin{definition} Physical Optics: optical effects that depend on the wave nature of light \end{definition} 
+The principle of superposition states: when two or more waves overlap, the resultant displacement at any point and at any instant is found by adding the instantaneous displacements that would be produced at the point by the individual waves if each were present alone. 
+\begin{definition} Monochromatic Light: light of a single color \end{definition}
+\begin{definition} Coherent: when two monochromatic sources of the same frequency and with a constant phase relationship (not necessarily in phase) \end{definition} 
+For constructive interference to occur at a point $P$, the path difference for the two sources must be an integral multiple of the wavelength. 
+\begin{definition} Constructive Interference, sources in phase:
+$$r_2 - r_1 = m\lambda $$ $$(m = 0, ±1, ±2, \dots) $$ where $r_1$ is the distance from the first source to the point $P$, $r_2$ is the distance from the second source to the point $P$, and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Destructive Interference, sources in phase: 
+$$r_2 - r_1 = (m + \frac{1}{2})\lambda$$ $$(m = 0, ±1, ±2, \dots) $$ \end{definition} 
+\begin{definition} Antinodal Curves: curves where constructive interference occurs; the path difference $r_2 - r_1$ is equal to an integer $m$ times the wavelength \end{definition} 
+\begin{definition} Nodal Curves: curves where destructive interference occurs \end{definition} 
+The above 2 equations only hold if the two sources have the same wavelength and always be in phase. 
+
+\subsection{Two-Source Interference of Light}
+\begin{definition} Constructive Interference, two slits: $$d\sin(\theta) = m\lambda $$
+$$(m = 0, ±1, ±2, \dots) $$ where $d$ is the distance between slits, $\theta$ is the angle of line from slits to $m$th bright region on screen and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Destructive Interference, two slits: $$d\sin(\theta) = (m + \frac{1}{2})\lambda $$  $$(m = 0, ±1, ±2, \dots) $$ where $d$ is the distance between slits, $\theta$ is the angle of line from slits to $m$th bright region on screen and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Interference Fringes: the pattern of succession of bright and dark bands on a screen, parallel to the slits \end{definition} 
+\begin{definition} Constructive Interference, Young's experiment (small angles only): 
+$$y_m = R\frac{m\lambda}{d} $$ $$(m = 0, ±1, ±2, \dots) $$ 
+where $y_m$ is the position of $m$th bright band, $R$ is the distance from slits to screen and $\lambda$ is the wavelength \end{definition} 
+
+\subsection{Intensity in Interference Patterns}
+\begin{definition} Electric-field Amplitude in two-source Interference: 
+$$E_P = 2E|\cos\frac{\Phi}{2}|$$ where $E$ is the amplitude of wave from one source and $\Phi$ is the phase difference between waves \end{definition} 
+\begin{definition} Intensity in two-source Interference: 
+$$I = I_0\cos^2\frac{\Phi}{2} $$ where $I_0$ is the maximum intensity and $\Phi$ is the phase difference between waves \end{definition} 
+\begin{definition} Phase Difference in two-source Interference: 
+$$\Phi = \frac{2\pi}{\lambda}(r_2 - r_1) = k(r_2 - r_1) $$ 
+where $\lambda$ is the wavelength, $r_2 - r_1$ is the path difference and $k$ is the wave number ($ = 2\pi/\lambda$) \end{definition} 
+\begin{definition} Intensity far from two sources:
+$$I = I_0\cos^2(\frac{1}{2}kd\sin\theta) = I_0\cos^2(\frac{\pi d}{\lambda}\sin\theta) $$
+\end{definition} 
+\begin{definition} Intensity in two-slit Interference: 
+$$I = I_0\cos^2(\frac{kdy}{2R}) = I_0\cos^2(\frac{\pi dy}{\lambda R}) $$ \end{definition} 
+
+\subsection{Interference in Thin Lenses}
+\begin{definition} Normal Incidence: $$E_r = \frac{n_a - n_b}{n_a + n_b}E_i$$
+where $E_r$ is the electric-field amplitude of the wave reflected from the interface, $E_i$ is the electric-field amplitude of the wave traveling in an optical material, $n_a$ is the index of refraction for the first optical material and $n_b$ is the index of refraction for the second material \end{definition} 
+Facts: \begin{enumerate} 
+\item When $n_a > n_b$, light travels more slowly in the first material than in the second. In this case, $E_r$ and $E_i$ have the same sign and the phase shift of the reflected wave relative to the incident wave is zero. 
+\item When $n_a = n_b$, the amplitude $E_r$ of the reflected wave is zero. In effect, there is no interface, so there is no reflected wave. 
+\item When $n_a < n_b$, light travels more slowly in the second material than in the first. In this case, $E_r$ and $E_i$ have opposite signs, and the phase shift of the reflected wave relative to the incident wave is $\pi$ rad (a half cycle). \end{enumerate} 
+\begin{definition} Constructive Reflection from thin film, no relative phase shift: 
+$$2t = m\lambda $$ $$(m = 0, ±1, ±2, \dots)$$ where $t$ is the thickness of film and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Destructive Reflection from thin film, no relative phase shift: 
+$$2t = (m + \frac{1}{2})\lambda$$ $$(m = 0, ±1, ±2, \dots)$$ where $t$ is the thickness of film and $\lambda$ is the wavelength \end{definition} 
+If one of the two waves has a half-cycle reflection phase shift, the conditions for constructive and destructive interference are reversed: 
+\begin{definition} Constructive Reflection from thin film, half-cycle phase shift: 
+$$2t = (m + \frac{1}{2})\lambda $$ $$(m = 0, ±1, ±2, \dots)$$ where $t$ is the thickness of film and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Destructive Reflection from thin film, half-cycle phase shift: 
+$$2t = m\lambda$$ $$(m = 0, ±1, ±2, \dots)$$ where $t$ is the thickness of film and $\lambda$ is the wavelength \end{definition} 
+\begin{definition} Newton's Rings: the appearance of circular interference fringes by a thin film of air between a convex surface of a lens in contact with a plane glass plate \end{definition} 
+
+\subsection{The Michelson Interferometer} 
+\begin{definition} Michelson Interferometer: an experimental device that uses interference \end{definition} 
+The Michelson interferometer uses a monochromatic light source and can be used for high-precision measurements of wavelength. Its original purpose was to detect motion of the earth relative to a hypothetical ether, the supposed medium for electromagnetic waves. The ether has never been detected, and the concept has been abandoned; the speed of light is the same relative to all observes. This is part of the foundation of the special theory of relativity. 
+
+\section{Diffraction} 
+\subsection{Fresnel and Fraunhofer Diffraction} 
+\begin{definition} Fresnel Diffraction: diffraction caused by the point source and the screen being relatively close to the obstacle forming the diffraction pattern \end{definition} 
+\begin{definition} Fraunhofer Diffraction: diffraction caused when the source, obstacle and screen are far enough apart that all lines from the source to the obstacle can be considered parallel and likewise, all lines from the obstacle to a given point on the screen to be parallel \end{definition} 
+There is no fundamental distinction between interference and diffraction. The term interference is used for effects involving waves from a small number of wave sources. Diffraction usually involves a continuous distribution of Huygen's wavelets across the area of an aperture, or a very large number of sources or apertures. But both interference and diffraction are consequences of superposition and Huygen's principle. 
+
+\subsection{Diffraction from a Single Slit} 
+When a beam is transmitted through a single slit, the beam spreads out vertically. The diffraction pattern consists of a central bright band bordered by alternating dark and bright bands with rapidly decreasing intensity. In general, the narrower the slit, the broader the entire diffraction pattern. 
+\begin{definition} Dark Fringes, Single-Slit Diffraction: $$\sin(\theta) = \frac{m\lambda}{a} $$ where $\theta$ is the angle of line from center of slit to $m$th dark fringe on screen, $\lambda$ is the wavelength and $a$ is the slit width \end{definition} 
+When $\theta$ is very small, $$\theta = \frac{m\lambda}{a} $$ If the distance from slit to screen is $x$ and the vertical distance of the $m$th dark band from the center of the pattern is $y_m$, then $$y_m = x\frac{m\lambda}{a} $$ where $y_m << x$. 
+
+\subsection{Intensity in the Single-Slit Pattern} 
+\begin{definition} Amplitude in Single-Slit Diffraction: $$E_P = E_0\frac{\sin(\beta/2)}{\beta/2} $$ where $E_0$ is the amplitude of the electric field and $\beta$ is the total phase difference between the first and last phasor \end{definition} 
+\begin{definition} Intensity in Single-Slit Diffraction: $$I = I_0\{\frac{\sin[\pi a(\sin\theta)/\lambda]}{\pi a(\sin\theta)\lambda}\}^2 $$ where $I_0$ is the intensity at $\theta = 0$, $\theta$ is the angle of line from center of slit to position on screen, $a$ is the slit width and $\lambda$ is the wavelength \end{definition} 
+For small angles, the angular spread of the diffraction pattern is inversely proportional to the ratio of the slit width $a$ to the wavelength $\lambda$. The wider the slit (or the shorter the wavelength), the narrower and sharper is the central intensity peak. 
+
+\subsection{Multiple Slits}
+For two slits of finite width $$I = I_0\cos^2\frac{\Phi}{2}[\frac{\sin(\beta/2)}{\beta/2}] $$ where $$\Phi = \frac{2\pi d}{\lambda}\sin\theta$$ and $$\beta = \frac{2\pi a}{\lambda}\sin\theta$$ 
+When there are multiple slits, reinforcement occurs when the phase difference $\Phi$ is point $P$ for light from adjacent slits is an integer multiple of $2\pi$. That is, the maxima in the pattern occur at the same positions as for two slits with the same spacing. \newline 
+When there are $N$ slits, there are $(N - 1)$ minima between each pair of principle maxima and a minimum occurs whenever $\Phi$ is an integral multiple of $2\pi/N$ except when $\Phi$ is an integral multiple of $2\pi$ which gives a principle maximum. \newline 
+Increasing the number of slits in an interference experiment (while keeping the spacing of adjacent slits constant) gives interference patterns in which the maxima are in the same positions but progressively narrower than with two slits. 
+
+\subsection{The Diffraction Grating} 
+\begin{definition} Diffraction Grating: an array of a large number of parallel slits, all with the same width $a$ and spaced equal distances $d$ between centers \end{definition} 
+\begin{definition} Intensity Maxima, Multiple Slits: $$d\sin\theta = m\lambda$$ where $d$ is the distance between slits, $\theta$ is the angle of line from center of slit array to $m$th bright region on screen and $\lambda$ is wavelength \end{definition} 
+Grating spacing is $$d  = \frac{1}{\text{slits/mm}} $$ 
+
+\subsection{X-Ray Diffraction} 
+Conditions for Radiation from the Entire Array of Scattering Centers to Observers in Phase: \begin{itemize} 
+\item The angle of incidence must equal the angle of scattering 
+\item the path difference for adjacent rows must equal $m\lambda$ where $m$ is an integer \end{itemize} 
+\begin{definition} Bragg Condition for Constructive Interference from an Array: $$2d\sin\theta = m\lambda$$ where $d$ is the distance between adjacent rows in an array, $\theta$ is the angle of line from surface of array to $m$th bright region on space and $\lambda$ is wavelength \end{definition} 
+
+\subsection{Circular Apertures and Resolving Power} 
+An aperture of any shape forms a diffraction pattern. The diffraction pattern formed by a circular aperture consists of a bright spot surrounded by a series of bright and dark rings. 
+\begin{definition} Diffraction by a Circular Aperture: $$\sin\theta_1 = 1.22\frac{\lambda}{D}$$ where $\theta_1$ is the angular radius of first disk ring (or angular radius of Airy disk), $\lambda$ is the wavelength and $D$ is the aperture diameter \end{definition} 
+The angular radii of the next 2 rings are given by: $$\sin\theta_2 = 2.23\frac{\lambda}{D}$$ and $$\sin\theta_3 = 3.24\frac{\lambda}{D}$$ 
+\begin{definition} Rayleigh's Criterion: for resolution of two point objects, the objects are just barely resolved (that is, distinguishable) if the center of one diffraction pattern coincides with the first minimum of the other \end{definition} 
+\begin{definition} Limit of Resolution: the minimum separation of two objects that can just be resolved by an optical instrument \end{definition} 
+The smaller the limit of resolution, the greater the resolution, or resolving power, of the instrument. 
+
+\subsection{Holography} 
+\begin{definition} Holography: a technique for recording and reproducing an image of an object through the use of interference effects \end{definition} 
+In making a hologram, the light used must be coherent over distances that are large in comparison to the dimensions of the object and its distance from the film and, extreme mechanical stability is needed. If any relative motion of source, object or film occurs during exposure, even by as much as a quarter of a wavelength, the interference pattern on the film is blurred enough to prevent satisfactory image formation. 
+
+
+
+\section{Relativity}
+\subsection{Invariance of Physical Laws}
+\begin{definition} Einstein's First Postulate: Principle of Relativity: the laws of physics are the same in every frame of reference \end{definition} 
+\begin{definition} Einstein's Second Postulate: the speed of light in vacuum is the same in all inertial frames of reference and is independent of the motion of the source \end{definition} 
+It is impossible for an inertial observer to travel at $c$, the speed of light in vacuum. 
+
+\subsection{Relativity of Simultaneity}
+\begin{definition} Event: an occurrence that has a definite position and time \end{definition} 
+In general, two events that are simultaneous in one frame of reference are not simultaneous in a second frame that is moving relative to the first, even if both are inertial frames. Whether or not two events at different x-axis locations are simultaneous depends of the state of motion of the observer. Each observer is his or her own state of reference. The time interval between two events may be different in different frames of reference. 
+
+\subsection{Relativity of Time Intervals} 
+\begin{definition} Time Dilation: $$\Delta t = \frac{\Delta t_0}{\sqrt{1 - \frac{u^2}{c^2}}} $$ where $\Delta t_0$ is the proper time between two events (measured in rest frame), $\Delta t$ is the time interval between same events measured in second frame of reference, $u$ is the speed of second frame relative to rest frame and $c$ is the speed of light in vacuum \end{definition} 
+Observers measure any clock to run slow if it moves relative to them. 
+\begin{definition} Lorentz Factor: $$\gamma = \frac{1}{\sqrt{1 - \frac{u^2}{c^2}}} $$ where $u$ is the speed of second frame relative to rest frame and $c$ is the speed of light in vacuum \end{definition} 
+\begin{definition} Time Dilation: $$\Delta t = \gamma\Delta t_0$$ where $\gamma$ is the Lorentz factor relating the two frames, $\Delta t_0$ is the proper time between two events and $\Delta t$ is the time interval between same events measured in second frame of reference \end{definition} 
+\begin{definition} Twin Paradox: a thought experiment involving identical twins, one of whom makes a journey into space in a high-speed rocket and returns home to find that the twin who remained on Earth has aged more due to time dilation \end{definition}
+
+\subsection{Relativity of Length} 
+\begin{definition} Length Contraction: $$l = l_0\sqrt{1 - \frac{u^2}{c^2}} = \frac{I_0}{\gamma} $$ where $l$ is the length in second frame of reference moving parallel to object's length, $l_0$ is the proper length of object (measured in rest frame), $u$ is the speed of second frame relative to rest frame, $c$ is the speed of light in vacuum and $\gamma$ is the Lorenz factor relating the two frames \end{definition} 
+A length measured in any other frame that is not at rest is less than its proper length and thus its effect is called length contraction. \newline 
+There is no length contraction perpendicular to the direction of relative motion of the coordinate systems. 
+
+\subsection{The Lorentz Transformations}
+\begin{definition} Lorentz Coordination Transformation - spacetime coordinates of an event are $x,y,z,t$ is frame $S$ and $x',y',z',t'$ in frame $S'$: $$x' = \frac{x - ut}{\sqrt{1 - \frac{u^2}{c^2}}} = \gamma(x - ut) $$ $$y' = y $$ $$z' = z$$ $$t' = \frac{t - \frac{ux}{c^2}}{\sqrt{1 - \frac{u^2}{c^2}}} = \gamma(t - \frac{ux}{c^2}) $$ where $u$ is the velocity of $S'$ relative to $S$ in positive direction along $x-x'$ axis, $\gamma$ is the Lorentz factor relating the two frames and $c$ is the speed of light in vacuum \end{definition} 
+Space and time have become intertwined; we can no longer say that length and time have absolute meanings independent of the frame of reference. 
+\begin{definition} Lorentz Velocity Transformation (velocity in $S'$ in terms of velocity in $S$): $$v'_x = \frac{v_x - u}{1 - \frac{uv_x}{c^2}} $$ where $v_x$ is the $x$-velocity of object in frame $S$, $u$ is the velocity of $S'$ relative to $S$ in positive direction along $x-x'$ axis, $c$ is the speed of light in vacuum and $v'_x$ is the $x$-velocity of object in frame $S'$ \end{definition} 
+\begin{definition} Lorentz Velocity Transformation (velocity in $S$ in terms of velocity in $S'$): $$v_x = \frac{v'_x + u}{1 + \frac{uv'_x}{c^2}} $$ where $v_x$ is the $x$-velocity of object in frame $S$, $u$ is the velocity of $S'$ relative to $S$ in positive direction along $x-x'$ axis, $c$ is the speed of light in vacuum and $v'_x$ is the $x$-velocity of object in frame $S'$ \end{definition} 
+
+\subsection{The Doppler Effect for Electromagnetic Waves}
+\begin{definition} Doppler Effect, Electromagnetic Waves, source approaching observer: 
+$$f = \sqrt{\frac{c + u}{c - u}}f_0$$ where $c$ is the speed of light in vacuum, $u$ is the speed of source relative to observer, $f_0$ is the frequency measured in rest frame of source and $f$ is the frequency measured by observer \end{definition} 
+When the source moves away from the observer, $$f = \sqrt{\frac{c - u}{c + u}}f_0 $$ 
+
+\subsection{Relativistic Momentum} 
+The principle of conservation of momentum states that when two bodies interact, the total momentum is constant, provided that the net external force acting on the bodies in an inertial reference frame is zero. 
+\begin{definition} Relativistic Momentum: $$\hat{p} = \frac{m\hat{v}}{\sqrt{1 - \frac{v^2}{c^2}}} $$ where $m$ is the rest mass of particle, $\hat{v}$ is the velocity of particle, $v$ is the speed of particle and $c$ is the speed of light in vacuum \end{definition} 
+\begin{definition} Relativistic Momentum: $$\hat{p} = \gamma m\hat{v}$$ where $\gamma$ is the Lorentz factor relating rest frame of particle and frame of observer, $m$ is the rest mass of particle and $\hat{v}$ is the velocity of particle \end{definition} 
+Unless the net force on a relativistic particle is either along the same line as the particle's velocity or perpendicular to it, the net force and acceleration vectors are not parallel. 
+
+\subsection{Relativistic Work and Energy} 
+\begin{definition} Relativistic Kinetic Energy: $$K = \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} - mc^2 = (\gamma - 1)mc^2 $$ where $m$ is the rest mass of particle, $c$ is the speed of light in vacuum, $v$ is the speed of particle and $\gamma$ is the Lorentz factor relating rest frame of particle and frame of observer \end{definition} 
+\begin{definition} Total Energy of a Particle: $$E = K + mc^2 = \frac{mc^2}{\sqrt{1 - \frac{v^2}{c^2}}} = \gamma mc^2$$ where $K$ is the kinetic energy, $mc^2$ is the rest energy, $m$ is the rest mass of the particle, $v$ is the speed of particle, $c$ is the speed of light in vacuum and $\gamma$ is the Lorentz factor relating rest frame of particle and frame of observer \end{definition} 
+\begin{definition} Total Energy, Rest Energy and Momentum: $$E^2 = (mc^2)^2 + (pc)^2 $$ 
+where $E$ is total energy, $m$ is rest mass, $c$ speed of light in vacuum, $mc^2$ is rest energy and $p$ is magnitude of momentum \end{definition}
+
+
+\section{Photons: Light Waves Behaving as Particles} 
+\subsection{Light Absorbed as Photons: The Photoelectric Effect} 
+\begin{definition} Photoelectric Effect: an effect where a material emits electrons from its surface when illuminated \end{definition} 
+To escape from the surface, an electron must absorb enough energy from the incident light to overcome the attraction of positive ions in the material. These attractions constitute a potential-energy barrier; the light supplies the "kick" that enables the electron to escape. 
+\begin{definition} Maximum Kinetic Energy of Photoelectrons: $$W_{\text{tot}} = -eV_0 = 0 - K_{\text{max}} $$ $$K_{\text{max}} = \frac{1}{2}mv_{\text{max}}^2 = eV_0$$ where $V_0$ is the stopping potential and $e$ is the charge of an electron \end{definition} 
+Results:  \begin{itemize} 
+\item The photocurrent depends on the light frequency. For a given material, monochromatic light with a frequency below a minimum threshold frequency produces no photocurrent, regardless of intensity. 
+\item There is no measurable time delay between when the light is turned on and when the cathode emits photoelectrons (assuming the frequency of the light exceeds the threshold frequency). 
+\item The stopping potential does not depend on intensity, but does depend on frequency. The greater the light frequency, the higher the energy of the ejected photoelectrons. \end{itemize} 
+\begin{definition} Photons: small packets of energy \end{definition} 
+\begin{definition} Energy of a Photon: $$E = hf = \frac{hc}{\lambda} $$ where $h$ is Planck's constant, $f$ is frequency, $c$ is speed of light in vacuum and $\lambda$ is wavelength \end{definition} 
+\begin{definition} Planck's Constant: $$h = 6.626069 \times 10^{-34} J \cdot s $$ \end{definition} 
+\begin{definition} Photoelectric Effect: $$eV_0 = hf - \Phi$$ where $eV_0$ is the maximum kinetic energy of photoelectron, $e$ is the magnitude of electron charge, $V_0$ is the stopping potential, $hf$ is the energy of absorbed photon, $h$ is Planck's constant, $f$ is light frequency and $\Phi$ is work function \end{definition} 
+\begin{definition} Momentum of a Photon: $$p = \frac{E}{c} = \frac{hf}{c} = \frac{h}{\lambda} $$ where $E$ is photon energy, $c$ is the speed of light in vacuum, $h$ is Planck's constant, $f$ is frequency and $\lambda$ is wavelength \end{definition} 
+
+\subsection{Light Emitted as Photons: X-Ray Production} 
+Not all x-ray frequencies and wavelengths are emitted in a bremsstrahlung spectra. Each spectrum has a maximum frequency $f_{\text{max}}$ and a corresponding minimum wavelength $\lambda_{\text{min}}$. The greater the value of $V_{\text{AC}}$, the higher the maximum frequency and the shorter the minimum wavelength. 
+\begin{definition} Bremsstrahlung: $$eV_{\text{AC}} = hf_{\text{max}} = \frac{hc}{\lambda_{\text{min}}} $$ where $eV_{\text{AC}}$ is the kinetic energy lost by electron, $e$ is the magnitude of electron charge, $V_{\text{AC}}$ is accelerating voltage, $hf_{\text{max}}$ is maximum energy of an emitted photon, $h$ is Planck's constant, $f_{\text{max}}$ is maximum photon frequency, $c$ is the speed of light in vacuum and $\lambda_{\text{min}}$ is minimum photon wavelength \end{definition} 
+
+\subsection{Light Scattered as Photons: Compton Scattering and Pair Production} 
+When light is scattered by a single electron, such as an individual electron within an atom, the incident photon gives up part of its energy and momentum to the electron. The scattered photon that remains can fly off at a variety of angles $\Phi$ with respect to the incident direction but it has less energy and less momentum than the incident photon. Therefore, the scattered light has a lower frequency $f$ and longer wavelength $\lambda$ than the incident light. 
+\begin{definition} Compton Scattering: $$\lambda' - \lambda = \frac{h}{mc}(1 - \cos\Phi) $$ 
+where $\lambda'$ is the wavelength of scattered radiation, $\lambda$ is the wavelength of incident radiation, $h$ is the Planck's constant, $m$ is the electron rest mass, $c$ is the speed of light in vacuum and $\Phi$ is the scattering angle \end{definition} 
+
+\subsection{Wave-Particle Duality, Probability and Uncertainty} 
+\begin{definition} Heisenberg Uncertainty Principle for Position and Momentum: 
+$$\Delta x\Delta p_x \geq \frac{\hbar}{2} $$ where $\Delta x$ is the uncertainty in coordinate $x$, $\Delta p_x$ is the uncertainty in corresponding momentum component $p_x$, and $\hbar$ is the Planck's constant divided by $2\pi$ \end{definition} 
+\begin{definition} Heisenberg Uncertainty Principle: states that in general, it is impossible to simultaneously determine both the position and the momentum of a particle with arbitrary great precision \end{definition} 
+\begin{definition} Heisenberg Uncertainty Principle for Energy and Time: 
+$$\Delta t\Delta E \geq \frac{\hbar}{2} $$ where $\Delta t$ is the time uncertainty of a phenomenon, $\Delta E$ is the energy uncertainty of same phenomenon and $\hbar$ is the Planck's constant divided by $2\pi$ \end{definition} 
+
+
+\section{Particles Behaving as Waves}
+\subsection{Electron Waves} 
+\begin{definition} De Broglie Wavelength of a Particle: $$\lambda = \frac{h}{p} = \frac{h}{mv} $$ where $h$ is the Planck's constant, $p$ is the particle's momentum, $m$ is the particle's mass and $v$ is the particle's speed \end{definition} 
+\begin{definition} Energy of a Particle: $$E = hf$$ where $h$ is Planck's constant and $f$ is frequency \end{definition} 
+\begin{definition} De Broglie Wavelength of an Electron: $$\lambda = \frac{h}{p} = \frac{h}{\sqrt{2meV_{ba}}} $$ where $h$ is Planck's constant, $p$ is the electron momentum, $m$ is the electron mass, $e$ the magnitude of electron charge and $V_{ab}$ is the accelerating voltage \end{definition} 
+
+\subsection{The Nuclear Atom and Atomic Spectra}
+Heated materials emit light and different materials emit different kinds of light. If the light source is a hot solid or liquid, the spectrum is continuous; light of all wavelengths is present. But if the source is a heated gas, the spectrum includes only a few colors.
+\begin{definition} Emission Line Spectrum: a series of only a few colors in the form of isolated sharp parallel lines corresponding to the wavelengths that have been emitted \end{definition} 
+Lines of an emission line spectrum are called spectral lines. \newline 
+While a heated gas selectively emits only certain wavelengths, a cool gas selectively absorbs certain wavelengths. 
+\begin{definition} Absorption Line Spectrum: a series of dark lines corresponding to the wavelengths that have been absorbed \end{definition} 
+In Thomson's model of the atom, an alpha particle is scattered through only a small angle. In Rutherford's model of the atom, an alpha particle can be scattered through a large angle by the compact, positively charged nucleus. 
+
+\subsection{Energy Levels and the Bohr Model of the Atom} 
+\begin{definition} Energy of Emitted Photon: $$hf = \frac{hc}{\lambda} = E_i - E_f $$ where $h$ is Planck's constant, $f$ is photon frequency, $c$ is speed of light in vacuum, $\lambda$ is photon wavelength, $E_i$ is initial energy of atom before transition and $E_f$ is final energy of atom after transition \end{definition} 
+Each atom has a set of possible energy levels - an amount of internal energy - but it cannot have an energy intermediate between two levels. According to Bohr, an excited atom can make a transition from one energy level to a lower level by emitting a photon with energy equal to the energy difference between the initial and final levels. 
+\begin{definition} Ground Level: lowest energy level \end{definition} 
+\begin{definition} Excited Levels: levels with energies greater than the ground level \end{definition} 
+An atom in an excited level, called an excited atom, can make a transition into the ground level by emitting a photon. If an atom initially in the lower energy level is struck by a photon with just the right amount of energy, the photon can be absorbed and the atom will end up in the higher level. \newline 
+In the Bohr model, each energy level of a hydrogen atom corresponds to a specific stable circular orbit of the electron around the nucleus. An electron in such an orbit does not radiate. An atom radiates energy only when an electron makes a transition from an orbit of energy $E_i$ to a different orbit with lower energy $E_f$, emitting a photon of energy $hf = E_i - E_f$ in the process. 
+\begin{definition} Quantization of Angular Momentum: $$L_n = mv_nr_n = n\frac{h}{2\pi}$$ where $L_n$ is the orbital angular momentum, $m$ is the electron mass, $v_n$ is the electron speed, $r_n$ is the electron orbital radius, $n$ is the principal quantum number ($n = 1, 2, 3, \dots$), and $h$ is Planck's constant. \end{definition} 
+\begin{definition} Radius of $n$th Orbit in the Bohr Model: $$r_n = \varepsilon_0\frac{n^2h^2}{\pi me^2} $$ where $\varepsilon_0$ is the electric constant, $n$ is the principal quantum number, $m$ is the electron mass, $h$ is Planck's constant and $e$ is the magnitude of electron charge \end{definition} 
+\begin{definition} Orbital Speed in $n$th Orbit in the Bohr Model: $$v_n = \frac{1}{\varepsilon_0}\frac{e^2}{2nh}$$ where $\varepsilon_0$ is the electric constant, $e$ is the magnitude of electron charge, $n$ is principal quantum number and $h$ is Planck's constant \end{definition} 
+\begin{definition} Radius of $n$th Orbit in the Bohr Model: $$r_n = n^2a_0$$ where $n$ is the principal quantum number and $a_0$ is the Bohr radius ($a_0 = \varepsilon_0\frac{h^2}{\pi me^2}$) \end{definition}
+\begin{definition} Total Energy for $n$th Orbit in the Bohr Model: $$E_n = -\frac{hcR}{n^2} = -\frac{13.60 \text{eV}}{n^2} $$ where $h$ is Planck's constant, $c$ is the speed of light in vacuum, $n$ is principal quantum number and $R$ is Rydberg constant $$R = \frac{me^4}{8\varepsilon_0^2h^3c} $$ \end{definition} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
