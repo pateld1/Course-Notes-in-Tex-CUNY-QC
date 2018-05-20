@@ -1,0 +1,1082 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+\usepackage{blkarray}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Math 623: Stochastic Operations Research}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{question}{Question}[section]
+
+\newcommand{\expe}[1]{\mathrm{E}[ #1 ]}
+\newcommand{\var}[1]{\mathrm{Var}[ #1 ]}
+\newcommand{\prob}[1]{\mathrm{P}( #1 )}
+\newcommand{\geom}[1]{\text{Geometric}( #1 )}
+\newcommand{\expo}[1]{\text{Exp}( #1 )}
+\newcommand{\poisson}[1]{\text{Poisson}( #1 )}
+\newcommand{\qs}{Queueing System }
+\newcommand{\set}[1]{\Big\{ #1 \Big\}}
+
+
+
+
+
+
+
+\title{Math 623: Stochastic Operations Research}
+\author{Darshan Patel}
+\date{Spring 2018}
+\maketitle
+
+\tableofcontents
+
+\section{Lecture 1} 
+
+$$\expe{X} = \begin{cases} \sum_{\text{all } x} xf(x) &\text{ if discrete} \\ \int_{-\infty}^\infty xf(x)\, dx &\text{ if continuous} \end{cases} $$ 
+Take $X$, a discrete random variable with values $1,2,3,\dots$ and $f(x) = \frac{1}{x(x+1)} = \prob{X = x}$. Is it a pdf? $ \sum_1^\infty \frac{1}{x(x+1)} \stackrel{?}{=} 1$
+$$ \begin{aligned} \sum_1^n \frac{1}{x(x+1)} &= \frac{1}{1 \cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4} + \dots + \frac{1}{n \cdot n+1} \\ &= (1 - \frac{1}{2}) + (\frac{1}{2} - \frac{1}{3}) + (\frac{1}{3} - \frac{1}{4}) + \dots + (\frac{1}{n} - \frac{1}{n+1}) \\ &= 1 - \frac{1}{n+1} \\ &\to 1 \end{aligned} $$ 
+However, $$ \expe{X} = \sum_1^\infty x \cdot \frac{1}{x(x+1)} = \sum_1^\infty \frac{1}{x+1} = \frac{1}{2} + \frac{1}{3} + \dots = \infty $$ 
+For $0 < p < 1$ and $q = 1-p$, a random variable $X$ is called Geometric($p$) if the values of $X$ are $0, 1, 2, \dots$ and $\prob{X = x} = f(x) = pq^x$
+$$ \sum pq^x = p \sum q^x = p \frac{1}{1 - q} = p \frac{1}{p} = 1 $$ 
+If $X = \geom{p}$, $\expe{X} = \frac{q}{p}$. \\
+For a random variable $X$, the moment generating function (mgf) is defined to be $$m(t) = \expe{e^{tX}} = \sum e^{tX}f(x) $$ 
+If $X$ is discrete, $$\expe{h(X)} = \sum_{\text{all } x} h(x)f(x) $$ where $f(x)$ is the probability density function of $X$. \\~\\
+Find the mgf of $\geom{p}$. 
+$$ \begin{aligned} m(t) &= \sum_{x=0}^\infty e^{tx} pq^x \\ &= p \sum_{x = 0}^\infty (e^tq)^x \\ &= p\sum_{x=0}^\infty r^x \text{ assume } r < 1 \to e^t q < 1 \to t < \ln \frac{1}{q} \\ &= p\frac{1}{1-r} \\ &= \frac{p}{1 - e^tq} \end{aligned} $$ 
+Note: In general, $e^u = \sum_{n=0}^\infty \frac{u^n}{n!}$. Therefore 
+$$ e^{tx} = \sum_{n=0}^\infty \frac{t^nx^n}{n!} \to m(t) = \sum_{n=0}^\infty \frac{\expe{X^n}}{n!}t^n = 1 + \expe{X}t + \frac{\expe{X^2}}{2}t^2 + \dots $$ 
+Thus $$m'(t) = \expe{X} + \expe{X^2}t + \dots \to m'(0) = \expe{X}$$ 
+If $X = \geom{p}$, $$ \begin{aligned} m(t) &= p(1 - e^tq)^{-1} ~ (\text{all } t < \ln \frac{1}{q}) \\
+m'(t) &= pe^tq(1 - e^tq)^{-2} \\ m'(0) &= \frac{pq}{p^2} = \frac{q}{p} \end{aligned} $$ 
+A queue is a line that changes over time. Let try to understand a \qs. \\~\\
+Let $N(t) = $ total number of customers at time $t$. Then $N(t)$ is looked at as a random variable called the state of the system. Furthermore, $L = \expe{N(t)}$, the expected value of the steady state in the long run. The average time waited for customer is $W = \expe{\mathcal{W}}$. $$ L = \lambda W $$ 
+
+\section{Lecture 2} 
+
+Assumptions: \begin{enumerate} 
+\item Assume that successive customers arrive at the \qs at random times where $T_1$ = time of arrival of the first customer, $T_2 = \dots $ and $T_0 = 0$. Note that the interval times are $\tau_1 = T_1 - T_0$, $T_2 = T_2 - T_1$, and so on. 
+\item The service time of consecutive customers are random $\mathscr{T}_1, \mathscr{T}_2, \dots $ (iid) \end{enumerate} 
+State of the system refers to the number of customers in the \qs \\
+Queue length refers to the number of customers in the queue. 
+$$ \begin{aligned} N(t) &= \text{ the random number of customers in the \qs at time } t \\ N_q(t) &= \text{ the random number of customers in the queue at time } t \\ 
+N_s(t) &= \text{ the random number of customers in the service facility at time } t \end{aligned} $$ Clearly, $$N_q(t) + N_s(t) = N(t) $$
+We let $P_n(t) = \prob{N(t) = n | N(0) = k}$ where $s$ is the number of servers. \\
+Let $\lambda_n = $ mean arrival rate of new customers (the expected number of arrivals per unit time given that there are $n$ customers in the \qs). \\
+Let $\mu_n = $ mean departure/service rate for the overall \qs (the expected number of service completions per unit time given that there $n$ customers in the customers in the \qs). \\
+Suppose a \qs has 3 servers, of which 2 are occupied and no one waiting. Then the state of the system $N(t) = 2$ and $\mu_2 = 2\mu$. \\
+Suppose a \qs has 3 servers of which all 3 are occupied and no one waiting. Then $\mu_3 = 3\mu$. \\~\\
+In general, $$ \mu_n = \begin{cases} n\mu &\text{ if } 1 \leq n < s \\ s\mu &\text{ if } s \leq n \end{cases} $$ 
+Between $0$ and $T_0$, the system is in transient state; from $T_0$ and outward, the system is in steady state and $N(t)$ does not depend much on initial condition and on $t$. \\
+In a \qs in steady state, $N$ = the state of the system and $P_n = \prob{N = n}$. Furthermore, $L = \expe{N}$ and $L_q = \expe{N_q}$. Let $W = $ waiting time of a customer in the \qs. Then $\mathcal{W} = \expe{W}$. Let $W_q = $ waiting time of a customer in the queue. Then $\mathcal{W}_q = \expe{W_q}$. \\~\\
+For $n = 0,1,2,3,4$: $p_0 = \frac{1}{16}$, $p_1 = \frac{4}{16}$, $p_2 = \frac{6}{16}$, $p_3 = \frac{4}{16}$ and $p_4 = \frac{1}{16}$. This system is in steady state (no dependency on $t$). $N = 0,1,2,3,4$. 
+$$ L = \expe{N} = \sum_{n=0}^4 np_n = 0 \cdot \frac{1}{16} + 1 \cdot \frac{4}{16} + 2 \cdot \frac{6}{16} + 3 \cdot \frac{4}{16} + 4 \cdot \frac{1}{16} = 2 $$ 
+In the long run, there will be an average of 2 customers in the \qs. 
+$$ \begin{tabular}{c|c} $N$ & $N_q$ \\ \hline 0 & 0 \\ 1 & 0 \\ 2 & 0 \\ 3 & 1 \\ 4 & 2 \end{tabular} $$ 
+$$L_q = \expe{N_q} = 0 \cdot \prob{N_q = 0} + 1 \cdot \prob{N_q = 1} + 2 \cdot \prob{N_q = 2} = 1\cdot p_3 + 2 \cdot p_4 = \frac{4}{16} + \frac{2}{16} = \frac{3}{8} $$ 
+$$ N = N_q + N_s \to \expe{N} = \expe{N_q} + \expe{N_s} \to \expe{N_s} = 2 - \frac{3}{8} = \frac{13}{8} $$ 
+Fundamental Identities in Queueing Theory: Assume that the \qs is in the steady state conition and that $\lambda_n = \lambda > 0$ (all $n > 1$). then 
+$$ L = \lambda w \text{ and } L_q = \lambda w_q \text{ Little's formulas} $$ 
+General Remark: If we have access to one of the 4 measures $L, L_q, w, w_q$, then we can get the other 3 from Little's formulas. \\~\\
+Suppose $w = 3$ and $\lambda = 2$. From $L = \lambda w = 2 \cdot 3 = 6$. This is the expected number of customers in the \qs. Suppose $\expe{\phi} = \frac{1}{4}$. Now $\mathcal{w} = w_q + \phi = w_q + \frac{1}{4}$. 
+$$ w = 3 = w_q + \frac{1}{4} \to w_q = 3 - \frac{1}{4} = \frac{11}{4} $$
+$$L_q = \lambda w_q = 2 \cdot \frac{11}{4} = \frac{11}{2} = 5.5 $$ 
+Note: If the \qs is in steady state but the sequence ($\lambda_n$) is not constant, we let $\bar{\lambda} = \sum_{n=0}^\infty \lambda_np_n$. Then $$ L = \bar{\lambda}w \text{ and } L_q = \bar{\lambda}w_q$$ 
+Given that $\bar{\lambda} = 4$, since $L = 2$, $$w = \frac{L}{\bar{\lambda}} = \frac{2}{4} = \frac{1}{2} ~~ w_q = \frac{L_q}{\bar{\lambda}} = \frac{3/8}{4} = \frac{3}{32} $$ 
+
+\section{Lecture 3}
+
+The Exponential Distribution (measures lifetime of an object): A continuous random variable $X > 0$ is called $\expo{\lambda}$, where $\lambda > 0$, if the pdf of $X$ is given by 
+$$f(x) = \begin{cases} \lambda e^{-\lambda x} &\text{ if } x \geq 0 \\ 0 &\text{elsewhere} \end{cases} $$ 
+For the exponential distribution, the cumulative density function is 
+$$F(x) = \prob{X \leq x} = \begin{cases} 1 - e^{-\lambda x} &\text{ if } x > 0 \\ 0 &\text{ elsewhere} \end{cases} $$ 
+Note: For $x > 0$, $\prob{X \geq x} = e^{-\lambda x}$. \\~\\
+Let $t_0 = 0$ and $s < s + t$. Then $$ \prob{X \geq s + t | X \geq s} = \prob{X \geq t} $$ 
+This is the lack of memory property for the exponential distribution. 
+$$ \prob{X \geq s + t | X \geq s} = \frac{\prob{X \geq s + t}}{\prob{X \geq s}} = \frac{e^{-\lambda(s + t)}}{e^{-\lambda s}} = e^{-\lambda t} = \prob{X \geq t} $$ 
+\begin{theorem} Assume $X_1, \dots, X_n$ are independent Exponential random variables ($X_i = \expo{\lambda_i}$, where $i = 1,\dots, n$). Let $Y = \min(X_1, \dots, X_n) \geq 0$. Then $Y = \expo{\lambda = \lambda_1 + \dots + \lambda_n}$. \end{theorem} 
+\begin{proof} Clearly $Y \geq 0$. Let $y > 0$ and $G(y) = \prob{Y \leq y}$. Then $$ \begin{aligned} 
+1 - G(y) &= \prob{\min(X_1,\dots,X_n) \geq y} \\ &= \prob{X_1 \geq y, \dots, X_n \geq y} \\ &= \prob{X_1 \geq y}\dots\prob{X_n \geq y} \\ &= e^{-\lambda_1 y}\cdot \dots \cdot e^{-\lambda_n y} \\ &= e^{-y(\lambda_1 + \dots + \lambda_n)} \end{aligned} $$ We got for $y > 0$, $$ 1 - G(y) = e^{-\lambda y} \to G(y) = \prob{Y \leq y} = 1 - e^{-\lambda y} $$ \end{proof} 
+
+If $X = \expo{\lambda}$, then $\expe{X} = \frac{1}{\lambda}$ and $\var{X} = \frac{1}{\lambda^2}$. Furthermore, $$ \begin{aligned} \expe{X^n} &= \int_0^\infty x^n \lambda e^{-\lambda x} \, dx \\ \text{Let } u = x^n, ~ du = nx^{n-1}\, dx, ~& v = -\lambda e^{-\lambda x}, ~ dv = \lambda e^{-\lambda x} \, dx \\ &= \underbrace{-x^n e^{-\lambda x} \Big|_{x = 0}^{x = \infty}}_0 + \frac{n}{\lambda} \underbrace{\int_0^\infty x^{n-1} \lambda e^{-\lambda x} \, dx}_{\expe{X^{n-1}}} \end{aligned} $$ 
+Therefore, $$\expe{X^n} = \frac{n}{\lambda}\expe{X^{n-1}} $$ 
+In particular, if $n=1$, $\expe{X} = \frac{1}{\lambda}$. If $n = 2$, $\expe{X^2} = \frac{2}{\lambda} \cdot \frac{1}{\lambda} = \frac{2}{\lambda^2}$. Therefore $\var{X} = \expe{X^2} - (\expe{X})^2 = \frac{2}{\lambda^2} - \Big( \frac{1}{\lambda}\Big)^2 = \frac{1}{\lambda^2}$. 
+
+\begin{theorem} If $X_1,\dots,X_n$ are independent and $X_i = \expe{\lambda_i}$ where $i = 1,\dots, n$, then $\prob{\min( X_1,\dots, X_n) = X_k} = \frac{\lambda_k}{\lambda_1 + \dots + \lambda_n} $. \end{theorem} 
+The Poisson Random Variable: Let $X = 0,1,2,3,\dots,$. A random variable $X$ is said to be $\poisson{\lambda}$ if $f(x) = \prob{X = x} = e^{-\lambda} \frac{\lambda^x}{x!}$. \\
+For $x > 0$, $$\sum_{x=0}^\infty \frac{\lambda^x}{x!} = e^\lambda \to \sum_{x=0}^\infty f(x) = e^{-\lambda} \cdot e^{\lambda} = 1$$ 
+Note: $\prob{X = 0} = e^{-\lambda} \to \lambda = -\ln(\prob{X= 0})$. Therefore $\expe{X} = \lambda$ and $\var{X} = \lambda$. \\~\\
+Poisson Process: Fix an event that may or may not occur. In $t > 0$, let $X(t) = $ the random number of times the event occurs in $[0,t]$. Take $X(0) = 0$. Then $(X(t))_{t >0}$ is called a counting process. For example, $X(s+t) - X(s)$ has an increment of length $t$. \\
+A counting process $(X(t))_{t \geq 0}$ such that for all $X(t_1) - X(t_0)$, $X(t_2) - X(t_1)$, $\dots, X(t_n) - X(t_{n-1})$ are independent random variables will be called a counting process with independent increments. \\
+A counting process $(X(t))_{t \geq 0}$ is called (time) stationary if all distributions of $X(s+t) - X(s)$ depends only on $t$ but not on $s$. \\
+Let $\lambda > 0$. A counting process $(X(t))_{t \geq 0}$ is called a Poisson process with rate $\lambda$ if it has independent increments and for every $s >0$, $t>0$, $X(s+t) - X(s)$ is a Poisson random variable with rate parameter $\lambda t$. \\
+Remark: The second property tells us that every Poisson process is time stationary. 
+$$ \prob{X(s+t) - X(s) = n} = e^{-\lambda t} \frac{(\lambda t)^n}{n!} $$ 
+
+Problem 1: Messages arrive at a telephone office according to a Poisson process with rate $3$ messages per hour. What is the probability that no messages arrive during 8am and noon?
+$$ \prob{X(4) = 0} = e^{-12} \frac{12^0}{0!} $$ 
+
+ What is the distribution of the time at which the first afternoon message arrives?
+ $$ \prob{T_1 \leq t} = \prob{X(t) \geq 1} = 1 - \prob{X(t) = 0} = 1 - e^{-3t} $$ 
+ As a random variable, $X(t) = \poisson{3t}$. So the cdf of the first time of an occurrence $T_1$ is $$G(t) = \prob{T_1 \leq t} = \begin{cases} 0 &\text{ if } t \leq 0 \\ 1 - e^{-3t} &\text{ if } t > 0 \end{cases} $$ 
+
+Problem 2: Suppose $(X(t))_{t \geq 0}$ is a Poisson process with rate $\lambda$. Fix $s > 0$, $t>0$. Find $\expe{X(s) - X(s + t)}$. \\ Hint: $X(s) = X(s) - X(0)$, an increment on $[0,s]$, or a Poisson random variable with parameter $\lambda s$. 
+$$ X(s) - X(s + t) = X(s)[X(s+t) - X(s)] + [X(s)]^2 $$ \\~\\
+
+Problem 3: Suppose $(X(t))_{t \geq 0}$ is a Poissom process with rate $\lambda = 2$. Find \begin{enumerate}
+\item $\prob{X(1) = 2}$
+\item $\prob{X(1) = 2, X(3) = 6} = \prob{X(1) = 2, X(3) - X(1) = 4} = \prob{X(1) = 2}\prob{X(3) - X(1) = 4} = \Big( e^{-2} \frac{2^2}{2!}\Big) \Big( e^{-4} \frac{4^4}{4!} \Big) $
+\item $\prob{X(1) = 2 | X(3) = 6}$
+\item $\prob{X(3) = 6 | X(1) = 2}$ 
+\end{enumerate}
+
+\section{Lecture 4} 
+
+Mom-and-Pop's Grocery Store has a small adjacent parking lot with three parking spaces reserved for the store's customers. During store hours, cars enter the lot and use of the spaces at a mean rate of $2$ per hour. For $n = 0,1,2,3$, the probability $P_n$ that exactly $n$ spaces currently are being used is $p_0 = 0.2, p_1 = 0.3, p_2 = 0.3,p_3 = 0.2$. Determine the basic measures of performance - $L, L_q, W, W_q$ - for this queueing system. Use this result to determine the average length of time a car remains in a parking space. \\ 
+$$ \overline{\lambda} = \lambda_0p_0 + \lambda_1p_1 + \lambda_2p_2 + \overbrace{\lambda_3}^0p_3 = 2p_0 + 2p_1 + 2p_2 = 2(p_0 + p_1 + p_2) = 2(0.8) = 1.6$$ 
+$$ L = \sum_{n=0}^3 np_n = (0)(0.2) + (1)(0.3) + (2)(0.3) + (3)(0.2) = 1.5 $$ 
+Therefore $$ L = \overline{\lambda} w \to w = \frac{L}{\overline{\lambda}} = \frac{1.5}{1.6} $$ 
+Then, $L_q = \expe{\overbrace{N_q}^0} = 0$. Hence $w_q = 0$. 
+$$ w = w_q + \varphi \to \expe{\varphi} = w = \frac{1.5}{1.6} $$ \\~\\
+Assume a \qs is in steady state condition and the long tun probability are $P_n = \prob{N = n}$ where $n = 0,1,2,\dots.$. Find a formula for $L_q = \expe{N_q}$ in terms of $P_n$. \\
+ Assume we have $s$ servers. Then $$L_q = \expe{N_q} = \sum_{k=0}^\infty k\prob{N_q = k} = \sum_{k=0}^\infty k\prob{N = s + k}$$ 
+ For example, $\{N_q = 1\} = \{N = s + 1\}$, $\{N_q = 2\} = \{N = s + 2\}$. Therefore, if $s + k = n$, then $k = n-s$ and so $$ L_q = \sum_{n=s}^\infty (n-s)p_n $$ 
+ In general, if $\{X(t)\}_{t \geq 0}$ is a Poisson process with rate $\lambda $ and $T_1 < T_2 < \dots$ are the arrival rates. Let $\tau_1 = T_1 - T_0$, Let $\tau_1 = T_1 - T_0$, $\tau_2 = T_2 - T_1, \dots$. $T_1,T_2,T_3,\dots$ are called inter-arrival times. Then $\tau_1 = T_1 = \expo{\lambda}$. In reality, for $(X(t))_{t \geq 0}$ = Poisson process (rate $\lambda$), the inter-arrival times $\tau_1,\tau_2,\dots$ are independent, identically distributed $\expo{\lambda}$ random variables. \\~\\
+ Example: If $\lambda = 3$, find $\expe{T_4}$. Clearly $T_4 = \tau_1 + \tau_2 + \tau_3 + \tau_4$, each iid $\expo{\lambda = 3}$. Therefore 
+ $$\expe{T_4} = \expe{\tau_1} + \expe{\tau_2} + \expe{\tau_3} + \expe{\tau_4} = 4\expe{\tau_1} = 4 \cdot \frac{1}{3} = \frac{4}{3} $$ 
+ Furthermore, $$ \var{T_4} = 3 \var{\tau_1} = \frac{4}{9} $$ 
+ The distributions of the inter-arrival times and the service times are given as follows. In steady state, let $w$ and $w_q$ be random variables. What's $\expe{w}$ and $\expe{w_q}$? Note that $N(t)$ and $N_q(t)$ are stochastic processes. $$ \expe{N} = L ~~ \expe{N_q} = L_q$$ 
+ M/M/1 Model: 1 refers to 1 server, M comes from memory-less property, $\tau = \expo{\lambda}$. Service time is represented as $\varphi = \expo{\mu}$. \\~\\
+ Explain why the utilization factor $\rho$ for the server in a single server queueing system must equal $1 - P_0$ where $P_0$ is the probability of having $0$ customers in the system. \\ Here $s = 1$. Assume inter-arrival time $\tau$ has cdf $G_1$ and service time $\varphi$ has cdf $G_2$ with $\expe{\tau} = \frac{1}{\lambda}$ and $\expe{\varphi} = \frac{1}{\mu}$. The utilization factor is $\rho = \frac{\lambda}{\mu}$. 
+ 
+  \section{Lecture 5}
+ Consider a G/G/1 (single server queueing system with any service time distribution and any distribution of inter-arrival times). Let $\expe{\tau} = \frac{1}{\lambda}$, $\expe{\varphi} = \frac{1}{\mu}$ and $\rho = \frac{\lambda}{\mu} < 1$. Prove the following: \begin{itemize} 
+ \item $L = L_q + (1- P_0)$ \\ 
+ Start from $N = N_q + N_s$. Since $s = 1$, $N_s = \begin{cases} 1 &\text{ with probability } \rho \\ 0 &\text{ with probability } 1-\rho \end{cases} $. Therefore $\expe{N_S} = \prob{N_S = 1}$. To say $N_S = 1$ is the same as $N \geq 1$; therefore $\prob{N_S = 1} = \prob{N \geq 1} = 1 - \prob{N = 0} = 1 - p$.  Then $\expe{N} = \expe{N_q} + \expe{N_s}$. So $L = L_q + \expe{N_s} = L_q + (1 - P_0)$. 
+ \item $L = L_q + \rho$  \\
+ Start from $W = W_Q + \varphi$. Then $\expe{W} = \expe{W_q} + \frac{1}{\mu}$, or $L = W = W_Q + \frac{1}{\mu}$. Multiply by $\lambda$. Then $\lambda W = \lambda W_q + \frac{\lambda}{\mu}$. This is $L = L_q + \rho$. 
+ \item $P_0 = 1 - \rho$ \\ Start with $L = L_q + \rho = L_q + (1 - P_0)$. Then $\rho = 1 - P_0$ or $P_0 = 1 - \rho = \prob{N = 0}$. 
+ \end{itemize} 
+ Remark: The mean arrival rate is $k$ customers per unit time when the \qs is full. Assume it is in steady state and $N \leq M$ (some maximum value). In this case, $\lambda_0 = \lambda_1 = \lambda_2 = \dots = \lambda_{m-1} = k$ and $\lambda_m = \lambda_{m+1} = \dots = 0$. We can use $L = \overline{\lambda}W $ and $L_q = \overline{\lambda}W_q$ with $$\overline{\lambda} = \sum_{n=0}^\infty \lambda_np_n = kp_0 + kp_1 + \dots + kp_{m-1} = k(p_0 + p_1 + \dots + p_{m-1}) = k(1 - p_m) = \overline{\lambda} $$ 
+ Show that $$L = \sum_{n=0}^{s-1} nP_n + L_q + s\Big( 1 - \sum_{n=0}^{s-1} P_n\Big) $$ 
+ $$ \begin{aligned} 
+ L_q &= \sum_{n=s}^\infty (n-s)P_n = \sum_{n=s}^\infty (nP_n - sP_n) = \sum_{n=s}^\infty nP_n - s\sum_{n=s}^\infty P_n \\ 
+ L &= \sum_{n=0}^\infty np_n = \sum_{n=0}^\infty np_n = \sum_{n=0}^{s-1} np_n + \sum_{n=s}^\infty np_n \\ L_q &= L - \sum_{n=0}^{s-1} np_n - s\sum_{n=s}^\infty p_n \\ 
+ L &= L_q + \sum_{n=0}^{s-1}npn + s\sum_{n=s}^\infty p_n \\ 
+ 1 &= \sum_{n=0}^\infty p_n = \sum_{n=0}^{s-1} p_n + \sum_{n=s}^\infty p_n \\ 
+ \sum_{n=s}^\infty p_n &= 1 - \sum_{n=0}^{s-1} p_n \\ 
+ L &= L_1 + \sum_{n=0}^{s-1} np_n + \Big(1 - \sum_{n=0}^{s-1} p_n\Big) \end{aligned} $$ 
+ If $X = \expo{\lambda}$, for $\lambda > 0$, $\prob{X \geq c} = e^{-\lambda c}$. If $\lambda > 0$ and $X \geq 0$ is a continuous random variable such that $\prob{X \geq x} = e^{-\lambda x}$, for all $x > 0$, then $X = \expo{\lambda}$. \\~\\
+ A \qs has three servers with expected service times of $20$ minutes, $15$ minutes and $10$ minutes. The service times have an exponential distribution. Each server has been busy with a current customer for $5$ minutes. Determine the expected remaining time until the next service completion. \\ 
+ $$ \expe{\varphi_1} = 20 \text{ mins } = \frac{1}{3} \text{ hrs } ~~ \expe{\varphi_2} = \frac{1}{4} \text{ hrs} ~~ \expe{\varphi_2} = \frac{1}{6} \text{ hrs} $$ 
+ Let $\varphi_1^*, \varphi_2^*, \varphi_3^*$ be the remaining service times at the corresponding servers. By the memoryless property of the exponential distribution, each of these service times are distributed exponentially. Assume these three are independent. The next service completion corresponds to the minimum of $\varphi_1^*,\varphi_2^*,\varphi_3^*$. 
+ $$ \expe{\varphi_1} = \frac{1}{3} = \frac{1}{\mu} \to \mu_1 = 3$$ 
+ In similar manner, $\mu_2 = 4$ and $\mu_3 = 6$. Due to independence, $\varphi_1^* = \expo{3}$, $\varphi_2^* = \expo{4}$ and $\varphi_3^* = \expo{6}$. Then 
+ $$U = \min\{\varphi_1^*,\varphi_2^*,\varphi_3^*\} = \expo{\mu^* = \mu_1 + \mu_2 + \mu_3 = 13} $$ So the expected remaining time until the next completion is $$\expe{U} = \frac{1}{13} \text{ hrs } $$ 
+ Consider a two-server \qs where all service times are independent and identically distributed according to an exponential distribution with a mean of $10$ minutes. Service is provided on a first come first serve basis. When a particular customer arrives, he finds that both servers are busy and no one is waiting in the queue. What is the probability distribution (including its mean and standard deviation) of this customer's waiting time in the queue? 
+ $$ \begin{aligned} \varphi_1 &= \expo{\mu = 6} \\ \varphi_2 &= \expo{\mu = 6} \\ W_q &= \min\{ \varphi_1^*, \varphi_2^*\} = \expo{\mu = 12} \\ \expe{W_q} &= \frac{1}{12} \text{ hrs } = \frac{60}{12} \text{ mins} = 5 \text{ mins} \\ \text{sd} &= \sqrt{\var{W_q}} = \frac{1}{\mu} = \frac{1}{12} \text{ hrs }  \end{aligned} $$ 
+ Therefore the average waiting time in the queue is $5$ minutes with a standard deviation of $5$ minutes. \\
+ Determine the expected value and standard deviation of this customer's waiting time in the system. 
+ $$ \begin{aligned} W &= W_q + \varphi \\ &= \expo{\mu = 12} + \expo{\mu = 6} \\ \expe{W} &= \expe{W_q} + \expe{\varphi} \\  &= \frac{1}{12} + \frac{1}{6} = \frac{1}{4} \text{ hrs } = 15 \text{ mins } \end{aligned} $$ 
+ Suppose that this customer is still waiting in the queue $5$ minutes after its arrival. Given this information, how does this change the expected value and the standard deviation of this customer's total waiting time in the system from the answer above. 
+ $$ \expe{W} = \frac{1}{12} + W_q + \varphi = \frac{1}{12} + \frac{1}{4} = \frac{1}{3} \text{ hrs } = 20 \text{ mins } $$ 
+ $$ \text{sd} = \sqrt{ \frac{1}{12^2} + \frac{1}{6^6}} \text{ hrs } $$ 
+ 
+ \section{Exam 1} 
+ 
+ \begin{question} Consider a barber shop with $2$ barbers and $3$ additional waiting seats. The number of customers in the shop varies from $0$ to $5$. In the steady state condition, the probability that a new customer will wait to be served is: \begin{enumerate} 
+ \item $p_1 + p_2 + p_3 + p_4$ 
+ \item $p_4 + p_5$ 
+ \item \fbox{$1 - (p_0 + p_1)$}
+ \item $p_0 + p_1 + p_2$ \end{enumerate} \end{question}
+ 
+ \begin{question} Answer the following with TRUE or FALSE. Assume steady state and $\lambda_n = \lambda$, all $n \geq 1$. \begin{enumerate} 
+ \item If the average number of customers in the \qs is $L$, then the average waiting time of a customer in the queue is $\frac{L}{\lambda}$. TRUE/\fbox{FALSE} - $W_q = \frac{L_q}{\lambda}$. 
+ \item If there are $3$ servers in the system, then the average number of customers in the service facility is calculated as $= 0\cdot p_0 + 1 \cdot p_1 + 2 \cdot p_2 + 3 \cdot p_3 $.  TRUE/\fbox{FALSE} - $\expe{N_s} = \sum_{n=0}^\infty nP_n$. 
+ \end{enumerate} \end{question}
+ 
+ \begin{question} Customers arrive at a store according to a Poisson Process $(X(t))_{t \geq 0}$ at rate $3$ per hour. The successive arrival times are $T_1$, $T_2$, $T_3, \dots$ (with $T_0 = 0$). Suppose that customer number $N$ is the first customer to arrive after time $2$. The number $N$ is random satisfying uniquely $T_{n-1} \geq 2 \geq T_n$. \\
+ \begin{enumerate} 
+ \item Compare the events $\set{T_n > 2 + s}$ and $\set{X(2 + s) - X(2) = 0}$ where $s > 0$. $$ \set{T_n > + s} = \set{X(2+s) - X(s) = 0} $$
+ \item Find $\prob{T_n > 2 + s}$ for $s > 0$. $$ \begin{aligned} \prob{T_n > 2 + s} &= \prob{X(s+2) - X(2) = 0} \\ &= e^{-3s} \text{ where } X\sim \text{Poisson}(\lambda s) \\ \prob{T_n - 2 > s} &= e^{-3s} \\ T_n -2 &\sim \text{Exp}(3) \\ \expe{T_n-2} &= \frac{1}{\theta} = \frac{1}{3} \end{aligned} $$ 
+ \item Find $\expe{T_n}$. $$ \expe{T_n} = 2 + \frac{1}{3} = \frac{7}{3}$$ 
+ \end{enumerate} \end{question} 
+  
+  \begin{question} For a single server queueing system in steady state condition, find a formula connecting only $p_0 = \prob{N = 0}$, $L$ and $L_q$. 
+  $$ \begin{aligned} N &= N_q + N_s \\ \expe{N} &= \expe{N_q} + \expe{N_s} \\ &= \expe{N_q} + \prob{N_s = 1} \\ L &= L_q + (1-P_0) \end{aligned} $$ 
+  \end{question} 
+  
+  \begin{question} Show that the chance that an exponential distributed random variable takes on a value below its mean is more that $60\%$.  \\
+  Since $X \sim \text{Exp}(\lambda)$, $$ \prob{X < \frac{1}{\lambda}} = 1 - e^{-\lambda(\frac{1}{\lambda})} = 1 - e^{-1} > 0.6 $$ 
+  \end{question} 
+  
+  \begin{question} A queueing system in steady state condition has $2$ servers. Given that $N$ could only be $0$, $1$, $2$, $3$, $4$, and $p_0 = \frac{1}{5}$, $p_1 = \frac{1}{5}$, $p_2 = \frac{2}{5}$, $p_3 = \frac{1}{10}$, $p_4 = \frac{1}{10}$, \begin{enumerate} 
+  \item Find $L$. $$ L = \sum_{n=0}^4 nP_n = 1.7$$ 
+  \item Find $L_q$. $$ L_q = \sum_{n=2}^4 (n-s)P_n = P_3 + 2P_4 = 0.3 $$ 
+  \item Given that the mean arrival rate is $3$ customers per hour when the system is not full, find $W$. \\ Use $\bar{\lambda}$ since $P_n$ not constant. $$ \bar{\lambda} = \lambda_0P_0 + \dots + \lambda_3P_3 = 3(1 - P_n) = 3 \cdot \frac{9}{10} = 2.7 $$ Then $$ W = \frac{L}{\bar{\lambda}} = \frac{1.7}{2.7} $$ and $$ W_q = \frac{L_q}{\bar{\lambda}} = \frac{0.3}{2.7} $$ 
+  \item If the service time distribution is the same for both servers, find the expected service time for any customer. $$ W = W_q + \varphi \to \expe{\varphi} = \expe{W} - \expe{W_q} = \frac{1.7}{2.7} - \frac{0.3}{2.7} = \frac{1.4}{2.7} $$ 
+  \end{enumerate} \end{question} 
+  
+  \begin{question} Assume that immigration into a specific territory occurs according to a Poisson Process at rate $\lambda = 1$ per day. \begin{enumerate} 
+  \item Find the expected time until the $10^{\text{th}}$ immigrant arrives. \\
+  Note that $T_{10} = \tau_1 + \dots + \tau_{10}$ and so $$ \expe{T_{10}} = \expe{\tau_1} + \dots + \expe{\tau_{10}} = 10 \cdot 1 = 10 $$ 
+  \item What is the probability that the elapsed time between the $10^{\text{th}}$ and the $11^{\text{th}}$ immigrant arrival exceeds $2$ days? \\
+  Note that $\tau_{11} \sim \text{Exp}(1)$ and so $$ \prob{\tau_{11} > 2} = e^{-2} $$ 
+  \end{enumerate} \end{question} 
+ 
+ \section{Lecture 6} 
+ Birth and Death Processes: Consider a population and let $X(t)$ denote the size of the population at time $t$. Note that $X(t) = n$. Then $(X(t))_{t\geq 0}$ is a counting process. 
+ $$ \prob{X(t_{n+1}) = j | X(t_n) = i_n, X(t_{n-1}) = i_{n-1},\dots, X(t_1) = i_1} = \prob{X(t_{n+1}) = j | X(t_n) = i} $$ 
+ This is the Markov Condition. \\
+ For a continuous time Markov chain (CTMC), we only need to look at transition probabilities: $$ \prob{X(s+t) = j | X(s) = i} = P_{ij}(t) $$ 
+ A CTMC has transition probability. Look at the matrix: $Q(t) = (P_{ij}(t))$. \\
+ Note that $$P_{ij}(t) = \begin{cases} 1 &\text{ if } j = 1 \\ 0 &\text{ if } j = 0 \end{cases} $$ 
+ Facts: \begin{itemize} 
+ \item $Q(0) = I = \begin{bmatrix} 1 & 0 & \dots & 0 \\ 0 & 1 & \dots & 0 \\ 0 & 0 & \ddots & 0 
+  \\ 0 & 0 & \dots & 1 \end{bmatrix}$ 
+ \item Each function $P_{ij}(t)$ is differentiable in $t$, $t \in (0,\infty)$
+ \item $Q(s+t) = Q(s)\cdot Q(t) \iff P_{ij}(s+t) = \sum_k P_{ik}(s)\cdot P_{kj}(s)$ 
+ \item The holding time in any state is Exponential (Chapman-Kolmogorov eqn) \end{itemize} 
+ An example of a CTMC is a Poisson Process with rate $\lambda$. \\
+ Suppose $(X(t))_{t \geq 0}$ is a Poisson Process with rate $\lambda$. For $j < i$, $\prob{X(s+t) = j | X(s) = i} = 0$. For $j > i$, $$ \begin{aligned} 
+ \prob{X(s+t) = j | X(s) = i} &= \frac{\prob{X(s+t) = j, X(s) = i}}{\prob{X(s) = i}} \\
+ &= \frac{\prob{X(s t) - X(s) = j - i, X(s) = i}}{\prob{X(s) = i}} \\ 
+ &= \frac{\prob{X(s+t) - X(s) = j - i}\prob{X(s) = i}}{\prob{X(s) = i}} \\
+ &= \overbrace{\prob{X(s+t) - X(s) = j - i}}^{\text{Poisson}(\lambda t)} \\ 
+ &= e^{-\lambda t} \frac{(\lambda t)^{j-i}}{(j-i)!}  \end{aligned} $$ 
+ We get for the Poisson process with rate $\lambda$, 
+ $$P_{ij}(t) = \begin{cases} 0 &\text{ if } j < i \\ e^{-\lambda t} \frac{(\lambda t)^{j-i}}{(j-i)!} &\text{ if } j \geq i \end{cases} $$ 
+ A birth and death process $(X(t))_{t \geq 0}$ has birth rate $\lambda_n \geq 0$ and death rate $\mu_n \geq 0$. \\
+ Assumptions: \begin{itemize} 
+ \item Given $X(t) = n$, the (remaining) time until the next birth is $\expo{\lambda_n}$. 
+ \item Given $X(t) = n$, the (remaining) time until the next death is $\expo{\mu_n}$. 
+ \item Given $X(t) = n$, the two random variables stated above are independent. \end{itemize} 
+ Given that $X(t) =n $, there $2$ counting random variables, $U_n$: time until a birth = $\expo{\lambda_n}$ and $V_n$: time until a death = $\expo{\mu_n}$. \\
+ Note: $\prob{U_n = V_n} = 0$. \\
+ The next change in size changes according to the $\min \set{U_n,V_n}$. If $\min\set{U_n,V_n} = U_n$, $n \to n+1$; if $\min\set{U_n,V_n} = V_n$, $n \to n-1$.\\
+ Note that $\mu_0 = 0$. \\
+ For the Poisson Process: $$ \begin{aligned} 
+ P_n(t) &= \prob{X(t) = n} \\ &= e^{-\lambda t} \frac{(\lambda t)^n}{n!} \\
+\lim_{n\to\infty} P_n(t) &= P_n = \prob{X=n} \end{aligned} $$ 
+\begin{theorem} The functions $(P_n(t))$ for a birth and death process with rates $\lambda_n$ and $\mu_n$ satisfy a sequence of ordinary differential equations. 
+$$ \begin{aligned} \frac{dP_n}{dt} &= -\lambda_0P_0(t) + \mu_1P_1(t) \\ 
+\frac{dP_n}{dt} &= -(\lambda_n + \mu_n)P_n(t) + \lambda_{n-1}P_{n-1}(t) + \mu_{n+1}P_{n+1}(t) \end{aligned} $$ 
+for all $n \geq 1$ and subject to $P_i(0) = 1$ and $P_j(0) = 0$ for all $j \neq i$. \end{theorem} 
+If the limit condition is satisfied, let $t \to \infty$ and differentiate. 
+$$ \begin{aligned} \lim_{t \to \infty} P_0'(t) &= (\lim_{t\to\infty} P_0(t))' = (P_0)' = 0\\
+\lim_{t\to\infty} P_n'(t) &= (\lim_{t\to\infty} P_n(t))' = (P_n)' = 0 \end{aligned} $$ 
+Doing this, we get, for all $n \geq 1$, $$ \begin{aligned} 
+0 &= \lambda_0P_0 + \mu_1P_1 \\ 0 &= -(\lambda_n + \mu_n)P_n + \lambda_{n-1}P_{n-1} + \mu_{n+1}P_{n+1} \\ \lambda_0P_0 &= \mu_1P_1 \\ (\lambda_n + \mu_n)P_n &= \lambda_{n-1}P_{n-1} + \mu_{n+1}P_{n+1} \end{aligned} $$ 
+The last two equations are balance equations. 
+ 
+ \section{Lecture 7} 
+\qs modeled by a Birth and Death Process: Assume $(N(t))_{t\geq0}$ (state of the system at time $t$) is a birth and death process with rate $\lambda_n$, $\mu_n$ ($\mu_n \neq 0$) where $\lim_{n\to\infty} N(t) = N$, $\prob{N(t) = n} = P_n$ and $\sum P_n = 1$. Then the balance equations are: $$ \begin{aligned} \lambda_0P_0 &= \mu_1P_1 \\ \forall n \geq 1~~ (\lambda_n + \mu_n)P_n &= \lambda_{n-1}P_{n-1} + \mu_{n+1}P_{n+1} \end{aligned} $$ 
+Observe that the second equation is equivalent to, for $n \geq 1$: 
+$$ -\lambda_{n-1}P_{n-1} + \mu_nP_n = -\lambda_nP_n + \mu_{n+1}P_{n+1} $$ 
+Let $x_n = -\lambda_{n-1}P_{n-1} + \mu_nP_n$. Then the second equation becomes $$ x_n = x_{n+1} ~~ \forall n \geq 1 $$ 
+Therefore $x_1 = x_2 = x_3 = \dots = $ constant. Now $$x_1 = -\lambda_0P_0 + \mu_1P_1 = 0 \text{ from equation 1} $$ 
+Therefore $\forall n \geq$, $x_n = 0$ or $\lambda_{n-1}P_{n-1} = \mu_nP_n$. Assume that $\mu_n > 0$ for all $n$. Then $$P_n = \frac{\lambda_{n-1}}{\mu_n}P_{n-1} = \frac{\lambda_{n-1}}{\mu_n}\frac{\lambda_{n-2}}{\mu_{n-1}}P_{n-2} = \dots $$ 
+Hence $$ P_n = \frac{\lambda_{n-1}\lambda_{n-2}\dots\lambda_0}{\mu_n\mu_{n-1}\dots\mu_{1}} P_0 ~~~\forall n \geq 1 $$ 
+For $n\geq 1$, let $C_n = \frac{\lambda_{n-1}\lambda_{n-2}\dots\lambda_0}{\mu_n\mu_{n-1}\dots\mu_{1}}$, then $$P_n = C_nP_0$$ 
+In order to have steady state condition, we must have $1 = \sum P_n$, which means 
+$$ \begin{aligned} 1 &= P_0 + P_1 + P_2 + \dots \\ &= P_0 + C_1P_0 + C_2P_0 + \dots \\ 
+&= P_0(1 + C_1 + C_2 + \dots) \\ &= P_0A \end{aligned} $$ where $A = 1 + C_1 + C_2 + \dots < +\infty$. Then $P_0A = 1$ and so $$ P_0 = \frac{1}{A} ~~ P_n = C_nP_0$$ 
+This is the general solution of the balance equations. \\~\\
+The M/M/1 model is a model for a queueing system with $s=1$ server based on a birth and death process with $\lambda_0 = \lambda_1 = \lambda_2 = \dots = \lambda > 0$ and $\mu_1 = \mu_2 = \dots = \mu > 0$. Under what conditions on $\lambda$ and $\mu$ does the M/M/1 model have steady state condition $P_n = \prob{N = n}$? To answer this question, we  will use the general solution. \\
+If we let $\rho = \frac{\lambda}{\mu}$, then $$C_ = \frac{\lambda^n}{\mu^n} = \Big( \frac{\lambda}{\mu} \Big)^n = \rho^n $$ 
+For steady state, we need $A = 1 + C_1 + C_2 + \dots < +\infty$ or 
+$$A = 1 + \rho + \rho^2 + \rho^3 + \dots < +\infty \iff \rho = \frac{\lambda}{\mu} < 1 $$ 
+For the M/M/1 model to have steady state solution, we need $\rho = \frac{\lambda}{\mu} < 1$. When $\rho < 1$,
+$$A = 1 + \rho + \rho^2 + \dots  = \frac{1}{1-\rho} \to P_0 = \frac{1}{A} = 1 - \rho $$ 
+and $$P_n = C_nP_0 = \rho^n(1-\rho) $$ 
+Conclusion: For the M/M/1 model if $\rho = \frac{\lambda}{\mu} < 1$, $P_0 = 1 - \rho $ and for all $n \geq 1$, $P_n = \rho^n(1-\rho)$, then the queueing system based on a birth and death process has steady state condition. \\~\\
+What exactly are the $4$ measures ($L$, $L_q$, $W$, $W_q$) for the M/M/1 model where $\rho < 1$? Recall that a random variable $X = 0,1,2,\dots$ and $\prob{X = x} = pq^x$ where $0 < p < 1$ and $q = 1-p$ is called a Geometric($p$) random variable. Note that $\expe{X} = \frac{q}{p}$. For random variable $N$, $$\prob{N = n}  =(1-\rho)\rho^n$$
+Therefore $N = \geom{1-\rho}$ and $$L = \expe{N} = \frac{\rho}{1-\rho} = \frac{\lambda}{\mu - \lambda} $$ 
+Since $L = \frac{\rho}{1-\rho}$, $$ W = \frac{L}{\lambda} = \frac{\lambda}{\lambda(\mu - \lambda)} = \frac{1}{\mu - \lambda}$$ 
+Since $\mathcal{W} = \mathcal{W}_q + \varphi$, taking expected value of the entire equation, $$ W = W_q + \frac{1}{\mu} $$ 
+So $$W_q = W - \frac{1}{\mu} = \frac{1}{\mu - \lambda} - \frac{1}{\mu} = \frac{\lambda}{\mu(\mu - \lambda)} $$ 
+If $W_q = \frac{\lambda}{\mu(\mu - \lambda)}$, then $$L_q = \lambda\mu_q = \frac{\lambda^2}{\mu(\mu - \lambda)} $$ 
+Another direction for derivation: we know $N = N_q + N_s$. Since $s=1$, $N_s = \begin{cases} 1 \\ 0 \end{cases}$ and so 
+$$ \prob{N_s = 1} = \prob{N \geq 1} = 1 - \prob{N = 0} = 1 - P_0 $$ 
+Taking expected value of the entire equation, 
+$$ L = L_q + \prob{N_s = 1} = L_q + 1 - P_0$$ 
+Then $$L_q = L + P_0 - 1 = \frac{\lambda}{\mu - \lambda} - \frac{\lambda}{\mu} = \frac{\lambda^2}{\mu(\mu - \lambda)} $$ 
+Questions: Assume M/M/1 model for the queueing system.  \begin{enumerate} 
+\item \begin{enumerate} 
+\item Assuming an expected inter-arrival time for customers is $15$ minutes and an expected service time of $10$ minutes. Find $L$, $L_q$, $W$ and $W_q$. 
+\item Using the data in the previous part, find the probability that there is at least one person waiting for service. $$ \prob{N \geq 2} = 1 - p_0 - P_1$$ 
+From the previous part, we have $\lambda = 4$ and $\mu = 6$. Therefore $\rho = \frac{2}{3}$. Furthermore, $$ \begin{aligned} p_0 &= 1 - \rho = \frac{1}{3} \\ p_1 &= (1-\rho)\rho^2 = \Big(\frac{1}{3}\Big)\Big(\frac{2}{3}\Big) = \frac{2}{9} \\ \prob{N \geq 2} &= \frac{4}{9} \end{aligned} $$ 
+\end{enumerate} 
+\item \begin{enumerate} 
+\item Find $L$, $L_q$ if $\rho = \frac{3}{4}$. 
+\item Find $L_q$ in terms of $L$. 
+\item Find $W_q$ if $\mu = 6$ and $L = 5$. 
+\end{enumerate} 
+\item If an average of $30$ customers arrive per hour, what average service time per customer must the server be capable of in order for the average length of time per customer (in the system) to be $5$ minutes? \\
+Here $\lambda = 30$ per hour and $W = 5$ mins = $\frac{1}{12}$ hrs. In this model,
+$$W = \frac{1}{\mu - \lambda} \to \frac{1}{12} - \frac{1}{\mu - 30}$$
+Therefore $\mu = 42$ and so the answer is $\frac{1}{\mu} = \frac{1}{42}$ hrs or $\frac{60}{42}$ mins. 
+\item Suppose $\lambda = 8$, $\mu = 12$ and customers value their time at $\$12$ per hour. \begin{enumerate} 
+\item What is the average cost for each customer's time? 
+\item Find the average hourly customer time cost for the queueing system. 
+\end{enumerate} 
+\item A queueing system has $\lambda = 2$ customers per hour. Find $L$, $L_q$, $W$ and $W_q$ in terms of $\mu$. 
+\end{enumerate} 
+
+\section{Lecture 8} 
+Assume a M/M/1 model where $(N(t))_{t \geq 0}$ is a birth and death process with $\lambda_n = \lambda > 0$ and $\mu_n = \mu > 0$ .Let $t \to 0$. Then $$\lim_{t\to 0} N(t) = N \text{ and } P_n = \prob{N(t) = n} $$ 
+If $\lambda < \mu$, then $\rho = \frac{\lambda}{\mu}$ and so $$P_n = (1-\rho)\rho^n \text{ all } n \geq 0 $$ 
+If $\lambda = 2$ and $\mu = 3$, then $$\prob{N = 5} = P_5 = (1-\rho)\rho^5 = \frac{1}{3}\Big(\frac{2}{3}\Big)^5 $$ 
+Furthermore, $$L = \frac{\rho}{1 -\rho} = \frac{\lambda}{\mu - \lambda}$$
+and $$ W = \frac{L}{\lambda} = \frac{1}{\mu - \lambda} $$ 
+Hence $$W_q = W - \frac{1}{\mu} \to L_q = \lambda W_q $$ 
+Consider a M/M/2 model. Here $\lambda_n = \lambda > 0$ and $\mu_1 = \mu$ and $\mu_n = 2\mu$ for $n \geq 2$. \\
+Consider a M/M/2 model where $\lambda = \mu = \frac{1}{2}$. Find all steady state probabilities $P_n$ (if they exist) and find $L$, $L_q$, $W$ and $W_q$. 
+$$\mu_n = \begin{cases} \frac{1}{2} &\text{ if } n = 1 \\ 1 &\text{ if } n \geq 2 \end{cases} $$ 
+Since M/M/2 is based on a birth and death process, we can use the general solution for $P_n$. 
+$$ \begin{aligned} C_n &= \frac{\lambda_0\lambda_1\dots\lambda_{n-1}}{\mu_1\mu_2\dots\mu_{n-1}} \\ C_{n+1} &= C_n \cdot \frac{\lambda_n}{\mu_{n+1}} \\ C_1 &= \frac{\lambda_0}{\mu_1} = \frac{1/2}{1/2} = 1 \\ C_2 &= C_1 \cdot \frac{1/2}{1} = \frac{1}{2} \\ C_3 &= C_2 \cdot \frac{1/2}{1} = \Big(\frac{1}{2}\Big)^2 \\ C_4 &= C_3 \cdot \frac{1/2}{1} = \Big(\frac{1}{2}\Big)^3 \\ C_n &= \Big(\frac{1}{2}\Big)^{n-1} ~~\forall n \geq 1 \end{aligned} $$ Consider $$ \begin{aligned} A &= 1 + C_1 + C_2 + C_3 + \dots \\ &= 1 + 1 + \Big(\frac{1}{2}\Big) + \Big(\frac{1}{2}\Big)^2 + \Big(\frac{1}{2}\Big)^3 \\ &= 1 + \frac{1}{1 - \frac{1}{2}} \\ &= 1 + 2 = 3 \end{aligned} $$ 
+Since $A$ converges, there are steady state solutions given by $$ P_0 = \frac{1}{A} \text{ and } P_n = C_nP_n $$ 
+Therefore $$P_0 = \frac{1}{3} \text{ and } P_n = \Big(\frac{1}{3})\Big(\frac{1}{2}\Big)^{n-1} ~~\forall n \geq 1 $$ 
+Remark: For the general M/M/s model to have steady state solutions, it must be the case that $$\rho = \frac{\lambda}{s\mu} < 1 $$ 
+Find the 4 measures. Rather than starting with $L$, start with $L_q$. 
+$$\begin{aligned} L_q &= \sum_{n = 2}^\infty \overbrace{(n-2)}^kP_n \\ &= \sum_{k=0}^\infty kP_{n+2} \\ P_{k+2} &= \Big(\frac{1}{3}\Big)\Big(\frac{1}{2}\Big)^{k+1} \\ L_q &= \sum_{k=0}^\infty k\cdot \frac{1}{3} \cdot \frac{1}{2} \cdot \Big( \frac{1}{2} \Big)^k \\ &= \frac{1}{6} \sum_{k=0}^\infty k\Big(\frac{1}{2}\Big)^k \\ \text{If } r< 1, ~ S = \sum_{k=0}^\infty kr^k &= r + 2r^2 + 3r^3 \\ &= r(1 + 2r + 3r^2 + 4r^3 + \dots) \\ &= r(\underbrace{1 + r + r^2 + r^3 + \dots}_{\frac{1}{1-r}})' \\ &= r((1-r)^{-1})' \\ &= r(1-r)^{-2} = \frac{r}{(1-r)^2} \\ S = \sum_{k=0}^\infty kr^k &= \frac{r}{(1-r)^2} \\ L_q &= \frac{1}{6} \cdot \frac{1/2}{(1-1/2)^2} \\ &= \frac{1}{3} \\ W_q &= \frac{L_q}{\lambda} = \frac{1/3}{1/2} = \frac{2}{3} \\ W &= W_q + \frac{1}{\mu} = \frac{2}{3} + \frac{1}{1/2} = \frac{8}{3} \\ L &= \lambda W = \frac{1}{2} \cdot \frac{8}{3} = \frac{4}{3} \end{aligned} $$ 
+General Remark: In the M/M/s model, with $\rho  = \frac{\lambda}{s\mu} < 1$, the formula for $L_q$ is $$L_q = P_0 \cdot \frac{ \Big( \frac{\lambda}{\mu} \Big)^s}{s!} \cdot \frac{\rho}{(1-\rho)^2} $$ 
+Going back to the previous problem, $s=2$, $\lambda = \mu = \frac{1}{2}$, $P_0 = \frac{1}{3}$ and $\rho = \frac{1}{2}$. Therefore 
+$$ L_q = \Big( \frac{1}{3} \Big) \frac{ \Big( \frac{1/2}{1/2} \Big)^2}{2!} \cdot \frac{1/2}{(1 - 1/2)^2} = \frac{1}{3} \Big( \frac{1}{2} \Big) \Big( \frac{1/2}{1/4}\Big) = \frac{1}{3} $$ 
+Questions: \begin{enumerate} 
+\item A M/M/2 queueing system has $L_q = \frac{1}{3}$, $W_q = \frac{1}{15}$ and $L = \frac{4}{3}$. Find $\lambda$, $\mu$ and $\rho$. Check $\rho < 1$. 
+\item A M/M/12 queueing system has an inter-arrival rate of $\lambda = 25$ and service rate $\mu = 3$> Show that steady state is achieved and find the value of $k$ such that $\prob{N = k} = P_k$ is maximum. 
+\end{enumerate} 
+
+ \section{Lecture 9} 
+ Suppose that a queueing system has two servers, an exponential interarrival time distribution with a mean of $2$ hours and an exponential service-time distribution with a mean of $2$ hours for each server. Furthermore, a customer has just arrived at $12:00$ noon. What is the probability that the next arrival will come before $1:00$ pm, between $1:00$ and $2:00$ pm, and after $2:00$ pm? \\
+ Here $s=2$ and $\lambda = \mu = \frac{1}{2}$. Therefore $\rho = \frac{\lambda}{2\mu} = \frac{1}{2} < 1$. Therefore we have steady state solutions. Say $\tau = \expo{\frac{1}{2}}$, which is the distribution for the interarrival time. Then $$ \begin{aligned} 
+ \prob{\tau < 1} &= 1 - e^{-(\frac{1}{2})(1)} = 1 - e^{-\frac{1}{2}} \\ \prob{1 < \tau < 2} &= \prob{\tau < 2} - \prob{1 < \tau} = \Big( 1 - e^{-(\frac{1}{2})(2)} \Big) - \Big(1 - e^{-\frac{1}{2}(1)}\Big) = e^{-\frac{1}{2}} - e^{-1} \\ \prob{\tau > 2} &= e^{-(\frac{1}{2})(2)} = e^{-1} \end{aligned} $$ 
+ Suppose that no additional customers arrive before $1:00$ pm. Now what is the probability that the next arrival will come between $1:00$ and $2:00$ pm? \\ 
+ Note that $\prob{A|B} = 1 - \prob{\overline{A}|B}$. Then
+ $$ \prob{\tau \leq 2 | \tau \geq 1} 1 - \prob{\tau \geq 2| \tau \geq 1} = 1 - \prob{\tau \geq 1} = 1 - e^{-\frac{1}{2}(1)} = 1 - e^{-\frac{1}{2}} $$ 
+ What is the probability that the number of arrivals between $1:00$ and $2:00$ pm will be $0$, $1$ and $2$ more more? \\
+ Let $u$ be the number of arrivals between $1$ and $2$ pm. It is a Poisson random variable with parameter $\lambda = \frac{1}{2} \cdot 1 = \frac{1}{2}$. Then 
+ $$ \begin{aligned} \prob{U = 0} &= e^{-\frac{1}{2}}\frac{0.5^0}{0!} = e^{-\frac{1}{2}} \\ 
+ \prob{U = 1} &= e^{-\frac{1}{2}}\frac{0.5^1}{1!} = \frac{1}{2}e^{-\frac{1}{2}} \\ \prob{U \geq 2} &= 1 - \prob{U=0} - \prob{U=1} = 1 - \frac{3}{2}e^{-\frac{1}{2}} \end{aligned} $$ 
+ Suppose that both servers are serving customers at $1:00$ pm. What is the probability that neither customers will have service completed before $2:00$ pm? \\
+ Let $\varphi_1^*$, $\varphi_2^*$ represent the remaining service times for customers $1$ and $2$ at server $1$ and $2$ respectively. By the memoryless property of the Exponential distribution, $\varphi_1^* = \varphi_2^* = \expo{\mu}$. The next exit from the service facility will occur at $\min( \varphi_1^*, \varphi_2^*) = V$. Assume $\varphi_1^*$ and $\varphi_2^*$ are independent. Then $V$ is distributed as $\expo{\mu + \mu} = \expo{2\mu}$. Then $$ \set{\text{neither customers will have service completions before 2pm}} = \set{V > 1}$$ 
+ Hence $$\prob{V > 1} = e^{-(2)(\frac{1}{2})(1)} = e^{-1} $$ 
+The time required by a mechanic to repair a machine has an exponential distribution with a mean of $4$ hours. However, a special took would reduce this mean to $2$ hours. If the mechanic repairs a machine in less than $2$ hours, he is paid $\$100$; otherwise, he is paid $\$80$. Determine the mechanic's expected increase in pay per machine repaired if he uses the special tool. \\
+Let $\tau$ represent the time to repair the machine. Then $\tau_{\text{old}} = \expo{\theta  = \frac{1}{4}}$ and $\tau_{\text{new}} = \expo{\theta = \frac{1}{2}}$. Furthermore, 
+$$ \text{pay} = \begin{cases} 100 &\text{ if } \tau < 2 \\ 80 &\text{ if } \tau > 2 \end{cases} $$ 
+Then $$\text{expected pay} = 100\underbrace{\prob{\tau < 2}}_{1 - \prob{\tau > 2}} + 80\prob{\tau > 2} = 100 - 20\prob{\tau > 2}$$ 
+In the two cases, $$ \begin{aligned} \prob{\tau_{\text{old}} > 2} &= e^{-\frac{1}{4}\cdot 2} = e^{-\frac{1}{2}} \\ \prob{\tau_{\text{new}}} &= e^{-\frac{1}{2} \cdot 2} = e^{-1} \end{aligned} $$ 
+Therefore the increase in pay (on the average) is the expected new pay minus the expected old pay, or $$ 20(e^{-\frac{1}{2}} - e^{-1}) $$ 
+Consider the birth and death process with all $\mu_n = 2$ ($n= 1,2,\dots$), $\lambda_0=3$, $\lambda_1=2$, $\lambda_2 =1$ and $\lambda_n =0$ for $n\geq 3$. Calculate $P_0$, $P_1$, $P_2$, $P_3$ and $P_n$ for $n=4,5,\dots$. \\
+Using the general solution for steady state probabilities in a birth and death process, $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = \frac{3}{2} \\ C_2 &= C_1 \cdot \frac{\lambda_1}{\mu_2} = \frac{3}{2} \cdot \frac{1}{1} = \frac{3}{2} \\ C_3 &= C_2 \cdot \frac{\lambda_2}{\mu_3} = \frac{3}{2} \cdot \frac{1}{2} = \frac{3}{4} \\ C_4 &= C_3 \cdot \frac{\lambda_3}{\mu_4} = \frac{3}{4} \cdot 0 = 0 = C_5 = \dots \end{aligned} $$ 
+Therefore $$A = 1 + C_1 + C_2 + C_3 = 1 + \frac{3}{2} + \frac{3}{2} + \frac{3}{4} = \frac{19}{4}$$ This means $$P_0 = \frac{1}{A} = \frac{1}{19/4} = \frac{4}{19} $$ 
+Moving along, $$ \begin{aligned} P_1 &= C_1 \cdot P_0 = \frac{3}{2} \cdot \frac{4}{19} = \frac{6}{19} \\ P_2 &= C_2 \cdot P_0 = \frac{3}{2} \cdot \frac{4}{19} = \frac{6}{19} \\ P_3 &= C_3 \cdot P_0 = \frac{3}{4} \cdot \frac{4}{19} = \frac{3}{19} \end{aligned} $$ 
+Check: $$\sum P_0 = \frac{4}{19} + \frac{6}{19} + \frac{6}{19} + \frac{3}{19} = 1 $$ 
+Calculate $L$, $L_q$, $W$ and $W_q$. \\ 
+Consider a queueing system with this birth and death process with $s=1$ server. Then 
+$$L = \sum nP_n = 0\cdot P_0 + 1 \cdot P_1 + 2 \cdot P_2 + 3 \cdot P_3 = \frac{1}{19}(6 + 12 + 9) = \frac{27}{19} $$ 
+Now $$\overline{\lambda} = \sum \lambda_nP_n = \lambda_0P_0 + \lambda_1P_1 + \lambda_2P_2 = \frac{3 \cdot 4}{19} + \frac{2 \cdot 6}{19} + \frac{1 \cdot 6}{19} = \frac{30}{19} $$ 
+Then $$ W = \frac{L}{\overline{\lambda}} = \frac{27/19}{30/19} = \frac{9}{10} $$ 
+Now if $W = W_q + \frac{1}{\mu}$, then 
+$$W_q = W - \frac{1}{\mu} = \frac{9}{10} - \frac{1}{2} = \frac{4}{10} = \frac{2}{5} $$ 
+and hence $$L_q = \overline{\lambda}W_q = \frac{30}{19} \cdot \frac{4}{10} = \frac{12}{19} $$ 
+
+\section{Lecture 10} 
+The arrival times in a queueing system occur following a Poisson Process at a rate of $3$ per hour when the system is empty, at a rate of $2$ per hour when there $1$ customer in the queueing system and at a rate of $1$ customer per hour when there is $2$ customers. There are no arrivals otherwise. Assume $s=1$ and that the service time is exponentially distributed with a mean of $30$ mins. Draw the rate diagram and derive the balanced equations. Then find the probability that the server is busy in the long run. \\
+According to what's stated above, $\lambda_0 = 3$, $\lambda_1 = 2$, $\lambda_2 = 1$, $\lambda_3 = \lambda_4 = \dots = 0$. Furthermore, since the service time exponentially distributed with a mean of $30$ mins, that means $\expe{\mu} = 30 \text{ mins} = \frac{1}{2} \text{ hrs } = \frac{1}{\mu}$. Therefore $\mu = 2$. Hence $\mu_n = 2$ for $n\geq 1$. Then the balanced equations are $$ \begin{aligned} 
+3P_0 &= 2P_1 \\ 3P_0 + 2P_2 &= 4P_1 \\ 2P_1 + 2P_3 &= 3P_3 \\ P_2 &= 2P_3 \end{aligned} $$ 
+To find the probability, note that it is the same as saying $$\prob{N \geq 1} = 1 - P_0$$ 
+Use the general solutions for the birth and death process to find $P_0$: $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = \frac{3}{2} \\ C_2 &= C_1 \cdot \frac{\lambda_1}{\mu_2} = \frac{3}{2} \\ C_3 &= C-2 \cdot \frac{\lambda_2}{\mu_3} = \frac{3}{4} \\ C_4 &= C_3 \cdot \frac{ \lambda_3}{\mu_4} = 0 = C_5 = \dots \\ A &= 1 + C_1 + C_2 + C_3 = 1 + \frac{3}{2} + \frac{3}{2} + \frac{3}{4} = \frac{19}{4} \\ P_0 &= \frac{1}{A} = \frac{4}{19} \end{aligned} $$ 
+Then $$\prob{\text{the server in busy in the long run}} = \prob{N \geq 1} = 1 - P_0 = 1 - \frac{4}{19} = \frac{15}{19} $$ 
+A service station has one gasoline pump. Cars wanting gasoline arrive according to a Poisson Process at a mean rate of $15$ per hour. However, if the pump already is being used, these potential customers may balk (drive on to another service station). In particular, if there are $n$ cars already at the service station, the probability that an arriving potential customer will balk is $\frac{n}{3}$ for $n=1,2,3$. The time required to service a car has an exponential distribution with a mean of $4$ minutes. Construct the rate diagram for this queueing system. Develop the balance equations. Solve these equations to find the steady-state probability distribution of the number of cars at the system. Verify that this solution is the same as that given by the general solution for the birth and death process. Lastly, find the expected waiting time (including service) for those cars that say. 
+$$ \prob{\text{arrival of } \{N = n\}} = 1 - \frac{n}{3}$$ 
+The arrival rate $\lambda_n$ will be distributed to the function of $\lambda =15$ according to this function $$ \lambda_n = 15(1 - \frac{n}{3})$$ 
+Therefore $$ \begin{aligned} \lambda_0 &= 15(1 - \frac{0}{3}) = 15 \\ \lambda_1 &= 15(1 - \frac{1}{3}) = 10 \\ \lambda_2 &= 15(1 - \frac{2}{3}) = 5 \\ \lambda_3 &= 15(1 - \frac{3}{3}) = 0 = \lambda_4 = \dots  \end{aligned} $$
+The service time, by assumption, is Exp(mean = $15$ mins) or Exp($\mu = 15$). Since the $\lambda$s are not equal, this is not a M/M/1 model \\~\\
+Balanced Equations: $$ \begin{aligned} 15P_0 &= 15P_1 \\ 15P_0 + 15P_1 &= 25P_1 \\ 10P_1 + 15P_3 &= 20P_2 \\ 5P_2 &= 15P_3 \end{aligned} $$ 
+To solve this system of equations, let $P_0 = x$, $P_1 = y$, $P_2 = u$ and $P_3 = v$. Then by solving the equations, we find $$ \begin{aligned} x &= y \\ 3x + 2u &= 5y = 5x \to 3u = 2x \to u = \frac{2x}{3} \\ 2y + 3v &= 2x + 3v = 4u = 4 \cdot \frac{2u}{3} = \frac{8u}{3} \\ 3v &= \frac{8u}{3} - 2x = \frac{2x}{3} \to v = \frac{2x}{9} \end{aligned} $$ 
+Take $x = 9t$. Then $y = 9t$, $u = 6t$ and $v = 2t$. Then
+$$x +y + u + v = 26t = 1 \to t = \frac{1}{26}$$ 
+Hence $$ \begin{aligned} x &= P_0 = \frac{9}{26} \\ y &= P_1 = \frac{9}{26} \\ u &= P_2 = \frac{6}{26} \\ v &= P_3 = \frac{2}{26} \end{aligned} $$ 
+To verify this answer, use the general solutions: $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = 1 \\ C_2 &= C_1 \cdot \frac{\lambda_1}{\mu_2} = 1 \cdot \frac{10}{15} = \frac{2}{3} \\ C_3 &= C_2 \cdot \frac{\lambda_2}{\mu_3} = \frac{2}{3} \cdot \frac{1}{3} = \frac{2}{9} \\ C_4 &= C_3 \cdot \frac{\lambda_3}{\mu_4} = \frac{2}{9} \cdot 0 = 0 = C_5 = \dots \\ 
+A &= 1 + C_1 + C_2 + C_3 = 1 + 1 + \frac{2}{3} + \frac{2}{9} = \frac{18+6+2}{9} = \frac{26}{9} \\ P_0 &= \frac{1}{A} = \frac{9}{26} \\ P_1 &= C_1P_0 = P_0 = \frac{9}{26} \\ P_2 &= C_2P_0 = \frac{2}{3}\cdot\frac{9}{26} = \frac{6}{26} \\ P_3 &= C_3P_0 = \frac{2}{9} \cdot \frac{9}{26} = \frac{2}{26} \end{aligned} $$ 
+To find the waiting time $W$, first find $L$
+$$ L = \sum nP_n = 0P_0 + 1P_1 + 2P_2 + 3P_3 = 0 + \frac{9}{26} + \frac{12}{26} + \frac{6}{26} = \frac{27}{26} $$ 
+Now $$\bar{\lambda} = \lambda_0P_0 + \lambda_1P_1 + \lambda_2P_2 = 15 \cdot \frac{9}{26} + 10 \cdot \frac{9}{26} + 5 \cdot \frac{6}{26} = \frac{255}{26} $$ 
+Hence $$W = \frac{L}{\bar{\lambda}} = \frac{27/26}{255/26} = \frac{27}{255} = \frac{9}{85} \text{ hours } $$ 
+The Finite Calling Population Variation of the M/M/s Model: Assume the following: \begin{itemize}
+\item finite calling process of $M$ elements (machines)
+\item the elements (machines) are similar in nature 
+\item each of the $M$ machines works for an Exp($\lambda$) amount of time before it breaks down 
+\item independence of time lifetime 
+\item $s=1$ servers 
+\item repair time is distributed as Exp($\lambda$) 
+\item once a machine is repaired, it is as good as new \end{itemize} 
+If $N=n$, there are $n$ machines in the queueing system and $M-n$ working machines. Looking at assumption $1$ for a birth and death process, given $N=n$, each machine $M_i$ works for Exp($\lambda$) amount of time before breaking down, where $i = 1, \dots, M-n$. Therefore the time corresponding to the next arrival is $$\expo{\lambda_n} = \expo{(M-n)\lambda} $$ 
+A maintenance person has the job of keeping two machines in working order. The amount of time that a machine works before breaking down has an exponential distribution with a mean of $10$ hours. The time then spent by the maintenance person to repair the machine has an exponential distribution with a mean of $8$ hours. Show that this process fits the birth and death process by defining the states, specifying the values of the $\lambda_n$ and $\mu_n$. Calculate the $P_n$ as well as $L$, $L_q$, $W$ and $W_q$. Determine the proportion of time (probability) that the maintenance person is busy. Determine the proportion of time that any given machine is working. \\
+Here, $M = 2$ machines and $s=1$. Note that $\frac{1}{\lambda} = 10 \text{ hours }$ so $\lambda = \frac{1}{10}$ hours. In addition, $\frac{1}{\mu} = 8$ hours and so $\mu = \frac{1}{8}$ hours. The arrival rates are $$\lambda_n = (2-n)\frac{1}{10}$$ Therefore $$\begin{aligned} \lambda_0 &= (2-0)\frac{1}{10} = \frac{2}{10} \\ \lambda_1 &= (2-1)\frac{1}{10} = \frac{1}{10} \\ \lambda_2 &= (2-2)\frac{1}{10} = 0 \end{aligned} $$ Therefore $\lambda_0 = \frac{2}{10}$, $\lambda_1 = \frac{1}{10}$, and $\mu = \frac{1}{8}$. 
+
+\section{Lecture 11} 
+Consider a single-server \qs where interarrival times have an exponential distribution with parameter $\lambda$ and service times have an exponential distribution with parameter $\mu$. In addition, customers renege (leave the \qs without being served) if their waiting time in the queue grows too large. In particular, assume that the time each customer is willing to wait in the queue before reneging has an exponential distribution with a mean of $\frac{1}{\theta}$. Construct the rate diagram for this \qs and develop the balance equations. \\
+Here $s=1$. Let $R$ = the reneging time of each customer which is distributed as $\expo{\theta}$. Assume $N \geq 1$. Given $N=n$, let $\mu_n$ = the time until the next departure from the \qs. Assume $R_1,\dots,R_{n-1}$ are independent. Then clearly $$U = \min(R_1,\dots,R_{n-1},\mu)$$ where $\mu$ is the departure rate. Then 
+$$U = (n-1)\theta + \mu$$ 
+Then $$\begin{aligned} \mu_1 &= \mu \\ \mu_2 &= \theta + \mu \\ \mu_3 &= 2\theta + \mu \\ &\vdots \\ \mu_n &= (n-1)\theta + \mu \\ \mu_{n+1} &= n\theta + \mu \end{aligned} $$ 
+In addition, $\lambda_n = \lambda$. \\
+Balance Equations: $$ \begin{aligned} \lambda_0P_0 &= \mu P_1 \\ \lambda_0P_0 + (\theta + \mu)P_2 &= (\lambda + \mu)P_1 \\ &\vdots \\ \lambda P_{n-1} = (n\theta + \mu)P_{n+1} &= [\lambda + (n-1)\theta + \mu]P_n \end{aligned} $$ 
+Consider the general M/M/s model. Then $\lambda_n = \lambda$. Furthermore, $\mu_1 = \mu$, $\mu_2 = 2\mu$, $\mu_3 = 3\mu$, $\dots$, $\mu_s = s\mu$, $\mu_{s+1} = s\mu$, $\dots$. Then $$L_q = \sum_{n=s}^\infty (n-s)P_n = \sum_{k=0}^\infty kP_{k+s} $$ 
+where if $n-s=k$, then $n=k+s$. Recall that $\rho = \frac{\lambda}{s\mu} < 1$ for steady state conditions. Try solving for $P_0$. First $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = \frac{\lambda}{\mu} \\ C_2 &= \frac{\lambda_1}{\mu_2} = \frac{\Big( \frac{\lambda}{\mu}\Big)^2}{2!} \\ C_3 &= \frac{\lambda_2}{\mu_3} = \frac{\Big( \frac{\lambda}{\mu}\Big)^3}{3!} \\ &\vdots \\ C_s &= \frac{\lambda_{s-1}}{\mu_s} = \frac{\Big( \frac{\lambda}{\mu}\Big)^s}{s!} \\ C_{s+1} &= \frac{\lambda_s}{\mu_{s+1}} = \frac{\Big(\frac{\lambda}{\mu}\Big)^{s+1}}{s! \cdot s} \\ C_{s+2} &= \frac{\lambda_{s+1}}{\mu_{s+2}} = \frac{\Big( \frac{\lambda}{\mu}\Big)^{s+2}}{s! \cdot s^2} \\ &\vdots \\ C_{s+k} &= \frac{\lambda_{s+k-1}}{\mu_{s+k}} = \frac{ \Big(\frac{\lambda}{\mu}\Big)^{s+k}}{s! \cdot s^k} \end{aligned} $$ 
+Note that $$ \frac{\Big(\frac{\lambda}{\mu}\Big)^k}{s^k} = \Big( \frac{\lambda}{s\mu}\Big)^k = \rho^k$$ 
+Therefore $$ \begin{aligned} L_q &= \sum_{k=0}^\infty kP_{n+s} \\ &= \sum_{k=0}^\infty kC_{s+k}P_0 \\ &= P_0\sum_{k=0}^\infty k \frac{ \Big( \frac{\lambda}{\mu}\Big)^s}{s!}\rho^k \\ &= P_0\frac{\Big( \frac{\lambda}{\mu}\Big)^s}{s!} \sum_{k=0}^\infty k\rho^k \\ &= P_0\frac{\Big( \frac{\lambda}{\mu}\Big)^s}{s!} \frac{\rho}{(1-\rho)^2} \end{aligned} $$
+This comes from the fact that $$\sum_{k=0}^\infty k\rho^k = \frac{\rho}{(1-\rho)^2} \text{ for } \rho < 1 $$ 
+To find $P_0$, calculate $$ \begin{aligned} A &= 1 + C_1 + C_2 + C_3 + \dots + C_{s-1} + C_s + C_{s+1} + \dots \\ &= 1 + \frac{\lambda}{\mu} + \frac{ \Big( \frac{\lambda}{\mu}\Big)^2}{2!} + \frac{\Big( \frac{\lambda}{\mu}\Big)^3}{3!} + \dots + \frac{ \Big( \frac{\lambda}{\mu}\Big)^{s-1}}{(s-1)!} + \underbrace{\sum_{k=0}^\infty \frac{ \Big( \frac{\lambda}{\mu}\Big)^{s+k}}{s! \cdot s^k}}_{C_{s+k}}\\ &= 1 + \frac{\lambda}{\mu} + \frac{ \Big( \frac{\lambda}{\mu}\Big)^2}{2!} + \frac{\Big( \frac{\lambda}{\mu}\Big)^3}{3!} + \dots + \frac{ \Big( \frac{\lambda}{\mu}\Big)^{s-1}}{(s-1)!} + \frac{ \Big( \frac{\lambda}{\mu}\Big)^s}{s!} \sum_{k=0}^\infty \rho^k \\ &= 1 + \frac{\lambda}{\mu} + \frac{ \Big( \frac{\lambda}{\mu}\Big)^2}{2!} + \frac{\Big( \frac{\lambda}{\mu}\Big)^3}{3!} + \dots + \frac{ \Big( \frac{\lambda}{\mu}\Big)^{s-1}}{(s-1)!} + \frac{ \Big( \frac{\lambda}{\mu}\Big)^{s+k}}{s!} \cdot \frac{1}{1-\rho} \end{aligned} $$ Once this is calculated numerically, calculate $P_0 = \frac{1}{A}$. \\~\\
+A \qs has Poisson input arrivals and Exponential service times. The mean arrival time is $2$ per hour. Find $L$, $L_q$, $W$ and $W_q$ if (a) $s=1$, $\mu = 6$, (b) $s=2$, $\mu = 3$, (c) $s=3$, $\mu=2$. \\
+(a) This is a M/M/1 model where $\rho = \frac{2}{6} = \frac{1}{3} < 1$. Then $$ \begin{aligned} L &= \frac{\rho}{1-\rho} = \frac{1/3}{1 - 1/3} = \frac{1/3}{2/3} = \frac{1}{2} \\ 
+W &= \frac{L}{\lambda} = \frac{1/2}{2} = \frac{1}{4} \\ W_q &= W - \frac{1}{\mu} = \frac{1}{4} - \frac{1}{6} = \frac{1}{12} \\ L_q &= \lambda W_q = 2 \cdot \frac{1}{12} = \frac{1}{6} \end{aligned} $$ 
+(b) This is a M/M/2 model where $\rho = \frac{2}{2\cdot 3} = \frac{1}{3} < 1$. To solve for $$ L_q = P_0 \frac{\Big( \frac{\lambda}{\mu}\Big)^2}{2!}\frac{\rho}{(1-\rho)^2}$$ we need to solve for $P_0$. So, if $\lambda_n = 2$, $\mu_1 = 3$, $\mu_n = 6$ for all $n\geq 2$, then $$ \begin{aligned} C_1 &= \frac{2}{3} \\ C_2 &= \frac{2}{3} \cdot \frac{1}{3} \\ C_3 &= \frac{2}{3} \cdot \Big(\frac{1}{3}\Big)^2 \\ &\vdots \\ A &= 1 + C_1 + C_2 + C_3 + \dots \\ &= 1 + \frac{2}{3}\Big( 1+ \frac{1}{3} + \Big( \frac{1}{3} \Big)^2 + \Big( \frac{1}{3} \Big)^3 + \dots) \\ &= 1 + \frac{2}{3}\Big( \frac{1}{1 - \frac{1}{3}}\Big) = 1 + \frac{2}{3} \cdot \frac{3}{2} = 2 \\ P_0 &= \frac{1}{A} = \frac{1}{2} \end{aligned} $$ 
+Knowing this, then $$ \begin{aligned} L_q &= \frac{1}{2} \frac{\Big( \frac{2}{3}\Big)^2}{2!} \frac{\frac{1}{3}}{(1 - \frac{1}{3})^2} = \frac{1}{12} \\ W_q &= \frac{L_q}{\lambda} = \frac{1/12}{2} = \frac{1}{24} \\ W &= W_q + \frac{1}{\mu} = \frac{1}{24} + \frac{1}{3} = \frac{9}{24} = \frac{3}{8} \\ L &= \lambda W = 2 \cdot \frac{3}{8} = \frac{6}{8} = \frac{3}{4} \end{aligned} $$ 
+(c) This is a M/M/3 model, better known as M/M/s model where $\rho = \frac{2}{3 \cdot 2} = \frac{1}{3} < 1$. To solve for $L_q$, like before, solve for $P_0$ first. So, if $\lambda_n = 2$ and $\mu_1 = 2$, $\mu_2 = 4$, $\mu_n = 6$ for $n\geq 3$, then $$ \begin{aligned} C_1 &= 1 \\ C_2 &= \frac{1}{2} \\ C_3 &= \frac{1}{2} \cdot \frac{1}{3} \\ C_4 &= \frac{1}{2} \cdot \Big( \frac{1}{3}\Big)^2 \\ &\vdots \\ A &= 1 + C_1 + C_2 + C_3 + \dots \\ &= 1 + 1 + \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{3} + \frac{1}{2} \cdot \Big( \frac{1}{3}\Big)^2 \\ &= 2 + \frac{1}{2}\Big(1 + \frac{1}{3} + \Big( \frac{1}{3}\Big)^2 + \dots \Big) = 2 + \frac{1}{2} \cdot \frac{3}{2} = 2 + \frac{3}{4} = \frac{11}{4} \\ P_0 &= \frac{1}{A} = \frac{4}{11} \end{aligned} $$ 
+Then $$ \begin{aligned} L_q &= \frac{4}{11} \frac{3}{6 \cdot 4} = \frac{1}{22} \\ W_q &= \frac{L_q}{\lambda} = \frac{1/22}{2} = \frac{1}{44} \\ W &= W_q + \frac{1}{\mu} = \frac{1}{44} + \frac{1}{2} = \frac{23}{44} \\ L &= \lambda W = 2 \cdot \frac{23}{44} = \frac{23}{22} \end{aligned} $$ 
+Using the models in the last questions, for each part, find the expected fractional time, or probability, that at least $2$ people are in the system in the long run. In other words, find $\prob{N \geq 2} = 1 - P_0 - P_1$. \\
+(a) $$ \begin{aligned} P_0 &= 1-\rho = 1 - \frac{1}{3} = \frac{2}{3} \\ C_1 &= \frac{\lambda}{\mu} = \frac{2}{6} = \frac{1}{3} \\ P_1 &= C_1 \cdot P_0 = \frac{1}{3} \cdot \frac{2}{3} = \frac{2}{9} \\ \prob{N \geq 2} &= 1 - P_0 - P_1 = 1 - \frac{2}{3} - \frac{2}{9} = \frac{1}{9} \end{aligned} $$ 
+(b) $$ \begin{aligned} P_0 &= \frac{1}{2} \\ P_1 &= \frac{1}{3} \\ \prob{N \geq 2} &= 1-  \frac{1}{2} - \frac{1}{3} = \frac{1}{6} \end{aligned} $$ 
+(c) $$ \begin{aligned} P_0 &= P_1 = \frac{4}{11} \\ \prob{N\geq 2} &= 1 - 2\cdot \frac{4}{11} = \frac{3}{11} \end{aligned} $$ 
+For the original problem, find the average hourly system cost for each part if the customer time is $\$11$ per hour and each service is paid $\$5$ per hour. Then $$C = 11L + 5S$$ 
+Hence for part (a) $$ C = 11 \cdot \frac{1}{2} + 5 \cdot 1 = 5.5 + 5 = 10.5 $$ 
+For part (b) $$ C = 11 \cdot \frac{3}{4} + 5 \cdot 2 = 8.25 + 10 = 18.25 $$ 
+For part (c) $$ C = 11 \cdot \frac{23}{22} + 5 \cdot 3 = 11.5 + 15 = 26.5 $$ 
+Barber Shop Example: Consider $s=2$ and $N \leq 5$. Then $\lambda_n = \lambda$ for $n \leq 5$. Furthermore, $\mu_1 = \mu$, $\mu_n = 2\mu$ for $2 \leq n \leq 5$. Here
+$$ \begin{aligned} C_1 &= \frac{\lambda}{\mu} \\ C_2 &= \frac{\lambda}{2\mu} \\ C_3 &= \frac{\lambda}{2^2 \mu} \\ C_4 &= \frac{\lambda}{2^3 \mu} \\ C_5 = \frac{\lambda}{2^4 \mu} \\ C_6 &= \dots = 0 \end{aligned} $$ 
+Assume $\lambda=2$ and $\mu=1$. Find $P_n$, $L$, $L_q$, $W$ and $W_q$. 
+
+\section{Exam 2} 
+\begin{question} Consider a \qs with a Poisson arrival process and exponential service times. 
+\begin{enumerate} 
+\item If $s=1$ and $\rho = \frac{4}{5}$, find $L_q$ and $L$. \\ This is a M/M/1 model and so $$ L = \frac{\rho}{1-\rho} = \frac{4/5}{1 - 4/5} = 4 $$ 
+and $$ L = L_q + \rho \to L_q = L - \rho = 4 - \frac{4}{5} = \frac{16}{5} $$ 
+\item Assume the mean arrival rate is $3$ customers per hour. If $s=2$ and $\mu = 2$, find $W$. \\
+This is a M/M/2 model where $\lambda = 3$ and $\mu = 2$. Then $\rho = \frac{\lambda}{s\mu} = \frac{3}{4} < 1$. Furthermore, $$ L_q = P_0 \cdot \frac{ (\frac{\lambda}{\mu})^s}{s!} \cdot \frac{\rho}{(1-\rho)^2} $$
+Now, $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = \frac{3}{2} \\ C_2 &= \frac{3}{2\cdot 2} = \frac{3}{4} \\ C_3 &= \frac{3}{2} \cdot (\frac{3}{4})^2 \\ A &= 1 + C_1 + C_2 + \dots \\ &= 1 + \frac{3}{3} + \frac{3}{2} \cdot (\frac{3}{4}) + \frac{3}{2} \cdot (\frac{3}{4})^2 + \dots = 7 \\ P_0 &= \frac{1}{A} = \frac{1}{7} \end{aligned} $$
+Hence $$L_q = \frac{1}{7} \cdot \frac{(3/2)^2}{2!} \cdot \frac{3/4}{(1-3/4)^2} = \frac{27}{14} $$ 
+Now, $$W_q = \frac{L_q}{\lambda} = \frac{27}{14} \cdot \frac{1}{3} = \frac{9}{14} $$ and $$ W = W_q + \frac{1}{\mu} = \frac{9}{14} + \frac{1}{2} = \frac{16}{14} = \frac{8}{7} $$ 
+\end{enumerate} 
+\end{question} 
+
+\begin{question} You are given a \qs in steady-state condition. Arrivals occur according to a Poisson process at a rate of $5$ per minute when nobody is in the system and $3$ per minute when there is one customer in the system. No arrivals occur otherwise. The \qs has $2$ servers, each with an exponential service time averaging $30$ seconds. 
+\begin{enumerate} 
+\item Write the rate diagram. \\
+This is a system of $3$ states, $0,1,2$ where $\lambda_0 = 5$, $\lambda_1 = 3$ and $\lambda_2 = 0$ and on forth. Also, $\mu_1=2$ and $\mu_2 = 4$. 
+\item Find $P_0$ and $L$. \\ 
+Using the general solution for a birth and death process, $$ \begin{aligned} C_1 &= \frac{5}{2} \\ C_2 &= \frac{5}{2} \cdot \frac{3}{4} = \frac{15}{8} \\ C_3 &= C_4 = \dots = 0 \\ P_0 &= \frac{1}{1 + C_1 + C_2} = \frac{1}{1 + \frac{5}{2} + \frac{15}{8}} = \frac{8}{43} \end{aligned} $$ Then $$ P_1 = C_1P_0 = \frac{5}{2} \cdot \frac{8}{43} = \frac{20}{43}$$ and $$P_2 = C_2P_0 = \frac{15}{8} \cdot \frac{8}{43} = \frac{15}{43} $$ and $P_3 = P_4 = \dots = 0$. Then $$ L = 0P_0 + 1P_1 + 2P_2 = P_1 + 2P_2 = \frac{50}{43} $$ 
+\end{enumerate} 
+\end{question} 
+
+\begin{question} The time $T$ to repair a machine is exponential with mean of $\frac{1}{2}$ hour. Find the probability that a repair takes at least $12.5$ hours, given that its duration exceeds $12$ hours. \\
+Since $T \sim \text{Exp}(2)$, $$ \prob{T \geq 12.5 | T  \geq 12} = \prob{T \geq 0.5} = e^{(-0.5)(2)} = e^{-1} $$ 
+\end{question} 
+
+\begin{question} Customers arrive at a single-server \qs according to a Poisson process with rate of $1$ per hour. The service time distribution is exponential with mean of $15$ minutes. If the system is in steady-state condition, what is the probability that the queue is non-empty? \\
+This is an M/M/1 model where $\lambda = 1$ and $\mu= 2$. Then $$ \prob{N \geq 2} = 1 - P_0 - P_1 $$ 
+Now $$ P_0 = 1 - \rho = 1 - \frac{\lambda}{\mu} = \frac{3}{4} $$ and $$ P_1 = \rho(1-\rho) = \frac{1}{4} \cdot \frac{3}{4} = \frac{3}{16} $$ 
+Then $$ \prob{N \geq 2} = 1 - \frac{3}{4} - \frac{3}{16} = \frac{1}{16} $$ 
+\end{question} 
+
+\begin{question} A maintenance person keeps two machines in working conditions. The amount of time a machine works before breaking down is exponential with mean of $8$ hours. The service time is exponential with mean of $6$ hours. 
+\begin{enumerate} 
+\item Construct the rate diagram. \\
+This is a Machine repair model where $M = 2$ and $s= 1$. Also $\lambda = \frac{1}{8}$ and $\mu = \frac{1}{6}$. Now $$ \begin{aligned} \lambda_0 &= (2-0)\lambda = \frac{2}{8} \\ \lambda_1 &= (2-1)\lambda = \frac{1}{8} \end{aligned} $$ and $\mu_1 = \frac{1}{6}$ and $\mu_2 = \frac{1}{6}$.  
+\item Calculate $P_n$ for all $n \geq 0$, $L$, $L_q$, $W$ and $W_q$. \\
+Using the general solution for the probabilities based on a birth and death process, we get that $$ \begin{aligned} C_1 &= \frac{2/8}{1/6} = \frac{6}{4} = \frac{3}{2} \\ C_2 &= \frac{3}{2} \cdot \frac{1/8}{1/6} = \frac{9}{8} \\ P_0 &= \frac{1}{1 + C_1 + C_2} = \frac{8}{29} \end{aligned} $$ Then $$P_1 = \frac{12}{29} ~~~ P_2 = \frac{9}{29} $$ Now $$ L = P_1 + 2P_2 = 1.034$$ $$ \bar{\lambda} = \frac{1}{4}P_0 + \frac{1}{8}P_1 = 0.12075$$ Thus $$ \begin{aligned} W &= \frac{L}{\bar{\lambda}} = 8.56 \\ L_q &= P_2 = 0.310 \\ W &= \frac{L}{\bar{\lambda}} = 2.56 \end{aligned} $$ 
+\end{enumerate} 
+\end{question} 
+
+\begin{question} In an M/M/$2$ queueing model find $P_0$ where $L_q = \frac{1}{3}$, $W_q = \frac{1}{15}$ and $L = \frac{4}{3}$. \\
+$$ \begin{aligned} L_q &= \lambda W_q \\ \lambda &= \frac{L_q}{W_q} = \frac{1/3}{1/15} = 5 \\ L &= \lambda W = \lambda(W_q + \frac{1}{\mu}) \\ \frac{4}{3} &= 5(\frac{1}{15} + \frac{1}{\mu}) \to \mu = 5 \\ \rho &= \frac{\lambda}{s\mu} = \frac{5}{2 \cdot 5} = \frac{1}{2} \\ A &= 1 + C_1 + C_2 + \dots = 1 + 1 + \frac{1}{2} + (\frac{1}{2})^2 + \dots = 3 \\ P_0 &= \frac{1}{A} = \frac{1}{3} \end{aligned} $$ 
+\end{question} 
+
+\section{Lecture 12}
+Imagine a system that changes at random from state to state over discrete time ($0,1,2,\dots$). Let's call $X_n$ = the state of the system at time $n$. Assume the possible states of the system are $s_0$, $s_1$, $\dots$, $s_M$, where $s_0$ is represented as $0$, $s_1$ as $1$, $\dots$, $s_M$ as $M$. For example, when we write $X_2 = 2$, we mean the system is in state $2$ at time $2$. Say $X_{19} = 1$; this means that the system is in state $1$ at time $19$. We have a sequence of discrete random variable $X_0,X_1,\dots$. Such a sequence will be called a chain. \\~\\
+Assume that $(X_n)_{n\geq 0}$ satisfies the Markov Property: for every choice of time value values $0,1,2,3,\dots,n-1,n,n+1,\dots$ and for every choice of state $i_0,i_1,i_2,i_3,\dots,i_{n-1},i_n,i_{n+1},\dots$, $$ \prob{X_{n+1} = i_{n+1} | X_n = i_n, X_{n-1} = i_{n-1},\dots, X_1 = i_1,X_0 = i_0} = \prob{X_{n+1} = i_{n+1} | X_n = i_n} $$ 
+Therefore there is no dependency on the past but only the present. \\
+Time Stationary Assumption: Assume that this probability does not depend on $n$. \\
+Call $i_n = i$ and $i_{n+1} = j$, then $$\prob{X_{n+1} = j | X_n = i} = P_{ij} $$ 
+Let $Q = (P_{ij})$, the transition probability matrix of the Markov chain $(X_n)$. \\~\\
+Random Walk: Assume that an individual $A$ is moving through $5$ locations: $0,1,2,3,4$ according to the following rules: \begin{itemize} 
+\item If $A$ is at $0$ now, $A$ will be next at $1$ for sure.
+\item If $A$ is at $1$ now, $A$ will be next at $0$ with probability $\frac{1}{2}$ and at $2$ with probability $\frac{1}{2}$. 
+\item If $A$ is at $2$ now, $A$ will be next at $1$ with probability $\frac{1}{3}$ and at $3$ with probability $\frac{2}{3}$. 
+\item If $A$ is at $3$ now, $A$ will be next at $2$ with probability $\frac{1}{2}$ and at $4$ with probability $\frac{1}{2}$. 
+\item If $A$ is at $4$ now, $A$ will be next at $4$ for sure. \end{itemize} 
+By assuming the rules above, it is clear that $(X_n)_{n\geq 0}$ is a Markov chain where $X_n$+ the position of individual $A$ at time $n$. Construct the transition probability matrix $Q$ where the rows represent current state and columns represent next state.
+$$ \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+  0 & 1 & 0 & 0 & 0 & 0 \\
+  1 & \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 \\
+  2 & 0 & \frac{1}{3} & 0 & \frac{2}{3} & 0 \\
+  3 & 0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\
+  4 & 0 & 0 & 0 & 0 & 1 \\
+\end{block} \end{blockarray} $$ 
+Find $\prob{X_0 = 2,X_1=1,X_2=3}$ given that $\prob{X_0 = i} = \frac{1}{5}$ for all $i = 0,1,2,3,4$. \\
+Recall the property: $\prob{A \bigcap B} = \prob{A~|~B}\prob{B}$.  
+$$ \begin{aligned} \prob{X_0 = 2,X_1=1,X_2 = 3} &= \prob{X_2 = 3,X_1=1,X_0=2} \\ &= \prob{\underbrace{X_2}_{\text{future}} =3 | \underbrace{X_1}_{\text{present}} = 1, \underbrace{X_0}_{\text{past}} = 2} \prob{X_1 1,X_0=2} \\ &= \prob{X_2 = 3 | X_1 = 1} \prob{X_1 =1,X_0=2} \\ &= \prob{X_2=3 |X_1=1} \cdot \prob{X_1 = 1 | X_0 =2}\prob{X_0=2} \\ &= P_{13}P_{21}\prob{X_0=2} \\ \prob{X_0=2,X_1=1,X_2=3} &= \prob{X_0=2}P_{21}P_{13} \\ &= 0 \end{aligned} $$ 
+In general for any Markov chain, $$ \prob{X_0 = i_0, X_1=i_1,X_2=i_2,\dots,X_n = i_n} = \prob{X_0=i_0}P_{i_0i_1}P_{i_1i_2}\dots P_{i_{n-1}i_n} $$ 
+Let $(X_n)$ be a Markov chain with $$Q = 
+ \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & \frac{1}{4} & 0 & \frac{2}{4} & \frac{1}{4} \\ 
+1 & 0 & \frac{1}{3} & \frac{2}{3} & 0 \\
+2 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\
+3 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ \end{block} \end{blockarray} $$ 
+Find $\prob{X_0 = 0,X_1=2,X_4=0}$ if $\prob{X_0 = 0} = \frac{1}{3}$, $\prob{X_0 = 1} = \frac{1}{3}$, $\prob{X_0=2} = \frac{1}{3}$, and $\prob{X_0=3}=0$. \\ 
+First note that $$\prob{X_0=0,X_1=2,X_4=0} = \bigcup_{ij} \prob{X_0=0,X_1=2,X_2=i,X_3=j,X_4=0} $$ 
+Therefore $$ \begin{aligned} \prob{X_0=0,X_1=2,X_4=0} &= \sum_{ij} \prob{X_0=0,X_1=2,X_2=i,X_3=i,X_4=0} \\ &= \sum_{ij} \prob{X_0=0} P_{02}P_{2i}P_{ij}P_{j0} \\ &= \sum_{ij} \frac{1}{3} \cdot \frac{1}{2} \cdot P_{2i} P_{ij} P_{j0} \\ &= \frac{1}{6} \sum_j (\sum_i P_{2i}P_{ij}P_{j0}) \\ &= \frac{1}{6} \sum_j P_{j0}(\sum_{i=0}^3 P_{2i}P_{ij}) \\ &=\frac{1}{6} \sum_j P_{j0} (P_{20}P_{0j} + P_{21}P_{1j} + P_{22}P_{2j} + P_{23}P_{3j}) \\ &= \frac{1}{6} \sum_j P_{j0} (\frac{1}{4}[P_{0j} + P_{1j} + P_{2j} + P_{3j}]) \\ &= \frac{1}{24}\sum_{j=0}^3 P_{j0}(c_j) \text{ where $c_j$ is the sum of column $j$} \\ &= \frac{1}{24}[\frac{1}{4} \cdot \frac{3}{4} + 0 \cdot \frac{5}{6} + \frac{1}{4} \cdot \frac{5}{3} + \frac{1}{4} \cdot \frac{3}{4}] \\ &= \frac{1}{96}[\frac{3}{4} + \frac{5}{3} + \frac{3}{4}] \\ &= \frac{1}{96} \cdot \frac{19}{6} \\ &= \frac{19}{576} \end{aligned} $$ 
+
+\section{Lecture 13} 
+Higher-Order Transition Probabilities: Let $(X_n)_{n\geq 0}$ be a Markov chain with $Q = (P_{ij})$. For two fixed states $i,j$, $$\prob{X_{n+k} = j | X_k=i} = P_{ij}^{(n)} $$ 
+This conditional probability does not depend on $k$. \\
+If $n=1$, $P_{ij}^{(1)} = P_{ij}$. \\
+Let $Q^{(n)} = (P_{ij}^{(n)})$. This is a stochastic matrix. Then $Q^{(1)} = Q$. \\
+Let $n=2$. Lemma: $$P_{ij}^{(2)} = \sum_{k=0}^M P_{ik}P_{kj} $$ 
+Proof: $$ P_{ij}^{(2)} = \frac{X_2 = j | X_0 = i} = \frac{\prob{X_2 = j, X_0 = i}}{\prob{X_0=i}} $$ 
+Note: $$\prob{X_2=j,X_0=i} = \bigcup_{k=0}^M (X_2 = j, X_1 = k,X_0 = i) = \sum_{k=0}^M \prob{X_0 = i}P_{ik}P_{kj} $$ 
+Therefore $$ \begin{aligned} P_{ij}^{(2)} &= \frac{\prob{X_2 = j,X_0=i}}{\prob{X_0=j}} \\ &= \frac{\sum_{k=0}^M \prob{X_0 = i} P_{ik}P_{kj}}{\prob{X_0=i}} \\ &= \sum_{k=0}^M P_{ik}P_{kj} \end{aligned} $$ 
+Mote: $$\sum_{k=0}^M P_{ik}P_{kj} = P_{ij} \text{ in } Q \times Q = Q^2 \text{ matrix} $$
+Therefore $$P_{ij}^{(2)} = (i,j) \text{ entry in } Q^{(2)} $$ 
+Thus $$Q^{(2)} = Q^2 $$ 
+Chapman-Kolmogorov Equations (valid for any Markov chain): $$ P_{ij}^{n+m} = \sum_{k=0}^M P_{ik}^{n}P_{kj}^{m} $$ 
+For example, $$P_{ij}^{(3)} = \sum_{k,l} P_{ik}P_{kl}P_{lj} $$ where $i \to k \to l \to j$ represents three transitions. \\
+Extension of Lemma: $$ P_{ij}^{(n)} = \sum_{i_1,i_2,\dots,i_{n-1}} P_{ii_1}P_{i_1i_2}\dots P_{i_{n-1}j} $$ 
+The states can be grouped into ``classes." 
+$$P_{ij}^{(0)} = \prob{X_k = j | X_k = i}= \begin{cases} 1 &\text{ if } j=i \\ 0 &\text{ if } j \neq i \end{cases}$$ 
+In particular, $P_{ii}^{(0)} = 1$. \\~\\
+For two states $i,j$, possibly equal, we say that ``$i$ leads to $j$" and write $i \to j$ if there exists $n\geq0$ such that $P_{ij}^{(n)} > 0$. \\
+Note: For any state $i$, $i \to i$ since $P_{ii}^{(0)} = 1 > 0$. \\
+Proposition: If $i\to j$ and $j \to k$, then $i \to k$. This means that there is some $n$ and $m$ such that $P_{ij}^{(n)} > 0$ and $P_{ij}^{(m)} > 0$. Show that $P_{ik}^{n+m} > 0$ using Chapman-Kolmogorov equation. \\~\\
+For two states $i,j$, we say that $i$ communicates with $j$ and write $i \iff j$ if $i \to j$ and $j \to i$. This relation is reflexive, symmetric and transitive and so it is an equivalence relation. \\~\\
+Consider three Markov chains with states $0,1,2,3$ each and transition probabilities as follows: 
+$$ Q_1 = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 \\
+2 & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\
+3 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 \\ \end{block} \end{blockarray}~~~ Q_2 = 
+\begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 0 & 0 & 1 & 0 \\
+1 & 1 & 0 & 0 & 0 \\
+2 & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\
+3 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 \\ \end{block} \end{blockarray}~~~ Q_3 = 
+\begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\
+1 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 \\ 
+2 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ 
+3 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ \end{block} \end{blockarray} $$
+For each Markov chain, obtain the class of communicates. \\
+Hint: The easiest (fastest) way to conclude that $i \to j$ is to observe that $P_{ij} > 0$.   
+
+\section{Lecture 14} 
+
+For $Q_3$: $P_{01} = \frac{1}{2} > 0$ so $0 \to 1$. Now $P_{12} = \frac{1}{3} > 0$ and so $1 \to 2$. Furthermore, $P_{23} = \frac{1}{4} > 0$ and so $2 \to 3$. Also $P_{30} = \frac{1}{4} > 0$ and so $3 \to 0$. This is a loop: $0 \to 1 \to 2 \to 3 \to 0$, going through all the states. \\
+Lemma: If we have a loop going thorough all the states, then all states communicate and we have a single class of communication. This means the Markov chain is irreducible. \\
+In fact, if we have a loop, then all the states within the loop communicate. \\ If one class is irreducible, then two or more class have to be reducible. \\~\\
+For $Q_2$: $0 \to 2$ (since $P_{02} = 1 > 0$), $2 \to 0$ (since $P_{20} = \frac{1}{2} > 0$). Therefore $0 \to 2 \to 0$. But also, $2 \to 1$ (since $P_{21} = \frac{1}{2} > 0$) and $1 \to 0$ (since $P_{10} = 1 > 0$). Therefore $ 0 \to 2 \to 1 \to 0$. Note that $0 \iff 2$ and therefore $0 \to 2 \to 1 \to 0 \iff $ $0, 2, 1$ communicate. \\~\\
+In general, for a Markov chain with states $0,1,\dots,M$ and transition probability matrix $Q = (P_{ij})$, a subset of states ($C \subseteq \set{0,1,2,\dots,M}$) is called closed if for all $i \in C$ and for all $j \notin C$, $P_{ij} = 0$. \\
+In $Q_2$, $C = \set{0,1,2}$ is closed since $P_{03} = P_{13} = P_{23} = 0$. \\
+Proposition: $C$ is closed if and only if the submatrix $Q_C$ is stochastic (rows add up to $1$). \\
+Lemma: Suppose $C$ is closed. Then for all $n \geq 1$ and for all $i \in C$ and for all $j \notin C$, $P_{ij}^{(n)} = 0$. \\
+So if $C$ is closed, no states inside $C$ can lead to a state outside $C$. 
+\\ 
+Induction on $n$: Say $i \in C$ and $j \notin C$, $$ \begin{aligned} 
+P_{ij}^{(n+1)} &= \sum_k P_{ik}^{(1)}P_{kj}^{(n)} \\ &= \sum_{k \in C} P_{ik}^{(1)}P_{kj}^{(n)} + \sum_{k \notin C} P_{ik}^{(1)}P_{kj}^{(n)} \\ &= \sum_{k \in C} P_{ik}^{(1)} \cdot 0 + \sum_{k \notin C} 0 \cdot P_{kj}^{(n)} \\ &= 0 \end{aligned} $$ 
+Note: If $C$ is closed and all states in $C$ communicates, then if $j \notin C$, $j$ cannot communicate with a state in $C$. \\
+Conclusion: $C$ is a class of communication. \\
+Applying these results to $Q_2$, $C = \set{0,1,2}$ is closed and all states in $C$ communicates and so $C$ is a class of communication. $\set{3}$ is another class of communication, not closed though. \\~\\
+Suppose $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 0 & 1 & 0 & 0 \\
+1 & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\ 
+2 & \frac{1}{3} & \frac{1}{3} & 0 & \frac{1}{3} \\ 
+3 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ \end{block} \end{blockarray} $$
+$\set{0}$ is a class of communication and $0$ is an absorbing state ($P_{00} = 1$). \\
+A state $i$ for which $P_{ii} = 1$ is called an absorbing state and forms a class by itself. \\
+Note that $1\to 0$ (since $P_{10} = \frac{1}{2} > 0$), $2 \to 3 \to$ (since $P_{23} = \frac{1}{3} > 0$ and $P_{32} = \frac{1}{4} > 0$). This means $2 \iff 3$. Look at $C = \set{0,1}$. This is closed since $Q_C$ is stochastic. In particular, $1 \not\to 2$ so the state $1$ cannot be in the same class with state $2$. \\
+Conclusion: $\set{0}$ is a class, $\set{2,3}$ is a class, $\set{1}$ is a class. \\
+Lemma: If a state $i$ is absorbing, $P_{ii} = 1$, then it does not lead to any other states. \\~\\
+For a Markov chain $(X_n)_{n \geq 0}$ with states $0,1,2,\dots, M$ and $Q = (P_{ij})$, fix $2$ states $i,j$. The first passage time from state $i$ to state $j$ is a random variable $T_{ij} = 1,2,3,4,\dots$ and possibly $+\infty$ such that if $n\geq 1$ is finite, $$f_{ij}^{(n)} = \prob{T_{ij} = n} = \prob{X_n = j, X_{n-1} \neq j, X_{n-2} \neq j, \dots, X_1 \neq j | X_0 = i}$$
+Note that $f_{ij}^{(1)} = P_{ij}$. \\
+In general, $f_{ij}^{(n)} \leq P_{ij}^{(n)}$. 
+$$ \sum{n=1}^\infty \underbrace{\prob{T_{ij} = n}}_{f_{ij}^{(n)}} = \prob{T_{ij} \text{ is finite}} = f_{ij} $$ This means $$f_{ij} = \sum_{n=1}^\infty f_{ij}^{(n)} $$ Furthermore, $$\prob{T_{ij} \text{ is } + \infty} = 1 - f_{ij} $$ 
+Now when $j = i$, $T_{ii} = $ the first return time to state $i$ If $f_{ii} < 1$, then $i$ is called nonrecurrent or transient. If $f_{ii} = 1$, then $i$ is called recurrent. 
+\begin{theorem} Recurrence is a class property. Meaning, if $2$ states communicate, ($i \iff j$) and $i$ is recurrent, then $j$ is also recurrent. \\
+Transient is also a class property. Meaning, if $2$ states communicate, ($i \iff j$) and $i$ is transient, then $j$ is also transient. \end{theorem} 
+\begin{theorem} A state $i$ is recurrent if and only if $\sum_{n=1}^\infty P_{ii}^{(n)} = +\infty$ (divergent). A state $i$ is transient if and only if $\sum_{n=1}^\infty P_{ii}^{(n)} < +\infty $(convergent). Therefore if $i$ is transient, then for all $i$, $\lim_{n\to \infty} P_{ii}^{(n)} = 0$. \\ If a state $j$ is transient, then for all $i$, $\lim_{n\to\infty} P_{ij}^{(n)} = 0$. \\ At least one state must be recurrent in a finite Markov chain. \end{theorem} 
+Proof of second part: By contradiction, suppose all states $01,2,\dots,M$ are transient. Then $$P_{00}^{(n)} + P_{01}^{(n)} + \dot + P_{0M}^{(n)} = 1$$ But $$ \lim_{n\to\infty} P_{00}^{(n)} + P_{01}^{(n)} + \dots + P_{0M}^{(n)} = 0 + 0 + \dots + 0 = 1 $$ Contradiction. 
+
+\section{Lecture 15}
+
+Let $(X_n)_{n\geq 0}$ be a Markov chain with $Q = (P_{ij})$ with states $0,1,\dots,M$. If $C \subseteq \set{0,1,\dots,M}$ is closed then the submatrix $Q_C$ is stochastic (meaning each row of $Q_C$ adds up to $1$). Then at least $1$ state in $C$ is recurrence. 
+\begin{theorem} If $C$ is closed and irreducible, all thats in $C$ communicate, then $C$ is a recurrent class. \end{theorem} 
+Note: This theorem serves as a method to prove that a specific subset of $C$ is a recurrent class. \\~\\
+Let $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 1 & 0 & 0 & 0 \\
+1 & 1 & 0 & 0 & 0 \\ 
+2 & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\ 
+3 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 \\ \end{block} \end{blockarray} $$
+Here $P_{00} = 1$ and so $0$ is an absorbing state and $\set{0}$ is a class of communication. \\
+If $i$ is absorbing and $j \neq i$, then $i \not\to j$. To show this, show that for all $n \geq 1$, $P_{ii}^{(n)} = 0$. \\ Since $P_{ii} = 1$ and $P_{ii}^{(n)} = 1$ for all $n$, then $P_{ij}^{(n)} = 0$. \\
+Can a recurrent state lead to a transient state? No. 
+\begin{theorem} If $i$ is recurrent and $i \to j$ then $j \to i$ and so $j$ must be recurrent. \end{theorem} 
+A part of this theorem is important: if $i$ is recurrent and $i \to j$, then $j \to i$. \\
+Back to $Q$, now $1 \to 0$ since $P_{10} = 1 > 0$. But $0$ is absorbing. Can $1$ be recurrent? No. By above result, if $1$ would be recurrent, then $0 \to 1$. But this is impossible since $0$ is absorbing and an absorbing state does not lead to any other state. \\
+Lemma: If $i$ is absorbing and $j \neq i$ is such that $j \to j$, then $j$ is transient. \\
+By the same argument, we can conclude that states $2$ and $3$ are also transient because $2 \to 0$ since $P_{20} = \frac{1}{2} > 0$ and $3 \to 0$ since $P_{30} = \frac{1}{3} > 0$. \\~\\
+Lemma: If $i$ is absorbing then $i$ is recurrent. \\
+Proof: Since $P_{ii} = 1$, for all $n \geq 1$, $P_{ii}^{(n)} = 1$. $$ \sum_{n=1}^\infty P_{ii}^{(n)} = 1 + 1 + \dots + 1 = +\infty$$ This is divergent and so $i$ is recurrent. \\
+Observe that $C = \set{0,1}$ is closed since $Q_C = \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}$ is stochastic. So $1 \not\to 2$ and $1 \not\to 3$ and hence $\set{1}$ is a class of communication. \\
+Observe that $D = \set{0,1,2}$ is closed since $Q_D = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ \frac{1}{2} & \frac{1}{2} & 0 \end{bmatrix}$ is stochastic. So $2 \not\to 3$. Therefore $\set{2}$ and $\set{3}$ are classes of communication. \\~\\
+Let $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & \frac{1}{2} & 0 & 0 & \frac{1}{2} \\
+1 & \frac{1}{3} & \frac{2}{3} & 0 & 0 \\ 
+2 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ 
+3 & 1 & 0 & 0 & 0 \\ \end{block} \end{blockarray} $$
+Let $A = \set{0,1,3}$. Then $Q_A = \begin{bmatrix} \frac{1}{2} & 0 & \frac{1}{2} \\ \frac{1}{3} & \frac{2}{3} & 0 \\ 1 & 0 & 0 \end{bmatrix}$, which is stochastic and so $A$ is closed. Is $A$ irreducible? No. Now let $B = \set{0,3}$. Then $Q_B = \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \\ 1 & 0 \end{bmatrix}$. This is stochastic and so $B$ is closed. But now $B$ is irreducible since $0 \to 3$ since $P_{03} = \frac{1}{2} > 0$ and $3 \to 0$ since $P_{30} = 1 > 0$. Therefore $B$ is closed and irreducible. By a theorem, this means $B$ must be a recurrence class. In particular, since $0 \in B$ and $1 \not\in B$, then $ 0 \not\to 1$. This means that $A$ is not irreducible. Therefore $\set{0,3}$ communicate and forms a class of communication. \\
+Claim: States $1$ and $2$ do not communicate. \\
+Proof: Since $1 \in A = \set{0,1,3}$ is closed but $2 \not\in A$, then $1 \not\to 2$.\\ 
+Therefore the classes of communication in this example are: $\set{0,3}, \set{1}, \set{2}$. \\
+For each class of communication, specify and justify if it is recurrent or transient. \\
+We already know that $\set{0,3}$ is a recurrent class. Now $1 \to 0$ since $P_{10} = \frac{1}{3} > 0$. Claim: $1$ is transient. Proof: By contradiction, if $1$ is recurrent, since $1 \to 0$, then by a theorem, $0 \to 1$. Impossible since $ 0 \in \set{0,3}$, a closed set and $1 \not\in \set{0,3}$. In fact, we have the following theorem: 
+\begin{theorem} Let $C$ be a recurrent class and $ j \not\in C$. If $ j \to i \in C$, then $j$ must be transient. \end{theorem} 
+So $\set{1}$ is a transient class. By an identical argument, we can conclude that $2$ is also transient and so $\set{2}$ is a transient class. \\~\\
+Let $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 0 & 0 & \frac{1}{3} & \frac{2}{3} \\
+1 & 1 & 0 & 0 & 0 \\ 
+2 & 0 & 1 & 0 & 0 \\ 
+3 & 0 & 1 & 0 & 0 \\ \end{block} \end{blockarray} $$
+Now $0 \to 2 \to 1 \to 0$ since $P_{02} > 0$, $P_{21} > 0$ and $P_{10} > 0$. Since we have a loop (starting and ending with state $0$), going through states $1$ and $2$, then $0$, $1$ and $2$ all communicate. Also note that $0 \to 3 \to 1 \to 0$ since $P_{03} > 0$, $P_{31} > 0$ and $P_{10} > 0$. Then $0$, $1$ and $3$ all communicate. Hence all states communicate and the Markov chain is irreducible. \\~\\
+Let $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & \frac{1}{2} & \frac{1}{2} & 0 \\ 
+2 & 0 & \frac{1}{2} & \frac{1}{2} & 0 \\ 
+3 & \frac{1}{2} & 0 & 0 & \frac{1}{2} \\ \end{block} \end{blockarray} $$
+First observe that $P_{00} = 1$ and so $0$ is absorbing and so $\set{0}$ is a recurrence class. Note that if $C = \set{1,2}$ then $C$ is closed since $Q_C = \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{bmatrix}$ is stochasic and irreducible.It is irreducible because $1 \to 2$ since $P_{12} = \frac{1}{2} > 0$ and $P_{21} = \frac{1}{2} > 0$. Therefore $C = \set{1,2}$ is a recurrent class. Since $3 \to 0$ since $P_{30} > 0$, and $0$ is absorbing then $3$ is transient and $\set{3}$ is a transient class. \\
+Remark: A class of communication must be closed. \\
+Example: $\set{3}$ is a class but $3 \to 0$ since $P_{30} > 0$. 
+
+\section{Lecture 16} 
+Let $$Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0 & 0 & 1 \\
+1 & \frac{1}{2} & \frac{1}{2} & 0 \\ 
+2 & 0 & 1 & 0  \\ \end{block} \end{blockarray} $$ Here, $0 \to 2$ since $P_{02} > 0$ and $2 \to 1$ since $P_{21} > 0$ and finally $1 \to 0$ since $P_{10} > 0$. Therefore there is a loop going through all the states and so all states communicate. There is a single class of communication, $\set{0,1,2}$ which is recurrent because there is one state in it that is recurrent. \\
+Another solution: Find $Q^{(2)} = Q \cdot Q = Q^2$ where $0$ is represented as $0$ and all positive values as $+$. 
+$$ Q^2 = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0 & 0 & + \\
+1 & + & + & 0 \\ 
+2 & 0 & + & 0  \\ \end{block} \end{blockarray} \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & 0 & 0 & + \\
+1 & + & + & 0 \\ 
+2 & 0 & + & 0  \\ \end{block} \end{blockarray} = \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & 0 & + & 0 \\
+1 & + & + & + \\ 
+2 & + & + & 0  \\ \end{block} \end{blockarray} $$ 
+Find $Q^{(4)} = Q^4 = (Q^2)^2$. 
+$$ Q^{(4)} = \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & 0 & + & 0 \\
+1 & + & + & + \\ 
+2 & + & + & 0  \\ \end{block} \end{blockarray} \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & 0 & + & 0 \\
+1 & + & + & + \\ 
+2 & + & + & 0  \\ \end{block} \end{blockarray} = \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & + & + & + \\
+1 & + & + & + \\ 
+2 & + & + & +  \\ \end{block} \end{blockarray} $$ 
+$Q^{(4)}$ has all positive values so all states communicate and all are recurrent. \\~\\
+The period of a state $i$ of a Markov chain with states $0,1,\dots,M$ and $Q = (P_{ij})$ is $$ \text{Period}(i) = gcd\set{n \geq 1 | P_{ii}^{(n)} > 0} $$ 
+Note: If $P_{ii} > 0$, then Period($i$) = $1$. A state $i$ for which Period($i$) = $1$ is called aperioidic. \\~\\
+Consider a Markov chain with states $0$ and $1$ and transition probability matrix $Q = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$. Find Period($0$).
+$$ Q^{(2)} = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I_2 $$ Look at $Q^{(n)} = Q^n$. For $n=1$, $Q^{(1)} = Q$; for $n=2$, $Q^{(n)} = I_2$; for $n=3$, $Q^{(3)} = Q$; for $n=4$, $Q^{(4)} = I_2$, etc. Then the sequence of $P_{00}^{(n)}$ from $n = 1,2,3,\dots$ is $0,1,0,1,\dots$. So $$ \set{n \geq 1 | P_{00}^{(n)} > 0} = \set{2,4,6,\dots}$$ and so Period($0$) = gcd($\set{2,4,6,\dots}$) = $2$. \\
+Remark: What can I say about $\lim_{n\to\infty} P_{00}^{(n)}$ in this example? The limit of $P_{00}^{(n)}$ as $n\to\infty$ does not exist. The reason the limit does not exist is that $0$ is a recurrence state with period $2$. \\~\\
+Let $$Q =  \begin{blockarray}{cccc}
+&0&1&2 \\ \begin{block}{c(ccc)}
+0 & 0 & 1 & 0 \\
+1 & \frac{1}{2} & 0 & \frac{1}{2} \\ 
+2 & \frac{1}{3} & \frac{2}{3} & 0  \\ \end{block} \end{blockarray} $$ 
+Let $\prob{X_0 = 0} = 0.2$ and $\prob{X_2 = 0} = 0.7$. Find \begin{itemize} 
+\item $\prob{X_5 = 2 | X_3 = 1}$ $$ \prob{X_5 = 2 | X_3 = 1} = P_{12}^{(2)} = \sum_{k=0}^2 P_{1k}P_{k2} = \frac{1}{2}(0) + (0)\frac{1}{2} + \frac{1}{2}(0) = 0 $$ 
+\item $\prob{X_0 = 0, X_1 = 1, X_2 = 0}$ $$ \prob{X_0 = 0, X_1 = 1, X_2 = 0} = \prob{X_0 = 0}P_{01}P_{10} = (0.2)(1)(\frac{1}{2}) = 0.1$$ 
+\item $\prob{X_0 = 0, X_2 = 0}$ $$ \begin{aligned} \prob{X_0 = 0,X_2 = 0} &= \sum_{k=0}^2 \prob{X_0 = 0, X_1 = i, X_2 = 0} \\ &= \sum_{k=0}^2 \underbrace{\prob{X_0 = 0}}_{0.2}P_{0i}P_{i0} \\ &= 0.2[(0 \cdot 0) + (1 \cdot \frac{1}{2}) + (0 \cdot \frac{1}{3})] \\ &= 0.2 \cdot \frac{1}{2} \\ &= 0.1 \end{aligned} $$ \end{itemize}
+Let $$Q =  \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & 0 & \frac{4}{5} & 0 & \frac{1}{5} & 0 \\
+1 & \frac{1}{4} & 0 & \frac{1}{2} & \frac{1}{4} & 0 \\ 
+2 & 0 & \frac{1}{2} & 0 & \frac{1}{10} & \frac{2}{5} \\ 
+3 & 0 & 0 & 1 & 0 \\
+4 & \frac{1}{3} & 0 & \frac{1}{3} & \frac{1}{3} & 0 \\ \end{block} \end{blockarray} $$
+Since $P_{33} = 1$, $3$ is an absorbing state and so $\set{3}$ is a recurrent state. Now, $0 \to 3$, $1\to3$, $2\to3$, and $4\to3$ since $P_{03}>0$, $P_{13}>0$, $P_{23}>0$ and $P_{43}>0$. Since $3$ is an absorbing state, states $0,1,2,4$ are all transient. Now $0\to1\to2\to4\to0$ since $P_{01}P_{12}P_{24}P_{40} > 0$. Therefore there is a loop from $0$ to $0$ going through states $1,2,4$. By a theorem, all states in the loop, $0,1,2,4$ communicate. Therefore $\set{0,1,2,4}$ is a class of communication. \\~\\
+For a fixed Markov chain $(X_n)_{n\geq0}$ with states $0,1,\dots,M$ and $Q = (P_{ij})$, $$ P_{ij}^{(n)} = \prob{X_n = j | X_0 = i}$$ Fix $i$ and $j$. We want to know if $\lim_{n\to \infty} P_{ij}^{(n)}$ exists and if so, how do we calculate it? \\
+Recall: If $j$ is transient, whatever $i$ is, $\lim_{n\to\infty} P_{ij}^{(n)} = 0$. \\
+Fix two states $i$ and $j$. Let $T_{ij}$ = the (first passage) time from state $i$ to state $j$. Then $$ \begin{aligned} 
+f_{ij}^{(n)} = \prob{T_{ij} = n} \leq P_{ij}^{(n)} \\ f_{ij} = \prob{T_{ij} \text{ is finite}} = \sum_{n=1}^\infty f_{ij}^{(n)} \end{aligned} $$ 
+Lemma:  $$i \to j \iff f_{ij} > 0$$
+Recall: If $i$ is recurrent and $i \to j$, then $j$ is recurrent. \\
+If $j$ is recurrent and $i \to j$, then $j \to i$, $j$ is recurrent and $f_{ij} = 1$ and $f_{ji} = 1$. \\
+Formula: $$f_{ij} = P_{ij} + \sum_{k \neq j} P_{ik}P_{kj} $$ 
+Let $$Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 1 & 0 & 0  \\
+1 & \frac{1}{4} & \frac{1}{4} & \frac{1}{2}  \\ 
+2 & 0 & 0 & 1  \\  \end{block} \end{blockarray} $$
+Here $P_{00} = 1 > 0$ and so $0$ is an absorbing state. Likewise, state $2$ is also an absorbing sate. Finally, since $1\to0$ since $P_{10} = \frac{1}{4} > 0$, $1$ is transient. What can I say about \begin{itemize} 
+\item $f_{11}$: $f_{11} < 1$ since $1$ is transient 
+\item $f_{10}$: $$ \begin{aligned} f_{10} &= P_{10} + P_{11}f_{10} + P_{12}f_{20} \\ &= \frac{1}{4} + \frac{1}{4}f_{10} + \frac{1}{2} \cdot 0 \\ &= \frac{1}{4} + \frac{1}{4}f_{10} \\ \frac{1}{4} &= f_{10} - \frac{1}{4}f_{10} \\ &= (1 - \frac{1}{4})f_{10} \\ &= \frac{3}{4}f_{10} \\ f_{10} &= \frac{1}{4} \cdot \frac{4}{3} \\ &= \frac{1}{3} \end{aligned} $$ 
+\item $f_{01}$: $f_{10} = 0$ since $0 \not\to 1$
+\item $f_{20}$: $f_{20} = 0$ since $2 \not\to 0$
+\end{itemize}
+Find $f_{12}$. Answer: $\frac{2}{3}$. 
+
+\section{Exam 3} 
+\begin{question} A Markov chain $(X_n)_{n\geq0}$ with states $0,1,2$ has $$Q  =  \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0.1 & 0.2 & 0.7  \\
+1 & 0.9 & 0 & 0.1  \\ 
+2 & 0.1 & 0.8 & 0.1  \\  \end{block} \end{blockarray} $$
+If $\prob{X_0 = 0} = 0.3$ and $\prob{X_0 = 1} = 0.5$, find $\prob{X_0 = 2, X_1 = 1, X_2 = 2}$. 
+$$ \prob{X_0 = 2, X_1 = 1, X_2 =2} = \prob{X_0=2}P_{21}P_{12} = 0.016 $$ 
+ \end{question} 
+ 
+ \begin{question} In the above problem, find $\prob{X_0 = 2, X_2 = 2}$. 
+ $$ \begin{aligned} \prob{X_0=2,X_2=2} &= \sum_{i=0}^2 \prob{X_0=2, X_1 = i,X_2=2} \\ &= \sum_{i=0}^2 \prob{X_0=2}P_{2i}P_{i2} \\ &= 0.2[P_{20}P_{02} + P_{21}P_{12} + P_{22}^2] \\ &= 0.032 \end{aligned} $$  
+ \end{question} 
+
+\begin{question} $(X_n)_{n\geq0}$ is a Markov chain with states $0,1,2$ and $$ Q =  \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3}  \\
+1 & 0 & \frac{2}{3} & \frac{1}{3}  \\ 
+2 & \frac{1}{2} & \frac{1}{2} & 0  \\  \end{block} \end{blockarray} $$
+Find $\prob{X_2 = 0 ~|~ X_0 = 0}$ and $\prob{X_4 = 1 ~|~ X_1 = 2}$. 
+$$ \begin{aligned} \prob{X_2 = 0 ~|~ X_0=0} &= P_{00}^{(2)} = \frac{5}{18} \\ \prob{X_4 = 1~|~X_1 = 2} &= P_{21}^{(3)} = \frac{5}{9} \end{aligned} $$ 
+
+\end{question} 
+
+\begin{question} For the Markov chain with states $0,1,2,3$ and transition probability matrix $$ Q =  \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & \frac{1}{3} & 0 & \frac{2}{3} & 0  \\
+1 & 1 & 0 & 0 & 0 \\ 
+2 & 0 & 0 & 0 & 1 \\ 
+3 & 0 & \frac{1}{2} & 0 & \frac{1}{2}  \\  \end{block} \end{blockarray} $$
+Find $f_{00} = \prob{T_{00} \text{ is finite}}$ where $T_{00}$ is the first return time to $0$. Justify your answer.  \\
+Observe $0 \to 2$ because $P_{02} > 0$, $2 \to 3$ because $P_{23} > 0$, $3\to1$ because $P_{31} > 0$, and $1 \to 0$ because $P_{10} > 0$. Thus all states communicate and at least one state is recurrent and so $f_{00} = 1$. 
+\end{question} 
+
+\begin{question} Identify the classes of communication of the Markov chain with $$ Q =  \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}  \\
+1 & 0 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\ 
+2 & 0 & 0 & 1  & 0 & 0 \\ 
+3 & 0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} \\ 
+4 & \frac{1}{2} & 0 & 0 & 0 & \frac{1}{2}  \\  \end{block} \end{blockarray} $$
+For each class, indicate and justify if it is recurrent or transient.  \\
+Observe that $P_{22} = 1$ and so state $2$ is absorbing and hence $\set{2}$ is a recurrent class. Let $C = \set{0,4}$. Note that $Q_C$ is stochastic and so $C$ is closed. Also $P_{04} > 0$ and $P_{40} > 0$ and so $0$ and $4$ communicate. Thus $C$ is closed and irreducible and so $\set{0,4}$ is a recurrent class. Since $P_{13} > 0$ and $P_{31} > 0$, then $1 \iff 3$. Since $3 \to 2$ (because $P_{32} > 0$), and $2$ is absorbing, state $3$ is absorbing. Therefore $\set{1,3}$ is a  transient class. 
+
+\end{question} 
+
+\begin{question} Consider a Markov chain with states $0,1,2,3,4$ and $$ Q =  \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} & 0  \\
+1 & 0 & 1 & 0 & 0 & 0 \\ 
+2 & 0 & 0 & \frac{3}{4} & \frac{1}{4} & 0 \\ 
+3 & 0 & 0 & \frac{1}{2} & \frac{1}{2} & 0 \\ 
+4 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 \\  \end{block} \end{blockarray} $$
+Obtain the class of communication and for each, indicate and justify if recurrent or transient.  \\
+Note that $P_{11} = 1$ and so state $1$ is absorbing and so $\set{1}$ is a recurrent class. Let $C = \set{2,3}$. Then $Q_C$ is stochastic and $P_{23}P_{32} > 0$ and so $2 \iff 3$. This means $C$ is closed and irreducible and so $\set{2,3}$ is a recurrent class. Because $0\to1$ and $1$ is absorbing, $0$ is transient. Likewise, $4\to1$ and so $4$ is also transient. Are $0,4$ in the same class? Look at $D = \set{0,1,2,3}$. Let $Q_D$ be the submatrix without state $4$. It is stochastic and thus closed. So $0\not\to4$. Therefore $\set{0}$ and $\set{4}$ are separate transient classes.
+
+\end{question}
+
+\section{Lecture 17} 
+$$ \text{Period}(i) = gcd\set{n \geq 1: P_{ii}^{(n)} > 0} $$ 
+Recall: if $P_{ii} > 0$, then $i$ is aperiodic. \\
+Let $j$ be a fixed state and $T_{jj} = 1,2,3,\dots$ and $f_{jj}^{(n)} = \prob{T_{ij} = n}$> Then $$ \prob{T_{jj} \text{ is finite}} = f_{jj} = \sum_{n=1}^\infty f_{jj}^{(n)} $$ and so $$ \prob{T_{jj} \text{ is } +\infty} = 1 - f_{jj} $$ 
+The expected first return to state $j$ is $$ \mu_{jj} = \expe{T_{jj}} = \sum_{n=1}^\infty nf_{jj}^{(n)} + (+\infty)\prob{T_{jj} = +\infty} $$ 
+If $j$ is transient, then $\expe{T_{jj}} = +\infty$. If $j$ is aperiodic, $\expe{T_{jj}} = \sum_{n=1}^\infty nf_{jj}^{(n)} $. We can show that this series is finite. \\
+In fact, $\mu_{jj} = \expe{T_{jj}}$. 
+\begin{theorem} Fundamental Theorem of Markov Chains: If a state $j$ is ergodic (recurrent and aperiodic) and $i$ is any fixed state, then $\lim_{n\to\infty} P_{ij}^{(n)}$ exists and $$ \lim_{n\to\infty} P_{ij}^{(n)} = \frac{f_{ij}}{\mu_{jj}} $$ \end{theorem} 
+Let $(X_n)_{n\geq0}$ be a Markov chain with $Q = (P_{ij})$ and states $0,1,\dots,M$. If for any fixed state $j$, $\lim_{n\to\infty} P_{ij}^{(n)}$ exists and does not depend on $i = L_{ij}$,then $L_{ij} > 0$ for all $i$ and $L_0 + L_1 + \dots + L_M = 1$ and $(L_0, L_1,\dots,L_M)$ is called the limiting distribution (LD) of $(X_n)_{n\geq0}$. 
+Let $\pi_0 >0$, $\pi_1 > 0$, $\dots$, $\pi_M > 0$ such that $\pi_0 + \pi_1 + \dots + \pi_M = 1$ be called the stationary distribution if for all $j = 0,\dots,M$ fixed, $$\pi_j = \sum_{i=1}^M \pi_i P_{ij} $$ 
+Let $$Q = \begin{blockarray}{ccc}
+&0&1 \\
+\begin{block}{c(cc)}
+0 & \frac{1}{2} & \frac{1}{2}   \\
+1 & \frac{1}{3} & \frac{2}{3}  \\ \end{block} \end{blockarray} $$
+Find all stationary distributions. \\
+ Note that $\pi_0 > 0$, $\pi_1 > 0$ and $\pi_0 + \pi_1 = 1$. Now
+ $$ \begin{aligned} \pi_0 &= P_{00}\pi_0 + P_{10}\pi_1 &= \frac{1}{2}P_0 + \frac{1}{3}\pi_1 \\ \pi_1 &= P_{10}\pi_0 + P_{11}\pi_1 &= \frac{1}{2}\pi_0 + \frac{2}{3}\pi_1 \end{aligned} $$ 
+ This is equivalent to $$ \begin{aligned} \frac{1}{2}\pi_0 &= \frac{1}{3}\pi_1 \\ \frac{1}{3}\pi_1 &= \frac{1}{2}\pi_0 \end{aligned} $$ 
+ In other words, they are the same. Using the above equation,  let $\pi_1 = 3x$. Then $\pi_0 = 2x$. But $\pi_0 + \pi_1 = 2x + 3x = 5x = 1$. Hence $x = \frac{1}{5}$. Therefore $x_1 = 3x = \frac{3}{5}$ and $x_0 = 2x = \frac{2}{5}$. This is the only stationary distribution. 
+ \begin{theorem} If the limiting distribution $(L_0,L_1,\dots,L_M)$ exists, then the stationary distribution $(\pi_0,\pi_1,\dots,\pi_M)$ is unique and the limiting distribution is the same as the stationary distribution. \end{theorem} 
+ \begin{theorem} If the Markov chain is inadmissible and aperiodic, then the limiting distribution $(L_0,L_1,\dots,L_M)$ exists. \end{theorem} 
+ \begin{proof} All states are recurrent and aperiodic, so $$\lim_{n\to\infty} P_{ij}^{(n)} = \frac{f_{ij}}{\mu_{jj}} = \frac{1}{\mu_{jj}} = L_j $$
+ because since $i \iff j$, both recurrent, then $f_{ij} = f_{ji} = 1$. \end{proof} 
+ Problems: \begin{enumerate} 
+ \item Let $(X_n)_{n\geq0}$ be a Markov chain with states $0$, $1$ and $2$ and $$ Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & \frac{1}{2} & \frac{1}{2} & 0  \\
+1 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3}  \\ 
+2 & \frac{1}{6} & \frac{1}{2} & \frac{1}{3}  \\  \end{block} \end{blockarray} $$
+Show that the limiting distribution exists and find it. Then find $\mu_{00} = \expe{T_{00}}$. (Hint: $\mu_0 = L_0 = \lim_{n\to\infty} P_{00}^{(n)} = \frac{f_{00}}{\mu_{00}} = \frac{1}{\mu_{00}}$)
+\item Determine the limiting distribution for the Markov chain with states $0$, $1$, $2$ and $3$ and $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & \frac{1}{2} & 0 & 0 & \frac{1}{2}  \\
+1 & 1 & 0 & 0 & 0 \\ 
+2 & 0 & \frac{1}{2} & \frac{1}{3} & \frac{1}{6} \\ 
+3 & 0 & 0 & 1 & 0 \\  \end{block} \end{blockarray} $$
+\end{enumerate} 
+
+\section{Lecture 18} 
+Let $(X_n)_{n\geq0}$ be a Markov chain with states $0,1,\dots,M$ and transition probability matrix $Q = (P_{ij})$. Then the limiting distribution $LD = (L_0, L_1,\dots,L_M)$ where $L_0 > 0, L_1 > 0,\dots, L_M > 0$, $L_0 + L_1 + \dots + L_M = 1$ and $$L_j = \lim_{n\to\infty} P_{ij}^{(n)} $$ 
+\begin{theorem} If the Markov chain is irreducible and aperiodic, then the limiting distribution exists. \end{theorem} 
+\begin{proof} $$ \lim_{n\to\infty} P_{ij}^{(n)} = \frac{f_{ij}}{\mu_{jj}} = \frac{1}{\mu_{jj}} = L_j $$ $f_{ij}$ is $1$ because all states are recurrent and communicate. \end{proof} 
+\begin{theorem} If the limiting distribution exists, then it is equal to the unique stationary distribution. \end{theorem} 
+\begin{proof} Let $(L_0,L_1,\dots,L_M)$ be the limiting distribution. Show that $$L_j = \sum_{i=0}^M L_iP_{ij} $$ for all $j = 0,1,\dots,M$. Take the Chapman-Kolmogorov equation: $$ P_{ij}^{(n+1)} = \sum_{k=0}^M P_{ik}^{(n)}P_{kj} $$ Let $n \to \infty$. Then this is $$ L_j = \sum_{k=0}^M L_k P_{kj} $$ Replace $k$ by $i$ and so $$ L_j = \sum_{i=0}^M L_iP_{ij} $$ \end{proof} 
+We can prove that in this case, the stationary distribution is unique. \\
+How do we calculate $\prob{X_n = j}$ from $\alpha(i) = \prob{X_0 = i}$, the initial distribution where $j = 0,1,\dots,M$ and the matrix $Q$? $$ \prob{X_n = j} = \sum_{i=0}^M \alpha(i)P_{ij}^{(n)} $$ 
+This comes from the law of total probability: $$ \prob{A} = \sum_{i=0}^M \prob{A | B_i}\prob{B_i} $$ 
+So $$ \prob{X_n = j} = \sum_{i=0}^M \prob{X_n = j ~|~ X_0 = i}\prob{X_0 = i} = \sum_{i=0}^M P_{ij}^{(n)}\alpha(i) $$ 
+Lemma: If $(X_n)_{n\geq0}$ is irreducible and aperiodic, and if $(\pi_0,\pi_1,\dots,\pi_M)$ is the unique stationary distribution, then $$ \lim_{n\to\infty} \prob{X_n = j} = \pi_j $$ 
+The Markov chain $(X_n)_{n\geq0}$ has states $0,1,2$ and transition probability matrix $$ Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0 & 1 & 0  \\
+1 & 0 & \frac{1}{2} & \frac{1}{2}  \\ 
+2 & \frac{1}{3} & \frac{2}{3} & 0  \\  \end{block} \end{blockarray} $$
+Find $\mu_{00} = \expe{T_{00}}$ and $\lim_{n\to\infty} \prob{X_{n-2} = 1 ~|~ X_n = 2}$. \\
+Note that $0\to1\to2\to0$ since $P_{01}P_{12}P_{20} > 0$ so all states communicate and are recurrent ( at least one state is recurrent). Now, $P_{11} = \frac{1}{2} > 0$ and so period$(1)$ = $1$. So the Markov chain is irreducible and aperiodic. In that case, the limiting distribution does exist and is equal to the unique stationary distribution. Find the unique stationary distribution. $$ \begin{aligned} \pi_0 + \pi_1 + \pi_2 &= 1 \\ \pi_0 &= 0\pi_0 + 0\pi_1 + \frac{1}{3}\pi_2 \\ \pi_2 &= 0\pi_0 + \frac{1}{2}\pi_1 + 0\pi_2 \end{aligned} $$ This is equivalent to $$ \begin{aligned} \pi_0 + \pi_1 + \pi_2 &= 1 \\ \pi_0 &= \frac{1}{3}\pi_2 \\ \pi_2 &= \frac{1}{2}\pi_1 \end{aligned} $$ Let $\pi_1 = 6x$. Then $\pi_2 = 3x$ and $\pi_0 = x$. Then $$ \pi_0 + \pi_1 + \pi_2 = 10x = 1 $$ and so $x = \frac{1}{10}$. Therefore the stationary distribution is $\pi_0 = \frac{1}{10}$, $\pi_1 = \frac{6}{10}$ and $\pi_2 = \frac{3}{10}$. Now, $$ \frac{1}{10} = \mu_0 = \lim_{n\to\infty} \frac{f_{00}}{\mu_{00}} = \frac{1}{\mu_{00}} $$ and so $$ \frac{1}{10} = \frac{1}{\mu_{00}}$$ and thus $\mu_{00} = 10$. \\ Now,  $$ \begin{aligned} a_n &= \prob{X_{n-2} = 1 ~|~ X_n = 2} \\ &= \frac{\prob{X_n = 2, X_{n-2} = 1}}{\prob{X_n = 2}} \\ &= \frac{\prob{X_n = 2 ~|~ X_{n-2} = 1} \prob{X_{n-2} = 1}}{\prob{X_n=2}} \\ &= \frac{P_{12}^{(2)} \prob{X_{n-2} = 1}}{\prob{X_n = 2}} \end{aligned} $$ Now $$ \lim_{n\to\infty} \prob{X_n=2} = \pi_2 = \frac{3}{10} $$ and $$ \lim_{n\to\infty} \prob{X_{n-2} = 1} = \pi_1 = \frac{6}{10} $$ Therefore $$ \lim_{n\to\infty} a_n = \frac{P_{12}^{(2)} \cdot \frac{6}{10}}{\frac{3}{10}} = 2P_{12}^{(2)} = 2 \cdot \frac{1}{4} = \frac{1}{2} $$ 
+Is a stationary distribution always unique? Suppose $$ Q = \begin{blockarray}{ccc}
+&0&1 \\
+\begin{block}{c(cc)}
+0 & 1 & 0  \\
+1 & 0 & 1  \\   \end{block} \end{blockarray} $$ Then if $\pi_0 > 0$ and $\pi_1 > 0$, $$ \begin{aligned} \pi_0 + \pi_1 &= 1 \\ \pi_0 &= 1\pi_0 + 0\pi_1 = \pi_0 \\ \pi_1 &= 0\pi_0 + 1\pi_1 = \pi_1 \end{aligned} $$ Thus let $\pi_0 = \alpha$ and $\pi_1 = 1 - \alpha$, where $ 0 < \alpha < 1$. Hence there are infinite many stationary distribution. Does the limiting distribution exist here? Note that $Q^{(n)} = Q^n = Q$ because $Q$ is an identity matrix. Then $P_{00}^{(n)} = 1$ and $P_{10}^{(n)} = 0$. Furthermore, $$ \begin{aligned} \lim_{n\to\infty} P_{00}^{(n)} &= 1 \\ \lim_{n\to\infty} P_{10}^{(n)} &= 0 \end{aligned} $$ Since $1 \neq 0$, the limiting distribution does not exist. \\~\\
+A stationary distribution is given by, for all $j$, $\pi_j = \sum_{i=0}^M \pi_iP_{ij}$. If $\pi = (\pi_0,\pi_1,\dots,\pi_M)$, then in matrix notation, $\pi = \pi \times Q$. Look at $$\pi \times Q^2 = (\pi \times Q) \times Q = \pi \times Q = \pi $$ or $$\pi \times Q^{(2)} = \pi $$ In general, for every $n\geq1$, if $\pi$ is a stationary distribution, then $$ \pi = \pi \times Q^{(n)} $$ or, for all $j$, $$ \pi_j = \sum_{i=0}^M \pi_iP_{ij}^{(n)} $$ 
+Assume $(X_n)_{n\geq0}$ is irreducible and aperiodic. Let $(L_0,L_1,\dots,L_M)$ be the limiting distribution and $(\pi_0,\pi_1,\dots,\pi_M)$ be the stationary distribution. Use the above equation for $\pi_j$ and let $n\to\infty$. This is $$ \pi_j = \underbrace{(\sum_{i=0}^M \pi_i)}_{1}L_j = L_j $$ So for each $j=0,1,\dots,M$, we get $$ \pi_j = L_j$$ We also showed that every stationary distribution is in fact equal to the limiting distribution. Thus the stationary distribution is unique. 
+
+
+\section{Lecture 19} 
+\begin{theorem} If $(X_n)_{n\geq0}$ is a Markov chain with states $0,1,\dots,M$ and transition probability matrix $Q = (P_{ij})$, if the limiting distribution $(L_0,L_1,\dots,L_M)$ exists, then any stationary distribution $(\pi_0,\pi_1,\dots,\pi_M)$ must equal $(L_0,L_1,\dots,L_M)$ or $(\pi_0 = L_0, \pi_1 = L_1,\dots,\pi_M = L_M)$. \end{theorem} 
+\begin{proof} For all $j$, $$ \pi_j = \sum_{j=0}^M \pi_i P_{ij}^{(n)} $$ Let $n\to\infty$. Then $$ \pi_j = L_j $$ \end{proof} 
+An example of a reducible Markov chain for which the limiting distribution exists. $$Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0 & \frac{1}{2} & \frac{1}{2} \\
+1 & \frac{1}{2} & 0 & \frac{1}{2} \\ 
+2 & 0 & 0 & 1  \\  \end{block} \end{blockarray} $$
+Note that $P_{11} = 1$ and so $2$ is an absorbing state and $\set{2}$ is a recurrent class. Now $0\to2$, since $P_{02} > 0$ and so $0$ is transient. Likewise, $1\to2$, since $P_{12} > 0$ and so $1$ is also transient. In fact, $0 \iff 1$, because $P_{01}P_{10} > 0$. Therefore $\set{0,1}$ is a transient class. Now $\lim_{n\to\infty} P_{i0}^{(n)} = 0$ since $0$ is a transient state. In the same argument, $\lim_{n\to\infty} P_{i1}^{(n)} = 0$ since $1$ is a transient state. Now $\lim_{n\to\infty} P_{i2}^{(n)} = 1$ for all $i$ since $$P_{i0}^{(n)} + P_{i1}^{(n)} + P_{i2}^{(n)} = 1$$ All limits do not depend on $i$ and so the limiting distribution exists. \\~\\ 
+For a Markov chain with states $0,1,\dots,M$ assume $$ Q = \begin{blockarray}{ccccc}
+&0&1&\dots&M \\
+\begin{block}{c(cccc)}
+0 & P_{00} & P_{01} & \dots & P_{0M} \\
+1 & P_{10} & P_{11} & \dots & P_{1M}  \\
+\vdots  &\vdots & \vdots & \ddots & \vdots \\ 
+M & P_{M0} & P_{M1} & \dots & P_{MM} \\ \end{block} \end{blockarray} $$ is doubly-stochastic. If the Markov chain is irreducible and aperiodic, show that $\pi_J = \frac{1}{M+1} $ for $j = 0,1,\dots,M$. \\
+Since the Markov chain is irreducible and aperiodic, then the limiting distribution exists and is equal to the unique stationary distribution. Now the stationary distribution satisfies the following system $$ \begin{aligned} x_0 + x_1 + \dots + x_M &= 1 \\ x_j &= \sum_{i=0}^M x_iP_{ij} \end{aligned} $$ for all $i = 0,1,\dots,M$ uniquely. Let's check that $x_0 = x_1 = \dots =x_M = \frac{1}{M+1}$ satisfies the system. First, $$ x_0 + x_1 + \dots + x_M = \frac{1}{M+1} + \frac{1}{M+1} + \dots + \frac{1}{M+1} = (M+1)(\frac{1}{M+1}) = 1$$ Now replace $x_i$ and $x_j$ by $\frac{1}{M+1}$ in the second equation. $$ \frac{1}{M+1} = \sum_{i=0}^M \frac{1}{M+1}P_{ij} \to 1 = \sum_{i=0}^M P_{ij} $$ This is the sum of column $j$. This is true for all $j$ since $Q$ is doubly-stochastic. \\~\\
+Let $(X_n)_{n\geq0}$ be a Markov chain with states $0,1,2,3$ and transition probability matrix $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 1 & 0 \\  
+2 & 0 & 0 & 0 & 1 \\ 
+3 & \frac{1}{2} & 0 & 0 \frac{1}{2} \\ \end{block} \end{blockarray} $$
+Find $\mu_{00} = \expe{T_{00}}$ if it exists and $\lim_{n\to\infty} \prob{X_{n+2} = 2, X_n = 0 ~|~ X_0=1}$ if it exists. \\ 
+Let $$ \begin{aligned} a_n &= \prob{X_{n+2} = 2, X_n = 0 ~|~ X_0 = 1} \\ &= \frac{\prob{X_{n+2} = 2, X_n = 0, X_0=1}}{\prob{X_0 = 1}} \\ &= \frac{\prob{X_{n+2} = 2 ~|~ X_n = 0, X_0 = 1}\prob{X_n=0,X_0=1}}{\prob{X_0=1}} \\ &= \frac{\prob{X_{n+2} = 2 ~|~ X_n=0}\prob{X_n=0,X_0=1}}{\prob{X_0=1}} \\ &= \frac{\prob{X_{n+2} = 2 ~|~ X_n = 0}\prob{X_n=0 ~|~ X_0=1}\prob{X_0=1}}{\prob{X_0=1}} \\  &= \prob{X_{n+2} = 2 ~|~ X_n = 0} \prob{X_n=0 ~|~ X_0=1} \\ &= P_{02}^{(2)}P_{10}^{(n)} \end{aligned} $$ Thus $$ a_n = P_{02}^{(2)}P_{10}^{(n)} $$ Now, $0\to1\to2\to3\to0$ since $P_{01}P_{12}P_{23}P_{30} > 0$. So all states communicate and so all states are recurrent. (since at least one state is recurrent). On the other hand, $P_{33} = \frac{1}{2} > 0$ and so $3$ is aperiodic. Therefore the Markov chain is irreducible and aperiodic. Thus the limiting distribution exists and is equal to the unique stationary distribution. Therefore 
+$$\lim_{n\to\infty} a_n = P_{02}^{(2)}\lim_{n\to\infty} P_{10}^{(n)} = P_{02}^{(2)}L_0 = P_{02}^{(2)}\pi_0$$ From matrix calculation, $P_{02}^{(2)} = 1$. Now, find the stationary distribution. $$ \begin{aligned} \pi_0 + \pi_1 + \pi_2 + \pi_3 &= 1 \\ \pi_0 &= \frac{1}{2}\pi_3 \\ \pi_1 &= \pi_0 \\ \pi_2 &= \pi_1 \end{aligned} $$ Let $\pi_3 = 2x$. Then $\pi_0 = \pi_1 = \pi_2 = x$. Then $$ \pi_0 + \pi_1 + \pi_2 + \pi_3 = x  +x + x + 2x = 5x = 1 \to x = \frac{1}{5}$$ So $\pi_0 = \frac{1}{5}$ and $$\lim_{n\to\infty} a_n = P_{02}^{(2)}\pi_0 = 1 \cdot \frac{1}{5} = \frac{1}{5} $$ \\~\\
+Determine the stationary distribution for the periodic Markov chain with $$Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & 0 & \frac{1}{2} & 0 & \frac{1}{2} \\
+1 & \frac{1}{4} & 0 & \frac{3}{4} & 0 \\
+2 & 0 & \frac{1}{3} & 0 & \frac{2}{3} \\ 
+3 & \frac{1}{2} & 0 & \frac{1}{2} & 0 \\   \end{block} \end{blockarray} $$
+What is period($0$)? \\ 
+Clearly $0\to1\to2\to3\to0$ since $P_{01}P_{12}P_{23}P_{30} > 0$. Therefore all states communicate and are recurrent (since at least one has to be recurrent). Note that all states will have the same period. Also note that $P_{00}^{(1)} = P_{00} = 0$. For $P_{ii}^{(2)}$ to be positive, all we need is a loop from $i$ to $i$ with length $2$, or $$P_{ii}^{(2)} = \sum_k P_{ik}P_{kj} $$ For $P_{ii}^{(3)}$ to be positive, all we need is a loop from $i$ to $i$ with length $3$, or $$P_{ii}^{(3)} = \sum_{k,l} P_{ik}P_{kl}P_{lj} $$ Note that $0 \to 1 \to 0$ is a loop from $0$ to $0$ with length $2$ and so $P_{00}^{(2)} > 0$. Find $i,j$ such that $0 \to i \to j \to 0$. Here $i = 1$ or $3$ and $j = 0$ or $2$. But neither states $0$ nor $2$ lead to $0$. Thus there is no loop from $0$ to $0$ with length $3$ and so $P_{00}^{(3)} = 0$. Note that $0\to1\to0\to1\to0$ is a loop from $0$ to $0$ with length $4$. So $P_{00}^{(4)} > 0$. In fact, we can show that $P_{00}^{\text{odd}} = 0$ for all odd $n$ and $P_{00}^{\text{even}} > 0$ for all even $n$. Therefore period($0$) = $2$ and $\lim_{n\to\infty} P_{00}^{(n)}$ does not exists. 
+\\ Let the stationary distribution be $(\pi_0,\pi_1,\pi_2,\pi_3)$. The system of equations is $$ \begin{aligned} \pi_0 + \pi_1 + \pi_2 + \pi_3 &= 1 \\ \pi_0 &= \frac{1}{4}\pi_1 + \frac{1}{2}\pi_3 \\ \pi_1 &= \frac{1}{2}\pi_0 + \frac{1}{3}\pi_2 \\ \pi_2 &= \frac{3}{4}\pi_1 + \frac{1}{2}\pi_3 \\ \pi_3 &= \frac{1}{2}\pi_0 + \frac{2}{3}\pi_2 \end{aligned} $$ Solve this system of equations to get the stationary distribution. \\~\\
+Consider a Markov chain with states $0,1,2,3$ and transition probability matrix $$ Q = \begin{blockarray}{ccccc}
+&0&1&2&3 \\
+\begin{block}{c(cccc)}
+0 & + & 0 & + & 0 \\
+1 & + & + & 0 & 0 \\ 
+2 & 0 & 0 & + & + \\ 
+3 & 0 & 0 & + & + \\   \end{block} \end{blockarray} $$
+Show that $\set{0}$ is a transient class. \\ 
+Let $C = \set{2,3}$. Since $Q_C$ is stochastic, thus closed, it is also irreducible since $P_{23}P_{32} > 0$. Therefore $\set{2,3}$ is a recurrent class. Note that $0\to2$ since $P_{02} > 0$. $0$ is transient since $\set{2,3}$ is closed. Since $1\to2$, $1$ is also transient. (If $C$ is a closet set of states and $i \not\in C$, if $i \to j$, where $j \in C$, then $i$ is transient.) Now show that $0 \not\to 1$. Try by induction, to show for all $n\geq1$, $P_{01}^{(n)} = 0$. First, if $n=1$, $P_{01} = 0$. Next, assume $P_{01}^{(n)} = 0$ and show $P_{01}^{(n+1)} = 0$. $$ P_{01}^{(n+1)} = \sum_{k_0}^3 P_{0k}^{(n)}P_{k1}^{(1)} = P_{01}^{(n)} = 0 $$ Alternate proof: Look at $C = \set{0,2,3}$. This is a stochastic matrix and so $\set{0,2,3}$ is closed. Hence $0 \not\to 1$. \\~\\
+A Markov chain with states $0,1,2,3,4$ has transition probability matrix $$ Q = \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & \frac{1}{3} & 0 & 0 & 0 & \frac{2}{3}  \\
+1 & 0 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 \\ 
+2 & 0 & 1 & 0 & 0 & 0 \\ 
+3 & 0 & 0 & 0 & 1 & 0 \\ 
+4 & \frac{4}{5} & 0 & 0 & 0 & \frac{1}{5} \\ \end{block} \end{blockarray} $$
+Find $\lim_{n\to\infty} P_{04}^{(n)}$ if it exists. \\ Since $P_{33} = 1$, $3$ is an absorbing state and forms a recurrent class. Let $C = \set{0,4}$. Then $Q_C$ is stochastic. So $C$ is closed and irreducible (since $0\iff4$ and $P_{04}P_{40} > 0$). Therefore $\set{0,4}$ is a recurrent class. For the submatrix $Q_C$, $\lim_{n\to\infty} P_{04}^{(n)}$ exists and is equal to, because $4$ is ergodic (recurrent and aperiodic), $\frac{f_{04}}{\mu_{44}} = \frac{1}{\mu_{44}}$. $f_{44} = 1$ since $0\iff4$. Now let $\lim_{n\to\infty} P_{04}^{(n)} = l_4$ where $(l_0,l_4) = (\alpha_0,\alpha_4)$, the unique stationary distribution of $Q_C$. Find the unique stationary distribution. $$ \begin{aligned} \alpha_0 + \alpha_4 &= 1 \\ \alpha_0 &= \frac{1}{3}\alpha_0 + \frac{4}{5}\alpha_4 \end{aligned} $$ This is equivalent to $$ \frac{2}{3}\alpha_0 = \frac{4}{5}\alpha_4  $$ Let $\alpha_0 = 12x$. Then $\alpha_4 = \frac{5}{4} \cdot \frac{2}{3} \cdot 12x = 10x$. So $\alpha_0 = 12x$ and $\alpha_4 = 10x$. Thus $\alpha_0 + \alpha_4 = 22x = 1$ and so $x = \frac{1}{22}$. Furthermore, $l_4 = \alpha_4 = 10x = \frac{5}{11}$. Hence $$ \lim_{n\to\infty} P_{04}^{(n)} = l_4 = \frac{5}{11} $$ 
+
+
+\section{Lecture 20}
+
+A Markov chain has states $0,1,2,3,4,5$ and transition probability matrix $$ Q = \begin{blockarray}{ccccccc}
+&0&1&2&3&4&5 \\
+\begin{block}{c(cccccc)}
+0 & \frac{1}{3} & \frac{2}{3} & 0 & 0 & 0 & 0 \\
+1 & \frac{2}{3} & \frac{1}{3} & 0 & 0 & 0 & 0  \\ 
+2 & 0 & 0 & \frac{1}{4} & \frac{3}{4} & 0 & 0  \\
+3 & 0 & 0 & \frac{1}{5} & \frac{4}{5} & 0 & 0 \\ 
+4 & \frac{1}{4} & 0 & \frac{1}{4} & 0 & \frac{1}{4} & \frac{1}{4} \\
+5 & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} \\ \end{block} \end{blockarray} $$
+Find $\lim_{n\to\infty} P_{54}^{(n)}$ and $\lim_{n\to\infty} P_{52}^{(n)}$ if it exists. \\
+Let $A = \set{0,1}$. $A$ is closed and irreducible because $Q_A$ is stochastic and $0\to1$, respectively. Then $A$ is a recurrent class. Likewise, $B = \set{2,3}$ is a recurrent class since $B$ is closed and irreducible. Since $4\to0$ and $5\to0$, $4$ and $5$ are transient. In fact, $4\iff 5$. Hence $\set{4,5}$ is a transient class. Since $4$ is transient, $$\lim_{n\to\infty} P_{54}^{(n)} = 0 $$ This is because $$\lim_{n\to\infty} P_{ij}^{(n)} = \begin{cases} 0 &\text{ if $j$ is transient} \\ \frac{f_{ij}}{\mu_{jj}} &\text{ if $j$ is ergodic} \\ \text{does not exist} &\text{ if $j$ is recurrent and periodic} \end{cases} $$ 
+Now find $\lim_{n\to\infty} P_{52}^{(n)}$. Note that $2$ is ergodic because $2\in B$ and so $2$ is recurrent and $P_{22} = \frac{1}{4} > 0$ and so period($2$) = $1$. Therefore $$ \lim_{n\to\infty} P_{52}^{(n)} = \frac{f_{52}}{\mu_{22}} $$ Solve for the numerator: $$ \begin{aligned} f_{ij} &= P_{ij} + \sum_{\text{all } k \neq j} P_{ik}f_{kj} \\ f_{52} &= \frac{1}{6} + \frac{1}{6}\underbrace{f_{02}}_{0\not\to2} + \frac{1}{6}\underbrace{f_{12}}_{1\not\to2} + \frac{1}{6}\underbrace{f_{32}}_{3\not\to2} + \frac{1}{6}f_{42} + \frac{1}{6}f_{52} \\ &= \frac{1}{6} + \frac{1}{6}f_{42} + \frac{1}{6}f_{52} \\ \frac{5}{6}f_{52} &= \frac{1}{6} + \frac{1}{6}f_{42} \\ f_{42} &= \frac{1}{4}  +\frac{1}{4}\underbrace{f_{02}}_0 + 0f_{12} + 0f_{32} + \frac{1}{4}f_{42} + \frac{1}{4}f_{52} \\ \frac{3}{4}f_{42} &= \frac{1}{4} + \frac{1}{4}f_{52} \end{aligned} $$ Call $f_{42} = x$ and $f_{52} = y$. Then this is the system of equations $$ \begin{cases} 5y &= 2 + x \\ 3x &= 1 + y \end{cases} $$ 
+The solution to this system is $x = y = \frac{1}{2}$; thus $f_{52} = \frac{1}{2}$. \\ Now note that $\mu_{22} = \frac{1}{\pi_2}$ where $(\pi_2,\pi_3)$ is the unique stationary distribution from $Q_B = \begin{bmatrix} \frac{1}{4} & \frac{3}{4} \\ \frac{1}{5} & \frac{4}{5} \end{bmatrix} $. We can do this because $$ \pi_j = \lim_{n\to\infty} P_{jj}^{(n)} = \frac{1}{\mu_{jj}} \text{ when $j$ is absorbing} $$ Then $$ \begin{aligned} \pi_2 + \pi_3 &= 1 \\ \pi_2 &= \frac{1}{4}\pi_2 + \frac{1}{5}\pi_3 \end{aligned} $$ The solution to this system of equations is $$ (\pi_2,\pi_3) = (\frac{4}{19}, \frac{15}{19}) $$ Hence $\pi_2 = \frac{4}{19}$ and so $$ \lim_{n\to\infty} P_{52}^{(n)} = \frac{f_{52}}{\mu_{22}} = \frac{1/2}{4/19} = \frac{2}{19} $$ \\
+Note that $P_{02}^{(n)} = 0$ for all $n\geq 1$ because $0 \not\to 2$ since $0 \in A$ and $2 \in B$. Now $\lim_{n\to\infty} P_{02}^{(n)} = 0$ and $\lim_{n\to\infty} P_{52}^{(n)} = \frac{2}{19}$. Thus the limiting distribution does not exist. \\
+Recall: $$ f_{ij} = P_{ij} + \sum_{\text{all } j \neq k} P_{ik}f_{kj} $$ 
+\begin{theorem} Let $(X_n)_{n\geq0}$ be a Markov chain with states $0,\dots,M$. If it is irreducible and aperiodic, then all $\mu_{ij} = \expe{T_{ij}}$ are finite and $$ \mu_{ij} = 1 + \sum_{\text{all } k \neq j} P_{ik}f_{kj} $$ \end{theorem}
+Consider a Markov chain with states $0,1,2,3,4$ and transition probability matrix $$ Q = \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & 0 & 0 & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+1 & 0 & \frac{1}{3} & 0 & \frac{2}{3} & 0  \\ 
+2 & \frac{1}{4} & 0 & 0 & 0 & \frac{3}{4}   \\
+3 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\ 
+4 & 0 & 0 & 0 & \frac{1}{5} & \frac{4}{5} \\ \end{block} \end{blockarray} $$
+Obtain the classes of communications and specify/justify if it is recurrent or transient. Then find $\expe{T_{34}}$. \\ Let $A = \set{3,4}$. $A$ is closed because $Q_A$ is stochastic and $A$ is irreducible because $3\iff4$ since $P_{34}P_{43} > 0$. So $\set{3,4}$ is a recurrent class. It is also ergodic since $P_{33} > 0$ and so period($3$) = $1$. Since $0\to3$, $1\to3$ and $2\to4$, $P_{03}P_{13}P_{24} > 0$, states $0,1,2$ are all transient. Note that $0\iff 2$ because $P_{02}P_{20} > 0$. 
+Claim: $C=\set{0,2,3,4}$ is closed. Note that $Q_C$ is stochastic. That means $C$ is closed. Therefore $0 \not\to 1$. Hence the classes of communication are $\set{3,4}$ (recurrent), $\set{0,2}$ (transient) and $\set{1}$ (transient). $$\expe{T_{34}} = \mu_{34} = 1 + \sum_{k=3} P_{3k}f_{k4} = 1 + P_{33}\mu_{34} $$ Use $Q_A$ to find $\mu_{34}$. $$ Q_A = \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{5} & \frac{4}{5} \end{bmatrix} $$ Then $$ \begin{aligned} \mu_{34} &= 1 + \frac{1}{2}\mu_{34} \\ \frac{1}{2}\mu_{34} &= 1 \\ \mu_{34} &= 2 \end{aligned} $$ Therefore $$ \expe{T_{34}} = \mu_{34} = 2 $$ 
+Assume $(X_n)_{n\geq0}$ is an irreducible and aperiodic Markov chain with states $0,\dots,M$. We know that all states are ergodic. Let $(\pi_0,\dots,\pi_M)$ be the unique stationary distribution. $$ \mu_{ij} = 1 + \sum_{\text{all } k \neq j} P_{ij}\mu_{kj} $$ Multiply by $\pi_j$and then sum it up from $i=0$ to $i=M$. $$ \begin{aligned} \sum_{i=0}^M \pi_i \mu_{ij} &= 1 + \sum_{i=1}^M \sum_{\text{all } j \neq k} \pi_i P_{ik}\mu_{kj} \\ &= 1 + \sum_{\text{all } k \neq j} (\underbrace{\sum_{i=1}^n \pi_i P_{ik}}_{\pi_k})\mu_{kj} \\ &= 1 + \sum_{\text{all } k \neq j} \pi_k\mu_{kj} \\ \pi_j\mu_{jj} + \sum_{\text{all } i \neq j} \pi_j\mu_{ij} &= 1 + \sum_{\text{all } i \neq j} \pi_i\mu_{ij} \\ \pi_j\mu_{jj} &= 1 \\ \mu_{jj} &= \frac{1}{\pi_j} \end{aligned} $$ 
+Let $(X_n)_{n\geq0}$ be a Markov chain with states $0,\dots,M$ and transition probability matrix $Q = (P_{ij})$. If $Q^{(k)}$ has all entries $> 0$, for some $k$, show that $Q^{(k+1)}$ has all values $>0$. \\
+A Markov chain with states $0,1,2$ has transition probability matrix $$Q = \begin{blockarray}{cccc}
+&0&1&2 \\
+\begin{block}{c(ccc)}
+0 & 0 & \frac{1}{3} & \frac{2}{3} \\
+1 & \frac{1}{2} & 0 & \frac{1}{2}  \\ 
+2 & \frac{4}{5} & \frac{1}{5} & 0  \\ \end{block} \end{blockarray} $$
+Find period($i$) where $i = 0,1,2$. Find $\expe{X_1}$ where $\prob{X_0=0} = \prob{X_0=2} = \frac{1}{4}$. Hint: $$ \expe{X_1} = 0\prob{X_1=0} + 1\prob{X_1=1} + 2\prob{X_1=2} $$ 
+Also, $$ \prob{X_n = j} = \sum_{i=0}^n \alpha(i)P_{ij}^{(n)} $$ where $\alpha(i) = \prob{X_0=i}$. \\
+If the Markov chain is irreducible and aperiodic, $$ \lim_{n\to\infty} \expe{ \frac{C(X_1) + \dots + C(X_n)}{n}} = \sum_{i=0}^n C(i)\pi_i $$ 
+
+\section{Lecture 21} 
+If $Q^{(k)} > 0$, prove that $Q^{(k+1)} > 0$. 
+\begin{proof} $$ AQ^{(k+1)} = Q^{(k)} \times Q = Q \times Q^{(k)} $$ Now for any element of this, $$ P_{ij}^{(k+1)} = \sum_{i=0}^M P_{im}P_{mj}^{(k)}$$ 
+At least one $P_{im} >0$ since $\sum_{i=1}^M P_{im} =1$. Thus $$ \sum_{i=1}^M P_{im}P_{mj}^{(k)} > 0 $$ for all elements of $Q^{(k+1)}$ and so $$Q^{(k+1)} > 0$$ \end{proof} 
+Note that if $P_{00}^{k}>0$ and $P_{00}^{k+1}>0$, then period($0$) = $1$ and so aperiodic. \\
+Lemma: If $Q^{(k)} = Q^k > 0$, then all states communicate and are aperiodic. Thus the Markov chain is ergodic. \\~\\
+
+Final Review: Models based on the Birth and Death process include: M/M/s, machine repair variations where input is finite, and finite queue variations of M/M/s models (or M/M/s/K where k is the max number of people). \\
+General Solution to calculate $P_n$: $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} \\ C_2 &= \frac{\lambda_1}{\mu_2} \text{ and so forth } \\ A &= 1 + C_1 + C_2 + \dots \\ P_0 &= \frac{1}{A} \\ P_1 &= C_1P_0 \end{aligned} $$ 
+For the M/M/s model where $s=1$, check first that $$\rho = \frac{\lambda}{\mu} < 1$$ in order to have steady state conditions. Then $$ \begin{aligned} P_0 &= 1 - \rho \\ P_n &= (1-\rho)\rho^n \\ L &= \expe{N} = \frac{\rho}{1-\rho} = \frac{\lambda}{\mu - \lambda} \\ W &= \frac{L}{\lambda} = \frac{1}{\mu - \lambda} \\ W_q &= W - \frac{1}{\mu} \\ L_q &= \lambda W_q \end{aligned} $$ 
+Now for $s \geq 2$, first check that $$ \rho = \frac{\lambda}{s\mu} < 1 $$ 
+Suppose we have a M/M/2 system with $\lambda = \mu = 3$. Find $\prob{N \geq 1}$. $$ \prob{N \geq 1} = 1 - \prob{N=0} = 1 - P_0 $$ 
+Now $$ \rho = \frac{\lambda}{s\mu} = \frac{1}{2} < 1 $$
+Then $$ \begin{aligned} C_1 &= \frac{\lambda_0}{\mu_1} = \frac{3}{3} = 1 \\ C_2 &= \frac{\lambda_1}{\mu_2} = \frac{3}{2 \cdot 3} = \frac{1}{2} \\ C_3&= \frac{\lambda_2}{\mu_3} = (\frac{1}{2})^2 \\ A &= 1 + C_1 + C_2 + \dots = 1 + 1 + \frac{1}{2} + (\frac{1}{2})^2 + \dots \\ &= 1 + \frac{1}{1-\frac{1}{2}} = 3 \\ P_0 &= \frac{1}{A} = \frac{1}{3} \\ \prob{N \geq 1} &= \prob{N=0} = 1 - P_0 = 1 - \frac{1}{3} = \frac{2}{3} \end{aligned} $$ 
+Find $W$ in this scenario. $$ L_q = P_0 \cdot \frac{(\frac{\lambda}{\mu})^s}{s!} \cdot \frac{\rho}{(1-\rho)^2} $$ In this case, $$ L_q = \frac{1}{3} \cdot \frac{1}{2!} \cdot \frac{1/2}{(1-1/2)^2} = \frac{1}{3} $$ 
+Then $$W_q = \frac{L_q}{\lambda} = \frac{1/3}{3} = \frac{1}{9} $$ 
+and $$ W = W_q + \frac{1}{\mu} = \frac{1}{9} + \frac{1}{3} = \frac{4}{9} $$ 
+Extra: Also, $$ L = \lambda W = 3 \cdot \frac{4}{9} = \frac{4}{3}$$ 
+Consider a Markov chain with $5$ states: $0,1,2,3,4$ and transition probability matrix $$ Q = \begin{blockarray}{cccccc}
+&0&1&2&3&4 \\
+\begin{block}{c(ccccc)}
+0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4} \\
+1 & 0 & \frac{2}{3} & 0 & 0 & \frac{1}{3}  \\ 
+2 & \frac{2}{3} & 0 & 0 & 0 & \frac{1}{3}   \\
+3 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\ 
+4 & 0 & \frac{4}{5} & 0 & 0 & \frac{1}{5} \\ \end{block} \end{blockarray} $$
+Obtain the classes of communications an specify/justify if it is recurrent or transient.
+\\ 
+Notice that $C = \set{1,4}$ is closed since the submatrix $Q_C$ is stochastic. In addition, $C$ is irreducible, meaning $1 \iff 4$ because $P_{14}P_{41} > 0$. Hence $\set{1,4}$ is a recurrent class. Clearly, $0 \to 4$, $2\to4$ and $3\to4$, since $P_{04}P_{24}P_{34} > 0$. Since $4$ is recurrent, but $0,2,3 \not\in \set{1,4}$, $0,2,3$ are transient. Now observe that $0\iff 2$ since $P_{02}P_{20} > 0$. So $0$ and $2$ are in the same class. Next, observe that $B = \set{0,1,2,4}$ is closed since $Q_B$ is stochastic. Therefore $0\not\to3$ since $0\in B$ and $3 \not\in B$. So $3$ is in a class by itself. Thus the classes are $\set{1,4}$ (recurrent), $\set{3}$ (transient) and $\set{0,2}$ (transient). \\
+From this Markov chain, find $f_{34}$, $f_{43}$ and $f_{44}$. 
+$$ \begin{aligned} f_{34} &= P_{34} + \sum_{k\neq 4} P_{3k}f_{k4} \\ &= P_{34} + P_{30}f_{04} + P_{31}f_{14} + P_{32}f_{24} + P_{33}f_{34} \\ &= P_{34} + P_{33}f_{34} \\ &= \frac{1}{2} + \frac{1}{2}f_{34} \\ f_{34} &= 1 \end{aligned} $$ 
+For the second one, $$f_{43} = 0$$ since $4\not\to 3$. This comes from the fact that if $i$ is recurrent and if $j$ is transient, then $f_{ij} = 0$. For the last one, $$ f_{44} = 1$$ since $4$ is recurrent. \\
+Find $\mu_{44} = \expe{T_{44}}$. \\
+To find $\mu_{44}$, put $4$ in its recurrent class and look at the corresponding stochastic submatrix. $$ Q_C = \begin{bmatrix} \frac{2}{3} & \frac{1}{3} \\ \frac{4}{5} & \frac{1}{5} \end{bmatrix} $$ Next, find the stationary distribution $(\pi_1, \pi_4)$ of $Q_C$. $$ \begin{aligned} \pi_1 + \pi_4 &= 1 \\ \pi_1 &= \frac{2}{3}\pi_1 + \frac{4}{5}\pi_4 \to \frac{1}{3} \pi_1 = \frac{4}{5}\pi_4 \end{aligned} $$ 
+Let $\pi_4 = 5x$. Then $\pi_1 = 12x$. Then $$\pi_1 + \pi_4 = 17x = 1 \to x = \frac{1}{17} $$ 
+Thus $\pi_4 = 5x = \frac{5}{17}$ and $$ \mu_{44} = \frac{1}{\pi_4} = \frac{17}{5} $$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,918 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, physics}
+\usepackage{mathtools}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Darshan Patel}
+\rhead{Math 628: Functions of Complex Variables}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{question}{Question}[section]
+
+\newcommand{\set}[1]{\Big\{ #1 \Big\}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\abi}{a + bi}
+\newcommand{\z}{z = \abi}
+\newcommand{\zabin}[2]{z_{#1} = a_{#1} #2 b_{#1}}
+\newcommand{\conj}[1]{\overline{#1}}
+\renewcommand{\mod}[1]{\abs{#1}}
+\newcommand{\cosisin}[1]{\cos\Big( #1 \Big) + i\sin\Big( #1 \Big)}
+\newcommand{\union}{\bigcup} 
+\newcommand{\intersection}{\bigcap}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\mobt}{M\"obius transformation }
+\newcommand{\hatcom}{\hat{\complex}}
+\newcommand{\e}[1]{e^{#1}}
+\newcommand{\res}[1]{\underset{z=#1}{\text{Res }}}
+
+
+
+
+\title{Math 628: Functions of Complex Variables}
+\author{Darshan Patel}
+\date{Spring 2018}
+\maketitle
+
+\tableofcontents
+
+\section{Lecture 1} 
+
+Let $a + bi$ where $a, b \in \reals$ and $i^2 + 1 = 0$. \\
+Let $z_1 = a_1 + b_1i$ and $z_2 = a_2 + b_2i$. Then 
+$$ z_1 + z_2 = (a_1 + a_2) + (b_1 + b_2)i $$ 
+$a$ is the real part ($a = \Re{z}$) and $b$ is the imaginary part ($b = \Im{z}$). 
+$$z_1 - z_2 = (a_1 - a_2) + (b_1 - b_2)i $$ 
+$$z_1z_2 = (a_1a_2 - b_1b_2) + (a_1b_2 + a_2b_1)i $$ 
+Let $z = \abi$, its complex conjugate is $\conj{z} = a - bi$. \\
+Modulus: $\mod{z} = \sqrt{a^2 + b^2}$, $\mod{z}^2 = a^2 + b^2 $
+$$ z\cong{z} = a^2 + b^2 = \mod{z}^2 $$ 
+$$ \frac{1}{3 + 4i} = \frac{1}{3 + 4i} \cdot \frac{3-4i}{3-4i} = \frac{3-4i}{25} = \frac{3}{25} + \frac{-4}{25}i $$ 
+Note: $0 = 0 + 0i$ \\
+For $a,b \neq 0$, $$ \frac{1}{z} = \frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a-bi} = \frac{a-bi}{a^2 + b^2} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i $$ 
+$\frac{1}{z}$ is well defined if and only if $z \neq 0$ ($a,b \neq 0$). 
+$$z \cdot \frac{1}{z} = (a + bi)(\frac{a - bi}{a^2 + b^2}) = \frac{a^2 + b^2}{a^2 + b^2} = 1 $$ 
+$$ \frac{z_1}{z_2} = \frac{a_1 + b_1i}{a_2 + b_2i} = \frac{a_1 + b_1i}{a_2 + b_2i} \cdot \frac{a_2 - b_2i}{a_2 - b_2i} = \frac{a_1a_2 + b_1b_2}{a_2^2 + b_2^2} + \frac{a_2b_1 - a_1b_2}{a_2^2 + b_2^2}i  $$ 
+Let $z = \abi$ and $\conj{z} = a - bi$. Then $z + \conj{z} = 2a$
+$$ \Re{z} = a = \frac{1}{2}(z + \conj{z})$$ 
+Furthermore, $z - \conj{z} = 2bi$ $$ \Im{z} = b = \frac{1}{2i}(z - \conj{z})$$ 
+$$a^2 \leq a^2 + b^2 \to a \leq \sqrt{a^2 + b^2} $$ 
+$$\Re{z} \leq \mod{z} ~~ \Im{z} \leq \mod{z}$$ 
+Note that if $z_1 = a_1 + b_1i$ and $z_2 = a_2 + b_2i$, $$\mod{z_1z_2} = \mod{z_1}\mod{z_2}$$ $$ \conj{z_1z_2} = (a_1a_2 - b_1b_2) - (a_1b_2 + a_2b_1)i $$ 
+$$ \conj{z_1z_2} = \conj{z_1}\conj{z_2} = (a_1 - b_1i)(a_2 - b_2i) = (a_1a_2 - b_1b_2) - (a_1b_2 + a_2b_1)i $$ 
+$$ (\conj{z_1})(\conj{z_2}) = (a_1 - b_1i)(a_2 - b_2i) $$ 
+Similarly, $\conj{\Big( \frac{z_1}{z_2}\Big)} = \frac{\conj{z_1}}{\conj{z_2}}$. 
+$$ \begin{aligned} \mod{z_1z_2}^2 &= (z_1z_2)\mod{(z_1z_2)}\\ &= z_1z_2\mod{z_1}\mod{z_2} \\ &= z_1\mod{z_1}z_2\mod{z_2} \\ &= \mod{z_1}^2\mod{z_2}^2 \end{aligned} $$ 
+$$ \mod{z_1z_2}^2 = \mod{z_1}\mod{z_2}$$ 
+Note: $$ \mod{\frac{z_1}{z_2}} = \frac{\mod{z_1}}{\mod{z_2}}$$ 
+$$ z_1 + z_2 = (a_1 + a_2) + (b_1 + b_2)i \to \conj{z_1 + z_2} = (a_1 + a_2) - (b_1 + b_2)i $$ 
+$$ \conj{z_1} + \conj{z_2} = (a_1 - b_1i) + (a_2 - b_2i) = (a_1 + a_2) - (b_1 + b_2)i $$
+Therefore $$ \conj{z_1 + z_2} = \conj{z_1} + \conj{z_2}$$ 
+Note: $\conj{(\conj{z})} = z$ and $\mod{z} = \mod{\conj{z}}$. \\
+Preface: $\Re{z} = \frac{1}{2}(z + \conj{z}) \to 2\Re{z_1\conj{z_2}} = z_1\conj{z_2} + \conj{(z_1\conj{z_2})} = z_1\conj{z_2} + \conj{z_1}z_2$
+$$ \begin{aligned} \mod{z_1 + z_2}^2 &= (z_1 + z_2)\conj{(z_1 + z_2)} \\ &= (z_1 + z_2)(\conj{z_1} + \conj{z_2}) \\ &= z_1\conj{z_1} + z_2\conj{z_2} + z_1\conj{z_2} + \conj{z_1}z_2 = \mod{z_1}^2 + \mod{z_2}^2 + 2\Re{z_1\conj{z_2}} \\ &\leq \mod{z_1}^2 + \mod{z_2}^2 + 2\mod{z_1\conj{z_2}} \end{aligned} $$ 
+Hence $$ \mod{z_1 + z_2}^2 \leq \mod{z_1}^2 + \mod{z_2}^2 + 2\mod{z_1}\mod{z_2} $$ 
+Furthermore, $$ \mod{z_1 + z_2}^2 \leq (\mod{z_1} + \mod{z_2})^2 \to \mod{z_1 + z_2} \leq \mod{z_1} + \mod{z_2}$$ 
+Prove: $\mod{z_1 + z_2}^2 = \mod{z_1 - z_2}^2 = 2\mod{z_1}^2 + 2\mod{z_2}^2$. 
+$$ \begin{aligned} \mod{z_1 + z_2}^2 + \mod{z_1 - z_2}^2 &= (z_1 + z_2)\conj{(z_1 + z_2)} + (z_1 - z_2)\conj{(z_1 - z_2)} \\ &= (z_1 + z_2)(\conj{z_1} + \conj{z_2}) + (z_1 - z_2)(\conj{z_1} - \conj{z_2}) \\ &= z_1\conj{z_1} + z_2\conj{z_2} + \conj{z_2}z_1 + z_1\conj{z_1} + z_2\conj{z_2} -z_1\conj{z_2} - z_2\conj{z_1} \\ &= \mod{z_1}^2 + \mod{z_1}^2 + \mod{z_2}^2 + \mod{z_2}^2 \\ &= 2(\mod{z_1}^2 + \mod{z_2}^2) \end{aligned} $$ 
+Suppose $\mod{z_1} < 1$ and $\mod{z_2} < 1$. Prove $\mod{\frac{z_1 - z_2}{1 - z_1\conj{z_2}}} < 1$ and $\mod{\frac{z_1 - z_2}{1 - z_1\conj{z_2}}} = 1$ if either $\mod{z_1} = 1$ or $\mod{z_2} = 1$. 
+
+$$ \begin{aligned} \mod{\frac{z_1 - z_2}{1 - z_1\conj{z_2}}}^2 &< 1 \\
+ \mod{z_1 - z_2}^2 &< \mod{1 - z_1\conj{z_2}}^2 \\
+  0 &< \mod{1 - z_1\conj{z_2}}^2 - \mod{z_1 - z_2}^2 \\
+   &= (1 - z_1\conj{z_2})(1 - \conj{z_1}z_2) - (z_1 - z_2)(\conj{z_1} - \conj{z_2}) \\
+    &= 1 - z_1\conj{z_2} - \conj{z_1}z_2 + z_1\conj{z_1}z_2\conj{z_2} - z_1\conj{z_1} - z_2\conj{z_2} + z_1\conj{z_2} + \conj{z_1}z_2 \\
+     &= 1 - \mod{z_1}^2 - \mod{z_2}^2 + \mod{z_1}^2\mod{z_2}^2 \\
+     &= (1 - \mod{z_1}^2)(1 - \mod{z_2}^2) \\
+      0 < (1 - \mod{z_1}^2)(1 - \mod{z_2}^2) \\ &\text{ because both } \mod{z_1} < 1 \text{ and } \mod{z_2} < 1 \end{aligned} $$ 
+If either $\mod{z_1} = 1$ or $\mod{z_2} = 1$, then 
+$$ (1 - \mod{z_1}^2)(1 - \mod{z_2}^2) = 0 \to \mod{\frac{z_1 - z_2}{1 - z_1\conj{z_2}}} = 1 $$ 
+
+\section{Lecture 2} 
+Prove that $\mod{\mod{z_1} - \mod{z_2}} \leq \mod{z_1 - z_2}$. $$ \begin{aligned} 
+\mod{z_1} &= \mod{z_1 - z_2 + z_2} \leq \mod{z_1 - z_2} + \mod{z_2} \to \mod{z_1} - \mod{z_2} \leq \mod{z_1 - z_2} \\ \mod{z_2} &= \mod{z_2 - z_1 + z_1} \leq \mod{z_2 - z_1} + \mod{z_1} \to \mod{z_2} - \mod{z_1} \leq \mod{z_1 - z_2} \\ \mod{\mod{z_1} - \mod{z_2}} &\leq \mod{z_1 - z_2} \end{aligned} $$ 
+Let $X$ be a nonempty set. A map $d: X \times X \to \mathbb{R}$ is called a metric on $X$ if \begin{enumerate} 
+\item $d(x,y) \geq 0$ $\forall x,y \in X$ 
+\item $d(x,y) = 0 \iff x = y$
+\item $d(x,y) = d(y,x) \forall x,y \in \mathbb{R}$
+\item $d(x,z) \leq d(x,y) + d(y,z), x,y,z \in X$ \end{enumerate} 
+If so, then $(X,d)$ is called a metric space. \\
+Let $\complex$ be the set of all complex numbers. Define $d(z_1,z_2) = \mod{z_1 - z_2}$ where $z_1,z_2 \in \complex$. \begin{enumerate} 
+\item $\mod{z_1 - z_2} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2} \geq 0 $ and $\mod{z_1 - z_2} = 0 \iff z_1 - z_2 = 0 \iff z_1 = z_2$
+\item $\mod{z_1 - z_2} = \mod{z_2 - z_1}$ 
+\item $\mod{z_1 - z_3} = \mod{z_1 - z_2 + z_2 - z_3} \leq \mod{z_1 - z_2} + \mod{z_2 - z_3} $ Hence $d(z_1,z_3) \leq d(z_1,z_2) + d(z_2,z_3)$ \end{enumerate} 
+Therefore $(\complex, \mod{\cdot})$ is a metric space. \\~\\
+A complex number is an ordered pair of real numbers $z = (a,b)$ where $a = \Re{z}$ and $b = \Im{z}$. We say $(a,0)$ is purely real and $(0,b)$ is purely imaginary. Note that $i = (0,1)$. \\~\\
+Let $z_1 = (a_1,b_1)$ and $z_2 = (a_2,b_2)$. Then $$z_1 + z_2 = (a_1+a_2,b_1+b_2)$$ For each $z = (a,b)$, $\exists -z = (-a,-b)$ such that $z + (-z) = 0$. \\ Note: $0 = (0,0)$ and $1 = (1,0)$. \\
+$\forall z_1,z_2 \in \complex, z_1 + z_2 \in \complex$. \\
+$\forall z_1,z_2, z_3 \in \complex, (z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$. \\
+$\forall z_1,z_2 \in \complex, z_1 + z_2 = z_2 + z_1$. \\
+$\exists 0 \in \complex$ such that $z1 = 1z = z \forall z \in \complex$. \\
+For each $z \in \complex$ such that $z \neq 0, \exists z^{-1} \in \complex$ such that $zz^{-1} = 1$. \\~\\
+If $z \neq 0$ then $(a,b) \neq 0$ and so $a \neq 0$ and $b \neq 0$. \\ 
+If $z = (a,b)$ where $z \neq 0$, then $z^{-1} = \frac{1}{z} = \Big( \frac{a}{a^2 + b^2}, -\frac{b}{a^2 + b^2} \Big)$. Therefore $zz^{-1} = (1,0)$. \\
+$(C/\{0\}, \cdot)$ is an abelian group.  
+$$z_1(z_2 + z_3) = z_1z_2 + z_1z_3$$
+The set of all complex numbers $(\complex, +,\cdot)$ is a field. \\~\\
+We write $z = (a,b)$ as $z = a+bi$ where $i^2 = -1$. \\
+There exists a 1-1 correspondence between all points on the plane and the set of all complex numbers (seen as ordered pairs of real numbers). \\
+By $\complex$, we denote the complex plane where the real axis is horizontal and the imaginary axis is vertical. By $\Delta$, we denote the open unit disc $= \{z \in \complex | \mod{z} < 1\}$. By $\hat{\complex}$, we denote $\complex \bigcup \{\infty\}$, a Riemann sphere. \\ Note that $\mathcal{U}$ is the upper half plane $= z \in \complex : \Im{z} > 0$. \\
+Associated to each complex number $z = (a,b)$ there exists a complex conjugate $\conj{z} = (a,-b)$ and its modulus $\mod{z} = \sqrt{a^2 + b^2}$. \\~\\
+Describe the set of points: \begin{enumerate} 
+\item $\mod{z + 2} = \mod{z - 1}$ $$ \begin{aligned} \mod{z+2}^2 &= \mod{z-1}^2 \\ z &= x + yi \\ \mod{(x+z) + yi}^2 &= \mod{(x-1) + yi}^2 \\ (x+2)^2 + y^2 &= (x-1)^2 + y^2 \\ (x+2)^2 &= (x-1)^2 \\ x &= -\frac{1}{2} \end{aligned} $$ 
+\item $\mod{z-1} = \Re{z} + 1$ $$ \begin{aligned} \sqrt{(x-1)^2 + y^2} &= x + 1 \\ (x-1)^2 + y^2 &= (x+1)^2 \\ y^2 &= 4x \end{aligned} $$ 
+\item $\Re{z} \geq 4$, this is $x \geq 4$ 
+\item $\mod{z - i} < 2$, this is a open disc of radius $2$ 
+\item $\mod{z-1} = \mod{z + i}$ $$ \begin{aligned} (x-1)^2 + y^2 &= x^2 + (y+1)^2 \\ y &= -x \end{aligned} $$ 
+\item $\mod{z} \geq 6$, this is the region outside of an open disc of radius $6$ 
+\item $\mod{z} = a$, a circle of radius $a$ and centered at the origin 
+\item $\mod{z} < a$, an open disk of radius $a$
+\item $\mod{z} \leq a$, a closed disk of radius $a$
+\item $\mod{z} = \Re{z} + 2$ $$ \begin{aligned} \sqrt{x^2 + y^2} &= x^2 + 2 \\ x^2 + y^2 &= (x^2 + 2)^2 \\ y^2 &= 4x + 4 \end{aligned} $$ 
+\item $\mod{z - 1 + i} = 3$, this is a circle with center $(1,-1)$ and radius $3$ \end{enumerate} 
+Let $z = (x,y)$ be a point in a plane with length $r$ and angle $\theta$ to the real axis. Then $$ \begin{aligned} r &= \mod{z} = \sqrt{x^2 + y^2} \\ \cos\theta &= \frac{x}{r} \to x = r\cos\theta \\ \sin\theta &= \frac{y}{r} \to y = r\sin\theta \\ z &= x + yi = r(\cos\theta + i\sin\theta) \end{aligned} $$ 
+Let a unit surface be represented as follows: $\hat{S} = \{ x \in \complex: \mod{z} = 1\} = \cos \theta + i\sin \theta$. 
+$$ e^{i\theta} = \cos\theta + i\sin\theta$$ 
+$$ z = x + yi = r(\cos\theta + i\sin\theta) = re^{i\theta} $$ 
+
+\section{Lecture 3} 
+
+Let $\frac{x-yi}{x+yi} = a + bi$. Prove that $a^2 + b^2 = 1$. \\ Let $z = x + yi$ and $\alpha = a + bi$. $$ \begin{aligned} \frac{\conj{z}}{z} &= \alpha \\ \conj{\alpha} &= \conj{ \Big( \frac{\conj{z}}{z} \Big)} \\ &= \frac{z}{\conj{z}} \\ \alpha\conj{\alpha} &= \frac{\conj{z}}{z} \cdot \frac{z}{\conj{z}} \\ &= 1 \\ \mod{\alpha}^2 &= 1 \\ a^2 + b^2 &= 1 \end{aligned} $$ 
+Let $z = a+bi$. Define $\psi(z) = \begin{bmatrix} a & -b \\ b & a \end{bmatrix} $. \begin{itemize} 
+\item $\psi(z + w) = \psi(z) + \psi(w)$ \\ Let $w = x + yi$ and $z = a + bi$. $$ \begin{aligned} \psi(w) &= \begin{bmatrix} x & -y \\ y & x \end{bmatrix} \\ \psi(z + w) &= \psi( (a+x) + (b + y)i) \\ &= \begin{bmatrix} a + x & -b - y \\ b + y & a + x \end{bmatrix} \\ &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix} + \begin{bmatrix} x & -y \\ y & x \end{bmatrix} \\ &= \psi(z) +\psi(w) \end{aligned} $$ 
+\item $\psi(zw) = \psi(z)\psi(w)$ $$ \begin{aligned} zw &= (ax - by) + (bx + ay)i \\ \psi(zw) &= \begin{bmatrix} ax - by & -bx - ay \\ bx + ay & ax - by \end{bmatrix} \\ \psi(z)\psi(w) &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix} \begin{bmatrix} x & -y \\ y & x \end{bmatrix} \\ &= \begin{bmatrix} ax - by & -bx - ay \\ bx + ay & ax - by \end{bmatrix} \\ &= \psi(zw) \end{aligned} $$ 
+\item $\psi(1) = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} $
+\item $\psi(\lambda z) = \lambda \psi(z)$ if $\lambda$ is real \\ 
+ $$ \begin{aligned} \lambda z &= \lambda a + \lambda bi \\ \psi(\lambda z) &= \begin{bmatrix} \lambda a & -\lambda b \\ \lambda b & \lambda a \end{bmatrix} \\ &= \lambda \begin{bmatrix} a & -b \\ b & a \end{bmatrix} \\ &= \lambda \psi(z) \end{aligned} $$ 
+ \item $\psi(\conj{z}) = (\psi(z))^T$ $$ \begin{aligned} \psi(z) &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix} \\ \conj{z} &= a - bi \\ \psi(\conj{z}) &= \begin{bmatrix} a & b \\ -b & a \end{bmatrix} \\ &= (\psi(z))^T \end{aligned} $$ 
+ \item $\psi\Big( \frac{1}{z} \Big) = (\psi(z))^{-1}$ $$ \begin{aligned} z &= a + bi \\ \frac{1}{z} &= \frac{a-bi}{a^2 + b^2} \\ \psi\Big( \frac{1}{z} \Big) &= \frac{1}{a^2 + b^2} \begin{bmatrix} a & b \\ -b & a \end{bmatrix} \\ \psi(z) &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix} \\ (\psi(z))^{-1} &= \frac{1}{a^2 + b^2} \begin{bmatrix} a & b \\ -b & a \end{bmatrix} \\ &= \psi\Big( \frac{1}{z} \Big) \text{ if } z \neq 0 \end{aligned} $$ 
+ \item $z$ is real $\iff \psi(z) = (\psi(z))^T$ $$ \begin{aligned} \psi(z) &= (\psi(z))^T \\ \begin{bmatrix} a & -b \\ b & a \end{bmatrix} &= \begin{bmatrix} a & b \\ -b & a \end{bmatrix} \\ -b &= b \\ b &=0 \\ z  &\text{ is real} \end{aligned} $$ 
+ \item $\mod{z} = 1 \iff \psi(z)$ is orthogonal. (Matrix $A$ is orthogonal if $A^T = A^{-1} \iff AA^T = AA^{-1} = I$) $$ \begin{aligned} z &= a + bi \\ \mod{z} &= a^2 + b^2 = 1 \\ \psi(z) &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix} \\ &\text{ If } \psi(z) \text{ is orthogonal} \\ (\psi(z))^{-1} &= (\psi(z))^T \\ \frac{1}{a^2 + b^2} \begin{bmatrix} a & b \\ -b & a \end{bmatrix} &= \begin{bmatrix} a & b \\ -b & a \end{bmatrix} \\ a^2 + b^2 &= 1 \\ \mod{z} &= 1 \end{aligned} $$ \end{itemize} 
+Let $\varphi: \complex \to \Lambda$ where $\Lambda = \Big\{ \begin{bmatrix} a & -b \\ b & a \end{bmatrix} : a,b \in \reals\Big\}$ and $\psi(z) = \begin{bmatrix} a & -b \\ b & a \end{bmatrix} $. \begin{itemize} 
+\item $\psi(z + w) = \psi(z) + \psi(w)$ 
+\item $\psi(zq) = \psi(z)\psi(w)$
+\item $\psi(1) = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$ 
+\item $\psi(0) = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$
+\item $\psi(z^{-1}) = (\psi(z))^{-1}$ if $z \neq 0$ \end{itemize} 
+Let $r = 1$ ($\mod{z} = 1$). $$\begin{aligned} (\cos\theta + i\sin\theta)^2 &= (\cos^2\theta - \sin^2\theta) + i(2\sin\theta\cos\theta) \\ &= \cos2\theta + i\sin2\theta \\ (\cos\theta + i\sin\theta)^3 &= (\cos\theta + i\sin\theta)^2(\cos\theta + i\sin\theta) \\ &= (\cos2\theta + i\sin2\theta)(\cos\theta + i\sin\theta) \\ &= (\cos2\theta\cos\theta - \sin2\theta\sin\theta) + i(\sin2\theta\cos\theta + \cos2\theta\sin\theta) \\ &= \cos(2\theta + \theta) + i\sin(2\theta + \theta) \\ &= \cos3\theta + i\sin3\theta \end{aligned} $$ 
+De Moivre's Theorem: $$ (\cos\theta + i\sin\theta)^n = \cos n\theta + i\sin n\theta $$ where $n$ is a postive integer. \\
+Suppose $n$ is a positive integer. $$ \begin{aligned} (\cos\theta + i\sin\theta)^{-n} &= \frac{1}{(\cos\theta + i\sin\theta)^n} \\ &= \frac{1}{\cos n\theta + i\sin n\theta} \\ &= \cos n\theta - i\sin n\theta \\ &= \cos (-n\theta) + i\sin(-n\theta) \end{aligned} $$ 
+Hence, $$ (\cos\theta + i\sin\theta)^n = \cos n\theta + i\sin n\theta \forall n \in \mathcal{Z}$$ 
+Let $n$ be a positive integer. The set of all values of $(\cos\theta + i\sin\theta)^{\frac{1}{n}}$ is $$ \Big\{ \cos\Big( \frac{\theta + 2\pi k}{n} \Big) + i\sin\Big( \frac{\theta + 2\pi k}{n} \Big) \Big\} \text{ where } k = 0, 1, 2, \dots, n-1 $$ 
+Let $z^n = 1$ where $n$ is a positive integer. $$ 1 = \cos 0 + i\sin 0 ~~ (\theta = 0) $$
+All roots of $z^n = 1$ are given by $$ \cos \Big( \frac{2\pi k}{n} \Big) + i\sin \Big( \frac{2\pi k}{n} \Big) \text{ where } k = 0, 1, 2, \dots, n-1$$ 
+When $k=0$, $\cos 0 + i\sin 0 = 1$. \\
+When $k=1$, let $w = \cos \Big( \frac{2\pi}{n} \Big) + i\sin \Big(\frac{2\pi}{n} \Big)$. \\
+When $k=2$, $$ \cos\Big( \frac{4\pi}{n} \Big) + i\sin\Big( \frac{4\pi}{n} \Big) = w^2$$ 
+Hence, all $n^{\text{th}}$ (distinct) roots of $z^n = 1$ are given by $1,w,w^2,\dots,w^{n-1}$ where $w = \cos\Big( \frac{2\pi k}{n} \Big) + i\sin\Big( \frac{2\pi k}{n}\Big)$. Thus the $n^{\text{th}}$ roots of unity form a geometric series. \\~\\
+Solve $z^8 = 1$. $$ \begin{aligned} 
+w &= \cosisin{\frac{2\pi}{8}} = \cosisin{\frac{\pi}{4}} = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i \\ 
+w^2 &= \cosisin{\frac{4\pi}{8}} = \cosisin{\frac{\pi}{2}} = i \\ 
+w^3 &= \cosisin{\frac{6\pi}{8}} = \cosisin{\frac{3\pi}{4}} = -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i \\
+w^4 &= \cosisin{\pi} = -1 \\
+w^5 &= \cosisin{\frac{10\pi}{8}} = \cosisin{\frac{5\pi}{4}} = -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}i \\
+w^6 &= \cosisin{\frac{12\pi}{8}} = \cosisin{\frac{3\pi}{2}} = -i \\
+w^7 &= \cosisin{\frac{14\pi}{8}} = \cosisin{\frac{7\pi}{4}} = \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}i \end{aligned} $$ 
+Let $z = r(\cos\theta + i\sin\theta)$. Then $$z^n = r^n(\cos n\theta + i\sin n\theta) ~\forall n \in \mathcal{Z}$$ and $$z^{\frac{m}{n}} = r^{\frac{m}{n}}\Big( \cos\Big( \frac{\theta + 2\pi k}{n} \Big) + i\sin \Big( \frac{\theta + 2\pi k}{n} \Big)\Big)^m \text{ where } k = 0,1,2,\dots,n-1 $$ 
+
+\section{Lecture 4} 
+
+Let $z = x + yi = r(\cos \theta + i\sin\theta)$ where $\arg{z} = \theta + 2\pi n$. The principal argument is defined as follows $$-\pi < \text{Arg } z \leq \pi $$ and $\arg{z} = \text{Arg } z + 2\pi n$, $n \in \mathcal{Z}$. \\~\\
+Express $-1-i$ in terms of $\cos \theta$ and $\sin\theta$. 
+$$ \begin{aligned} -1 - i &= r\cos\theta + ir\sin\theta \\ r\cos\theta &= -1 \\ r\sin\theta &= -1 \\ r^2 &= 2 \to r = \sqrt{2} \\ \cos\theta &= -\frac{1}{\sqrt{2}} \\ \sin\theta &= -\frac{1}{\sqrt{2}} \\ \text{Arg } z &= -\frac{3\pi}{4} \\ z &= \sqrt{2}\Big(\cosisin{-\frac{3\pi}{4}}\Big) \end{aligned} $$ 
+Evaluate $(1 - \sqrt{3}i)^{\frac{1}{2}}$. 
+$$ \begin{aligned} r\cos\theta &= 1 \\ r\sin\theta &= -\sqrt{3} \\ r^2 &= 4 \to r = 2 \\ \cos\theta &= \frac{1}{2} \\ \sin\theta &= -\frac{\sqrt{3}}{2} \\ \theta &= -\frac{\pi}{3} \\ z &= 2\Big(\cosisin{-\frac{\pi}{3}}\Big) \\ z^{\frac{1}{2}} &= 2^{\frac{1}{2}}\Big(\cosisin{\frac{-\frac{\pi}{3} + 2\pi k}{2}}\Big) ~~ k = 0,1 \\ \text{For } k = 0, &~ \sqrt{2}\Big(\cosisin{-\frac{\pi}{6}}\Big) = \sqrt{2}\Big( \frac{\sqrt{3}}{2} - \frac{1}{2}i\Big) = \frac{\sqrt{3}}{\sqrt{2}} - \frac{1}{\sqrt{2}}i \\ \text{For } k = 1, &~ \sqrt{2}\Big(\cosisin{\frac{5\pi}{6}}\Big) = -\frac{\sqrt{3}}{\sqrt{2}} + \frac{1}{\sqrt{2}}i \end{aligned} $$ 
+
+
+Evaluate $(-8 - 8\sqrt{3}i)^{\frac{1}{4}}$. 
+$$ \begin{aligned} r\cos\theta &= -8 \\ r\sin\theta &= -8\sqrt{3} \\ r^2 &= 64 + 64(3) = 256 \to r = 16 \\ \cos\theta &= -\frac{8}{16} = -\frac{1}{2} \\ \sin\theta &= -\frac{8}{16\sqrt{3}} = - \frac{1}{2\sqrt{3}} \\ \theta &= -\frac{2\pi}{3} \\ z &= 16\Big( \cosisin{-\frac{2\pi}{3}}\Big) \\ z^{\frac{1}{4}} &= 2\Big( \cosisin{ \frac{-\frac{2\pi}{3} + 2\pi k}{4}} \Big) ~~ k = 0,1,2,3 \\ \text{For } k = 0, &~ 2\Big(\cosisin{-\frac{\pi}{6}}\Big) = 2\Big( \frac{\sqrt{3}}{2} - \frac{1}{2}i\Big) = \sqrt{3} - i \\ \text{For } k = 1, &~ 2\Big(\cosisin{\pi}{3}\Big) = 2\Big( \frac{1}{2} + \frac{\sqrt{3}}{2}\Big) = 1 + \sqrt{3}i \\ \text{For } k = 2, &~ 2\Big( \cosisin{\frac{5\pi}{6}}\Big) = 2\Big( -\frac{\sqrt{3}}{2} + \frac{1}{2}i\Big) = -\sqrt{3} + i \\ \text{For } k = 3, &~ 2\Big( \cosisin{\frac{4\pi}{3}} \Big) = 2\Big( -\frac{1}{2} - \frac{\sqrt{3}}{2}i\Big) = -1 - \sqrt{3}i \end{aligned} $$ 
+
+Express $\cos 3\theta$ and $\sin 3\theta$ in terms of $\cos\theta$ and $\sin\theta$ using De Moivre's Theorem. 
+$$ \begin{aligned} (\cos\theta + i\sin\theta)^3 &= \cos3\theta + i\sin3\theta \\ \cos^3 \theta - i\sin^3 \theta + 3i\sin\theta\cos^2\theta - 3\cos\theta\sin^2\theta &= \cos3\theta + i\sin3\theta \\ (\cos^3\theta - 3\cos\theta\sin^2\theta) + i(3\sin\theta\cos^2\theta - \sin^3\theta) &= \cos 3\theta + i\sin3\theta \\ \cos 3\theta &= \cos^3\theta - 3\cos\theta\sin^2\theta \\ \sin 3\theta &= 3\sin\theta\cos^2\theta - \sin^3\theta \end{aligned} $$ 
+
+Let $w = f(z) = f(x + yi)$. \\
+We say $\lim_{z \to z_0} f(z) = L$ if: Given $\varepsilon > 0$, there exists $\delta > 0$ such that $\abs{f(z) - L} < \varepsilon$ whenever $0 < \abs{z - z_0} < \delta$. \\
+Properties \begin{itemize} 
+\item $\lim_{z \to z_0} [f(z) \pm g(z)] = \lim_{z \to z_0} f(z) \pm \lim_{z \to z_0} g(z)$ 
+\item $\lim_{z\to z_0} f(z)g(z) = \lim_{z\to z_0} f(z) \lim_{z \to z_0} g(z)$ 
+\item $\lim_{z\to z_0} \frac{f(z)}{g(z)} = \frac{\lim_{z \to z_0} f(z)}{\lim_{z \to z_0} g(z)}$ provided $\lim_{z\to z_0} g(z) \neq 0 $ 
+\item $\lim_{z\to z_0} \lambda g(z) = \lambda \lim_{z \to z_0} g(z)$ \end{itemize} 
+
+A function $w = f(z)$ is continuous at $z_0$ if $\lim_{z \to z_0} f(z) = f(z_0)$. That is, given $\varepsilon > 0$, there exists $\delta > 0$ such that $\abs{f(z) - f(z_0)} < \varepsilon$ for all $\abs{z - z_0} < \delta$. \\
+Lemma: Suppose $f$ is continuous on a disk $D(a,r) = \set{ z : \abs{z - a} < r}$ and $f(a) \neq 0$ ($\abs{f(a)} > 0$). Then there exists $\delta > 0$ such that $\abs{f(z)} \neq 0$ for all $z \in D(a, \delta)$. \\
+Proof: Choose $\varepsilon = \frac{1}{2} \abs{f(a)}$> Then $\varepsilon > 0$. There exists $\delta > 0$ such that $\abs{f(z) - f(a)} < \frac{1}{2}\abs{f(a)}$ for all $\abs{z - a} < \delta$. Then $\abs{ \abs{f(z)} - \abs{f(a)} } \leq \abs{f(z) - f(a)}$. So for all $\abs{z -a} < \delta$, we have $\abs{ \abs{f(z)} - \abs{f(a)} } < \frac{\abs{f(a)}}{2}$. Therefore $$ -\frac{1}{2}\abs{f(a)} < \abs{f(z)} - \abs{f(a)} < \frac{1}{2}\abs{f(a)} $$
+Hence for all $\abs{z -a} < \delta$, $\abs{f(z)}  > \frac{1}{2}\abs{f(a)} > 0$. Therefore there exists $B(a,\delta) = \abs{z - a} < \delta$ such that $f(z) \neq 0$. \\~\\
+A sequence $z_n \to z_0$ means that given $\varepsilon > 0$, there exists a positive integer $N$ such that $\abs{z_n - z_0} < \varepsilon$ for all $n \geq N$. Then $\set{z_n}$ converges to $z_0$. \\
+A sequence $\set{z_n}$ is said to be Cauchy if given $\varepsilon > 0$, there exists a positive integer $N$ such that $\abs{z_m - z_n} < \varepsilon$ for all $m,n > N$. \\
+A sequence $\set{z_n} \in \complex$ is convergence $\iff$ $\set{z_n}$ is Cauchy. In other words, $(C, \abs{\cdot})$ is a complete metric space. 
+
+\section{Lecture 5} 
+
+\begin{definition} Let $\complex$ be a complex plane and let $a \in \complex$. If $\delta > 0$, then a neighborhood $N$ or $N_\delta$ around $a$ is defined as follows 
+$$ N(a,\delta) = N_\delta(a) = \set{ z: \abs{z-a} < \delta} $$ \end{definition} 
+\begin{definition} Let $G \subseteq \complex$. A point $x_0 \in G$ is called an interior point if there exists $\delta > 0$ such that $N_\delta(x_0) \subseteq G$. \end{definition} 
+\begin{definition} A set $G \subseteq \complex$ is called an open set if each point of $G$ is an interior point. \end{definition} 
+Note: $N_\delta(a)$ and $\complex$ are open sets. 
+\begin{definition} Let $F \in \complex$ and $x_0 \in \complex$. Then $x_0$ is a limit point of $F$ if for every $\delta > 0$, $N_\delta(x_0) \intersection F/\set{x_0} \neq 0$. In other words, every neighborhood of $x_0$ must contain a point in $F$ distinct from $x_0$. \end{definition} 
+\begin{definition} A set $F \subseteq \complex$ is called a closed set if every limit point of $F$ belongs to $F$. \end{definition} 
+\begin{definition} Let $F \subseteq \complex$ and $z_0 \in \complex$. Then $z_0$ is called a boundary point of $F$ is for every $\delta > 0$, $N_\delta(z_0) \intersection \neq 0$ and $N_\delta(z_0) \intersection F^C \neq 0$. \end{definition} 
+\begin{definition} The set of all boundary points of $F$ is called the boundary of $F$ and is written as $\partial F$. \end{definition} 
+Facts: \begin{itemize} 
+\item A set $G$ is open $\iff$ $G^c$ is closed. 
+\item An arbitrary union of open sets is open. In other words, if $\set{G_i}_{i \in I}$ each $G_i$ open, then $\union_i G_i$ is open. 
+\item A finite intersection of open sets is open. In other words, if $G_1,\dots,G_n$ are open, then $\intersection_i^n G_i$ is open. 
+\item A finite union of closed sets is closed. In other words, if $F_1,\dots,F_n$ are closed, then $\union_i^n F_i$ is closed. 
+\item An arbitrary intersection of closed sets is closed. In other words, if $\set{F_i}_{i \in I}$ each $F_i$ closed, then $\intersection_i F_i$ is closed. \end{itemize} 
+\begin{definition} Let $K \subseteq \complex$. A family $G$ of open sets, $G_i$, $G = \set{G_i}$ is called an open covering of $K$ if $K = \union_i G_i$. \end{definition} 
+\begin{definition} A set $K \subseteq \complex$ is called compact if every open covering admits a finite subcovering. In other words, if $G = \set{G_i}$ is any open covering of $K$, then there exists $G_1,\dots,G_n \in G$ such that $K = \union_i^n G_i$. \end{definition} 
+\begin{theorem} A set $K \subseteq \complex$ in compact $\iff$ $K$ is closed and bounded. \end{theorem} 
+\begin{definition} A set $K$ is called bounded if there exists $R > 0$ such that $K \subseteq N(0,R)$, or $K \subseteq \set{z: \mod{z} \leq R}$. \end{definition} 
+\begin{definition} Let $S$ be a bounded set of real numbers. Then $$ \sup S = \text{lub } S  = \lambda$$  This means that $x \leq \lambda$ for all $x \in S$ and given any $\varepsilon > 0$, there exists $t \in S$ such that $t - \varepsilon < t < \lambda$. \end{definition} 
+\begin{definition} Let $S$ be a bounded set of real numbers. Then $$ \inf S = \text{glb } S = \eta$$ This means that $\eta \leq x$ for all $x \in S$ and given any $\varepsilon > 0$, there exists $p \in S$ such that $\eta < p < \eta + \varepsilon$. \end{definition}
+\begin{theorem} Let $K \subseteq \complex$. If $f: K \to \complex$ is continuous and $K$ is compact, then there exists $R > 0$ such that $\mod{f(z)} \leq R $ for all $z \in K$. 
+Furthermore, there exists $z_1,z_2 \in K$ such that $\mod{f(z_1)} = \sup_{z \in K} \mod{f(z)}$ and $\mod{f(z_2)} = \inf_{z\in K} \mod{f(z)}$, \end{theorem} 
+\begin{definition} Let $F \subseteq \complex$. Then the derived set $F'$ (of $F$) is the set of all limit points of $F$. \end{definition} 
+Note: The closure of $F$ is written as $\overline{F} = F \union F'$. 
+\begin{definition} A set $F$ is dense in $\complex $ if $\overline{F} = \emptyset$. In other words, given any $z \in \complex$, every neighborhood $N_\delta(z)$ must intersect $F$. \end{definition} 
+\begin{definition} Let $X$ be a metric space and $K \subseteq X$. Let $x_0 \in K$. Then 
+$$d(x_0, K) = \inf\set{d(x_0,x): x \in K}$$ and $$\text{diam } K = \sup\set{d(x_1,x_2): x_1,x_2 \in K} $$ \end{definition} 
+Let $X$ be a metric space and $F,K \subseteq X$ such that $F$ is compact and $K$ is closed. If $F \intersection K = \emptyset$, prove that $d(F,K) > 0$. \\~\\
+Note: $d(F,K) = \inf\set{d(x,y): x \in F, y \in K}$. \\
+Let $K = \set{ (x,): x \in \reals, y = 0}$ and $F = \set{(x,y): x \in \reals, y \in \reals, y = e^x}$. Then $K,F$ are closed. $K$ is not compact. Furthermore, $K \intersection F = \emptyset$ but $d(K,F) \ngtr 0$. 
+\begin{definition} Let $S \subseteq \complex$ and $x_0 \in \overline{S}$. Then there exists a sequence $z_i \in S$ such that $z_n \to z0$. \end{definition} 
+\begin{definition} Let $X$ be a metric space. If $X = S_1 \union S_2$ where $S_1,S_2 \neq \emptyset$, both $S_1,S_2$ are open and $S_1 \intersection S_2 = \emptyset$, then $X$ is not connected. \end{definition} 
+Fact: A metric space $X$ is connected if otherwise. In other words, $X$ is connected if there exists no separation of $X$. \\
+Fact: Equivalently, $X$ is connected $\iff$ the only subsets of $X$ that are both open and closed are $\emptyset$ and $X$. \\
+Fact: $S \subseteq \reals^1$ is connected $\iff$ $S$ is an interval.
+\begin{theorem} If $S \subseteq \complex$ is connected, then given any two points $z_1,z_2 \in \complex$, there exists a polygon joining $z_1,z_2$ that is contained in $S$. \end{theorem} 
+Corollary: If $S \subseteq \complex$ is connected and open, then any two points in $S$ can be joined by a polygon whose segments are parallel to the real or imaginary axis. 
+\begin{definition} If $K \subseteq \complex$ is compact and $f:K \to \complex$ is continuous, then $f(K)$ is compact. \end{definition} 
+\begin{definition} If $K \subseteq \complex$ is connected and $f:K \to \complex$ is continuous, then $f(K)$ is connected. \end{definition} 
+\begin{definition} A region $\Omega \subseteq \complex$ is a connected open set. In other words, $\Omega$ is a region $\iff$ $\Omega \subseteq \complex$, $\Omega$ is open, $\Omega$ is connected. \end{definition} 
+
+\section{Lecture 6} 
+Example Problems: \begin{itemize} 
+\item $\set{z: 0 < \mod{z} \leq 1}$: not open, not closed, not compact, connected 
+\item $\set{z: 1 \leq \Re{z} \leq 2}$: not open, closed, not compact, connected 
+\item $\set{z: \Im{z} > 2}$: open, not closed, not compact, connected 
+\item $\set{z: 1 \leq z \leq 2}$: not open, closed, compact, connected 
+\item $\set{z: -2 < \Re{z} \leq 2}$: not open, not closed, not compact, connected 
+\item $\set{z: \mod{z} \leq 3 \text{ and } \mod{\Re{z}} \geq 1}$: not open, closed, compact, not connected 
+\item $\set{z: \mod{\Re{z}} \geq 1}$: not open, closed, compact, not connected 
+\item $\set{z: \mod{z} \geq 5 \text{ and } \mod{\Im{z}} \geq 1}$: not open, closed, compact, not connected \end{itemize} 
+\begin{definition} Simply Connected Example: $\complex / \set{z: \Re{z} \leq 0 \text{ and } \Im{z} = 0}$ \end{definition} 
+Every simply connected region is homomorphic to $\Delta = \set{z: \mod{z} < 1}$. \\~\\
+Let $X$ be a metric space, $A \subset A$ and $x \in X$. Then define $d(x,A)$ as follows: 
+$$d(x,A) = \inf\set{d(x,A): a \in A} $$ Properties \begin{itemize} 
+\item $d(x,a) = d(x, \overline{A})$ \\ 
+Pf: Let $A \subseteq \overline{A}$. then $d(x, \overline{A}) \leq d(x,A)$. Let $\varepsilon > 0$. There exists $y \in \overline{A}$ such that $d(x,\overline{A}) \geq d(x,y) - \frac{\varepsilon}{2}$ and there exists $a \in A$ such that $s(x,a) < \frac{\varepsilon}{2}$. Then $\mod{d(x,y) - d(x,a)} \leq d(x,a) < \frac{\varepsilon}{2}$. In particular, $d(x,y) > d(x,a) - \frac{\varepsilon}{2}$. Therefore $d(x,\overline{A}) \geq d(x,a) - \varepsilon$. Hence $d(x,\overline{A}) \geq d(x,A) - \varepsilon$. But $\varepsilon > 0$ is arbitrary. Hence $d(x,\overline{A}) \geq d(x,A)$. Thens $d(x,A) = d(x,\overline{A})$. 
+\item $d(x,A) = 0 \iff x \in \overline{A}$ \\
+Pf: Forward, let $x \in \overline{A}$. Then $d(x,A) = d(x,\overline{A}) = 0$. Now suppose $d(x,A) = 0$. For any $x \in \overline{A}$, there exists a sequence $\set{a_n}$ in $A$ such that $d(x,S) = \lim d(x,a_n)$. Since $d(x,A) = 0$, then $\lim d(x,a_n) = 0$. Therefore $x = \lim a_n$ and thus $x \in \overline{A}$. 
+\item $\mod{d(x,A) - d(y,A)} \leq d(x,y)$ for all $x,y \in X$. \\
+Pf: Let $a \in A$. Then $d(x,a) \leq d(x,y) + d(y,a)$. This means that 
+$$d(x,A) \leq \inf\set{d(x,a): a \in A} \leq \inf\set{d(x,y) + d(y,a)} \leq d(x,y) + \inf\set{d(y,a)} $$ 
+Therefore $$d(x,A) \leq d(x,y) + d(y,A)$$
+So $$ d(x,A) - d(y,A) \leq d(x,y)$$ 
+Hence $$\mod{d(x,A) - d(y,A)} \leq d(x,y) $$ \end{itemize}  
+Let $K$ be compact and $f: K \to \reals$ be continuous. There exists $m,M$ such that $m \leq \mod{f(x)} M$ for all $x \in K$. Furthermore, there exists $a,b \in K$ such that $f(a) = m$ and $f(b) = M$. \\
+Corollary: Let $A \subseteq K$. Let $f(x) = d(x,A)$ for all $x \in X$ be continuous. If $K \subseteq X$ and $K$ is compact and $x \in X$, there exists $y \in K$ such that $d(x,y) = d(x,K)$. \\
+Let $A,B \subseteq X$. Then $$d(A,B) = \inf\set{d(a,b): a \in A, b \in B}$$ 
+\begin{theorem} If $A$ and $B$ are disjoint sets in $X$ with $B$ closed and $A$ compact, then $d(A,B) > 0$. \end{theorem} 
+\begin{proof} Define $f: X \to \reals$ as $f(x) = d(x,B)$. Claim: $f(a) > 0$ for each $a \in A$ because $A \intersection B = \emptyset$ and $B$ closed. $A$ is compact therefore there exists $a \in A$ such that $f(a) = \inf\set{f(x): x \in A}$. Therefore 
+$$0 < \inf\set{f(x): x \in A} = d(A,B) $$ \end{proof} 
+Let $\Omega$ be a connected and open set. Let $G \subseteq \complex$ be open. Then $f$ is continuous on $G$ if and only if whenever $z_n \to z_0$ in $G$, $f(z_n) \to f(z_0)$. By continuous at $z_0$, we mean that given $\varepsilon > 0$, there exists $\delta > 0$ such that $\mod{f(z) - f(z_0)} < \varepsilon$ for all $\mod{z - z_0} < \delta$. \\
+Let $z_n \to z_0$. Then given $\delta > 0$, there exists $N > 0$ such that $\mod{z_n - z_0} < \delta$ for all $n \geq N$. Therefore for all $n \geq N$, $\mod{f(z_n) - f(z_0)} < \varepsilon$ and thus $f(z_n) \to f(z_0)$. \\
+Suppose $z_n \to z_0$. Let $\varepsilon > 0$. Then there exists $N > 0$ such that $\mod{f(z_n) - f(z_0)} < \varepsilon$ for all $n \geq N$. For this, $\varepsilon > 0$, then there exists $M > 0$ such that $\mod{z_n - z_0} < \varepsilon$ for all $n \geq M$. Choose $\tilde{M} > \max\set{M,N}$. Then for $\varepsilon > 0$, there exists $\delta > 0$ ($\delta = \varepsilon$) such that $\mod{f(z) - f(z_0)} < \varepsilon$ for all $\mod{z - z_0} < \delta$. 
+Then $\mod{f(z_n) - f(z_0)} < \varepsilon$ and $\mod{z_n - z_0} < \varepsilon$ for all $ n \geq \tilde{M}$. 
+
+\section{Lecture 7} 
+Homomorphic/ Analytic Functions: Let $G$ be a nonempty open set $\complex$. Let $f: G \to \complex$ and $z \in G$. We say that $f$ has a derivative at $z$, written as $f'(z)$ if the following exists $$ \lim_{h\to\infty} \frac{f(z+h) - f(z)}{h} = f'(z)$$ 
+We say that $f$ is holomorphic in $G$ if $f'(z)$ exists at each $z \in G$. \\ 
+The set of all homomorphic functions in $G$ is denoted by $\mathcal{O}(G)$. It is a ring with respect to $+$ and $\cdot$. In other words, if $f, g \in \mathcal{O}(G)$, then \begin{itemize} 
+\item $f+g \in \mathcal{O}(G)$ 
+\item $f \cdot g \in \mathcal{O}(G)$
+\item $\lambda f \in \mathcal{O}(G)$ where $\lambda$ is a constant 
+\item $\frac{f}{g} \in \mathcal{O}(G)$ if $g \neq 0$ \end{itemize} 
+Let $\mathfrak{G}(G)$ denote the set of all continuous functions in $G$. \\
+Lemma: If $f \in \mathcal{O}(G)$, then $f \in \mathfrak{G}$. \\ 
+Proof: The following exists: $f'(z) = \lim_{h\to\infty} \frac{f(z+h) - f(z)}{h}$. So then, $$ \begin{aligned} \lim_{h\to\infty} f(z+h) - f(z) &= \lim_{h\to\infty} \Big( \frac{f(z+h) - f(z)}{h} \Big) \cdot h \\ &= f'(z) \cdot \lim_{h\to\infty} h \\ &= 0 \\ f &\in \mathfrak{G}(G) \end{aligned} $$ 
+Cauchy-Riemann Equations: Let $w = f(z)$ where $z = x + iy$ and $w = u + iv$. So then $u + iv = f(x + iy)$. Let $z \in G$ where $G$ is an open set in $\complex$. 
+\begin{theorem} If $f$ is holomorphic in $G$, then the Cauchy Riemann equations hold in $G$; in other words, $u_x = v_y$ and $u_y = -v_x$. \end{theorem} 
+\begin{proof} Let $f \in \mathcal{O}(G)$. Then $f'(z)$ exists for all $ z \in G$, or $f'(z) = \lim_{h\to\infty} \frac{f(z+h) - f(z)}{h}$ exists for each $z \in G$. This means, given $z \in G$, $f'(z)$ exists and the limit $(f'(z))$ is independent of how $h \to 0$. So we first let $h \to 0$ through purely real values: $$ \begin{aligned} 
+f'(z) &= \lim_{h\to 0} \frac{f(z+h) - f(z)}{h} \\ &= \lim_{h\to 0} \frac{u(x+h,y) + iv(x+h,y) - u(x,y) - iv(x,y)}{h} \\ &= \lim_{h\to 0} \frac{u(x+h,y) - u(x,y)}{h} + i\lim_{h\to 0} \frac{v(x+h,y) - v(x,y)}{h} \\ &= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x} \end{aligned} $$ 
+Now let $h \to 0$ through purely imaginary values, in other words, $ih \to 0$: $$ \begin{aligned} f'(z) &= \lim_{h\to 0} \frac{f(z + ih) - f(z)}{h} \\ &= \lim_{h\to 0} \frac{u(x,y+h) + iv(x,y+h) - u(x,y) - iv(x,y)}{ih} \\ &= \lim_{h\to 0} \frac{-iu(x,y+h) + v(x,y+h) + iu(x,y) - v(x,y)}{h} \\ &= \lim_{h\to 0} \frac{v(x,y+h) - v(x,y)}{h} - i\lim_{h\to 0} \frac{u(x,y+h) - u(x,y)}{h} \\ &= \frac{\partial v}{\partial y} -i \frac{\partial u}{\partial y} \end{aligned} $$ 
+Since $f'(z)$ is independent of the way it tends to zero, we that have $f'(z) = u_x + iv_x = v_y - u_y$. Equating real and imaginary parts, we get $$ \begin{aligned} u_x &= v_y\\ u_y &= -v_x \end{aligned} $$ \end{proof} 
+\begin{theorem} If $w = f(z)$ is holomorphic on $G$ where $w = u + iv$ and $z = x + iy$, then $u_x = v_y$ and $u_y = -v_x$ for all $z = (x,y) \in G$. Furthermore, since $f'(z) = u_x + iv_x$ and $\abs{f'(z)}^2 = u_x^2 + v_x^2 = u_y^2 + v_y^2 = u_xv_y - u_yv_x$, $$ \abs{f'(z)}^2 = \det \begin{bmatrix} u_x & u_y \\ v_x & v_y \end{bmatrix}$$  \end{theorem} 
+Let $\Omega$ be a region and $f \subseteq \mathcal{O}(\Omega)$. \begin{itemize} 
+\item If $f'(z) = 0$ for all $z \in \Omega$, then $f$ is a constant. \\
+Proof: If $f'(z) = u_x + iv_x = v_y - iu_y = 0$, then $u_x = v_x = 0$ and $u_y = v_y = 0$. Consider $u(x,y)$. If $u_x = u_y = 0$, then $u(x,y) = k_1$, a constant. Consider $v(x,y)$. If $v_x = v_y = 0$, then $v(x,y) = k_2$, a constant. Hence $f'(z) = k_1 + ik_2$, which itself is a constant. 
+\item If $\abs{f(z)}$ is constant for all $z \in \Omega$, then $f$ is constant in $\Omega$. \\
+Proof: Let $f = u + iv$ and $\abs{f}^2 = u^2 + v^2 = $ constant. Then the derivative with respect to $x$ gives $2uu_x + 2vv_x = 0$ and the derivative with respect to $y$ gives $2uu_y + 2vv_y = 0$. Multiply the first equation by $v$ and the second equation by $u$ to get $$ \begin{aligned}v(uu_x + vv_x) &= uvu_x + v^2v_x = 0 \\ u(uu_y + vv_y) &= u^2u_y + uvv_y = 0 \\ uvu_x + v^2v_x &= u^2u_y + uvv_y \\ uvu_x - v^2u_y &= 0 \\ uvu_x + u^2u_y &= 0 \end{aligned} $$ 
+Then $u_x(u^2 + v^2) = 0$ and so $u_y = 0$ and similarly, $u_x = 0$. By the C-R equations, $v_x = 0$ and $v_y = 0$. Thus we find that $u_x = u_y = 0$ and so $u(x,y)$ is constant and $v_x = v_y = 0$ and $v(x,y)$ is constant. Therefore $f = u + iv$ is a constant. 
+\item If $\Re{f}$ is a constant, then $f$ is a constant. \\ 
+Proof: Let $f = u + iv$. Then $\Re{f} = u$, a constant. Furthermore, $u_x = u_y = 0$. By C-R equations, $u_x = v_y = 0$ and $u_y = -v_x = 0$. So $u_x = u_y = v_x = v_y = 0$. Therefore $f$ is a constant. 
+\item If $\Im{f}$ is a constant, then $f$ is a constant. \\ 
+Proof: Let $f=  u + iv$. Then $\Im{f} = v$, a constant. Furthermore, $v_x = v_y = 0$. By C-R equations, $v_x = -u_y = 0$ and $v_y = u_x = 0$. So $u_x = u_y = v_x = v_y = 0$. Therefore $f$ is a constant. 
+\item If $\text{Arg}(f(x))$ is a constant, then $f$ is a constant. \\ 
+Proof: Let $f = u + iv$. Then $\text{Arg}(f) = \theta$ is a constant. Hence $\tan \theta = \tan \frac{v}{u}$ is a constant. So we have $u = kv$ for some constant $k$. Then $u - kv = \Re{(1+ki)f}$. Check: 
+$$(1 + ki)(u + vi) = (u - kv) + (ku + v)i \to u - kv = \Re{(1 + ki)f} $$ 
+Then $\Re{(1 + ki)f} = 0$. Therefore $(1 + ki)f$ is a constant and so $f$ is a constant. 
+\item If $f \in \mathcal{O}(\Omega)$ nd $\overline{f} \in \mathcal{O}(\Omega)$, then $f$ is a constant on $\Omega$. \\
+Proof: Let $f = u + iv$ and $\overline{f} = u - iv = p + iq$. If $\overline{f} \in \mathcal{O}(\Omega)$, then if $p = u$ and $q = v$, $p_x = q_y$ and $p_y = -q_x$. Therefore since $p_x = q_y$, $u_x = -v_y$. Since $p_y = -q_x$, $u_y = v_x$. Henceforth, $u_x = v_y = -v_y$ and so $v_y = 0$. Also, $v_x = u_y = -v_x$ and so $v_x = 0$. Hence $v(x,y)$ is a constant. By the same logic, since $u_x = v_y = 0$ and $u_y = -v_x = 0$, $u(x,y)$ is constant. Thus $f$ is a constant. 
+\end{itemize} 
+
+\section{Lecture 8} 
+Note that if $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, there exists $a < c < b$ such that $$f'(v) = \frac{f(b) - f(a)}{b-a} \to f(a+h) - f(a) = hf'(a+t)$$ where $\abs{t} < \abs{h}$. 
+\begin{theorem} Let $f = u(x,y) + iv(x,y)$ be holomorphic on an open set $G \subseteq \complex$. Then the Cauchy-Riemann equations hold $$u_x = v_y \text{ and } u_y = -v_x $$ \end{theorem} 
+\begin{theorem} Let $u(x,y)$ and $v(x,y)$ have continuous first partial derivatives on a region $\Omega$ such that the Cauchy-Riemann equations are satisfied. Then the function $f(z) = u(x,y) + iv(x,y)$ is holomorphic in $\Omega$. \end{theorem} 
+\begin{proof} To show that $\lim_{h\to 0} \frac{f(z+h) - f(z)}{h}$ exists, let $z =x+yi$ and $h=s+ti$. 
+$$ \frac{f(z+h) - f(z)}{h} = \frac{u(x+s, y+t) - u(x,y) + iv(x+s,y+t) - iv(x,y)}{s+ti} ~~~(1)$$ 
+Now $$ u(x+s,y+t) - u(x,y) = [u(x+s,y+t) - u(x,y+t)] + [u(x,y+t) - u(x,y)] $$ 
+By the Mean Value Theorem, there exists $s_1$ and $t_1$ such that $\abs{s_1} < \abs{s}$ and $\abs{t_1} < \abs{s}$ so that 
+$$u(x+s,y+t) - u(x,y+t) = su_x(x+s_1,y+t)~~~ (2a)$$ where $\abs{s_1} < \abs{s}$, and 
+$$u(x,y+t) - u(x,y) = tu_y(x,y+t_1) ~~~ (2b)$$ where $\abs{t_1} < \abs{t}$. \\
+Define $$ \varphi(s,t) = [u(x+s,y+t) - u(x,y)] - [su_x(x,y) - tu_y(x,y)] $$ Then 
+$$ \begin{aligned} \frac{\varphi(s,t)}{s+ti} &= \frac{su_x(x+s_1,y+t) + tu_y(x,y+t_1) - su_x(x,y) - tu_y(x,y)}{s+ti} \\ &= \frac{s(u_x(x+s_1,y+t) + tu_y(x,y+t_1))}{s+ti} + \frac{t(u_y(x,y+t_1) - u_y(x,y))}{s+ti} ~~~(3) \end{aligned} $$ 
+Claim: $\lim_{s+ti \to 0} \frac{\varphi(s,t)}{s+ti} = 0$ because $\abs{s} \leq \abs{s+ti}$, $\abs{t} \leq \abs{s+ti}$, $\abs{s_1} \leq \abs{s}$ and $\abs{t_1} \leq \abs{t}$ and $u_x$ and $u_y$ are continuous. Hence 
+$$ u(x+s,y+t) - u(x,y) = su_x + tu_y + \varphi(s,t)$$ 
+where $$\lim_{s+ti} \frac{\varphi(s,t)}{s+ti} = 0 ~~~(4) $$ 
+Similarly, $$v(x+s, y+t)-v(x,y) = sv_x + tv_y + \psi(s,t)$$
+ where $$\lim_{s+ti} \frac{\psi(s,t)}{s+ti} = 0 ~~~(5) $$ 
+ By $(1)$, $(4)$ and $(5)$, 
+ $$ \begin{aligned} \lim_{h\to 0} \frac{f(z+h) - f(z)}{h} &= \lim_{s+ti \to 0} \frac{su_x + tu_y + \varphi(s,t)}{s+ti} + i\lim_{s+ti \to 0} \frac{sv_x + tv_y + \psi(s,t)}{s+ti} \\ 
+ &= \lim_{s+ti \to 0} \frac{su_x - tv_x + \varphi(s,t)}{s+ti} + i\lim_{s+ti \to 0} \frac{sv_x + tu_x + \psi(s,t)}{s+ti} \\ 
+ &= \lim_{s+ti \to 0} \frac{s(u_x + iv_x) + ti(u_x + iv_x)}{s+ti} + \lim_{s+ti \to 0} \frac{sv_x + tu_x + \psi(s,t)}{s+ti} \\ &= \lim_{s+ti \to 0} \frac{(s+ti)(u_x + iv_x) + ti(u_x + v_x)}{s+ti} + \lim_{s+ti \to 0} \frac{\varphi(s,t)}{s+ti} + \lim_{s+ti \to 0} \frac{\psi(s,t)}{s+ti} \\ 
+ &= \lim_{s+ti \to 0} \frac{(s+ti)(u_x + iv_x)}{s+ti} \\ &= u_x + iv_x \\ f'(z) &= u_x + iv_x \end{aligned} $$ \end{proof} 
+ Summary of Theorem $1$ and $2$: Suppose $u(x,y)$ and $v(x,y)$ are $2$ real-valued functions with continuous first partial derivatives on a region $\Omega$, a connected open subset of the complex plane. Then the complex-valued function $f(z) = u(x,y) + iv(x,y)$ is holomorphic in $\Omega$ if and only if the Cauchy-Riemann equations hold in $\Omega$:
+ $$u_x = v_y \text{ and } u_y = -v_x $$
+ Furthermore, $$f'(z) = u_x + iv_x $$ 
+ 
+ \section{Lecture 9} 
+ Let $U$ be an open set in $\complex$. Let $f \in \O(U)$ and $g \in \O(U)$. Then if $f+g \in \O(U)$, $fg \in \O(U)$ and $\lambda_1f + \lambda_2g \in \O(U)$ (where $\lambda_1,\lambda_2 \in \complex$), then $\O(U)$ is a ring. 
+ \begin{theorem} If $f \in \O(U)$ and if $f(U) \in U$, $4g \in \O(U)$ and $h = g \cdot f$, then $h \in \O(U)$ and $$h'(z) = g'(f(z))f(z) ~ \forall z \in U $$ \end{theorem} 
+ \begin{proof} Fix $z_0 \in U$. Let $w = f(z)$ and so $w_0 = f(z_0)$. To show $h'(z_0) = g'(f(z_0))\cdot f'(z_0)$, we have $$f(z) - f(z_0) = (f'(z_0) + \varepsilon(z))(z-z_0)$$ where $\varepsilon(z) \to 0$ as $z \to z_0$ and $$g(w) - g(w_0) = (g'(w_0) + \eta(f(w)))(w -w_0) $$ where $\eta(w) \to 0$ as $w \to w_0$. Then $$ \begin{aligned} 
+ g(f(z)) - f(f(z_0)) &= (g'(f(z_0)) + \eta(f(z)))(f(z) - f(z_0)) \\ 
+ h(z) - h(z_0) &= (g'(f(z_0)) + \eta(f(z)))(f(z) - f(z_0))) \\ 
+ &= (g'(f(z_0)) + \eta(f(z)))(f'(z_0) + \varepsilon(z))(z-z_0) \end{aligned} $$ 
+ So $$ \frac{h(z) - h(z_0)}{z-z_0} = (g'(f(z_0)) + \eta(f(z)))(f'(z_0) + \varepsilon(z))$$ for all $z\neq z_0$. Since $f \in \O(U)$, $f$ is continuous on $U$. So as $z \to z_0$, we have $f(z) \to f(z_0)$. This means $w \to w_0$. So taking limits, $$ \begin{aligned} 
+ \lim_{z\to z_0} \frac{h(z) - h(z_0)}{z-z_0} &= g'(f(z_0))\cdot f'(z_0) \\ h'(z_0) &= g'(f(z_0))\cdot f'(z_0) \end{aligned}$$ and since $z_0 \in U$ is arbitrary in $\O(U)$, $$ h'(z) = g'(f(z))\cdot f'(z)$$ for all $z \in U$. \end{proof} 
+ Let $u(x,y)$ be a real valued function on $U$, an open set in $\complex$ such that $u(x,y)$ has continuous second partials and $$\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 ~~ \forall (x,y) \in U $$ then $u(x,y)$ is harmonic on $U$. \\
+ If $f \in \O(\Omega)$, then all of its higher-order derivatives exist and are holomorphic. \\~\\
+ Suppose $f = u + iv$ is holomorphic in a region $\Omega$. Claim: Both $u$ and $v$ are harmonic in $\Omega$. 
+ \begin{proof} Let $f \in \O(\Omega)$, by the above property, $u$ and $v$ both have continuous second partials on $\Omega$. Furthermore, $$ \begin{aligned} 
+ \frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} \\ \frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x} \\ \frac{\partial^2 u}{\partial x^2} &= \frac{\partial}{\partial x} \Big( \frac{\partial v}{\partial y} \Big) = \frac{\partial^2 v}{\partial x\partial y} \\ 
+ \frac{\partial^2 u}{\partial y^2} &= \frac{\partial}{\partial y} \Big( -\frac{\partial v}{\partial x} \Big) = -\frac{\partial^2v}{\partial y \partial x} \\ \frac{\partial^2u}{\partial x^2} + \frac{\partial^2u}{\partial y2} &= \frac{\partial^2v}{\partial x \partial y} - \frac{\partial^2 v}{\partial y \partial x} =  0 \end{aligned} $$ because the second partial derivatives of $u(x,y)$ are continous. Hence $u(x,y)$ is harmonic. Similarly, $$ \begin{aligned} 
+ \frac{\partial^2v}{\partial x^2} &= -\frac{\partial}{\partial x} \Big( \frac{\partial u}{\partial y} \Big) = -\frac{\partial^2 u}{\partial x \partial y} \\ \frac{\partial^2 v}{\partial y^2} &= \frac{\partial}{\partial y} \Big( \frac{\partial u}{\partial x} \Big) = \frac{\partial^2 u}{\partial y \partial x} \end{aligned} $$ 
+ Hence $$ \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} = 0$$ and so $v(x,y)$ is harmonic. \end{proof} 
+\begin{theorem} The real and imaginary parts of a holomorphic function on a region are harmonic. \end{theorem} 
+Suppose $u(x,y)$ is harmonic on an open set $U \subseteq \complex$. If there exists a harmonic function $v(x,y) \in U$ such that $f(z) = u(x,y) + iv(x,y)$ is holomorphic on $U$, then $v(x,y)$ is a harmonic conjugate of $u(x,y)$. \\~\\
+Let $u(x,y) = x^3 - 3xy^2 + y$. Determine if $u(x,y)$ is harmonic and if so, find its harmonic conjugate. 
+$$\begin{aligned} u_x &= 3x^2 - 3y^2 \\ u_{xx} &= 6x \\ u_y &= -6xy + 1 \\ u_{yy} &= -6x \\ u_{xx} + u_{yy} &= 0 \end{aligned} $$ Since $u(x,y)$ have continuous second partials, then $u(x,y)$ is harmonic on $\complex$. Suppose $v(x,y)$ is its harmonic conjuhate. Then $f = u + iv$ is holomorphic. Then $$ u_x = v_y \text{ and } u_y = -v_x$$ 
+This means $$ \begin{aligned} v_x &= -u_y = 6xy - 1 \\ \frac{\partial v}{\partial x} &= 6xy - 1 \\ v(x,y) &= 3x^2y - x + \varphi(y) \\ v_y &= 3x^2 + \varphi'(y) = 3x^2 - 3y^2 \\ \varphi'(y) &= -3y^2 \\ \varphi(y) &= -y^3 + k \\ v(x,y) &= 3x^2y - x - y^2 + k \end{aligned} $$ 
+Let $\Omega$ be a region. Propositions: \begin{enumerate} 
+\item Any two harmonic conjugates must differ by a constant. \\
+Proof: Let $u(x,y)$ be harmonic on $\Omega$. Suppose $v(x,y)$ and $V(x,y)$ are two harmonic conjugates of $u(x,y)$. Then $u+iv$ and $u+iV$ are both holomorphic on $\Omega$. By Cauchy-Riemann equations, this means $$ \begin{aligned} u_x = v_y &\text{and } u_y = -v_x \\ u_x = V_y &\text{ and } u_y = -V_x \end{aligned} $$ 
+So $\frac{\partial V}{\partial x} = \frac{\partial v}{\partial x}$ and $\frac{\partial V}{\partial y} = \frac{\partial v}{\partial y}$. Therefore $V_x - v_x = 0$ and $V_y - v_y = 0$. Then $V(x,y) - v(x,y) = $ constant. 
+\item Suppose $v$ is a harmonic conjugate of $u$ in $\Omega$. Then $-u$ is a harmonic conjugate of $v$ in $\Omega$. \\
+Proof: $v$ is a harmonic conjugate of $u$ in $\Omega$. Then $f=u+iv$ is holomorphic in $\Omega$. So $v - iu = -if$, which is also holomorphic in $\Omega$. Therefore $-u$ is a harmonic conjugate of $v$. 
+\item If $u$ is a harmonic conjugate of $v$ and $v$ is a harmonic conjugate of $u$, then both $u$ and $v$ must be constants. \\ 
+Proof: Let $f=u+iv$ be holomorphic in $\Omega$. Then $g = v-iu$ is holomorphic in $\Omega$. Then $-ig = u - iv$ is holomorphic; this is $\conj{f}$. Therefore $f$ and $\conj{f}$ are both holomorphic in $\Omega$. Then $f$ is a constant and so $u$ and $v$ are constants. \end{enumerate} 
+Let $\Omega$ be a region. Suppose $v$ is a harmonic conjugate of $u$ in $\Omega$. Show that $uv$ is a harmonic function on $\Omega$. 
+\begin{proof} Let $f=u+iv$ be holomorphic in $\Omega$. Then $g = v - iu$ is also holomorphic in $\Omega$. $$ fg = (u + iv)(v -iu) = (uv + uv) + i(v^2 - u^2) = 2uv + i(v^2 - u^2) $$ Therefore $2uv$ is harmonic and so $uv$ is harmonic.\\ Since real and imaginary parts of a holomorphic function for a region are harmonic, the real part of a holomorphic function is harmonic.  \end{proof} 
+
+\section{Lecture 10} 
+Let $z = x + iy$ and $\conj{z} = x - iy$. Then $$ \begin{aligned} x &= \frac{1}{2}(x + \conj{z}) \\ iy &= \frac{1}{2}(z - \conj{z}) \\ y &= -\frac{i}{2}(z - \conj{z}) \\ \frac{\partial x}{\partial z} &= \frac{\partial x}{\partial \conj{z}} \\&= \frac{1}{2} \\ \frac{\partial y}{\partial z} &= -\frac{i}{2} \\ \frac{\partial y}{\partial \conj{z}} &= \frac{i}{2} \end{aligned} $$ 
+Let $f(x,y)$ exist. Then $$ \begin{aligned} 
+\frac{\partial f}{\partial z} &= \frac{\partial f}{\partial x}\frac{\partial x}{\partial z} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial z} = \half \frac{\partial f}{\partial x} - \frac{i}{2}\frac{\partial f}{\partial y} = \half \Big( \frac{\partial f}{\partial x} - i\frac{\partial f}{\partial y}\Big) \\
+\frac{\partial f}{\partial \conj{z}} &= \frac{\partial f}{\partial x} \frac{\partial x}{\partial \conj{z}} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial \conj{z}} = \half \frac{\partial f}{\partial x} + \frac{i}{2}\frac{\partial f}{\partial y} = \half\Big( \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y}\Big) \end{aligned} $$ 
+Define the operators $\partial$ and $\conj{\partial}$ as follows: 
+$$ \begin{aligned} \partial &= \frac{\partial}{\partial z} = \half \Big( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y}\Big) \\ \conj{\partial} &= \frac{\partial}{\partial \conj{z}} = \half\Big( \frac{\partial}{\partial x} + i\frac{\partial}{\partial y}\Big) \end{aligned}$$ 
+Let $f = u(x,y) + iv(x,y)$. Then $$ \begin{aligned} 
+\frac{\partial f}{\partial x} &= \half \Bigg( \Big( \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}\Big) - i \Big( \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\Big)\Bigg) \\ &=
+\half\Big( (u_x + v_x) - i(v_y - u_y)\Big) \\ \frac{\partial f}{\partial \conj{z}} &= \half \Bigg( \Big( \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x} \Big) + i \Big( \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\Big)\Bigg) \\ &= \half \Big( (u_x + v_x) + i(u_y + v_y) \Big) \end{aligned} $$ 
+Suppose $f$ is holomorphic. Then $u_x = v_y$ and $u_y = -v_x$. Then 
+$$\frac{\partial f}{\partial z} = \half (u_x + i2u_x) = u_x + iv$$ and $$ \frac{\partial f}{\partial \conj{z}} = 0 $$ 
+Summary: Suppose $f = u(x,y) + iv(x,y)$ where $u$ and $v$ have continuous first partials. Then $f$ is holomorphic if and only if $u_x = v_y$ and $u_y = -v_x$. Equivalently, $\frac{\partial f}{\partial z} = f'(z)$ and $\frac{\partial \conj{z}} = 0$. Thus $\frac{\partial}{\partial \conj{z}} = 0$ if and only if $u_x = v_y$ and $u_y = -v_x$. Hence $f(z)$ is a holomorphic function. \\~\\
+Properties: \begin{enumerate} 
+\item $\partial$ and $\conj{\partial}$ are $\complex$-linear maps for which product and quotient rules apply 
+\item $\conj{\partial} f = \conj{(\partial \conj{f})}$ 
+\item $\conj{\partial} \conj{f} = \conj{(\partial f)}$ 
+\item Let $f \in \O(\Omega)$ and so $\conj{\partial} f = 0$ and $\partial f = f'$. Let $\conj{f} \in \O(\Omega)$ and so $\conj{\partial} \conj{f} = 0$ and $\partial f = 0$ and $\conj{f}' = (\conj{\partial} f)$. Then $\partial f = \conj{\partial} f = 0$ and so $f$ is a constant. \end{enumerate} 
+A series $\set{z_n}$ is said to converge if and only if $\Re{z_n}$ and $\Im{z_n}$ converges. \\
+A power series is of the format $\sum_{n=0}^\infty a_nz^n$ where $a_n \in \complex$ and $n \geq 0$. \\~\\
+Lemma: There exists $0 \leq R \leq \infty$ such that if $z \in \complex$ and $\mod{z} < R$, then $\sum a_nz^n$ converges. \\
+Lemma: If $\sum a_nz^n$ has a radius of convergence $R$, then so does the derived series $\sum_{n=1}^\infty na_nz^{n-1}$. \\
+Lemma: If $a,b \in \complex$ and $\mod{a} < \rho$, $\mod{b} < \rho$, then $$ \mod{b^k - a^k} \leq k\rho^{k-1}\mod{b-a} ~~~\forall k \geq 0 $$ 
+Proof: $$ \begin{aligned} b^k - a^k &= (b-a)(b^{k-1} + b^{k-2}a^2 + b^{k-3}a^3 + \dots + a^{k-1}) \\ &= (b-a)\sum_{j=0}^{k-1} a^jb^{k-1-j} \\ \mod{b^k - a^k} &\leq \mod{b-a}\sum_{j=0}^{k-1} \rho^j \rho^{k-1-j} \\ \mod{b^k - a^k} &\leq \mod{b-a}\sum_{j=0}^{k-1} \rho^{k-1} \end{aligned} $$ So $$\mod{b^k - a^k} \leq \mod{b-a}kp^{k-1} $$ 
+\begin{theorem} Let $\sum a_nz^n$ have a radius of convergence $R \geq 0$ and let $D(0,R) = \set{z \in \complex: \mod{z} < R}$. Then the function $f(z) = \sum a_nz^n$ is holomorphic to $D(0,R)$ and for all $z \in D(0,R)$, $f'(z) = \sum na_nz^{n-1}$.\end{theorem} 
+\begin{proof} 
+Define $g(x) = \sum_{n=1}^\infty na_nz^{n-1}$ where $\mod{z} < R$. Fix $z_0$ with $\mod{z_0} < R$. Choose $\rho$ such that $\mod{z_0} < \rho < R$. Assume $z \neq z_0$ and $\mod{z} < \rho$. Then $$ 
+\frac{ f(z) - f(z_0)}{z-z_0} - g(z_0) = \sum_{n=2}^\infty a_n\Big( \frac{z_n - z_0^n}{z - z_0} - nz_0^{n-1}\Big) $$ 
+Consider: $$ \begin{aligned} \mod{ \frac{z^n - z_0^n}{z-z_0} - nz_0^{n-1}} &= \mod{\sum_{k=0}^{n-1} (z^kz_0^{n-1-k} - z_0^{n-1})} \\ &\leq \sum_{k=0}^{n-1} \mod{z_0}^{n-1-k} \mod{z^k - z_0^k} \\ &\leq \sum_{k=0}^{n-1} \rho^{n-1-k} k\rho^{k-1} \mod{z-z_0} \\ &= \mod{z-z_0}\rho^{n-2}\sum_{n=0}^{k-1} k \end{aligned} $$ 
+Hence $$ \mod{ \frac{f(z) - f(z_0)}{z-z_0} - g(z_0)} \leq \mod{z-z_0}\sum_{n=2}^\infty \mod{a_n}\rho^{n-2} \frac{n(n-1)}{2} $$ 
+Claim: $ \mod{ \frac{f(z) - f(z_0)}{z-z_0} - g(z_0)} \to 0$ as $z \to z_0$. Proof: If $\sum_{n=0}^\infty a_nz^n$ converges in $\mod{z} < R$, then $\sum_{n=1}^\infty na_nz^{n-1}$ converges in $\mod{z} < R$. Therefore $\sum_{n=2}^\infty n(n-1)a_nz^{n-2}$ converges in $\mod{z} < R$. Hence $\sum_{n=2}^\infty n(n-1)\mod{a_n}\mod{z}^{n-2}$ converges in $\mod{z} < R$. Thus $\sum_{n=2}^\infty n(n-1)\mod{a_n}\rho^{n-2}$ converges in $\mod{z} < R$. \\ 
+Hence $$ \lim_{z\to z_0} \frac{f(z) - f(z_0)}{z-z_0} = g(z_0) $$
+or $f'(z_0) = g(z_0)$ and since $z_0$ is arbitrary in $D(0,R)$, we are done. \end{proof} 
+
+\section{Lecture 11} 
+Let the following be Riemann surfaces: \begin{itemize} 
+\item $\Delta = \set{z \in \complex: \mod{z} < 1}$ 
+\item $\mathcal{U} = \set{z \in \complex: \Im{z} > 0}$ 
+\item $\hat{\complex} = \complex \bigcup \set{\infty}$ - Riemann sphere \end{itemize} 
+The Riemann sphere is a ``one point" compactification: $$ \hat{\complex}: \complex \bigcup \set{\infty} $$ of $\complex$. It is given the Hausdorff topology such that $V \subseteq \complex$ is open if and only if \begin{itemize} 
+\item $V \bigcap \complex$ is open \item if $\infty \in V$, then $\hat{\complex} \ V $ is compact in $\complex$ \end{itemize} 
+Let $S^2$ be defined as follows: $$ S^2 = \set{\vec{x} \in \mathbb{R}^3: \vec{x} = (x_1,x_2,x_3), x_1^2 + x_2^2 + x_3^2 = 1} $$ 
+\begin{theorem} The stereographic function $f: S^2 \to \hat{\complex}$, defined by 
+$$f(\vec{x}) = \begin{cases} \infty &\text{ if } \vec{x} = (0,0,1) \\ \frac{x_1 + ix_2}{1-x^3} \in \complex &\text{ if } \vec{x} \neq (0,0,1) \end{cases} $$ is a homomorphism. \end{theorem} 
+\begin{proof} Consider $S^2 \ \set{(0,0,1)}$. Function $f$ is continuous on $S^2 \ \set{(0,0,1)}$. $$ \mod{f(\vec{x})}^2 = \frac{x_1^2}{(1-x_3)^2} + \frac{x_2^2}{(1-x_3)^2} = \frac{x_1^2 + x_2^2}{(1-x_3)^2} = \frac{1-x_3^2}{(1-x_3)^2} = \frac{1+x_3}{1-x_3} $$ 
+So $\mod{f(\vec{x})} \to \infty$ as $\vec{x} \to (0,0,1)$. Here $f$ is continuous on all of $S^2$. Let $f(\vec{x}) = z \in \complex$. Then $$ \mod{\vec{z}}^2 = \mod{f(\vec{x})}^2 = \frac{1 + x_3}{1-x_3} $$ Then $$x_3 = \frac{\mod{z}^2 - 1}{\mod{z}^2 + 1} $$
+Let $z = \frac{x_1 + ix_2}{1-x_3}$ or $(1-x_3)z = x_1 + ix_2$. Substitute $z = x + iy$. Then 
+$$ \begin{aligned} (1-x_3)(x+iy) &= x_1 + ix_2 \\ x(1-x_3) + iy(1-x_3) &= x_1 + ix_2 \end{aligned} $$ Therefore $$ \begin{aligned} x &= \frac{x_1}{1-x_3} = \frac{x_1}{1 - \Big( \frac{\mod{z}^2 - 1}{\mod{z}^2 + 1}\Big)} = \frac{x_1(\mod{z}^2 + 1)}{2} \\ iy &= \frac{x_2}{1-x_3} \end{aligned} $$ 
+Here $$x_1 = \frac{2\Re{z}}{1+\mod{z}^2} \text{ and } x_2 = \frac{2\Im{z}}{1 + \mod{z}^2} $$ 
+Then $$ f^{-1}(z) = \begin{cases} (0,0,1) &\text{ if } z = \infty \\ \Big(\frac{2\Re{z}}{1+\mod{z}^2}, \frac{2\Im{z}}{1+\mod{z}^2}, \frac{\mod{z}^2 - 1}{\mod{z}^2 + 1}\Big) &\text{ if } z \in \complex \end{cases} $$ Clearly $f^{-1}$ is continuous on $\complex$. If $\mod{z} \to \infty$, then $\frac{\mod{z}^2 - 1}{\mod{z}^2 + 1} \to 1$ and so $f^{-1}(z) \to (0,0,1)$ as $z\to\infty$. Thus $f^{-1}$ is continuous on all of $\hat{\complex}$. \end{proof} 
+A \mobt is is a map $\varphi: \hatcom \to \hatcom$ given by $$\varphi(z) = \frac{az+b}{cz+d} $$ where $z \in \hatcom$ and $ad - bc \neq 0$. If $c \neq 0$, $\varphi(\infty) = \frac{a}{c}$ and $\varphi(-\frac{d}{c}) = \infty$. If $c=0$, $\varphi(\infty) = \infty$. \\~\\
+Lemma: Each \mobt is continuous. 
+\begin{proof} $\varphi| \complex \ \set{\varphi^{-1}(\infty)}$ is homomorphic and hence continuous. If $c=0$, $$ \varphi(z) = \frac{az}{d} + \frac{b}{d} = \alpha z + \beta$$ where $\alpha \neq 0$ and $\mod{\varphi(z)} \geq \mod{\alpha} \mod{z} - \mod{\beta} \to \infty$ as $\mod{z} \to \infty$. Therefore $\varphi$ is everywhere continuous. If $c \neq 0$, then $$\varphi(z) - \frac{a}{c} = \frac{az+b}{cz+d} - \frac{a}{c} = \frac{bc-ad}{c(cz+d)} \to $$ so $\mod{z} \to \infty$. Therefore $\varphi(z) \to \frac{a}{c}$ as $\mod{z} \to \infty$. So $\varphi$ is continuous at $\infty$. Finally, as $z \to -\frac{d}{c}$, then $az+b \to \frac{bc-ad}{c} \neq 0$. So $$\mod{\frac{az+b}{cz+d}} \to \infty$$ and so $\varphi$ is continuous at $-\frac{d}{c}$. \end{proof} 
+\begin{theorem} The set $\bigwedge$ of all \mobt is a group of homeomorphisms of $\hatcom$ onto itself. Let general linear group $GL(2,\complex)$ be the group of all invertible $2\times 2$ complex matrices $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$. Then the map $\Phi: GL(2, \complex) \to \bigwedge$ given by $$ \Phi\Big( \begin{bmatrix} a & b \\ c & d \end{bmatrix}\Big) = \frac{az+b}{cz+d}$$  is a surjective homomorphism. \end{theorem} 
+\begin{proof} Let $\varphi_1(z) = \frac{az+b}{cz+d}$ and $\varphi_2(z) = \frac{\alpha z + \beta}{\gamma z + \delta}$. Then $$\varphi_1 \circ \varphi_2 = \varphi_1(\varphi_2(z)) \in \bigwedge  $$ 
+If $\varphi_1 \in \bigwedge$ and $\varphi_2 \in \bigwedge$, then $\varphi_1 \circ \varphi_2 \in \bigwedge$. \\
+If $\varphi_1,\varphi_2,\varphi_3 \in \bigwedge$, then $$\varphi_1 \circ (\varphi_2 \circ \varphi_3) = (\varphi_1 \circ \varphi_2) \circ \varphi_3$$ $$ \varphi(z) = z \in \bigwedge $$ 
+If $\varphi(z) = w = \frac{az+b}{cz+d}$, then $wcz + ws = az+b$. This means $z(wc - a) = b-wd$. Hence $$z = \frac{b-wd}{wc-a} = \frac{-dw+b}{cw-a} $$ 
+Lastly, if $\varphi \in \bigwedge$ then $\varphi^{-1} \in \bigwedge$.
+$$ \varphi_{-1}(z) = \frac{-dz+b}{cz-a} = \frac{dz-b}{-cz + a} = \frac{dz-b}{a-cz} $$ Hence $\bigwedge$ is a group. \\~\\
+To show if $A,B \in GL(2,\complex)$, show that $\Phi(AB) = \Phi(A)\Phi(B)$. \\
+Let $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix} $ and $B = \begin{bmatrix} \alpha & \beta \\ \gamma & \delta \end{bmatrix}$. Then $$AB = \begin{bmatrix} a\alpha + b\gamma & a\beta + b\delta \\ c\alpha + d\gamma & d\beta + d\delta \end{bmatrix} $$ 
+Then $$\Phi(AB) = \frac{(a\alpha + b\gamma)z + (a\beta + b\delta)}{(c\alpha + d\gamma)z + (c\beta + d\delta)} $$ Now $$\Phi(A) = \frac{az+b}{cz+d} \text{ and } \Phi(B) = \frac{\alpha z + \beta}{\gamma z + \delta}$$ 
+Then $$ \begin{aligned} \Phi(A) \circ \Phi(B) &= \varphi_1 \circ \varphi_2 \\ &= \varphi_1(\varphi_2(z)) \\ &= \frac{a\Big( \frac{\alpha z + \beta}{\gamma z + \delta} \Big) + b}{c \Big( \frac{\alpha z + \beta}{\gamma z + \delta} \Big) + d} \\ &= \frac{(a\alpha + b\gamma)z + (a\beta + b\delta)}{(c\alpha + d\gamma)z + (c\beta + d\delta)} \\ &= \Phi(A)\Phi(B) \end{aligned} $$
+$\Phi$ is obviously onto. For example, if $\Phi: GL(2,\complex) \to \bigwedge$ and $\bigwedge = \frac{pz+q}{rz+s}$, then $GL(2,\complex) = \begin{bmatrix} p & q \\ r & s \end{bmatrix}$. Furthermore, the kernel of $\Phi$ is: 
+$$ \text{Ker } \Phi = \set{A \in GL(2,\complex): \Phi(A) = \text{Id}}$$ For Id to be in $\bigwedge$, it mush be the case that $\varphi(z) = \frac{az+b}{cz+d} = z$. This means $a=1$, $b=0$, $c=0$ and $d=1$. This forms the matrix $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$. For $1$ is arbitrary; all we need is $a = d$ and $b = c = 0$. Therefore $\begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} $, where $\lambda \in \complex \ \set{0}$, will produce this result since if this is $G(2,\complex)$, then $\bigwedge = \frac{\lambda z}{\lambda} = z$. Hence 
+$$K = \text{Ker } \Phi = \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix}$$ where $\lambda \in \complex \ \set{0} = \complex^*$. \end{proof} 
+Composition of Transformations: \begin{itemize} 
+\item Translation: $s(z) = z+a$ 
+\item Dilation: $s(z) = az$ where $a \in \mathbb{R}$ and $a > 0$ 
+\item Rotation: $s(z) = e^{i\theta}z$
+\item Inversion: $s(z) = \frac{1}{z}$ \end{itemize} 
+Proposition: If $S \in \bigwedge$, meaning if $S$ is a \mobt, then $S$ is a composition of translations, dilations and inversions.
+\begin{proof} Step $1$: Let $c =0$. Define $S(z) = \Big( \frac{a}{d}\Big)z + \Big( \frac{b}{d}\Big)$. Then $$ \begin{aligned} S_1(z) &= \frac{a}{d}z \\ S_2(z) &= z + \frac{b}{d} \\ S &= S_2 \circ S_1 \end{aligned} $$ 
+Step $2$: If $c \neq 0$, then $$ \begin{aligned} S_3(z) &= \frac{bc-ad}{c^2}z \\ S_4(z) &= z + \frac{a}{c} \\ S &= S_4 \circ S_3 \circ S_2 \circ S_1 \end{aligned} $$ \end{proof}
+
+\section{Lecture 12} 
+
+Let $\varphi(z) = \frac{az+b}{cz+d}$ be a \mobt and $\varphi(z) = z$, then $$ \begin{aligned} cz^2 + dz - az - b &= 0 \\ cz^2 + z(d-a) - b &= 0 \end{aligned}$$ which has at most $2$ roots. Thus a \mobt can have at most $2$ fixed points unless $\varphi(z) = z$ for all $z \in \hatcom$. \\~\\
+Let $z_1$, $z_2$ and $z_3$ be distinct points in $\hatcom$ and $w_1$, $w_2$ and $w_3$ be distinct points in $\hatcom$. Suppose there exists two \mobt $T$ and $S$ such that $T(z_i) = w_i$ and $S(T_i) = w_i$ for $i=1,2,3$. Then $$TS^{-1}(w_i) = w_i $$ for $i=1,2,3$. Therefore $$TS^{-1} = Id \text{ or } T = S $$ 
+A \mobt is uniquely determined by its action on $3$ distinct points in $\hatcom$. \\
+Cross Ratio: $$ [z_1,z_2,z_3,z_4] = \frac{(z_1-z_3)(z_2-z_4)}{(z_1-z_4)(z_2 - z_3)} $$ 
+Suppose $$S = [z,z_2,z_3,z_4] = \frac{(z-z_3)(z_2 - z_4)}{(z-z_4)(z_2-z_3)}$$
+This is a \mobt if when $z=z_2$, then $S(z_2) = 1$, if when $z=z_3$, then $S(z_3) = 0$ and if when $z=z_4$, then $S(z_4) = \infty$. In other words, if $S(z_i) = w_i$, then $z_2$ and $w_1$ go to $1$, $z_3$ and $w_2$ go to $0$ and $z_4$ and $w_3$ go to $\infty$. \\~\\
+Important Proposition: The cross ratio is invariance under \mobt. That is, if $z_1$, $z_2$, $z_3$, $z_4$ are distinct points in $\hatcom$, then $$[z_1,z_2,z_3,z_4] = [T(z_1), T(z_2), T(z_3), T(z_4)]$$ where $T$ is any \mobt. \\
+\begin{proof} Let $S(z) = [z,z_2,z_3,z_4]$ and defined $M = ST^{-1}$. Let $S$ map $z_2$ to $1$, $z_3$ to $0$ and $z_4$ to $\infty$. This means $MT(z_2) = 1$, $MT(z_3) = 0$ and $MT(z_4) = \infty$. Then $$M(z) = [z,T(z_2), T(z_3), T(z_4)]$$ or in other words, $$ST^{-1}(z) = [z,T(z_2),T(z_3),T(z_4)] $$ for all $z\in \complex$. In particular, if $z = T(z_1)$, then $$ST^{-1}(T(z_1)) = [T(z_1), T(z_2),T(z_3),T(z_4)]$$ Hence $$S(z_1) = [T(z_1),T(z_2),T(z_3),T(z_4)]$$ and so $$[z_1,z_2,z_3,z_4] = [T(z_1),T(z_2),T(z_3),T(z_4)]$$ \end{proof}
+Proposition: If $z_1$, $z_2$ and $z_3$ are distinct points in $\complex$ and $w_1$, $w_2$ and $w_3$ are distinct points in $\complex$, there exists a unique \mobt such that $T(z_i) = w_i$ where $i =1,2,3$. \\
+\begin{proof} Let $\varphi_1(z) = [z,z_1,z_2,z_3]$ and $\varphi_2(w) = [w,w_1,w_2,w_3]$. Then let $z_1$ and $w_1$ map to $1$, $z_2$ and $w_2$ map to $0$ and $z_3$ and $w_3$ map to $\infty$. Define $T = \varphi_2^{-1} \circ \varphi_1$. Then $$\begin{aligned} T(z_1) = \varphi_2^{-1}(\varphi_1(z_1)) = w_1 \\ T(z_2) = \varphi_2^{-1}(\varphi_1(z_2)) = w_2 \\ T(z_3) = \varphi_2^{-1}(\varphi_1(z_3)) = w_3 \end{aligned} $$ \end{proof}
+Let $w = \frac{az+b}{cz+d}$ be a \mobt where $ad - bc \neq 0$. This means $cwz + dw - az - b = 0$ is of the form $$Azw + Bz + Cw + D = 0 $$ where $A = c$, $B = -a$, $C = d$ and $D = -b$ and so $AD-BC = -bc+ad \neq 0$. \\
+Claim: $$[w,w_1,w_2,w_3] = [z,z_1,z_2,z_3]$$ is the \mobt such that $w(z_i) = w_i$ for $i=1,2,3$. 
+\begin{proof} Given the identity above, $$ \begin{aligned} \frac{(w-w_2)(w_1-w_3)}{(w-w_3)(w_1-w_2)} &= \frac{(z-z_2)(z_1-z_3)}{(z-z_3)(z_1-z_2)} \\ (w-w_2)(w_1-w_3)(z-z_3)(z_1-z_2) &= (w-w_3)(w_1- w_2)(z-z_2)(z_1-z_3) \end{aligned} $$ 
+If $z=z_2$, then $w = w_2$. If $z = z_3$, then $w = w_3$. If $z = z_1$, $$ \begin{aligned} 
+(w-w_1)(w_1-w_3)(z_1-z_3)(z_1-z_2) &= (w-w_3)(w_1-w_2)(z_1-z_2)(z_1-z_3) \\ (w-w_1)(w_1-w_3) &= (w-w_3)(w_1-w_2) \\ ww_1 - w_1w_2 - ww_3 + w_2w_3 &= ww_1 - w_1w_3 - ww_2 + w_2w_3 \\ -w_1w_2 - ww_3 &= -w_1w_3 - ww_2 \\ w(w_2 - w_3) &= w_1(w_2-w_3) \\ w&=w_1 \end{aligned} $$ \end{proof} 
+Find a \mobt that maps $z_1=2$, $z_2=i$, $z_3 = -2$ to $w_1=1$, $w_2 = i$, $w_3 = -1$. 
+$$[w,1,i,-1] = [z,2,i,-2]$$ This means $$ \begin{aligned} 
+\frac{(w-i)(2)}{(w+1)(1-i)} &= \frac{(z-1)(4)}{(z+2)(2-i)} \\ \frac{w-i}{(w+1)(1-i)} &= \frac{2(z-1)}{(z+2)(2-i)} \\ \frac{w-i}{w+1-iw -i} &= \frac{2z-2}{2z + 4 - iz - 2i} \\ 2wz + 4w - izw - 2wi - 2iz - 4i - 2 &= 2zw + 2z - 2izw - 2iz - 2iw - 2i - 2w - 2 \\ 4w - izw - 4i - z &= 2z - 2izw - 2i - 2w \\ 6w + izw &= 3z+2i \\ w &= \frac{3z + 2i}{iz+6} \end{aligned} $$ 
+Find a \mobt that maps $z_1=1$, $z_2 = 0$, $z_3 = -1$ to $w_1 = i$, $w_2 = \infty$, $w_3 = 1$. 
+$$ \begin{aligned} [w,w_1,w_2,w_3] &= [z,z_1,z_2,z_3] \\ [w,i,\infty,1] &= [z,1,0,-1] \end{aligned} $$ 
+This means $$ \frac{(w-w_2)(w_1-w_3)}{(w-w_3)(w_1-w_2)} = \frac{(z-z_2)(z_1-z_3)}{(z-z_3)(z_1-z_2)} $$
+If $w_2 = \infty$, $$ \frac{w_1-w_3}{w-w_3} = \frac{(z-z_2)(z_1-z_3)}{(z-z_3)(z_1-z_2)} $$ 
+Then $$ \begin{aligned} \frac{i-1}{w-1} &= \frac{z(2)}{(z+1)(1)} = \frac{2z}{z+1} \\ iz-z+i-1 &= 2zw-2z \\ 2wz &= z + iz + i - 1 \\ w &= \frac{z(1+i) + i - 1}{2z} \end{aligned} $$ 
+A circle in $\hatcom$ is a (closed) subset of $\hatcom$ which is either a circle in $\complex$ or else a set $L \bigcup \set{\infty}$ where $L$ is a straight line in $\complex$. \\
+For example, $\hat{\reals}: \reals \bigcup \set{\infty}$ is a circle in $\hatcom$. \\~\\
+Lemma: If $\varphi \in \bigwedge$, then $\varphi^{-1}(\hat{\reals})$ is a circle in $\hatcom$. 
+\begin{proof} Let $\varphi(z) = \frac{az+b}{cz+d}$. For $z \in \complex$, $\varphi(z) \in \hat{\reals}$ if and only if $(az+b)(\conj{c}\conj{z} + \conj{d}) = (\conj{a}\conj{z} + \conj{b})(cz+d)$. So $\complex \bigcup \varphi^{-1}(\hat{\reals})$ is the set of all $z \in \complex$ such that $$ (a\conj{c} - \conj{a}c)\mod{z}^2 + (a\conj{d} - \conj{b}c)z + (b\conj{c} - d\conj{a}) + (b\conj{d} - \conj{b}d) = 0 $$ 
+If $a\conj{c} - \conj{a}c \neq 0$, then this becomes $$ \mod{(a\conj{c} - \conj{a}c)z - (\conj{a}d - b\conj{c})}^2 = \mod{ad - bc}^2 $$ in $\complex$ which is a circle in $\complex$. \\
+If $a\conj{c} - \conj{a}c = 0$, then this defines a line in $\complex$ and so $\varphi^{-1}(\hat{\reals}) = L \bigcup \set{\infty}$. \end{proof}
+Lemma: If $C$ is a circle in $\hatcom$, there exists $\varphi \in \bigwedge$ such that $\varphi(C) = \hat{\reals}$. 
+\begin{proof} Choose $\alpha$, $\beta$ and $\gamma$ distinct points on $C$ and define $$ \varphi(z) = \frac{(z-\alpha)(\beta-\gamma)}{(z-\gamma)(\alpha-\beta)}$$ If $\varphi(\alpha) = 0$, $\varphi(\beta) = 1$ and $\varphi(\gamma) = \infty$, then $\varphi^{-1}(\hat{\reals})$ is a circle in $\hatcom$ through $\alpha,\beta,\gamma$ and the only such circle is $C$. \end{proof} 
+\begin{theorem} If $ \varphi \in \bigwedge$ and $C$ is a circle in $\hatcom$, then are $\varphi^{-1}(C)$ and $\varphi(C)$. \end{theorem} 
+\begin{proof} Choose $\psi \in \bigwedge$ such that $\psi^{-1}(\hat{\reals}) = C$. Then 
+$$\varphi^{-1}(C) = \varphi^{-1}(\psi^{-1}(\hat{\reals})) = (\psi \circ \varphi)^{-1}(\hat{\reals})$$ which is a circle in $\hatcom$. If so, then $\varphi^{-1} \in \bigwedge$ and so $\varphi(C) = (\varphi^{-1})^{-1}(C)$ is also a circle in $\hatcom$. \end{proof}
+
+\section{Lecture 13} 
+Let $$e^z = e^{x+iy} = e^xe^{iy} = e^x(\cos y + i\sin y) $$ 
+Let $$f(z) = e^z = e^x\cos y + ie^x\sin y = u(x,y) + iv(x,y) $$
+This means $u(x,y) = e^x\cos y$ and $v(x,y) = e^x\sin y$. \\
+All first partials are continuous $$ \begin{aligned} u_x &= e^x \cos y = v_y \\ u_y &= -e^x\sin y = -v_x \end{aligned} $$ 
+So the Cauchy-Riemann equations hold and hence $f(z) = e^z$ for all $z \in\complex$ is holomorphic. Furthermore, $$f'(z) = u_x + iv_x = e^x\cos y + 0e^x\sin y = e^x(\cos y + i\sin y) = e^z$$ 
+Conclusion: The function $f(z) = e^z$ is holomorphic on $\complex$ and $$ \frac{d}{dz} d^z = e^z ~~~ \forall z \in \complex$$ 
+A function holomorphic on the entire complex plane is called an entire function. \\
+Note that $$\abs{z} = e^x = e^{\Re{z}}$$ 
+Write $\abs{e^{2z+i}}$ in terms of $x$ and $y$. 
+$$ e^{2z+i} = e^{2x + 2iy + i} = e^{2x} + e^{i(2y + 1)} \to \abs{e^{2z+i}} = e^{2x} $$ 
+Write $\abs{e^{iz^2}}$ in terms of $x$ and $y$. 
+$$ e^{iz^2} = e^{i(x^2 - y^2 + 2ixy)} = e^{-2xy + i(x^2 - y^2)} \to \abs{e^{iz^2}} = e^{-2xy} $$ 
+Show that $\abs{e^{z^2}} \leq e^{\abs{z}^2}$. $$ \begin{aligned} \abs{e^{z^2}} &= e^{\Re{z^2}} = e^{x^2 - y^2} \\ e^{\abs{z}^2} &= e^{x^2 + y^2} \\ e^{x^2 - y^2} &\leq e^{x^2 + y^2} \\ \abs{e^{z^2}} &\leq e^{\abs{z}^2} \end{aligned} $$ 
+Prove that $\abs{e^{-2x}} \iff \Re{z} > 0$. $$ \begin{aligned} \abs{e^{-2z}} &= e^{\Re{-2z}} \\ &= e^{-2\Re{z}} \leq 1 \\ -2\Re{z} &< 0 \\ \Re{z} &> 0 \end{aligned} $$ 
+Let $f(z) = u(x,y) + iv(x,y)$ be holomorphic on a region $\Omega$. Define $U(x,y) = e^{u(x,y)} \cos v(x,y)$ and $V(x,y) = e^{u(x,y)}\sin v(x,y)$. Show that $U(x,y)$ and $V(x,y)$ are harmonic. \\
+Define $F(z) = e^{f(z)}$ is which is holomorphic on $\Omega$. $$ \begin{aligned} F(z) &= e^{f(z)} \\ &= e^{u(x,y) + iv(x,y)} \\ &= e^{u(x,y)}[\cos v(x,y) + i\sin v(x,y)] \\ &= e^{u(x,y)}\cos v(x,y) + ie^{u(x,y)} \sin v(x,y) \\ &= U(x,y) + iV(x,y) \end{aligned} $$ 
+So $U(x,y) = \Re{F(z)}$ and $V(x,y) = \Im{F(z)}$ and so they are harmonic. \\~\\
+Define the following: $$ \begin{aligned} \sin z &= \frac{\e{iz} - \e{-iz}}{2i}\\  \cos z &= \frac{\e{iz} + \e{-iz}}{2} \\ \frac{d}{dz} \sin z &= \frac{i\e{iz} + i\e{iz}}{2} = \frac{\e{iz} + \e{-iz}}{2} = \cos z \\ \frac{d}{dz} \cos z &= \frac{i\e{iz} - i\e{iz}}{2} = \frac{-\e{iz} + e{-iz}}{2i} = -\left( \frac{\e{iz} - \e{-iz}}{2i}\right) = -\sin z \end{aligned} $$ 
+Note that $$\cos z + i\sin z = \frac{\e{iz} + \e{-iz}}{2} + i\frac{\e{iz} - \e{-iz}}{2i}  = e^{iz} $$ 
+For $n \in \mathbb{Z}$, $$ \e{z+2\pi ni} = \e{z} \e{2\pi ni} = \e{z} $$ 
+Therefore, $e^z$ is a periodic function with period $2\pi ni$. \\
+Note the following: $$ \begin{aligned} \sin(z_1 + z_2) &= \sin z_1\cos _2 + \sin z_2 \cos z_1 \\ \cos(z_1 + z_2) &= \cos z_1\cos z_2 - \sin z_1 \sin z_2 \\ \sin^2 z + \cos^2 z &= 1 \end{aligned} $$ 
+Hyperbolic functions: $$ \begin{aligned} \sinh x &= \frac{\e{x} - \e{-x}}{2} \\ \cosh x &= \frac{\e{x} + \e{-x}}{2} \end{aligned} $$
+ Note the following: $$ \begin{aligned} \sin iy &= \frac{\e{-y} - \e{y}}{2i} = i\sinh y \\ \cos iy &= \cosh y \end{aligned} $$ 
+ If so, then $$\sin z = \sin (x+iy) = \sin x \cos iy + \cos x \sin iy = \sin x \cosh y + i\cos x \sinh y $$ 
+ Furthermore, let $$\abs{\sin x}^2 = \sin^2 x \cosh^2 y + \cos^2 y \sinh^2 x $$
+ Suppose $$ \cosh^2 x - \sinh^2 x = \frac{\e{2x} + \e{-2x} + 2 - \e{2x} - \e{-2x} + 2}{4} = 1$$ then $$ \abs{\sin z}^2 = \sin^2 x (1 - \sinh^2 y) + (1 - \sin^2 x)\sinh^2 y= \sin^2 x + \sinh^2 y $$ 
+ Similarly, $$\abs{\cos z}^2 = \cos^2 x + \sinh^2 y $$ 
+ Facts: $$ \begin{aligned} \frac{d}{dz} \sinh z &= \cosh z \\ \frac{d}{dz} \cosh z &= \sinh z \\ \sin iy &= i\sinh y \\ \cos iy &= \cosh y \\ \cosh^2 x - \sinh^2 x &= 1 \end{aligned} $$ 
+ Verify that $-i\sinh iz = \sin z$. $$ -i\sinh iz = -i \left( \frac{\e{iz} - \e{-iz}}{2}\right) = \left( \frac{\e{iz} - \e{-iz}}{2i}\right) = \sin z $$
+ Prove the following: $$\sinh (z_1 + z_2) = \sinh z_1 \cosh z_2 + \cosh z_1 \sinh z_2 $$
+ From the LHS: $$ \sinh (z_1 + z_2) = \frac{\e{z_1 + z_2} - \e{-i(z_1 + z_2)}}{2} = \frac{\e{z_1}\e{z_2} - \e{-z_1}\e{-z_2}}{2} $$ 
+ From the RHS: $$ \sinh z_1 \cosh z_2 + \cosh z_1 \sinh z_2 = \frac{\e{z_2} - \e{-z_1}}{2} \frac{\e{z_2} + \e{-z_2}}{2} + \frac{\e{z_1} + \e{-z_1}}{2} \frac{\e{z_2} - \e{-z_2}}{2} $$ 
+ Prove that $\sinh z = \sinh x \cos y + i \cosh x \sin y $. 
+ $$ \begin{aligned} \sinh z &= \sinh (x+iy) \\ &= \sinh x \cosh iy + \cosh x \sinh iy \\ &= \sinh x \cos y + i\cosh x \sin y \end{aligned} $$ 
+ Note that $$ \begin{aligned} 
+ \abs{\sinh z}^2 &= \sinh^2 x \cos^2 y + \cosh^2 x \sin^2 y \\ &= \sinh^2x(1-\sin^2 y) + (1 + \sinh^2 x)\sin^2 y \\ &= \sinh^2 x + \sin^2 y \end{aligned} $$ 
+ Similarly, $$ \abs{\cosh z}^2 = \sinh^2 x + \cos^2 y $$ 
+ where $$ \abs{\cos z}^2 = \cos^2 x + \sinh^2 y $$ 
+ Cauchy Riemann Equations in Polar Form: Let $z = x+iy$, $x = r\cos \theta$, and $y = r\sin \theta$. Let $w = f(z) = u(x,y) + iv(x,y)$. Then $$ \begin{aligned} 
+ \frac{\partial u}{\partial r} &= \frac{\partial u}{\partial x}\frac{\partial x}{\partial r} + \frac{\partial u}{\partial y}\frac{\partial y}{\partial r} = \cos(\theta)u_x + \sin(\theta)u_y \\ 
+ \frac{\partial u}{\partial \theta} &= \frac{\partial u}{\partial x}\frac{\partial x}{\partial \theta} + \frac{\partial u}{\partial y}\frac{\partial y}{\partial r} = -r\sin(\theta)u_x + r\cos(\theta)u_y \\ 
+ \frac{\partial v}{\partial r} &= \frac{\partial v}{\partial x}\frac{\partial x}{\partial r} + \frac{\partial v}{\partial y}\frac{\partial y}{\partial r} = \cos(\theta)v_x + \sin(\theta)v_y \\ 
+ \frac{\partial v}{\partial \theta} &= \frac{\partial v}{\partial x}\frac{\partial x}{\partial \theta} + \frac{\partial v}{\partial y}\frac{\partial y}{\partial \theta} = -r\sin(\theta)v_x + r\cos(\theta)v_y \end{aligned} $$ 
+ The Cauchy Riemann Equations are as follows: $$ \begin{aligned} 
+ u_x &= v_y \\ u_y &= -v_x \\ ru_r = r\cos(\theta)u_x + r\sin(\theta)u_y &= r\cos(\theta)v_y - r\sin(\theta)v_x = v_\theta \\ u_\theta = -r\sin(\theta)u_x + r\cos(\theta)u_y &= -r\sin(\theta)v_y - r\cos(\theta)v_x = -rv_r \end{aligned} $$ 
+ Therefore the Cauchy Riemann Equations are: $$ ru_r = v_\theta ~~~~ -rv_r = u_\theta $$ 
+ Furthermore, $$ \begin{aligned} f'(z) &= u_r + iv_r \\ &= \cos(\theta)u_x + \sin(\theta)u_y + i(\cos(\theta)v_x + \sin(\theta)v_y) \\ &= u_x(\cos \theta + i\sin \theta) + iv_x(\cos \theta + i\sin \theta) \\ &= e^{-i\theta}(u_x + iv_x) \\ f'(z) &= e^{-i\theta}(u_r + iv_r) \end{aligned} $$ 
+ Let $f(z) = \abs{z}$ be continuous. Show that $\abs{ \abs{z_n} - \abs{z}} \leq \abs{z_n - z}$ if $z_n \to z$ and $\abs{z_n} \to \abs{z}$. 
+
+
+\section{Lecture 14} 
+
+Let $z = r\e{i\theta}$. Define $\Omega = \complex / \set{z: z = x+iy: x \leq 0, y = 0}$. \\
+Problem: Suppose $z_n,z \in \Omega$ where $z_n = r_n\e{i\theta_n}$ and $z = r\e{i\theta}$ and $-\pi < \theta_n < \pi$ and $-\pi < \theta < \pi$. Provethat if $z_n \to z$, then $r_n \to r$ and $\theta_n \to \theta$. \\
+Let $\Omega$ be a region. If there exists a function $f: \Omega \to \complex$ such that $f$ is continuous on $\Omega$ and $e^{f(z)} = z$ for all $ z \in \Omega$, then $f$ is called a branch of the logarithm $\log z$> Note that $0 \notin \Omega$. \\
+Suppose $f$ is a given branch and $k$ is an integer. Let $g(z) = f(z) + 2\pi ki$. Then $$e^{g(z)} = \e{f(z)}\e{2\pi ki} = \e{f(z)} = z $$ Therefore $g(z)$ is also a branch. Consequently, if $f$ and $g$ are branches of $\log z$, then $$f(z) = g(z) + 2\pi ki$$ for some $k \in \mathbb{Z}$ where $k$ depends on $z$. \\
+Does the same $k$ work for all $z \in \Omega$? Let $h(z) = \frac{f(z) - g(z)}{2\pi i} $. So $h$ is continuous on $\Omega$. Since $\Omega$ is connected and $h$ is connected in connected on $\Omega$, then $g(z)$ is connected and hence a point. Therefore there exists $k \in \mathbb{Z}$ such that $$f(z) + 2\pi ki = g(z) ~~~~ \forall z \in \Omega$$ 
+Proposition: If $\Omega$ is a region and $f$ is a branch of $\log z$, then the totality of all branches of $\log z$ are $$f(z) + 2\pi ki, ~ k \in \mathbb{Z}$$ 
+Now back to the problem. Let $\Omega = \complex \ \set{z: z = x+iy: x \leq 0, y = 0}$. Seach $z \in \Omega$ can be written as $z = r\e{i\theta}$ where $i\pi < \theta < \pi$. By the problem, $f(z) = \ln \abs{r} + i\theta$ is a continuous function on $\Omega$ and $$\e{f(z)} = \e{\ln\abs{r} + i\theta} = \e{\ln r} \e{i\theta} = r\e{i\theta} = z$$ 
+Given a nonzero complex number $z$, $$\log z = \ln r + i\theta $$ where $z = r\e{i\theta}$ and $-\pi < \theta < \pi$. This is called the principal branch of $\log z$. The principal branch is written as $\log z$. So the general values of $\log z$ are: $$\log(z) = \ln r + i\theta + 2n\pi i $$ where $n \in \mathbb{Z}$ and $-\pi < \theta < \pi$. \\~\\
+Note that $$ \log z = \ln r + i\theta $$ where $r = \abs{z}$, $\theta = \arg z$ and $-\pi < \theta < \pi$. \\~\\
+If $z_n \to z$, to show that $f(z_n) \to f(z)$, show that $\ln \abs{z_n} + i\theta_ n \to \ln \abs{z} + i\theta$. \\~\\
+Recall: Polar form of Cauchy Riemann Equations: If $f(z) = u(x,y) + iv(x,y)$ and $x = r\cos \theta$ and $y = r\sin \theta$ then $$ \begin{aligned} ru_r &= v_\theta \\ u_\theta &= -rv_r \\ f'(z) &= \e{i\theta}(u_r + iv_r) \end{aligned} $$ 
+Consider $f(z) = \log z = \ln r + i\theta$ where $z = r\e{i\theta}$ and $-\pi < \theta < \pi$. Then $$ \begin{aligned} u(r,\theta) &= \ln r \\ v(r,\theta) &= \theta \\ u_r &= \frac{1}{r} \\ v_\theta &= 1 \end{aligned} $$ 
+Therefore $ru_r = v_\theta$ and if $u_\theta = 0$ and $v_r = 0$, then $u_\theta = -rv_r $. Furthermore, $$ \frac{d}{dz} \log z = \e{-i\theta}(u_r + iv_r) = \e{-i\theta} \left( \frac{1}{r} \right) = \frac{1}{r\e{i\theta}} = \frac{1}{z} $$ 
+Conclusion: $\log z$ is a holomorphic function on $\Omega = \complex / \set{z: z = x+iy: x \leq 0, y=0}$ and $\frac{d}{dz} \log z = \frac{1}{z}$ for all $z \in \Omega$. \\~\\
+When $z \neq 0$ and $z \in \complex$, $$z^c = \e{c\log z}$$ This gives the values of the principal value of $z^c$. \\
+Find the principal value of $(1+i)^{1+i}$. \\ Let $z = 1+i$. $$z^z = \e{(1+i)\log(1+i)}$$ 
+Let $z = 1+i = r(\cos \theta + i\sin\theta)$. Then $1 = r\cos\theta$ and $1 = r\sin\theta$. Since $r^2 = 2$, $r = \sqrt{2}$. Therefore $\cos \theta = \frac{1}{\sqrt{2}}$ and $\sin\theta = \frac{1}{\sqrt{2}}$. So $\theta = \frac{\pi}{4}$. So $$1 + i = \sqrt{2}\e{i\frac{\pi}{4}}$$ 
+Then the principal branch is $$ \log (1+i) = \ln \sqrt{2} + i\frac{\pi}{4} = \frac{1}{2}\ln 2 + i\frac{\pi}{4}$$ 
+Hence the principal value of $(1+i)^{1+i}$ is $$ \begin{aligned} \e{(1+i)(\ln \sqrt{2} + i\frac{\pi}{4})} &= \e{\ln \sqrt{2} - \frac{\pi}{4} + i \ln \sqrt{2} + i\frac{\pi}{4}} \\ &= \e{\ln \sqrt{2} - \frac{\pi}{4}} (\cos(\ln \sqrt{2} + \frac{\pi}{4}) + i\sin( \ln \sqrt{2} + \frac{\pi}{4})) \end{aligned} $$ 
+Find all values. $$ \log (1+i) = \ln \sqrt{2} + i\frac{\pi}{4} + 2n\pi i$$ Then $$ \begin{aligned} 
+\e{(1+i)(\log (1+i))} &= \e{(1+i)[\ln \sqrt{2} + i(\frac{\pi}{4} + 2n\pi)]} \\ &= \e{\ln{\sqrt{2}} - (\frac{\pi}{4} + 2n\pi)} \e{i[\ln \sqrt{2} + \frac{\pi}{4} + 2n\pi]} \\ &= \e{\ln \sqrt{2} - (\frac{\pi}{4} + 2n\pi)} [\cos (\ln \sqrt{2} + \frac{\pi}{4} + 2n\pi) + i\sin (\ln \sqrt{2} + \frac{\pi}{4} + 2n\pi)]\end{aligned} $$ 
+Find the principle value of $i^i$. \\
+Let $z = i$ and $z^z = i^i = \e{i \log i}$. Then $z = i = r(\cos \theta + i\sin \theta)$. So $r\cos \theta = 0$ and $r\sin\theta = 1$. Since $-\pi < \theta < \pi$ and $r^2 = 1$ and so $r = 1$, $\cos \theta = 0 $ and $\sin \theta = 1$ and hence $\theta = \frac{\pi}{2}$. So $$ i = \e{i\frac{\pi}{2}} = \cos \frac{\pi}{2} + i\sin \frac{\pi}{2} $$ 
+The principal branch is $$ \log i = \ln 1 + i\frac{\pi}{2} = i\frac{\pi}{2}$$ 
+Therefore the principal value is $$ i^i = \e{i \log i} = \e{i(i\frac{\pi}{2})} = \e{-\frac{\pi}{2}}$$ 
+Show that the principal value of $\left[ \frac{e}{2} (-1 - \sqrt{3}i)\right]^{3\pi i}$ is $-\e{2\pi^2}$.
+$$ -\frac{e}{2} - \frac{\sqrt{3}}{2}ei = r(\cos \theta + i\sin \theta)$$ 
+Therefore $-\frac{e}{2} = r\cos \theta$ and $-\frac{\sqrt{3}}{2} e= r\sin \theta$. Since $r^2 = e^2$ and so $r = 2$, then $\cos \theta = -\frac{1}{2}$ and $\sin \theta = -\frac{\sqrt{3}}{2}$. Hence $\theta = -\frac{2\pi}{3}$. The principal branch is 
+$$ \log z = ln e - i \frac{2\pi}{3} = 1 - i\frac{2\pi}{3} $$ 
+and the principal value is $$ \e{3\pi i(1 - \frac{2\pi}{3}i)} = \e{3\pi i} \e{2\pi^2} = \e{2\pi^2}(\cos 3\pi + i\sin 3\pi) = -\e{2\pi^2} $$ 
+Find the principal value of $(1-i)^{4i}$. \\
+Let $z = 1 - i = r(\cos \theta + i\sin \theta)$. Then $1 = r\cos \theta$ and $-1 = r\sin \theta$. Since $r^2 = 2$, then $r = \sqrt{2}$ and so $\cos \theta = \frac{1}{\sqrt{2}}$ and $\sin \theta = -\frac{1}{\sqrt{2}}$ and hence $\theta = -\frac{\pi}{4}$. The principal branch is 
+$$\log (1-i) = \ln \sqrt{2} - i\frac{\pi}{4}$$ 
+The principal value is $$ \begin{aligned} \e{4i(\ln \sqrt{2} - i\frac{\pi}{4})} &= \e{\pi} \e{i4\ln \sqrt{2}} \\ &= \e{\pi i4 \frac{1}{2}\ln 2} \\ &= \e{\pi}\e{i2\ln 2} \\ &= \e{\pi}(\cos 2\ln 2 + i\sin 2\ln 2) \end{aligned} $$ 
+
+\section{Lecture 15} 
+Let $z_n = r_n\e{i\theta_n}$ and $z = r\e{i\theta}$ where $-\pi < \theta_n < \pi$ and $-\pi < \theta < \pi$. Prove that if $z_n \to z$, then $\theta_n \to \theta$ and $r_n \to r$. 
+\begin{proof} 
+If $z_n \to z$, then $\abs{z_n} \to \abs{z}$ because $$ \abs{ \abs{z_n} - \abs{z} } \leq \abs{z_n - z } \to 0$$ and so $\abs{z_n} \to \abs{z}$. This means $r_n \to r$. If $z_n \to z$, then $$r_n \e{i\theta_n} \to r\e{i\theta}$$ Since $r_n \to r$, then $$ \begin{aligned} \frac{r_n\e{i\theta_n}}{r_n} &\to \frac{r\e{i\theta}}{r} \\ \e{i\theta_n} &\to \e{i\theta} \end{aligned} $$ Now if $\set{\theta_n}$ is a bounded sequence, then there exists a convergent subsequent $\theta_{n_j} \to \phi$. Then $$ \begin{aligned} \e{i\theta_{n_j}} &\to \e{i\phi} \\ \text{Let } \e{i\phi} &= \e{i\theta} \\ \text{Then } \e{i(\phi - \theta)} &= 1 \end{aligned} $$ and so $\phi = \theta$. So $\e{i\theta_{n_j}} \to \e{i\theta}$. Claim: if $\set{\theta_{n_k}}$ is any subsequence of $\set{\theta_n}$, then $\e{i\theta_{n_k}} \to \e{i\theta}$. Suppose that $\theta_{n_k} \to \alpha$. Then $\e{i\theta_{n_k}} \to \e{i\alpha}$. Hence $\e{i\alpha} = \e{i\theta}$ or $\alpha = \theta$. Therefore $\theta_n \to \theta$. 
+\end{proof} 
+
+\section{Midterm Practice Questions} 
+Theorems: \begin{enumerate} 
+\item Let $f$ be holomorphic in a region $\Omega$. Then \begin{itemize}
+\item if $f'(z) = 0$ for all $z \in \Omega$, then $f$ is constant in $\Omega$.
+\item if $\abs{f(z)}$ is constant, then $f$ is constant.
+\item if $\Re{f(z)}$ is constant, then $f$ is constant. 
+\item if $\Im{f(z)}$ is constant, then $f$ is constant. \end{itemize} 
+\item Let $f$ be holomorphic in a region $\Omega$. Then if $\conj{f}$ is holomorphic in $\Omega$, then $f$ is constant in $\Omega$. 
+\item Define the cross ratio of four points: $z_1$, $z_2$, $z_3$, $z_4$ as follows 
+$$[z_1,z_2,z_3,z_4] = \frac{(z_1-z_3)(z_2-z_4)}{(z_1 - z_4)(z_2-z_3)}$$ Let $$ \varphi(z) = [z,z_1,z_2,z_3] = \frac{(z-z_2)(z_1-z_3)}{(z-z_3)(z_1-z_2)}$$ where $z_1 \to 1$, $z_2 \to 0$ and $z_3 \to \infty$. Prove that if $T$ is a \mobt and $z_1$, $z_2$, $z_3$, $z_4$ are distinct points in $\hatcom$, then $$ [z_1,z_2,z_3,z_4] = [T(z_1),T(z_2),T(z_3),T(z_4)]$$ 
+\end{enumerate} 
+
+Problems: \begin{enumerate} 
+\item Suppose $u(x,y)$ is a harmonic function on $G$. Define $f = u_x - iu_y$. Show that $f$ is holomorphic on $G$. \\
+Let $f = u_x - iu_y = U + iV$. Then $U = u_x = \frac{\partial u }{\partial x}$ and $V = -u_y = -\frac{\partial u}{\partial y}$. $U$ and $V$ have continuous first partials because $u(x,y)$ is harmonic and so its second partials are all continuous. Now,
+$$ \begin{aligned} U_x &= \frac{\partial}{\partial x} (\frac{\partial u}{\partial x}) = \frac{\partial^2 u}{\partial x^2} \\ V_y &= -\frac{\partial}{\partial y} (\frac{\partial u}{\partial y}) = -\frac{\partial^2 u}{\partial y^2} \\ U_y &= \frac{\partial}{\partial y} (\frac{\partial u}{\partial x}) = \frac{\partial^2 u}{\partial y \partial x} \\ V_x &= -\frac{\partial}{\partial x}(\frac{\partial u}{\partial y}) = -\frac{\partial u}{\partial x \partial y} \end{aligned} $$ Since $u(x,y)$ is harmonic, $\frac{\partial^2 u}{\partial x \partial y} = \frac{\partial^2 u}{\partial y \partial x}$ and so $u_y = -v_x$ and hence 
+$$ \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 $$ 
+Thus $f$ is holomorphic on $G$. 
+\item Show that $u(x,y) = x^3 - 3xy^2$ is harmonic on $\complex$ and find the harmonic conjugates. \\
+$$ \begin{aligned} \frac{\partial u}{\partial x} &= 3x^2 - 3y^2 \\ \frac{\partial^2 u}{\partial x^2} &= 6x \\ \frac{\partial u}{\partial y} &= -6xy \\ \frac{\partial^2 u}{\partial y^2} &= -6x \\ \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} &= 6x - 6x = 0 \end{aligned} $$ Therefore $u(x,y) = x^3 - 3xy^2$ is harmonic. Furthermore, let $v(x,y)$ be a harmonic conjugate of $u$. Then $u+iv$ is holomorphic. $$ \begin{aligned} u_x &= v_y \\ u_y &= -v_x \\ v_x &= -u_y = 6xy \\ v &= \int 6xy \, dx = 3x^2y + h(y) \\ v_y &= u_x = \frac{\partial v}{\partial y} \\ &= 3x^2 + h'(y) = 3x^2 - 3y^2 \\ h'(y) &= -3y^2 \\ h(y) &= \int -3y^2 \, dy = -y^3 + k \\ v(x,y) &= 3x^2y - y^3 + k \end{aligned} $$ 
+\item Find a \mobt such that $f(z_i) = w_i$ where \begin{itemize}
+\item $z_1 = -1$, $z_2 = 1$, $z_3 = 2$; $w_1 = 0$, $w_2 = -1$, $w_3 = -3$ 
+$$ \begin{aligned} 
+\frac{(w+1)(3)}{(w+3)(2)} = \frac{(z-1)(-3)}{(z-2)(-2)} \\ \frac{w+1}{w+3} &= \frac{z-1}{2(z-2)} \\ 2(z-2)(w+1) &= (w+3)(z-1) \\ 2[zw - 2w + z - 2] &= wz + 3z - w - 3 \\ wz - 3w &= z+1 \\ w &= \frac{z+1}{z-3} 
+\end{aligned} $$
+\item $z_1 = -1$, $z_2 = 1$, $z_3 = 2$; $w_1 = -3$, $w_2 = -1$, $w_3 - 0$ 
+$$ \begin{aligned} 
+\frac{(w+1)(-3)}{(w-0)(-2)} &= \frac{(z-1)(-3)}{(z-2)(-2)} \\ \frac{w+1}{w} &= \frac{z-1}{z-2} \\ (w+1)(z-2) &= w(z-1) \\ wz -2w + z -2 &= wz - w \\ w &= z-2 
+\end{aligned} $$
+\item $z_1 = 0$, $z_2 = 1$, $z_3 = 2$; $w_1 = 0$, $w_2 = 1$, $w_3 = \infty$ \\ If $w_3 = \infty$,
+$$ \begin{aligned} 
+\frac{w-w_2}{w_1-w_2} &= \frac{(z-z_2)(z_1-z_3)}{(z-z_3)(z_1-z_2)} \\ \frac{w-1}{-1} &= \frac{(z-1)(-2)}{(z-2)(-1)} \\ (w-1)(z-2) &= -2(z-1) \\ wz - 2w - z + 2 &= -2z + 2 \\ w(z+2) &= -2 \\ w &= -\frac{z}{z-2} = \frac{z}{2-z}
+\end{aligned} $$
+\item $z_1 = -i$, $z_2 = 0$, $z_3 = i$; $w_1 = -1$, $w_2 = i$, $w_3 = 1$ 
+$$ \begin{aligned} 
+\frac{(w-i)(-2)}{(w-1)(-1-i)} &= \frac{(z-0)(-i - i)}{(z-i)(-i - 0)} \\ \frac{(w-i)(-2)}{(w-1)(-1-i)} &= \frac{2z}{z-i} \\ \frac{-(w-i)}{(w-1)(-1-i)} &= \frac{2}{z-i} \\ 2(w-1)(-1-i) &= -(w-i)(z-i) \\ z(-w-iw + 1 + i) &= -zq - iqz + z + iz = -wz + iw + iz + 1 \\ w &= \frac{z-1}{iz+1}
+\end{aligned} $$ 
+\item $z_1 = 1$, $z_2 = i$, $z_3 = -1$; $w_1 = 0$, $w_2 = 1$, $w_3 = \infty$ 
+$$ \begin{aligned} 
+\frac{w-1}{-1} &= 1-w = \frac{(z-i)(2)}{(z+1)(1-i)} = \frac{2z - 2i}{z + 1 - iz - i} \\ z + 1 - iz - i - wz - w + wiz + wi &= 2z - 2i \\ wi(z+1) - w(z+1) &= z - 1 + iz - 1 = (z-1) = i(z-1) \\ (wi - w)(z+1) &= (z-1)(1+i) \\ w(i-1)(z+1) &= (z-1)(1+i) \\ w &= \frac{(z-1)(1+i)}{(z+1)(i-1)} \\ w &= \frac{z(1+i) - (1+i)}{z(-1+i) - (1-i)} 
+\end{aligned} $$
+\end{itemize} 
+\item Find the principal values of \begin{itemize} 
+\item $\log(1+\sqrt{3}i)$
+$$ \begin{aligned} 
+1+\sqrt{3}i &= r(\cos \theta + i\sin \theta) \\ r\cos \theta &= 1\\ r\sin \theta &= \sqrt{3} \\ r^2 &= 4 \to r = 2 \\ \cos \theta &= \frac{1}{2} \\ \sin \theta &= \frac{\sqrt{3}}{2} \\ \theta &= \frac{\pi}{3} \\ \log(1 +\sqrt{3}i) &= \ln 2 + i\frac{\pi}{3} + 2n\pi i 
+\end{aligned} $$ 
+\item $(1-i)^{4i}$
+$$ \begin{aligned} 
+(1-i)^{4i} &= \e{4i \log(1-i)} \\ 1-i &= r(\cos \theta + i\sin \theta) \\ r\cos \theta &=1 \\ r\sin\theta &= -1 \\ r^2 &=2 \to r = \sqrt{2} \\ \cos \theta &= \frac{1}{\sqrt{2}} \\ \sin \theta &= -\frac{1}{\sqrt{2}} \\ \theta &= -\frac{\pi}{4} \\ \log (1-i) &= \ln \sqrt{2} - \frac{\pi}{4} \\ (1-i)^{4i} &= \e{4i[\ln \sqrt{2} - i\frac{\pi}{4}]} \\ &= \e{\pi} \e{(4\ln\sqrt{2})i} \\ &= \e{\pi} \e{(2\ln 2)i} \\ &= e\pi (\cos 2\ln 2 + i\sin 2\ln 2)
+\end{aligned} $$ 
+\item $(1+i)^i$
+$$ \begin{aligned} 
+(1+i)^i &= \e{i\log(1+t)} \\ 1+i &= r(\cos \theta + i\sin \theta) \\ r\cos\theta &= 1\\  r\sin\theta &= 1 \\ r^2 &=2 \to r = \sqrt{2} \\ \cos\theta &= \frac{1}{\sqrt{2}} \\ \sin \theta &= \frac{1}{\sqrt{2}} \\ \theta &= \frac{\pi}{4} \\ \log(1+i) &= \ln \sqrt{2} + i\frac{\pi}{4} \\ (1+i)^i &= \e{i(\ln \sqrt{2} + i\frac{\pi}{4})} \\ &= \e{-\frac{\pi}{4}} \e{(\ln \sqrt{2})i} \\ &= \e{-\frac{\pi}{4}}(\cos \ln\sqrt{2} + i\sin \ln\sqrt{2}) 
+\end{aligned} $$ 
+\item $(1+i)^{1+i}$
+$$ \begin{aligned} 
+(1+i)^{1+i} &= \e{(1+i)\log(1+i)} \\ &= \e{(1+i)(\ln \sqrt{2} + i\frac{\pi}{4})} \\ &= \e{\ln\sqrt{2} - \frac{\pi}{4}}\e{i(\ln\sqrt{2} + \frac{\pi}{4})} \\ &= \e{\ln\sqrt{2} - \frac{\pi}{4}} (\cos(\ln\sqrt{2} + \frac{\pi}{4}) + i\sin(\ln\sqrt{2} + \frac{\pi}{4}))
+\end{aligned} $$ 
+\end{itemize}
+\item Find all values of $(-8 -8\sqrt{3}i)^{\frac{1}{4}}$. 
+$$ [r(\cos\theta + i\sin \theta)]^\frac{1}{n} = r^{\frac{1}{n}}\left[\cos ( \frac{\theta + 2k\pi}{n}) + i\sin( \frac{\theta + 2k\pi}{n})\right] \text{ where } k = 0,1,2,\dots,n-1 $$
+$$ \begin{aligned} 
+ (-8-8\sqrt{3}i) &= r(\cos\theta + i\sin\theta) \\ r\cos \theta &= -8 \\ r\sin\theta &= -8\sqrt{3} \\ r^2 &=256 \to r = 16 \\ \cos \theta &= -\frac{1}{2} \\ \sin \theta &= -\frac{\sqrt{3}}{2} \\ \theta &= -\frac{2\pi}{3} \\ (-8-8\sqrt{3}i) &= 16(\cos(-\frac{2\pi}{3}) + i\sin (-\frac{2\pi}{3})) \\ [16(\cos (-\frac{2\pi}{3}) + i\sin (-\frac{2\pi}{3}))]^\frac{1}{4} &= 2[\cos ( \frac{-\frac{2}{3}\pi + 2k\pi}{4}) + i\sin (\frac{-\frac{2\pi}{3} + 2k\pi}{4})], 
+\end{aligned} $$ where $k = 0,1,2,3 $
+\end{enumerate} 
+
+\section{Lecture 16} 
+Let a curve be defined as: $\gamma: [0,1] \to \complex$, a continuous function where $\gamma(0)$ = initial point and $\gamma(1)$ = terminal point. \\
+Let a path be defined as: $\gamma: [,1] \to \complex$ such that $\gamma'$ is continuous and a closed path if $\gamma(0) = \gamma(1)$.\\
+Let $\gamma^*$ be the trace. Suppose $f$ is a continuous complex-valued function on $\gamma^*$. Then $$ \int_\gamma f = \int_\gamma f(z) \, dz = \int_0^1 f(\gamma(t))\gamma'(t)\, dt $$ 
+Suppose $\gamma: [0,2\pi] \to \complex$ and $\gamma(t) = \e{it}$ and $f(z) = \frac{1}{z}$, where $z \neq 0$. Then $\gamma'(t) = i\e{it}$ and $dz = i\e{it}\, dt$. Then $$\int_\gamma \frac{dz}{z} = \int_0^{2\pi} \frac{i\e{it}}{\e{it}} \, dt = i\int_0^{2\pi} \, dt = 2\pi i $$ 
+Goal: Let $f$ be holomorphic on a region that contains a disk $B(a,r) = \set{z: \abs{z-a} < r}$. Let $\gamma$ be the boundary. Then $$f(a) = \frac{2\pi i} \int_\gamma \frac{f(z)}{z-a} \, dz $$ 
+Let $\Omega$ be simply connected and $f \in \mathcal{O}(\Omega)$ and $\gamma_1$ and $\gamma_2$ be two boundaries. Then $$\int_{\gamma_1} f = \int_{\gamma_2} f $$ 
+Let $\Omega$ be simply connected and $f \in \mathcal{O}(\Omega)$. If $\gamma$ is a closed path in $\Omega$, then $$ \int_\gamma f = 0$$ 
+Cauchy's Integral Formula: $$ f^{(n)}(a) = \frac{n!}{2\pi i} \int \frac{f(z)}{(z-a)^{n+1}} \, dz $$ 
+Let $\gamma$ be square such that $x = \pm 2$ and $y = \pm 2$ and $\gamma$ is traversing counter-clockwise. Calculate $\int_\gamma \frac{\e{-z}}{z - \pi\frac{i}{2}} \, dz$. \\
+Note that $f(z) = \e{iz}$. Therefore $$ \begin{aligned} \int_\gamma \frac{f(z)}{z-a} &= 2\pi i \cdot f(a) \\ *= 2\pi i \cdot f(\frac{\pi i}{2}) \\ &= 2\pi i \cdot \e{-\frac{\pi}{2}i} \\ &= 2\pi i \cdot -1 \\ &= -2\pi i \end{aligned} $$ 
+Calculate $\int_\gamma \frac{\cos z}{z(z^2 + 8)} \, dz $. \\
+Let $f(z) = \frac{\cos z}{z^2 + 8}$. Then $$ \begin{aligned} \int_\gamma \frac{f(z)}{z-0} \, dz &= 2\pi i \cdot f(0) \\ &= 2\pi i \cdot \frac{1}{8} \\ &= \frac{\pi i}{4} \end{aligned} $$ 
+Let $\gamma: \abs{z-i} = 2$. Calculate $\int_\gamma \frac{dz}{z^2 + 4}$. 
+\\ Note first that $$ \frac{1}{z^2 + 4} = \frac{1}{(z+2i)(z-2i)}$$ 
+$z-2i$ is not on the boundary. Let $f(z) = \frac{1}{z+2i}$. Then 
+$$ \int_\gamma \frac{f(z)}{z-2i} \, dz = 2\pi i \cdot f(2i) = 2\pi i (\frac{1}{4i}) = \frac{\pi}{2} $$ 
+Calculate $\int_\gamma \frac{dz}{(z^2 + 4)^2} $. \\
+Note that $$ \frac{1}{(z^2 + 4)^2} = \frac{1}{(z - 2i)^2(z+2i)^2} $$ Let $f(z) = \frac{1}{(z+2i)^2}$. Note that $f'(a) = \frac{1!}{2\pi i} \int_\gamma \frac{f(z)}{(z-a)^2}\, dz$, from Cauchy's Integral Formula. Hence, we'll need $f'(z)$, which is $f'(z) = -\frac{z}{(z+2i)^2} $. Therefore 
+$$ \begin{aligned} \int_\gamma \frac{dz}{(z^2 + 4)^2} &= \int_\gamma \frac{f(z)}{(z-2i)^2} \, dz \\ &= 2\pi i \cdot f'(2i) \\ &= 2\pi i \cdot (\frac{-2}{-64i}) \\ &= \frac{\pi}{16} \end{aligned} $$ 
+Calculate $\int_\gamma \frac{e^z - \e{-z}}{z^4} \, dz$ where $\gamma: \abs{z} = 4$. \\
+Let $f(z) = e^z - \e{-z}$. Then $f'(z) = e^z + \e{-z}$, $f''(z) = e^z - \e{-z}$ and $f'''(z) = e^z + \e{-z}$. Therefore $$ \begin{aligned} \int_\gamma \frac{e^z - \e{-z}}{(z-0)^4} \, dz &= \int_\gamma \frac{f(z)}{(z-0)^4}\, dz \\ &= \frac{2\pi i}{3!} \cdot f'''(0) \\ &= \frac{\pi i}{3} \cdot (1+1) \\ &= \frac{2\pi i}{3} \end{aligned} $$ 
+Calculate $\int_\gamma \frac{z^3 + 2z}{(z-2)^3} \, dz$ where $\gamma: \abs{z} = 3$. \\
+Let $f(z) = z^3 + 2z$. Then $f'(z) = 3z^2 + 2$ and $f''(z) = 6z$. Hence 
+$$ \int_\gamma \frac{z^3 + 2z}{(z-2)^3} \, dz = \frac{2\pi i}{2!} \cdot f''(2) = \frac{2\pi i}{2} (12) = 12\pi i $$ 
+
+\section{Lecture 17} 
+A curve in $\complex$ is a continuous map $\gamma$ of $[\alpha, \beta]$ into $\complex$. The parameter interval is $[\alpha,\beta]$. Let $\gamma^* = \set{\gamma(t) : \alpha \leq t \leq \beta}$ where $\gamma(\alpha)$ is the initial point of $\gamma$ and $\gamma(\beta)$ is the end point of $\gamma$. \\
+If $\gamma(\alpha) = \gamma(\beta)$ then $\gamma$ is a closed curve. \\
+A path is a piecewise $C^1$ curve, in other words, $\gamma: [\alpha,\beta] \to \complex$ is continuous and there are infinitely many points. Let $\alpha = S_0 < S_1 < \dots < S_n = \beta$ such that $\gamma[S_{j-1}, S_j]$ has a continuous derivative on the interval. However at the points $S_1,\dots,S_{n-1}$, the left and right derivatives of $\delta$ may differ. Now suppose that $\delta$ is a path and $f$ is a continuous function on $\gamma^*$. Then $$\int_\gamma f(z) \, dz = \int_\alpha^\beta f(\gamma(t))\gamma'(t) \, dt $$ Let $\varphi$ be a continuous differentiable $1-1$ map of $[\alpha_1,\beta_1]$ onto $[\alpha,\beta]$ such that $\varphi(\alpha_1) = \alpha$ and $\varphi(\beta_1) = \beta$. Let $\gamma_1 = \gamma \circ \varphi$. Then $\gamma_1$ is a path with parameter intervals $[\alpha_1,\beta_1]$ and $$\int_{\gamma_1} f(z)\,dz = \int_{\alpha_1}^{\beta_1} f(\gamma_1(t))\gamma'_1 \, dt $$ But $\gamma'_1(t) = \gamma'(\varphi(t))\varphi'(t)$ and so $$\int_{\gamma_1} f(z) \, dz = \int_{\alpha_1}^{\beta_1} f(\gamma(\varphi(t))) \gamma'(\varphi(t)) \varphi'(t) \, dt = \int_\alpha^\beta f(\varphi(s))\gamma'(s) \,ds $$ 
+Note that if $\gamma = \gamma_1 + \gamma_2$, then $$ \int_{\gamma_1 + \gamma_2} f(z) \, dz = \int_{\gamma_1} f(z)\,dz + \int_{\gamma_2} f(z) \,dz $$ 
+Let $[0,1]$ be the parameter interval of $\gamma$. Consider $\varphi_1(t) = \varphi(1-t)$ where $0 \leq t \leq1$ and $\varphi_1$ is the opposite path of $\varphi$.Then $$ \int_\gamma f(z) \, dz = \int_0^1 f(\varphi_1(t))\gamma'_1(t)\, dt = -\int_0^1 f(\gamma(1-t))\gamma'(1-t) \, dt = -\int_0^1 f(\gamma(s))\gamma'(s) \,ds = -\int_\gamma f(z) \, dz $$ 
+Hence $$\int_{\gamma_1} f(z) \,dz = -\int_\gamma f(z) \, dz $$ 
+Suppose $\int_{\gamma} f(z) \, dz = \int_\alpha^\beta f(\gamma(t))\gamma'(t)\, dt$. Suppose $\mod{f(z)} \leq M$ for all $z \in \gamma$. Then $$ \begin{aligned} \mod{\int_\gamma f(z) \, dz} &= \mod{\int_\alpha^\beta f(\gamma(t))\gamma'(t) \, dt} \\ &\leq \int_\alpha^\beta \mod{f(\gamma(t))} \mod{\gamma'(t)} \, dt \\ &\leq M\int_\alpha^\beta \mod{\gamma'(t)}\, dt \\ &\leq ML(\gamma) \end{aligned} $$ where $L(\gamma)$ is the length of $\gamma$. \\~\\
+Recall: Cauchy's Integral Formula: Let $B(a,R) = \set{z : \mod{z-a} < R}$. Then $$ f^{(n)}(a) = \frac{n!}{2\pi i} \int_\gamma \frac{f(z)}{(z-a)^{n+1}} \, dz $$ where $\gamma = \set{z: \mod{z-a} = R}$. 
+\begin{theorem} Cauchy's Estimate: Suppose $\mod{f(z)} \leq M$ for all $z \in B{a,R}$. 
+$$\mod{f^{(n)}(a)} = \frac{n!}{2\pi i} \mod{ \int_\gamma \frac{f(z)}{(z-a)^{n+1}} \,dz} \leq \frac{n!}{2\pi} M \cdot \frac{2\pi R}{R^{n+1}}$$ Hence, if $f$ is holomorphic on a region containing $B(a,R) = \set{z: \mod{z-a} < R}$ and $\mod{f(z)} \leq M$ on $B(a,R)$, then $$ \frac{\mod{f^{(n)}(a)}}{n!} \leq \frac{M}{R^n} $$ \end{theorem} 
+\begin{theorem} Liouville's Theorem: Every bounded entire function is a constant. \end{theorem} 
+\begin{proof} Let $f$ be an entire function such that $\mod{f(z)} \leq M$ for all $z \in \complex$. Let $z_0 \in \complex$ be an arbitrary point in $\complex$ and consider a disk of radius $R$ centered at $z_0$. By Cauchy's estimate, $\mod{f'(z)} \leq \frac{M}{R}$. But $R > 0$ is arbitrary and hence $f'(z) = 0$. Since $z_0 \in \complex$ is arbitrary, $f'(z) = 0$ for all $z \in \complex$. Therefore $f$ is constant. \end{proof} 
+A polynomial of degree $n \geq 0$ is of the form $$f(z) = z^n + a_{n-1}z^{n-1} + a_{n-2}z^{n-2} + \dots + a_0$$ where $a_0,a_1,\dots,a_{n-1} \in \complex$. 
+\begin{theorem} Fundamental Theorem of Algebra: If $p(z)$ is a nonconstant polynomial, then there exists a complex number $z$ such that $p(z) = 0$. \end{theorem} 
+\begin{proof} Let $$p(z) = z_n + a_{n-1}z^{n-1} + a_{n-2}z^{n-2} + \dots + a_0 = z^n[1 + \frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \dots + \frac{a_0}{z^n}] $$ be a nonconstant polynomial. Then $\lim_{z\to \infty} p(z) = \infty$. Suppose there exists no $z \in \complex$ such that $p(z) = 0$. Define $f(z) = \frac{1}{p(z)}$. Then $f$ is an entire function. Furthermore, $\lim_{z\to\infty} f(z) = 0$. So there exists $N > 0$ such that $\mod{f(z)} < 1$ for all $\mod{z} > N$. Now consider the closed disk $\overline{B(0,N)} = \set{z: \mod{z} \leq N}$ which is compact. Since $f$ is holomorphic, and therefore continuous on $\overline{B(0,N)}$, it must be bounded on $\overline{B(0,N)}$. In other words, there exists $M > 0$ such that $\mod{f(z)} \leq M$ for all $z$ such that $\mod{z} \leq N$. Thus $f$ is a bounded entire function. By Liouville's theorem, $f$ is a constant. Therefore $p(z)$ is a constant which contradicts that $p(z)$ is a nonconstant polynomial. Hence there exists $z \in \complex$ such that $p(z) = 0$. \end{proof}
+
+\section{Lecture 18}
+Let $X$ be a set and $A \subseteq X$. Then we say $A$ is dense in $X$ which means that $\overline{A} = X$. That means, given any point $x \in X$, any neighborhood $N(x)$ intersects $A$. \\~\\
+Consequences of Liouville's Theorem: 
+\begin{theorem} The range of a nonconstant entire function is dense in the complex plane. \end{theorem} 
+\begin{proof} Let $f$ be a nonconstant entire function. Suppose the range of $f$ is not dense in $\complex$. That means, there exists $z_0 \in \complex$ and $\delta > 0$ such that $\mod{f(z) - z_0} > \delta$. Let $g(z) = \frac{1}{f(z) - z_0}$. This is an entire function because $\mod{f(z) - z_0} > \delta$. Furthermore $$\mod{g(z)} = \frac{1}{\mod{f(z) - z_0}} < \frac{1}{\delta} $$ for all $z\in\complex$. So then $g$ is a bounded entire function. Hence by Liouville's theorem, $g$ is constant. That means $f(z) - z_0$ is constant. But $z_0$ is constant as well and so $f(z)$ is constant. Contradiction. Hence the range of $f$ must be dense in $\complex$. \end{proof} 
+Suppose $f$ is an entire function such that $\Re{f}$ is bounded above. Prove that $f$ is a constant. 
+\begin{proof} Suppose $f$ is an entire function such that $\Re{f} \leq M$. Define $F = \e{f}$. $F$ is an entire function and $\mod{F} = \mod{\e{f}} = \e{\Re{f}} \leq \e{M}$. So $F$ is a bounded entire function. By Liouville's theorem, $F$ is a constant. That means $F'(z) = 0$ for all $z \in \complex$. Then $\e{f(z)}f'(z) = 0$. Hence $f'(z) = 0$ for all $z \in \complex$. Therefore $F$ is constant. \end{proof} 
+Suppose $f$ is an entire function such that $\Im{f}$ is bounded above. Prove that $f$ is a constant. 
+\begin{proof} Suppose $f$ is an entire function such that $\Im{f} \leq M$. Define $F = \e{-if}$. Then $\mod{F} = \mod{\e{-if}} = \e{\Im{f}} \leq \e{M}$. So $F$ is a bounded entire function. That means $F$ is a constant. Then $F'(z) = 0$ for all $z \in \complex$. Then $\e{-if}f'(z) = 0$. That is, $f'(z) = 0$ for all $z \in \complex$ and so $f$ is constant. \end{proof} 
+Suppose that $f$ is an entire function such that $\Re{f}$ is bounded below. Prove that $f$ is a constant. 
+\begin{proof} Suppose $f$ is an entire function such that $\Re{f} \geq M$. That means, $M \leq \Re{f} \leq \mod{f}$. So $\mod{f} \geq M$. Let $g(z) = \frac{1}{f(z)}$. Then $g$ is an entire function and $\mod{g(z)} = \frac{1}{\mod{f(z)}} \leq \frac{1}{M}$. Hence $g$ is a bounded entire function. Hence $g$ is a constant and so $f$ is a constant. \end{proof} 
+Suppose $f$ is an entire function such that $\mod{f(z)} > 1$. Show that $f$ is a constant. 
+\begin{proof} Let $g(z) = \frac{1}{f(z)}$. Since $\mod{f(z)} > 1$ for all $z \in \complex$. $g$ is an entire function. Furthermore, $\mod{g(z)} = \frac{1}{\mod{f(z)}} < 1$. So $g$ is a bounded entire function. Hence $g$ is a constant function and so $f$ is a constant. \end{proof}
+\begin{theorem} Let $U$ be an open set in $\complex$ and suppose $F \in \mathcal{O}(U)$ and $F'$ is continuous in $U$. Then $$\int_\gamma F'(z) \,dz = 0$$ for every closed path $\gamma$ in $U$. \end{theorem} 
+\begin{proof} Let $[\alpha, \beta]$ be the parameter interval of $\gamma$. $$ \int_\gamma F'(z) \, dz = \int_\alpha^\beta F'(\gamma(t))\gamma'(t) \,dt = F(\gamma(\beta)) - F(\gamma(\alpha)) = 0$$ since $\gamma(\alpha) = \gamma(\beta)$. \end{proof} 
+Corollary: Since $z^n$ is the derivative of $\frac{z^{n+1}}{n+1}$, for all integers $n \neq -1$, then $$\int_\gamma z^n \, dz = 0$$ for any closed path $\gamma$ if $n = 0,1,2,\dots$ and for those closed paths $\gamma$ such that $0 \not\in \gamma^*$ if $n = -2,-3,\dots$. \\
+Proposition: If $\gamma:[0,1] \to \complex$ is a closed smooth path and $a \not\in \gamma$, then $$ \frac{1}{2\pi i} \int_\gamma \frac{dz}{z-a} $$ is an integer. 
+\begin{proof} Define $g: [0,1] \to \complex$ as follows: $$g(t) = \int_0^t \frac{\gamma'(s)}{\gamma(s) - a} \, ds $$ Then $g(0) = 0$ and $g(1) = \int_\gamma \frac{dz}{z-a}$. In addition, $g'(t) = \frac{\gamma'(t)}{\gamma(t) - a}$ for $0 \leq t \leq 1$. Note $$ \begin{aligned} \frac{d}{dt} (\e{-g(t)}(\gamma(t) - a)) &= -g'(t)\e{-g(t)}(\gamma(t) - a) + \e{-g(t)}\gamma'(t) \\ &= -g'(t)\e{-g(t)}(\gamma(t) - a) + \e{-g(t)}(\gamma(t) -a)g'(t) \\ &= 0 \end{aligned} $$
+Hence $\e{-g(t)}(\gamma(t) - a)$ is a constant. Then $$ \begin{aligned} \e{-g(0)}(\gamma(0) - a) &= \e{-g(1)}(\gamma(1) - a) \\ \e{-g(0)} &= \e{-g(1)} \\ 1 &= \e{-g(1)} \\ &= \frac{1}{\e{g(1)}} \\ \e{g(1)} &= 1 \end{aligned} $$ 
+Then $g(1) = 2\pi ik$ for some integer $k$ and so $$ \frac{1}{2\pi i} g(1) = \frac{1}{2\pi i} \int_\gamma \frac{dz}{z-a} = k $$ \end{proof}
+If $\gamma$ is a closed path in $\complex$ and $\alpha \not\in \gamma$, then $$\text{Ind}(\gamma, a) = \frac{1}{2\pi i} \int_\gamma \frac{dz}{z-a} $$ is called the Index of $a$ with respect to $\gamma$ on the winding number of $a$ with respect to $\gamma$. 
+
+\section{Lecture 19} 
+If $\set{F_n}$ is a sequenced compact set such that $$ F_n \geq F_{n+1} $$ for all $n \geq 1$ and $\lim_{n\to\infty} \text{diam}(F_n) = 0$, then $$\bigcap_{n=1}^\infty F_n$$ contains exactly $1$ point. (Note: diam$(S) = \sup_{x\in S, y\in S} d(x,y)$.)\\
+For any $a,b,c \in \complex$< the triangle whose vertices are $a,b,c$ is $\Delta = \Delta(a,b,c)$. Let $\partial \Delta$ be the boundary of $\Delta$. For any function $f$ continuous on $\partial \Delta$, $$ \int_{\partial \Delta} f(z) \, dz = \int_{[a,b]} f(z) \, dz + \int_{[b,c]} f(z) \, dz + \int_{[c,a]} f(z) \, dz $$ 
+\begin{theorem} Local Cauchy Theorem: If $\Delta$ is a triangle contained in a region $\Omega$ and if $f \in O(\Omega)$ ($f$ is holomorphic), then $$ \int_{\partial \Delta} f(z) \, dz = 0 $$ \end{theorem} 
+\begin{proof} Let $a',b',c'$ be the midpoints of $[b,c]$, $[c,a]$ and $[a,b]$ respectively. Consider the four triangles $$ \begin{aligned} \Delta^1 &= \set{a, c', b'} \\ \Delta^2 &= \set{b, a', c'} \\ \Delta^3 &= \set{c, b', a'} \\ \Delta^4 &= \set{a',b',c'} \end{aligned} $$ Put $$J  = \int_{\partial \Delta} f(z) \, dz = \sum_{j=1}^4 \int_{\partial \Delta^j} f(z) \, dz $$ St least one of the triangles $\Delta^j$ must satisfy $$\mod{\int_{\partial \Delta^j} f(z) \, dz} \geq \frac{\mod{J}}{4} $$ Choose one of them and call it $\Delta_i$. Repeat this process to form a sequence of triangles $\Delta_1$, $\Delta_2$, $\dots$ such that $\Delta_{n+1} \subseteq \Delta$. The lengths of $\partial \Delta_n = \frac{L}{2^n}$ where $L$ is the length of the boundary of $\Delta$, or $\int_{\partial \Delta} \mod{dz}$ and $\Delta_n$ has diam = $\frac{D}{2^n}$ where $D = $ diam($\Delta$) and $$ \mod{\int_{\partial \Delta_n} f(z) \, dz} \geq \frac{\mod{J}}{4^n}$$ So $\bigcap_{n=1}^\infty \Delta_n = \set{z_0} \subseteq \Delta \subseteq \Omega$. Let $\varepsilon > 0$ be given. Choose $r > 0$ such that $B(z_0,r) \subseteq \Omega$. Note that $$ B(z_0, r) = \set{z: \mod{z-z_0} < r} $$ and $$ \mod{f(z) - f(z_0) - f'(z_0)(z-z_0)} \leq \varepsilon \mod{z-z_0} $$ if $z \in B(z_0,r)$. Choose $n$ so that $\Delta_n \subseteq B(z_0,r)$. Then $$\begin{aligned} \mod{\int_{\partial \Delta_n} f(z) \, dz} &= \mod{ \int_{\partial \Delta_n} [f(z) - f(z_0) - f'(z)(z-z_0)] \, dz} \\ &\leq \int_{\partial \Delta_n} \mod{f(z) - f(z_0) - f'(z_0)(z-z_0)} \, \mod{d_z} \\ &\leq \varepsilon \int_{\partial \Delta_n} \mod{z-z_0} \, \mod{dz} \\ &\leq \varepsilon \cdot \text{diam}(\Delta_n) \int_{\partial \Delta_n} \, \mod{dz} \\ &\leq \varepsilon \cdot \text{diam}(\Delta_n)(\text{length of }\partial \Delta_n) \\ &= \varepsilon \cdot \frac{D}{2^n} \cdot \frac{L}{2^n} \\ &= \frac{\varepsilon DL}{4^n} \end{aligned} $$ So $$\mod{J} \leq 4^n \mod{\int_{\partial \Delta_n} f(z)\, dz} \leq 4^n \cdot \frac{\varepsilon DL}{4^n} = \varepsilon DL $$ Hence $J = 0$. \end{proof} 
+\begin{theorem} Let $\Delta \subseteq \Omega$ and let $p$ be a point in $\Omega$. Let $f$ be continuous in $\Omega$ and holomorphic in $\Omega/\set{p}$. Then $$ \int_{\partial \Delta} f(z) \, dz = 0 $$ \end{theorem} 
+\begin{proof} There is nothing to prove if $p \in \Omega$ but $p \not\in \Delta$. Case $1$: $\Delta = \set{p,b,c}$ where $p$ is a vertex. Let $\varepsilon > 0$ be given. Choose $x \in [p,b]$ and $y \in [p,c]$ so close to $p$ such that $$ \mod{\int_{\partial \set{p,x,y}} f(z) \, dz } < \varepsilon $$ Now $$ \begin{aligned} \int_{\partial \Delta} f(z) \, dz &= \int_{\partial \set{p,x,y}} f(z) \, dz + \int_{\partial \set{x,b,y}} f(z) \, dz + \int_{\partial \set{b,c,y}} f(z) \, dz \\ *= \int_{\partial \set{p,x,y}} f(z) \, dz \end{aligned} $$ 
+Case $2$: If $p \in \Delta$ and $p$ is not a vertex, then $$ \int_{\partial \Delta} f(z) \, dz = \int_{\partial \set{a,b,c}} f(z) \, dz + \int_{\partial \set{a,b,p}} f(z) \, dz + \int_{\partial \set{b,c,p}} f(z) \, dz = 0 $$ \end{proof} 
+
+
+
+\section{Lecture 20} 
+A set $E$ is convex is it has the following geometric property: whenever $x \in E$, $y \in E$, and $0 < t < 1$, the point $$z_t = (1-t)x + ty $$ also lies in $E$. As $t$ runs from $0$ to $1$, one may visualized $z_t$ as describing a straight line segment in $V$, from $x$ to $y$. Convexity requires that $E$ contains the segments between any two of its points. \\
+Recall: If $\Omega$ is a region and $f \in O(\Omega)$ and $f'$ is continuous in $\Omega$, then $$ \int_\gamma f'(z) \, dz = 0$$ where $\gamma$ is a closed path in $\Omega$. \\
+The region $V$ is starlike with respect to the point $z_0$ if for every $z \in V$, the line segment $[z_0,z]$ is contained in $V$. The region $V$ is starlike if it is starlike with respect to any point in $V$. 
+\begin{theorem} Let $V$ be a starlike region with respect to $z_0 \in V$. For any $p \in V$, if $f$ is continuous in $V$ and holomorphic in $V/\set{p}$, then \begin{enumerate} 
+\item $\int_\gamma f(z) \, dz = 0$ for every closed path in $V$ 
+\item $f = F'$ for some $F \in O(V)$ \end{enumerate} \end{theorem} 
+\begin{proof} Define $F: V \to \complex$ by $F(z) = \int_{[z_0,z]} f(G) \, dG$. Since $V$ is starlike with respect to $z_0$, $\set{z_0, z, z+h} \subseteq V$ for all $h$ sufficiently small. Then $$F(z+h) - F(z) = \int_{[z_0, z+h]} f(G) \, dG - \int_{[z_0, z]} f(G) \, dG $$ But $$ \int_{[z_0,z]} f(G) \, dG + \int_{[z,z+h]} f(G) \, dG + \int_{[z+h, z_0]} f(G) \, dG = 0 $$  So $$ F(z+h) - F(z) = \int_{[z, z+h]} f(G) \, dG $$ 
+Now $$ \mod{\frac{1}{h} (F(z+h) - F(z)) - f(z)} = \mod{\frac{1}{h}\int_{[z,z+h]} f(G) - f(z) \,, dG} $$ But $$ \mod{\frac{1}{h} \int_{[z,z+h]} f(z) \, dG} = \mod{f(z)} \frac{1}{\mod{h}} \int_{[z,z+h]} \mod{dG} = \mod{f(z)} $$ So $$ \mod{\frac{1}{h} \int_{[z,z+h]} f(G) - f(z) \, dG} \leq \frac{1}{\mod{h}} \int_{[z,z+h]} \mod{f(G) - f(z)} \, \mod{dG} \to 0 $$ as $h \to 0$. Hence $$ \lim_{n\to\infty} \frac{f(z+h) - f(z)}{h} = f(z) $$ So $F = O(V)$ and $F' = f$. Finally, $$ \int_\gamma F'(z) \, dz = 0 $$ or $$ \int_\gamma f(z) \, dz = 0 $$ \end{proof}
+\begin{theorem} Cauchy's Integral Formula: Let $z$ be a starlike region and $f \in O(V)$. If $\gamma$ is a closed path in $V$ and $z \in V/\set{\gamma}$, then $$ \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G -z} \, dG = f(z)\text{Ind}(\gamma,z) $$ \end{theorem} 
+\begin{proof} Fix $p \in V/\gamma$. Define $g: V \to \complex$ by $g(G) = \begin{cases} \frac{f(G) - f(p)}{G-p} &\text{ if } G \neq p \\ f'(p) &\text{ if } G = p \end{cases} $. Apply the above theorem to $g$: $\int_\gamma g(G) \, dG = 0$. That is, $$ \frac{1}{2\pi i} \int_\gamma g(G) \, dG = 0 $$ or $$ \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G-p} \, dG = \frac{1}{2\pi i} f(p) \int_\gamma \frac{dG}{G-p} = f(p)\text{Ind}(\gamma, p) $$ \end{proof} 
+Special Case: If $\gamma$ is a circle and Ind($\gamma,p$) = 1, then $$ f(p) = \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{z-p} \, dz $$ 
+Corollary: Let $\Delta = \set{z: \mod{z} < 1}$. If $f \in O(\Delta)$, then there exists a power series $\sum_{n=0}^\infty a_nz^n$ with radius of convergence $\geq 1$ such that $f(z) = \sum_{n=0}^\infty a_nz^n$ for all $z \in \Delta$. Furthermore, $$a_n = \frac{2\pi i} \int_{\mod{G} = r} \frac{f(G)}{G^{n+1}} \, dG $$ if $0 < r < 1$. 
+\begin{proof} Suppose $0 < r < 1$. Let $\gamma(t) = re^{2\pi i t}$ for $0 \leq t \leq 1$. If $\mod{z} < r$, then Ind($\gamma,z$) = Ind($\gamma,0$) = $1$. Now $$f(z) = \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G-z} \, dG = \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G} (1 - \frac{z}{G})^{-1} \, dG = \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G} (\sum_{n=0}^\infty \frac{z^n}{G^n}) \, dG = \sum_{n=0}^\infty a_nz^n $$ Hence $$a_n = \frac{1}{2\pi i} \int_\gamma \frac{f(G)}{G^{n+1}} \, dG $$ This expression is valid for $\mod{z} < r$. But $a_n = \frac{f^{(0)}}{n!}$. Hence $$ \int_\gamma \frac{f(G)}{G^{n+1}} \, dG = \frac{2\pi i}{n!} f^{(n)}(0) $$ Since $a_n= \frac{f^{(n)}(0)}{n!}$ is independent of $r$, $$ f(z) = \sum_{n=0}^\infty a_nz^n$$ for all $z \in \Delta$. \end{proof} 
+Corollary: Let $D = D(a,r) = \set{z: \mod{z-a} < r}$. If $f in O(D)$, then the Taylor series of $f$ about $a$ has radius of convergence $\geq r$ and converges to $f$ in $D$. 
+\begin{proof} Apply the above corollary to $g(G) = f(a + rG)$ where $G \in \Delta$. \end{proof} 
+Corollary: If $V$ is any region in $\complex$ and $f \in O(V)$, then $f' \in O(V)$. \\
+Remark: If $f \in O(V)$, then all higher derivatives of $f$ are holomorphic in $V$. \\
+Corollary: If $f \in O(\Delta)$ and $\mod{f()} \leq M$ for all $z \in \Delta$, then $$ \mod{ \frac{f^{(n)}(0)}{n!}} \leq M $$ for all $n \geq 0$. 
+\begin{proof} If $0 < r < 1$, $$ \mod{\frac{f^{(n)}(0)}{n!}} = \mod{a_n} = \mod{ \frac{1}{2\pi i} \int_{\mod{G} = r} \frac{f(G)}{G^{r+1}} \, dG} \leq \frac{1}{2\pi} \frac{M}{r^{n+1}} \cdot 2\pi r \leq \frac{M}{r^n} $$ \end{proof} 
+Corollary: Cauchy's Estimate: If $f \in O(D(a,r))$ and $\mod{f(z)} \leq M$ for all $z \in D(a,r)$, then $$ \mod{f^{(n)}(a)} \leq \frac{M}{r^n} $$ for all $n\geq0$. 
+\begin{proof} Use the above corollary to $g(G) = f(a+rG)$ for $G \in \Delta$ so that $$g^{(n)}(G) = f^{(n)}(a+rG)r^n $$ \end{proof} 
+Remark: Suppose $f$ is an entire function. Then $$f(z) = \sum_{n=0}^\infty a_nz^n = a_0 + a_1z^1 + a_2z^2 + \dots + a_nz^n + \dots $$ where $$a_n = \frac{f^{(n)}(0)}{n!} $$ 
+
+\section{Lecture 21} 
+Let $f$ be holomorphic in a region $\Omega$ and $a \in \Omega$. There exists $R >0 $ such that $$f(a) = \sum_{n=0}^\infty c_n(z-a)^n $$ where $$c_n = \frac{f^{(n)}(a)}{n!} $$ 
+\begin{theorem} Let $\Omega$ be a region and let $f: \Omega \to \complex$ be a holomorphic function. Then the following are equivalent. \begin{itemize} \item $f \equiv 0$ \item There exists a point $a \in \Omega$ such that $f^{(n)}(a) = 0$ for all $n\geq 0$. \item $\set{z \in \Omega: f(z) = 0}$ has a limit point in $\Omega$. \end{itemize} \end{theorem} 
+\begin{proof} For $1\to2$: If $f = 0$, then all $f^{(n)}(a) = 0$ for any $n \geq 0$ and $a \in \Omega$. For $2\to3$, it is obvious. For $3\to2$: Let $Z = \set{z \in \Omega: f(z) = 0}$. Let $a$ be a limit point of $Z$ and $a \in \Omega$. There exists $R > 0$ such that $B(a,R) = \set{z : \mod{z-a} < R} \subseteq \Omega$. Note that $f(a) = 0$ (by continuity of $f$). Suppose there exist an integer $n \geq 1$ such that $f(a) = f^1(a) = f^2(a) = \dots = f^{n-1}(a) = 0$, but $f^n(a) \neq 0$. Then $$f(z) = \sum_{k=n}^\infty a_k(z-a)^k$$ for $\mod{z-a} < R$. Let $g(z) = \sum_{k=n}^\infty a_k(z-a)^{k-n}$ be holomorphic in $B(a,R)$. Then $f(z) = (z-a)^ng(z)$. Note that $g(a) = a_n \neq 0$. This means there exists $r > 0$ such that $g(z) \neq 0$ for all $\mod{z-a} < r$. Since $a$ is a limit point of $Z$, the neighborhood $B(a,R)$ cannot contain a point $b \in Z$ ($b\neq a$). This means $f(b) = 0$, or $f(b) = (b-a)^ng(b)$. Then $g(b) = 0$. Contradiction. \\
+For $2\to1$: Let $A = \set{z \in \Omega: f^{(n)}(z) = 0 \forall n \geq 0}$. Claim: $A \neq \emptyset$. True because $a \in A$. Claim: $A$ is closed. Let $z \in \conj{A}$. So there exists $z_0 \in A$ such that $z_k \to z$. Since each $f^{(n)}$ is continuous, it follows that $f^{(n)}(z) = \lim f^{(n)}(z_k) = 0$. So $z \in A$ and so $A$ is closed. Claim: $A$ is open. Let $a\in A$. There exists $R > 0$ such that $B(a,R) \subseteq \Omega$. Then $f(z) = \sum_{n=0}^\infty a_n(z-a)^n$ where $a_n = \frac{f^{(n)}(a)}{n!}$ for all $\mod{z-a} < R$ in $B(a,R)$. But $f(z) = 0$ for each $n\geq 0$. So $f(z) = 0$ for all $z \in B(a,R)$. So $B(a,R) \subseteq A$ and so $A$ is open. Finally, since $A \neq 0$ and is open and is closed and $\Omega$ is connected, $A = \Omega$. \end{proof} 
+Corollary: Suppose $f \in O(\Omega)$ and there exists $a \in \Omega$ such that $f(z) = 0$ for all $B(a,r) = \set{z : \mod{z-a} < r}$. Then $f(z) = 0$ for all $z \in \Omega$. Proof: True because $3\to1$. \\
+Corollary: Suppose $f,g \in O(\Omega)$ and $a \in \Omega$ such that $f(z) = g(z)$ for all $z \in B(a,r) = \set{z: \mod{z-a} < r}$. Then $f(g) = g(z)$ for all $z \in \Omega$. Proof: Let $h(z) = f(z) - g(z)$. Then $h \in O(\Omega)$ and by the above corollary, $h(z) = 0$ for all $z \in \Omega$. So $f(z) = g(z)$ for all $z \in \Omega$. \\
+Corollary: The zeros of a nonconstant holomorphic function on a region must be isolated. Proof: If $f \in O(\Omega)$ and if the zero set $Z$ has a limit point in $\Omega$, then $f \equiv 0$. This means that if $a \in \Omega$ such that $f(a) = 0$, there exists $R > 0$ such that $f(z) \neq 0$ for all $0 < \mod{z-a} < R$. \\
+Remark: A holomorphic function $f$ is said to have a zero of order $n \geq 0$ if there exists a holomorphic function $g$ and $a\delta > 0$ such that $f(z) = (z-a)^ng(z)$ where $g(z) \neq 0$ for all $z \in B(a,\delta) = \set{z: \mod{z-a} < \delta}$. \\
+Let $\Omega$ be a region. Let $f,g \in O(\Omega)$ such that $f(z)g(z) = 0$. Show that either $f(z) = 0$ for all $z \in \Omega$ or $g(z) = 0$ for all $z \in \Omega$. Proof: Suppose $g(z) \neq 0$ for all $z \in \Omega$. This means there exists $a \in \Omega$ such that $g(a) \neq 0$. By the continuity of $g$, there exists $R > 0$ such that $g(z) \neq 0$ for all $z \in B(a,R) = \set{z: \mod{z-a} < R}$. This implies $f(z) = 0$ for all $z \in B(a,R)$. Hence by the Identity Theorem, $f(z) = 0$ for all $z \in \Omega$. 
+
+\section{Lecture 22} 
+Suppose $f,g$ are holomorphic on a region $\Omega$ such that $\conj{f}g$ is holomorphic. Show that either $f$ is a constant or $g(z) = 0$ for all $z \in \Omega$. Proof: Suppose $g(z) \neq 0$ for all$ z \in \Omega$, meaning $g \not\equiv 0$, or there exists $a \in \Omega$ such that $g(a) \neq 0$. By the continuity of $g$, there exists a neighborhood $B(a,r) = \set{z: \mod{z-a} <r}$ such that $g(z) \neq 0$ for all $z \in B(a,r)$. Let $\conj{f}g=h$ given that $h \in O(\Omega)$. Then $\conj{f}(z) = \frac{h(z)}{g(z)}$ for all $z \in B(a,r)$ because $g(z) \neq 0$ for all $z \in B(a,r)$. Since $h$ and $g$ are both holomorphic and $g(z) \neq 0$ in $B(a,r)$, it follows that $\conj{f}$ is holomorphic in $B(a,r)$. Thus $f$ and $\conj{f}$ are both holomorphic in $B(a,r)$ and so $f$ is constant on $B(a,r)$. Hence by the Identity Theorem, $f$ is constant on $\Omega$. \\
+Let $\Delta = \set{z: \mod{z} < 1}$. Suppose $f \in O(\Delta)$ and $g \in O(\Delta)$ and neither $f$ and $g$ have a zero in $\Delta$. If $ \frac{f'}{f} (\frac{1}{n}) = \frac{g'}{g}(\frac{1}{n})$, where $n = 1,2,3,\dots$, find a simple relation between $f$ and $g$. Proof: Define $h = \frac{f}{g}$. Since $f,g\in O(\Delta)$ and $g$ has no zeros in $\Delta$, $h \in O(\Delta)$. Then $$ h'(z) = \frac{f'(z)g(z) - f(z)g'(z)}{(g(z))^2}$$ for all $z \in \Delta$. By hypothesis, $h'(z) = 0$ for $z = \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \dots$. So the zero set of $h$ is $Z = \set{\frac{1}{n}}_{n=2}^\infty$ which has a limit point $0$ in $\Delta$. Hence by the Identity Theorem, $h'(z) = 0$ for all $z \in \Omega$. This implies $h'(z) = \lambda$, a constant, for all $z \in \Omega$ and so $f(z) = \lambda g(z)$ for all $z \in \Delta$. \\ 
+Let $f$ be an entire function and suppose there exists a constant $M$ and $R > 0$ and an integer $n \geq 1$ such that $$\mod{f(z)} \leq M\mod{z}^n$$ for all $\mod{z} > R$. Show that $f$ is a polynomial of degree $\leq n$. Proof: Since $f$ is an entire function, $$f(z) = \sum_{n=0}^\infty a_nz^n$$ or $$ f(z) = f(0) + f'(0)z + \frac{f^2(0)}{2!}z^2 + \dots + \frac{f^n(0)}{n!}z^n + \dots $$ 
+By Cauchy's estimate, $$ \frac{\mod{f^{(k)}(0)}}{k!} \leq \frac{Mr^n}{r^k} $$ if $r > R$. So for all $ k > n$, $$ \frac{\mod{f^{(n)}(0)}}{k!} \leq \frac{M}{r^{k-n}} $$ where $n$ is fixed and is true for all $k > 0$. Since $r > R$ is arbitrary, it follows that $f^{(k)}(0) = 0$ for all $k>n$. Hence by the expansion of $f(z)$, $f$ is a polynomial of degree $\leq n$. \\
+Let $f$ be an entire function and $\mod{f(z)} < 1 + \mod{z}^{\frac{1}{2}}$ for all $z \in \complex$. Show that $f$ is a constant. Proof: If $f$ is an entire function, then $$ f(z) = \sum_{n=0}^\infty a_nz^n$$ or $$f(z) = f(0) + f'(0)z + \frac{f^2(0)}{2!}z^2 + \dots + \frac{f^n(0)}{n!}z^n + \dots $$ for all $z \in \complex$. Consider $\mod{z} = R$. Then $$ \mod{f(z)} < 1 + R^{\frac{1}{2}}$$ By Cauchy's estimate, $$ \frac{\mod{f^{(n)}(0)}}{n!} \leq \frac{1 + R^{\frac{1}{2}}}{R^n} $$ Since $R>0$ can be arbitrary, it follows that $f^{(n)}(0) = 0$ for all $n \geq 1$. Hence $f(z) = f(0)$ for all $z \in \complex$ and so $f$ is a constant. 
+
+\section{Lecture 23} 
+
+Let $U$ be an open set. If $a\in U$ and $f \in O(U \backslash \set{a})$, then $f$ is said to be an isolated singularity at the point $a$. If $f$ can be so defined at $a$ such  that the external function is holomorphic in $U$, then the singularity is removable. 
+\begin{theorem} Riemann's Removable Singularity Theorem: Suppose $f \in O(U \backslash \set{a})$ and $f$ is bounded in $D'(a,r) = \set{z: 0 < \mod{z-a} < r}$, for some $r>0$> Then $f$ has a removable singularity at $a$. \end{theorem} 
+\begin{proof} Define $h(a) = 0$ and $h(z) = (z-a)^2f(z)$ in $U\backslash\set{a}$. Claim: $h \in O(U)$ and $h'(a) = 0$. Note that $$h'(a) = \lim_{z\to z} \frac{h(z) - h(a)}{z-a} = \lim_{z\to a} \frac{(z-a)^2f(z)}{z-a} = \lim_{z\to a} (z-a)f(a) = 0 $$ because $f$ is bounded in $D'(a,r)$. Hence $h \in O(U)$ and $h'(a) = 0$. Now, $$ \begin{aligned} h(z) &= \sum_{n=0}^\infty c_n(z-a)^n \\ &= c_0 + c_1(z-a) + c_2(z-a)^2 + \dots \\ h(a) &= c_0 = 0 \\ h'(z) &= \sum_{n=0}^\infty nc_n(z-a)^{n-1} \\ &= c_1 + 2(z-a)^n + \dots \\ h'(a) = c_1 = 0 \end{aligned} $$ Hence $$h(z) = \sum_{n=2}^\infty c_n(z-a)^n $$ Therefore $$f(z) = \sum_{n=0}^\infty c_{n+2}(z-a)^n$$ for all $z \in D(a,r)$. So $f \in O(D(a,r))$ and hence $a$ is a removable singularity. \end{proof} 
+\begin{theorem} If $a \in U$ and $f \in O(U \backslash\set{a})$, then one of the following three cases must occur: \begin{enumerate} 
+\item $f$ has a removable singularity at $a$ 
+\item there exists complex numbers $c_1,\dots,c_m$, where $m$ is a positive integer and $c_m \neq 0$, such that $f(z) = \sum_{k=1}^m \frac{c_k}{(z-a)^k} $ has a removable singularity at $a$ 
+\item if $R > 0$ and $D(a,R) \subseteq U$, then $f(D'(a,R))$ is dense in the complex plane \end{enumerate} \end{theorem} 
+Remark: In case $b$, we say that $f$ has a pole of order $m$ at $a$. In case $c$, we say that $f$ has an essential singularity at $a$. Case $c$ means that for every complex number $w$, there exists a sequence such that $z_n \to a$ and $f(z_n ) \to w$, as  $n\to\infty$. \\
+Conclusion: An isolated singularity is either a removable singularity, a pole, or an essential singularity. 
+\begin{proof} Suppose $(c)$ fails. Then there exists $R > 0$ and a complex number $w$ such that $\mod{f(z) -w} > \delta$ in $D'(a,R) = D'$. Let $g(z) = \frac{1}{f(z) - w}$ for $z \in D'$. Then $g \in O(D')$ and $\mod{g} < \frac{1}{\delta}$. So by RRST, $g$ extends to a holomorphic function in $D$. \\
+Case $1$: If $g(a) \neq 0$. then $$f(z) = w + \frac{1}{g(z)} $$ and so $f(a) = w + \frac{1}{g(a)}$. Furthermore, $$ \lim_{z\to a} f(z) = w + \lim_{z\to a} \frac{1}{g(z)} = w + \frac{1}{g(a)} $$ This means $f$ is continuous at $a$ and so continuous on $D(a,R)$ and so there exists some $0 < \rho < R$ such that $f$ is bounded in $D(a,\rho)$ where $f(a) = w + \frac{1}{g(a)}$. Then by RRST, $z=a$ is a removable singularity of $f$, which is $(a)$. \\
+Case $2$: If $g(a) = 0$, suppose $g$ has a zero of order $m \geq 1$ at $z = a$. Then $f(z) = (z-a)^mg_1(z)$, for all $z \in D$ where $g_1 \in O(D)$ and $g_1(a) \neq 0$. Next, observe that $g_1$ does not have any zero in $D'$. So $g_1$ has no zero in $D$. Let $h = \frac{1}{g_1}$ in $D$. Hence $h \in O(D)$ and $h$ has no zero in $D$. So $$ f(z) - w + \frac{1}{(z-a)^mg_1(z)} = \frac{h(z)}{(z-a)^m} $$ or $$ f(z) = w + \frac{h(z)}{(z-a)^m} $$where $z \in D'$. If $$h(z) = \sum_{n=0}^\infty b_n(z-a)^n$$ for $z \in D$ and $b_0 \neq 0$, then $$f(z) = w + \frac{b_) + b_1(z-a) + b_2(z-a)^2 + \dots + b_m(z-a)^m + \dots}{(z-a)^m} $$ and so $$ f(a) = \frac{b_0}{(z-a)^m} + \frac{b_1}{(z-a)^{m-1}} + \dots + (b_m + w) + \dots $$, where $c_k = b_{m-k}$ for $k=1,2,\dots,m$. This is $(b)$. \end{proof} 
+
+\section{Lecture 24} 
+
+Let $D(a,r) = \set{z : \mod{z-a} < r}$. Let $f$ be holomorphic in $D(a,r)$. $f$ is said o have a zero of order $n$ at $a$ if there exists a holomorphic function $g$ in $D(a,r)$ such that $f(z) = (z-a)^ng(z)$ and $g(a) \neq 0$. \\
+Let $D'(a,r) = \set{z: 0 < \mod{z-a} < r}$. Let $f$ be holomorphic in $D'(a,r)$. $f$ is said to have a pole of order $n$ at $a$ if there exists a holomorphic function $g$ in $D(a,r)$ such that $f(z) = \frac{g(z)}{(z-a)^n}$ and $g(a) \neq 0$. \\
+Laurent Series: Suppose $f$ is holomorphic in the annulus $R_1 < \mod{z-a} < R_2$ and let $\gamma $ be any positively correlated circle centered at $z_0$ lying in the annulus. Then $\mod{z-z_0} = r$ where $R_1 < r < R_2$. For each $R_1 < z < R_2$, $$ f(z) = \sum_{n=0} a_n(z-z_0)^n + \sum_{n=1}^\infty \frac{b_n}{(z-z_0)^n} $$ where $R_1 < \mod{z-z_0} < R_2$ and $$ \begin{aligned} a_n &= \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{(z-z_0)^{n+1}} \, dz \text{ where } n = 0,1,2,\dots \\ b_n &= \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{(z-z_0)^{-n+1}} \, dz \text{ where } n = 1,2,3,\dots \end{aligned} $$ 
+In other words, $$ f(z) = \dots + \frac{b_2}{(z-z_0)^2} + \frac{b_1}{z-z_0} + a_0 + a_1(z-z_0) + a_2(z-z_0)^2 + \dots $$ Note: \begin{enumerate} 
+\item If $b_0 = 0$ for all $n\geq1$, $z=z_0$ is a removable singularity 
+\item If $b_i = 0$ for all $i > n$, $z=z_0$ is a pole of order $n$ (A pole of order $1$ is called a simple pole)
+\item If $b_n \neq 0$ for infinitely many $n$, $z=z_0$ is an essential singularity \end{enumerate} 
+\begin{theorem} Suppose $z=z_0$ is a pole of order $n$. Then the residue of $f$ at $z_0$ is $b_1$ and $$ \res{z_0} f(z) = b_1 = \frac{1}{2\pi i} \int_\gamma f(z) \, dz $$ \end{theorem} 
+Suppose $f$ has a pole of order $1$. Then $$f(z) = \frac{b_1}{z-z_0} + a_0 + a_1(z-z_0) + a_2(z-z_0)^2 + \dots $$ Let $g(z) = f(z)(z-z_0)$. Then $$g(z) = b_1 + a_0(z-z_0) + a_1(z-z_0)^2 + a_2(z-z_0)^3 + \dots $$ Hence $$f(z) = \frac{g(z)}{z-z_0}$$ and $g(z_0) = b_1$ and so $$ \res{z=z_0} f(z) = g(z_0) = b_1 $$ 
+Suppose $f$ has a pole of order $2$. Then $$f(z) = \frac{b_2}{(z-z_0)^2} + \frac{b_1}{z-z_0} + a_0 + a_1(z-z_0) + \dots $$ Let $g(z) = f(z)(z-z_0)^2$. Then $$g(z) = b-2 + b_1(z-z_0) + a_0(z-z_)^2 + \dots $$ 
+Hence $$f(z) = \frac{g(z)}{(z-z_0)^2} $$ and $g(z_0) = b_1$ and so $$ \res{z=z_0} f(z) = g(z_0) = b_1$$ 
+Suppose $f$ has a pole of order $3$. Then $$f(z) = \frac{b_3}{(z-z_0)^3} + \frac{b_2}{(z-z_0)^2} + \frac{b_1}{z-z_0} + a_0 + a_1(z-z_0) + \dots $$ Let $g(z) = f(z)(z-z_0)^3$. Then $$g(z) = b_3 + b_2(z-z_0) + b_1(z-z_0)^2 + a_0(z-z_0)^3 + \dots $$ Then $f(z) = \frac{g(z)}{(z-z_0)^3}$. Now, $$g'(z) = b_2 + 2b_1(z-z_0) + 3a_0(z-z_0)^2 + \dots $$ and $$ g''(z) = 2b_1 + 6a_0(z-z_0) + \dots $$ 
+Hence $g''(z_0) = 2b_1$ and so $$b_1 = \frac{g''(z_0)}{2} $$ Then $$ \res{z_0} f(z) = \frac{g''(z_0)}{2} $$ 
+Rule: $$ \begin{aligned} \res{z_0} f(z) &= \begin{cases} g(z_0) &\text{ if } n=1 \\ \frac{g^{(n-1)}(z_0)}{(n-1)!} &\text{ if } n > 1 \end{cases} \\ f(z) &= \frac{g(z)}{(z-z_0)^n} \end{aligned} $$ where $g$ is holomorphic and $g(z_0) \neq 0$. 
+\\~\\
+Suppose $f(z) = \frac{z^3 -2z}{(z-i)^3}$. This is $$f(z) = \frac{g(z)}{(z-i)^3} $$ where $g(z) = z^3 - 2z$. Then $z=i$ is a pole of order $3$ and $$\res{i} f(z) = \frac{g''(z)}{2!} = \frac{6i}{2} = 3i $$ 
+since $$ \begin{aligned} g'(z) &= 3z^2 - 2 \\ g''(z) &= 6z \\ g''(i) &= 6i \end{aligned} $$ 
+Suppose $f(z) = (\frac{z}{2z +1})^3$. This is equivalent to $$ f(z) = (\frac{z}{2(z + \frac{1}{2})})^3 = \frac{\frac{z^3}{8}}{(z-(-\frac{1}{2}))^3} = \frac{g(z)}{(z - (-\frac{1}{2}))^3} $$ 
+Then $z = -\frac{1}{2}$ is a pole of order $3$. Note that $$ \begin{aligned} g'(z) &= \frac{3}{8}z^2 \\ g''(z) &= \frac{6}{8}z = \frac{3}{4}z \\ g''(-\frac{1}{2}) &= \frac{3}{4}(-\frac{1}{2}) = -\frac{3}{8} \end{aligned} $$
+Then $$ \res{-\frac{1}{2}} f(z) = \frac{g''(-\frac{1}{2})}{2!} = \frac{-\frac{3}{8}}{2} = -\frac{3}{16} $$ 
+
+\section{Lecture 25} 
+
+Laurent Series: Let $R_1 < \mod{z-z_0} < R_2$. Let $$f(z) = \sum_{n=0}^\infty a_n(z-z_0)^n + \sum_{n=1}^\infty \frac{b_n}{(z-z_0)^n} $$ where $$ a_n = \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{(z-z_0)^{n+1}} \, dz $$ for $n=0,1,2,\dots$ and $$ b_n = \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{(z-z_0)^{-n+1}} \, dz $$ for $n=1,2,3,\dots$. In other words, $$ f(z) = \dots + \frac{b_1}{z-z_0} + a_0 + a_1(z-z_0) + a_2(z-z_0)^2 + \dots $$ Then $$ \res{z_0} f(z) = b_1 = \frac{1}{2\pi i} \int_\gamma f(z) \, dz $$ 
+$z=z_0$ is a pole if $f(z) = \frac{g(z)}{(z-z_0)^n} $ where $g$ is a holomorphic in a neighborhood of $z_0$ and $g(z_0) \neq 0$. \\
+If $n=1$, $\res{z_0} f(z) = g(z_0)$. If $n \geq 2$, $\res{z_0} f(z) = \frac{g^{(n-1)}(z_0)}{(n-1)!} $. 
+\begin{theorem} Cauchy's Residue Theorem: Let $f$ be holomorphic except for some poles at $z_1,\dots,z_m$. Then $$\int_\gamma f(z) \, dz = \sum_{i=1}^n \int_{\gamma_i} f(z) \, dz = 2\pi i \cdot (\text{sum of the residuals}) $$ \end{theorem}
+Evaluate: $$ \int_\gamma \frac{3z^3 + 2}{(z-1)(z^2 + 9)} \, dz $$ where $\gamma$ is the circle $\mod{z} = 4$ and $\gamma$ is taken counterclockwise. \\
+First note that $$ f(z) = \frac{3z^3 + 2}{(z-1)(z-3i)(z+3i)} $$ That means the singularities are at $z=1$, $z=3i$ and $z=-3i$, all of which are inside $\gamma$. \\
+At $z=1$, $f(z) = \frac{g(z)}{z-1}$ where $g(z) = \frac{3z^3 - 2}{z^2 + 9}$. This function is holomorphic in a small neighborhood of $z=1$. Then $$ \res{1} f(z) = g(1) = \frac{3(1)^3 + 2}{1 + 9} = \frac{5}{10} = \frac{1}{2}$$ 
+At $z=3i$, $f(z) = \frac{\phi(z)}{z-3i}$ where $\phi(z) = \frac{3z^3 + 2}{(z-1)(z+3i)}$. This function is holomorphic in a small neighborhood of $z=3i$. Thus $$ \res{3i} f(z) = \frac{2 - 81i}{(-1+3i)(6i)} = \frac{81-2i}{6(-1 + 3i)} = \frac{(81-2i)(-1-3i)}{-6(10)} = \frac{-87-241i}{-60} = \frac{87 + 241i}{60} $$ 
+At $z=-3i$, $f(z) = \frac{h(z)}{z+3i}$ where $h(z) = \frac{3z^3 + 2}{(z-1)(z-3i)}$. This function is holomorphic in a small neighborhood of $z=-3i$. Then $$ \res{-3i} f(z) = \frac{2+81i}{(-1-3i)(-6i)} = \frac{-81 + 2i}{(-1-3i)6} = \frac{75 - 245i}{60} $$ 
+Then $$ \int_\gamma \frac{3z^3 + 2}{(z-1)(z^2 + 9)} \, dz = 2\pi i( \frac{1}{2} + \frac{5}{4} + \frac{5}{4}) = 6\pi i $$ 
+Evaluate $$ \int_\gamma \frac{dz}{z^3(z+4)} $$ where $\gamma: \mod{z} = 2$ in the counterclockwise direction. \\
+First, note that $f(z) = \frac{1}{z^3(z^2 + 4)}$. Inside $\gamma$, $f$ has only one singularity, at $z=0$. Now let $f(z) = \frac{g(z)}{z^3}$ where $g(z) = \frac{1}{z+4}$. This function is holomorphic in a small neighborhood of $z=0$. Then $$ \res{0} f(z) = \frac{g''(0)}{2!} = \frac{1}{32} \cdot \frac{1}{2} = \frac{1}{64} $$ 
+Therefore $$ \int_\gamma \frac{dz}{z^3(z+4)} = 2\pi i \cdot \frac{1}{64} = \frac{\pi}{32}i $$ 
+Evaluate $$ \int_\gamma \frac{\cosh \pi z}{z(z^2 + 1)} \, dz $$ where $\gamma: \mod{z} = 2$ counterclockwise. Note that $\cosh z = \frac{e^z + e^{-z}}{2}$. \\
+Let $f(z) = \frac{\cosh \pi z}{z(z^2 + 1)}$. $f$ has singularities at $z=0$, $z=i$ and $z=-i$. \\
+At $z=0$, $g(z) = \frac{e^{\pi z} + e^{-\pi z}}{2(z^2 + 1)}$. Then $f(z) = \frac{g(z)}{2}$ which is holomorphic in a small neighborhood of $z=0$. Then $$ \res{0} f(z) = g(0) = 1 $$ 
+At $z=i$, $\phi(z) = \frac{e^{\pi z} + e^{-\pi z}}{2z(z+i)}$. Then $f(z) = \frac{\phi(z)}{z-i}$ which is holomorphic in a neighborhood of $z=i$. Then $$ \res{i} f(z) = \phi(i) = \frac{-1-1}{2i(2i)} = \frac{-2}{-4} = \frac{1}{2}$$ 
+At $z=-i$, $h(z) = \frac{e^{\pi z} + e^{-\pi z}}{1z(z-i)}$. Then $f(z) = \frac{h(z)}{2+i}$ which is holomorphic in a small neighborhood of $z=-i$. Then $$ \res{-i} f(z) = h(-i) = \frac{-1 + -1}{(-2i)(-2i)} = \frac{-2}{-4} = \frac{1}{2}$$ 
+Hence $$ \int_\gamma \frac{\cosh \pi z}{z(z^2 + 1)} \, dz = 2\pi i(1 + \frac{1}{2} + \frac{1}{2}) = 4\pi i $$ 
+
+\section{Lecture 26} 
+Theorems: \begin{itemize} 
+\item Liouville's Theorem: Every bounded entire function is a constant. 
+\begin{proof} Let $f$ be an entire function such that $\mod{f(z)} \leq M$ for all $z \in \complex$. Let $z_0 \in \complex$ be an arbitrary point in $\complex$ and consider a disk of radius $R$ centered at $z_0$. By Cauchy's estimate, $\mod{f'(z)} \leq \frac{M}{R}$. But $R > 0$ is arbitrary and hence $f'(z) = 0$. Since $z_0 \in \complex$ is arbitrary, $f'(z) = 0$ for all $z \in \complex$. Therefore $f$ is constant. \end{proof} 
+A polynomial of degree $n \geq 0$ is of the form $$f(z) = z^n + a_{n-1}z^{n-1} + a_{n-2}z^{n-2} + \dots + a_0$$ where $a_0,a_1,\dots,a_{n-1} \in \complex$. 
+\item FTA (Fundamental Theorem of Algebra): If $p(z)$ is a nonconstant polynomial, then there exists a complex number $z$ such that $p(z) = 0$. 
+\begin{proof} Let $$p(z) = z_n + a_{n-1}z^{n-1} + a_{n-2}z^{n-2} + \dots + a_0 = z^n[1 + \frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + \dots + \frac{a_0}{z^n}] $$ be a nonconstant polynomial. Then $\lim_{z\to \infty} p(z) = \infty$. Suppose there exists no $z \in \complex$ such that $p(z) = 0$. Define $f(z) = \frac{1}{p(z)}$. Then $f$ is an entire function. Furthermore, $\lim_{z\to\infty} f(z) = 0$. So there exists $N > 0$ such that $\mod{f(z)} < 1$ for all $\mod{z} > N$. Now consider the closed disk $\overline{B(0,N)} = \set{z: \mod{z} \leq N}$ which is compact. Since $f$ is holomorphic, and therefore continuous on $\overline{B(0,N)}$, it must be bounded on $\overline{B(0,N)}$. In other words, there exists $M > 0$ such that $\mod{f(z)} \leq M$ for all $z$ such that $\mod{z} \leq N$. Thus $f$ is a bounded entire function. By Louville's theorem, $f$ is a constant. Therefore $p(z)$ is a constant which contradicts that $p(z)$ is a nonconstant polynomial. Hence there exists $z \in \complex$ such that $p(z) = 0$. \end{proof}
+\item RRST (Riemann's Removable Singularity Theorem): Suppose $f \in O(U \backslash \set{a})$ and $f$ is bounded in $D'(a,r) = \set{z: 0 < \mod{z-a} < r}$, for some $r>0$> Then $f$ has a removable singularity at $a$. 
+\begin{proof} Define $h(a) = 0$ and $h(z) = (z-a)^2f(z)$ in $U\backslash\set{a}$. Claim: $h \in O(U)$ and $h'(a) = 0$. Note that $$h'(a) = \lim_{z\to z} \frac{h(z) - h(a)}{z-a} = \lim_{z\to a} \frac{(z-a)^2f(z)}{z-a} = \lim_{z\to a} (z-a)f(a) = 0 $$ because $f$ is bounded in $D'(a,r)$. Hence $h \in O(U)$ and $h'(a) = 0$. Now, $$ \begin{aligned} h(z) &= \sum_{n=0}^\infty c_n(z-a)^n \\ &= c_0 + c_1(z-a) + c_2(z-a)^2 + \dots \\ h(a) &= c_0 = 0 \\ h'(z) &= \sum_{n=0}^\infty nc_n(z-a)^{n-1} \\ &= c_1 + 2(z-a)^n + \dots \\ h'(a) &= c_1 = 0 \end{aligned} $$ Hence $$h(z) = \sum_{n=2}^\infty c_n(z-a)^n $$ Therefore $$f(z) = \sum_{n=0}^\infty c_{n+2}(z-a)^n$$ for all $z \in D(a,r)$. So $f \in O(D(a,r))$ and hence $a$ is a removable singularity. \end{proof} 
+\end{itemize}
+
+Problems: \begin{itemize} 
+\item $f$ is an entire function such that $\Re{f} \leq M$. Show that $f$ is a constant.
+\begin{proof} Suppose $f$ is an entire function such that $\Re{f} \leq M$. Define $F = \e{f}$. $F$ is an entire function and $\mod{F} = \mod{\e{f}} = \e{\Re{f}} \leq \e{M}$. So $F$ is a bounded entire function. By Liouville's theorem, $F$ is a constant. That means $F'(z) = 0$ for all $z \in \complex$. Then $\e{f(z)}f'(z) = 0$. Hence $f'(z) = 0$ for all $z \in \complex$. Therefore $F$ is constant. \end{proof}  
+\item $f$ is an entire function such that $\Im{f} \leq M$. Show that $f$ is a constant. 
+\begin{proof} Suppose $f$ is an entire function such that $\Im{f} \leq M$. Define $F = \e{-if}$. Then $\mod{F} = \mod{\e{-if}} = \e{\Im{f}} \leq \e{M}$. So $F$ is a bounded entire function. That means $F$ is a constant. Then $F'(z) = 0$ for all $z \in \complex$. Then $\e{-if}f'(z) = 0$. That is, $f'(z) = 0$ for all $z \in \complex$ and so $f$ is constant. \end{proof} 
+\item $f$ is an entire function. Suppose there exists a constant $M$, $R \geq 0$ and an integer $n \geq 1$ such that $\mod{f(z)} \leq M\mod{z}^n$ for all $\mod{z} > R$. Show that $f$ is a polynomial of degree $\leq n$. 
+\begin{proof} Since $f$ is an entire function, $$f(z) = \sum_{n=0}^\infty a_nz^n$$ or $$ f(z) = f(0) + f'(0)z + \frac{f^2(0)}{2!}z^2 + \dots + \frac{f^n(0)}{n!}z^n + \dots $$ 
+By Cauchy's estimate, $$ \frac{\mod{f^{(k)}(0)}}{k!} \leq \frac{Mr^n}{r^k} $$ if $r > R$. So for all $ k > n$, $$ \frac{\mod{f^{(n)}(0)}}{k!} \leq \frac{M}{r^{k-n}} $$ where $n$ is fixed and is true for all $k > 0$. Since $r > R$ is arbitrary, it follows that $f^{(k)}(0) = 0$ for all $k>n$. Hence by the expansion of $f(z)$, $f$ is a polynomial of degree $\leq n$. \end{proof}
+\item Let $\Omega$ be a region and $f, g \in O(\Omega)$ such that $f(z)g(z) = 0$ for all $z \in \Omega$. Show that either $f(z)$ is a constant or $g(z) = 0$ for all $z \in \Omega$. 
+\begin{proof} 
+Suppose $g(z) \neq 0$ for all $z \in \Omega$. This means there exists $a \in \Omega$ such that $g(a) \neq 0$. By the continuity of $g$, there exists $R > 0$ such that $g(z) \neq 0$ for all $z \in B(a,R) = \set{z: \mod{z-a} < R}$. This implies $f(z) = 0$ for all $z \in B(a,R)$. Hence by the Identity Theorem, $f(z) = 0$ for all $z \in \Omega$. 
+\end{proof} 
+\item Let $\Omega$ be a region and $f,g \in O(\Omega)$ such that $\conj{f}g \in O(\Omega)$. Show that either $f(z)$ is a constant or $g(z) = 0$ for all $z \in \Omega$. 
+\begin{proof} Suppose $g(z) \neq 0$ for all$ z \in \Omega$, meaning $g \not\equiv 0$, or there exists $a \in \Omega$ such that $g(a) \neq 0$. By the continuity of $g$, there exists a neighborhood $B(a,r) = \set{z: \mod{z-a} <r}$ such that $g(z) \neq 0$ for all $z \in B(a,r)$. Let $\conj{f}g=h$ given that $h \in O(\Omega)$. Then $\conj{f}(z) = \frac{h(z)}{g(z)}$ for all $z \in B(a,r)$ because $g(z) \neq 0$ for all $z \in B(a,r)$. Since $h$ and $g$ are both holomorphic and $g(z) \neq 0$ in $B(a,r)$, it follows that $\conj{f}$ is holomorphic in $B(a,r)$. Thus $f$ and $\conj{f}$ are both holomorphic in $B(a,r)$ and so $f$ is constant on $B(a,r)$. Hence by the Identity Theorem, $f$ is constant on $\Omega$. \end{proof}
+\end{itemize} 
+Note: Identity Theorem: Suppose $f,g \in O(\Omega)$ and $a \in \Omega$ such that $f(z) = g(z)$ for all $z \in B(a,r) = \set{z: \mod{z-a} < r}$. Then $f(g) = g(z)$ for all $z \in \Omega$.
+\\~\\
+Cauchy's Integral Formula: $$ f^{(n)}(a) = \frac{n!}{2\pi i} \int_\gamma \frac{f(z)}{(z-a)^{n+1}} \, dz $$ 
+\begin{itemize} 
+\item $\int_\gamma \frac{5z^2 + 2z + 1}{(z-i)^3} \, dz$ in the region $\gamma: \mod{z} = 2$ $$ \begin{aligned} 
+\int_\gamma \frac{5z^2 + 2z + 1}{(z-i)^3} \, dz &= \int_\gamma \frac{f(z)}{(z-i)^3} \, dz \\ f(z) = 5z^2 + 2z + 1 \\ f'(z) &= 10z \\ f''(z) &= 10 \to f''(i) = 10 \\ 
+\int_\gamma \frac{5z^2 + 2z + 1}{(z-i)^3} \, dz &= \frac{2\pi i}{2!} f''(i) \\ &= \frac{2\pi i}{2} \cdot 10 = 10 \pi i \end{aligned} $$ 
+\item $\int_\gamma \frac{e^{2z} - e^{-2z}}{z^5} \, dz $ in the region $\gamma: \mod{z} = 4$ $$ \begin{aligned} 
+\int_\gamma \frac{e^{2z} - e^{-2z}}{z^5} &= \int_\gamma \frac{f(z)}{z^5} \, dz \\ f(z) &= e^{2z} - e^{-2z} \\ f'(z) &= 2e^{2z} + 2e^{-2z} \\ f''(z) &= 4e^{2z} - 4e^{-2z} \\ f'''(z) &= 8e^{2z} + 8e^{-2z} \\ f^4(z) &= 16e^{2z} - 16e^{-2z} \\ f^5(z) &= 32e^{2z} + 32e^{-2z} \to f^5(0) = 64 \\ \int_\gamma \frac{e^{2z} - e^{-2z}}{z^5} &= \frac{2\pi i}{5!} \cdot 64 = \frac{128}{120}\pi i = \frac{16}{15} \pi i \end{aligned} $$ \end{itemize} 
+
+Cauchy's Residue Formula: $$ \res{z_0} f(z) = \begin{cases} g(z_0) &\text{ if } n=1 \\ \frac{g^{(n-1)}(z_0)}{(n-1)!} &\text{ if } n \geq 2 \end{cases} $$ 
+\begin{itemize} 
+\item $\int_\gamma \frac{1-2z}{z(z-1)(z-3)}$ where $\gamma: \mod{z} = 2$. \\
+Inside $\gamma$, there are only two singularities, $z=0$ and $z=1$, both of order $1$.  \\
+At $z=0$, $f(z) = \frac{g(z)}{z}$ where $g(z) = \frac{1-2z}{(z-1)(z-3)} = \frac{1-2z}{z^2 - 4z + 3}$, which is holomorphic in a small neighborhood of $z = 0$. Then $$ \res{0} = g(0) = \frac{1}{3}$$
+At $z = 1$, $f(z) = \frac{\phi(z)}{z-1}$ where $\phi(z) = \frac{1-2z}{z(z-3)}$ which is holomorphic in a small neighborhood of $z = 1$. Then $$ \res{1} f(z) = \phi(1) = \frac{-1}{-2} = \frac{1}{2}$$
+ Therefore $$ \int_\gamma \frac{1-2z}{z(z-1)(z-3)} = 2\pi i(\frac{1}{3} + \frac{1}{2}) = \frac{5}{3}\pi i $$ 
+ \item $\int_\gamma \frac{e^z}{z(z-2)^3}\, dz $ where $\gamma: \mod{z} = 3$. \\
+ Inside $\gamma$, there are only two singularities, $z=0$ and $z=2$, of order $1$ and $3$ respectively. \\
+ At $z=0$, $f(z) = \frac{g(z)}{z}$ where $g(z) = \frac{e^z}{(z-2)^3}$ which is holomorphic in a small neighborhood of $z=0$. Then $$ \res{0} f(z) = g(0) = -\frac{1}{8} $$ 
+ At $z=2$, $f(z) = \frac{\phi(z)}{(z-2)^3}$ where $\phi(z) = \frac{e^z}{z}$ which is holomorphic in a small neighborhood of $z=2$. Now $$ \begin{aligned} \phi(z) &= \frac{e^z}{z} \\ \phi'(z) &= \frac{ze^z - e^z}{z^2} \\ \phi''(z) &= \frac{z^2(ze^z + e^z - e^z) - (ze^z - e^z)2z}{z^4} \\ \phi''(2) &= \frac{4(2e^2) - 4(2e^2 - e^2)}{16} = \frac{4e^2}{16} = \frac{e^2}{4} \end{aligned} $$ Therefore $$ \res{2} f(z) = \frac{\phi''(2)}{2!} = \frac{e^2}{8} $$ Furthermore, $$ \int_\gamma \frac{e^z}{z(z-2)^3}\, dz = 2\pi i (-\frac{1}{8} + \frac{e^2}{8}) = (\frac{e^2 - 1}{4})\pi i  $$ 
+ \item $\int_\gamma \frac{\cos z}{z^2(z-\pi)^3} \, dz $ where $\gamma: \mod{z} = 4$. \\ Inside $\gamma$, there are two singularities, $z= 0$ and $z=\pi$, of order $1$ and $2$ respectively. \\
+ At $z = 0$, $f(z) = \frac{g(z)}{z^2}$ where $g(z) = \frac{\cos z}{(z-\pi)^3}$ which is holomorphic in a small neighborhood of $z=0$. Now $$ g'(z) = \frac{-(\sin z)(z-\pi)^3 - 3(\cos z)(z-\pi)^2}{(z-\pi)^4} $$ and $$ g'(0) = \frac{-3\pi^2}{\pi^6} = -\frac{3}{\pi^4} $$ Therefore $$ \res{0} f(z) = g'(0) = -\frac{3}{\pi^4} $$ 
+ At $z = \pi$, $f(z) = \frac{\phi(z)}{(z-\pi)^3}$ where $\phi(z) = \frac{\cos z}{z^2}$ which is holomorphic in a small neighborhood of $z=\pi$. Now $$ \begin{aligned} \phi(z) &= \frac{\cos z}{z^2} \\ \phi'(z) &= \frac{-z^2\sin z - 2z\cos z}{z^4} \\ \phi''(z) &= \frac{z^4[( -z^2 \cos z - 2z\sin z) - (-2z\sin z + 2\cos z)] + 4z^3(z^2\sin z + 2z\cos z)}{z^8} \\ \phi''(z) &= \frac{\pi^6 + 2\pi ^4 - 8\pi^4}{\pi^8} = \frac{\pi^6 - 6\pi^4}{\pi^8} = \frac{\pi^2 - 6}{\pi^4} \end{aligned} $$ 
+ Therefore $$ \res{\pi} f(z) = \frac{\phi''(\pi)}{2!} = \frac{\pi^2 - 6}{2\pi^4} $$ Furthermore, $$ \int_\gamma \frac{\cos z}{z^2(z-\pi)^3} = 2\pi i( \frac{-3}{\pi^4} + \frac{\pi^2 - 6}{2\pi^4}) = 2\pi i (\frac{1}{2\pi^2}) = \frac{1}{\pi} $$ \end{itemize} 
+ Laurent Series: Use the fact that $$ \frac{1}{1-z} = 1 + z + z^2 + z^3 + \dots $$ for $\mod{z} < 1$. Find the Laurent expansion of the following in the given region \begin{itemize} 
+ \item $f(z) = \frac{1}{z^2(1-z)}$ \begin{enumerate} 
+\item $0 < \mod{z} < 1$
+$$ \begin{aligned} f(z) &= \frac{1}{z^2}\frac{1}{1-z} \\ &= \frac{1}{z^2}(1 + z + z^2 + z^3 + \dots + z^n + \dots) \\ &= \frac{1}{z^2} + \frac{1}{z} + z + 1 + z^2 + \dots + z^{n-2} + \dots \\ &= \frac{1}{z^2} + \frac{1}{z} + \sum_{n=0}^\infty z^n \end{aligned} $$ 
+\item $1 < \mod{z} < \infty$ 
+$$ \begin{aligned} f(z) &= \frac{1}{z^2(1-z)} \\ &= \frac{1}{z^2 - z^3} \\ &= \frac{1}{-z^3(1 - \frac{1}{z})} \\ &= -\frac{1}{z^3}\frac{1}{1-\frac{1}{z}} \\ &= -\frac{1}{z^3}(1 + \frac{1}{z} + \frac{1}{z^2} + \frac{1}{z^3} + \dots + \frac{1}{z^n} + \dots) \\ &= -\frac{1}{z^3} - \frac{1}{z^4} - \frac{1}{z^5} - \dots \\ &= -\sum_{n=3}^\infty \frac{1}{z^n} \end{aligned} $$ 
+ \end{enumerate} 
+ \item $f(z) = -\frac{1}{(z-1)(z-2)}$ Note first that $f(z) = \frac{1}{z-1} - \frac{1}{z-2}$ by partial fraction decomposition. \begin{enumerate}
+\item $\mod{z}<1$ 
+$$ \begin{aligned} f(z) &= \frac{1}{z-1} - \frac{1}{z-2} \\ &= -\frac{1}{1-z} + \frac{1}{2-z} \\ &= -\frac{1}{1-z} + \frac{1}{2(1 - \frac{1}{z})} \\ &= -(1 + z + z^2  + \dots + z^n + \dots ) + \frac{1}{2}(1 + \frac{z}{2} + (\frac{z}{2})^2 + \dots + (\frac{z}{2})^n + \dots) \\ &= \sum_{n=0}^\infty (\frac{1}{2^{n+1}} - 1)z^n \end{aligned} $$ 
+\item $1< \mod{z} < 2$
+$$ \begin{aligned} f(z) &= \frac{1}{z(1 - \frac{1}{z})} + \frac{1}{2(1 - \frac{z}{2})} \\ &= \frac{1}{z}( 1 + \frac{1}{z} + \frac{1}{z^2} + \dots + \frac{1}{z^n} + \dots ) + \frac{1}{2}(1 + \frac{z}{2} + (\frac{z}{2})^2 + \dots + (\frac{z}{2})^n + \dots) \\ &= \sum_{n=0}^\infty \frac{1}{z^{n+1}} + \frac{1}{2}\sum_{n=0}^\infty \frac{2^n}{2^{n+1}} \end{aligned} $$ 
+\item $\mod{z} > 2$ 
+$$ \begin{aligned} f(z) &= \frac{1}{z-1} - \frac{1}{z-2} \\ &= \frac{1}{z(1 - \frac{1}{z})} - \frac{1}{z(1 - \frac{2}{z})} \\ &= \frac{1}{z}(1 + \frac{1}{z} + (\frac{1}{z})^2 + \dots + (\frac{1}{z})^n + \dots ) - \frac{1}{z}(1 + \frac{2}{z} + (\frac{2}{z})^2 + \dots + (\frac{2}{z})^n + \dots ) \\ &= \sum_{n=0}^\infty \frac{1}{z^{n+1}} - \sum_{n=0}^\infty \frac{2^n}{z^{n+1}} \\ &= \sum_{n=0}^\infty \frac{1-2^n}{z^{n+1}} \end{aligned} $$ 
+\end{enumerate} 
+ \end{itemize} 
+\end{document}
+
+
+
